@@ -296,7 +296,7 @@ class AboutPage extends React.Component {
                                 null
                         }
                         <div className="about__content__images">
-                            <img className="about__content__image" src="/images/aboutpage/img1.jpg" />
+                            <img className="about__content__image" src="https://res.cloudinary.com/dccqlnk3t/image/upload/v1534175699/img1_osaflx.jpg" />
                             <img className="about__content__image" src="/images/aboutpage/img2.jpg" />
                             <img className="about__content__image" src="/images/aboutpage/img3.jpg" />
                             <img className="about__content__image desktop_inline" src="/images/aboutpage/img4.jpg" />
