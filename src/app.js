@@ -17,6 +17,7 @@ import { firebase } from './firebase/firebase';
 const store = configureStore();
 
 console.log('port: '+process.env.PORT);
+console.log('firebase database url: '+process.env.FIREBASE_DATABASE_URL);
 
 const jsx = (
     <Provider store={store}>

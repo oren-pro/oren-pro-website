@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
-//console.log(process.env.FIREBASE_DATABASE_URL);
+console.log(process.env.FIREBASE_DATABASE_URL);
 
 const config = {
     apiKey: process.env.FIREBASE_API_KEY,
