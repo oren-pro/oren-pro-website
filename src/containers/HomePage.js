@@ -101,8 +101,8 @@ class HomePage extends React.Component {
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         var myUploadWidget;
         myUploadWidget = cloudinary.openUploadWidget({ 
-            cloud_name: 'dccqlnk3t', 
-            upload_preset: 'yardnmw1', 
+            cloud_name: 'orenpro', 
+            upload_preset: 'umqruyrp', 
             // tags: ['test'],
             sources: [
                 "local",
@@ -150,7 +150,12 @@ class HomePage extends React.Component {
                 //     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
                 // }
                 if (result.event === "success") {
-                    console.log(result);
+                    console.log(result.info.secure_url);
+                    homepage[name][index][field] = result.info.secure_url;
+                    this.setState({
+                        homepage: homepage
+                    })
+                    this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
                     //Step 2.4:  Call the .close() method in order to close the widget
                     myUploadWidget.close();
                 }
