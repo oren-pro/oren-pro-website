@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with all expenses 1`] = `
+<div>
+  <h1>
+    Veiwing 
+    5
+     expense
+    s
+     totalling 
+    $122.54
+  </h1>
+</div>
+`;
+
+exports[`should render with no expenses 1`] = `
+<div>
+  <h1>
+    Veiwing 
+    0
+     expense
+    s
+     totalling 
+    $0.00
+  </h1>
+</div>
+`;
+
+exports[`should render with one expenses 1`] = `
+<div>
+  <h1>
+    Veiwing 
+    1
+     expense
+     totalling 
+    $2.54
+  </h1>
+</div>
+`;
