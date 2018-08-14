@@ -14,7 +14,7 @@ const app = express();
 //app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080',
-                      'https://oren-pro.herokuapp.com'];
+                      'https://oren-pro-website.herokuapp.com'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
