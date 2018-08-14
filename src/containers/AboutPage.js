@@ -296,11 +296,11 @@ class AboutPage extends React.Component {
                                 null
                         }
                         <div className="about__content__images">
-                            <img className="about__content__image" src="https://res.cloudinary.com/dccqlnk3t/image/upload/v1534175699/img1_osaflx.jpg" />
-                            <img className="about__content__image" src="/images/aboutpage/img2.jpg" />
-                            <img className="about__content__image" src="/images/aboutpage/img3.jpg" />
-                            <img className="about__content__image desktop_inline" src="/images/aboutpage/img4.jpg" />
-                            <img className="about__content__image mobile_inline" src="/images/aboutpage/img4-mobile.jpg" />
+                            <img className="about__content__image" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/img1.jpg" />
+                            <img className="about__content__image" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/img2.jpg" />
+                            <img className="about__content__image" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/img3.jpg" />
+                            <img className="about__content__image desktop_inline" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/img4.jpg" />
+                            <img className="about__content__image mobile_inline" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/img4-mobile.jpg" />
                         </div>
                     </div>
                     <SocialMedia
