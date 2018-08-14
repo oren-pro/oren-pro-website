@@ -3,19 +3,19 @@ import UncontrolledCarousel from '../UncontrolledCarousel';
 
 const itemsDesktop = [
   {
-    src: 'https://res.cloudinary.com/dccqlnk3t/image/upload/v1534116622/carousel_01_lsqx0l.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_01.jpg',
     altText: 'Slide 1',
     caption: '',
     header: ''
   },
   {
-    src: 'https://res.cloudinary.com/dccqlnk3t/image/upload/v1534116644/carousel_02_slwqcc.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_02.jpg',
     altText: 'Slide 2',
     caption: '',
     header: ''
   },
   {
-    src: 'https://res.cloudinary.com/dccqlnk3t/image/upload/v1534141001/carousel_03_a9a2uo.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_03.jpg',
     altText: 'Slide 3',
     caption: '',
     header: ''
@@ -24,19 +24,19 @@ const itemsDesktop = [
 
 const itemsMobile = [
   {
-    src: '/images/homepage/carousel/carouselMobile_01.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_01.jpg',
     altText: 'Slide 1',
     caption: '',
     header: ''
   },
   {
-    src: '/images/homepage/carousel/carouselMobile_02.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_02.jpg',
     altText: 'Slide 2',
     caption: '',
     header: ''
   },
   {
-    src: '/images/homepage/carousel/carouselMobile_03.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_03.jpg',
     altText: 'Slide 3',
     caption: '',
     header: ''
