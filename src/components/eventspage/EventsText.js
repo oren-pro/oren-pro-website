@@ -71,7 +71,7 @@ export default class EventsText extends React.Component {
                 minHeight: Math.round(this.props.showLines* ratio) * lineHeight
             });
         } else {
-            console.log('componentDidMount');
+            //console.log('componentDidMount');
             ratio = 2.2;
             if (windowWidth >= 768 && windowWidth < 800) {
                 ratio = ratio * 0.68;
@@ -212,18 +212,15 @@ export default class EventsText extends React.Component {
         const { height } = this.state;
         //console.log(this.props.showLines);
         return (
-
             <div className="events__text__box">
                 <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
                 <img className="events__seperator events__seperator__w100 mobile" src="/images/eventspage/events-seperator-mobile.png" />
                 <div className="events__text__flexbox" dir="rtl">
-                    
                     <AnimateHeight
                     duration={ 500 }
                     height={ height }>
                         { 
                             this.props.isAuthenticated === true ? 
-                                
                                 <Textarea
                                     className="events__text Heebo-Regular"
                                     value={this.props.categoryText}
@@ -242,9 +239,7 @@ export default class EventsText extends React.Component {
                                     readOnly
                                 />
                         }
-                        
                     </AnimateHeight>
-
                 </div>
                 <div className="events__text__more__box">
                     <button 
@@ -257,13 +252,8 @@ export default class EventsText extends React.Component {
                     >
                         <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
                         <p className="events__text__more__button__text Heebo-Regular">קראו עוד</p>
-                        
-                    </button> 
-
-                    
+                    </button>
                 </div>
-
-
                 { 
                     this.props.isAuthenticated === true ? 
                         <input
@@ -279,18 +269,7 @@ export default class EventsText extends React.Component {
                     :
                         null
                 }
-
-
         </div>
         );
     }
 }
-
-
-
-
-
-
-// <p className="events__text Heebo-Regular">
-//             מתאפיינים, איזה סוג של לקוחות וכו טקסט כליי על אירועי חברה. אולי במה הם מתאפיינים, איזה סוג של לקוחות וכו טקסט כליי על אירועי חברה. אולי במה הם מתאפיינים, איזה סוג של לקוחות וכו טקסט כליי על אירועי חברה. אולי במה הם מתאפיינים, איזה סוג של לקוחות וכו טקסט כליי על אירועי חברה. אולי במה הם מתאפיינים, איזה סוג של לקוחות וכו. נקודה סוף.
-//             </p>

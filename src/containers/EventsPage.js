@@ -95,24 +95,62 @@ class EventsPage extends React.Component {
     uploadWidget = (e) => {
         const { dataset } = e.target;
         const { action, field, index, name } = dataset;
-        cloudinary.openUploadWidget({ cloud_name: 'dccqlnk3t', upload_preset: 'yardnmw1', tags:['test']},
+        var myUploadWidget = cloudinary.openUploadWidget({ 
+            cloud_name: 'orenpro', 
+            upload_preset: 'fbznsdxt', 
+            // tags: ['test'],
+            sources: [
+                "local",
+                "url",
+                "image_search",
+                "facebook",
+                "dropbox",
+                "instagram",
+                "camera"
+            ],
+            //UI Customization
+            // styles: {
+            //     palette: {
+            //         window: "#10173a",
+            //         sourceBg: "#20304b",
+            //         windowBorder: "#9999ff",
+            //         tabIcon: "#33ffcc",
+            //         inactiveTabIcon: "#0e2f5a",
+            //         menuIcons: "#ffccff",
+            //         link: "#ff0066",
+            //         action: "#33ffcc",
+            //         inProgress: "#00ffcc",
+            //         complete: "#33ff00",
+            //         error: "#cc3333",
+            //         textDark: "#000000",
+            //         textLight: "#ffffff"
+            //     }
+            // },
+            fonts: {
+                default: null,
+                "'Cute Font', cursive": "https://fonts.googleapis.com/css?family=Cute+Font",
+                "'Gamja Flower', cursive": "https://fonts.googleapis.com/css?family=Gamja+Flower|PT+Serif"
+            }
+        },
             (error, result) => {
                 if (error) {
                     console.log(error);
                 }
-                if (result) {
+                if (result.event === "success") {
                     const image = {
-                        image: result[0].url
+                        image: result.info.secure_url
                     };
                     this.props.startUpdateEventImage(index, image).then((items)=> {
                         console.log('done page');
-                        // this.setState({
-                        //     items
-                        // });
+                        this.setState({
+                            items
+                        });
                     });
+                    myUploadWidget.close();
                 }
             }
         );
+        //myUploadWidget.open();
     }
 
     handleScroll = () => {
@@ -126,12 +164,12 @@ class EventsPage extends React.Component {
         const nextCategory = this.props.eventsObject.categories[this.props.categoryIndex].id;
         const prevCategory = this.props.eventsObject.categoryId;
         if (nextCategory !== prevCategory) {
-            console.log('reset sub to all');
+            //console.log('reset sub to all');
             this.props.setCategoryId(nextCategory);
             this.props.setSubcategoryId('');
         }
         if (!prevCategory) {
-            console.log('new cat');
+            //console.log('new cat');
             this.props.setCategoryId(nextCategory);
         }
 
@@ -141,7 +179,7 @@ class EventsPage extends React.Component {
                     allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
                 });
                 this.props.startSetAllEvents().then(() => {
-                    console.log(this.props.eventsObject.allEvents);
+                    //console.log(this.props.eventsObject.allEvents);
                     this.setState({
                         allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                     });
@@ -184,7 +222,7 @@ class EventsPage extends React.Component {
                 this.props.eventsObject.categories.map((category, index) => {
                     if (category.id !== categoryId) {
                         this.props.startSetItems(category.id).then((items)=> {
-                            console.log('set '+category.id)
+                            //console.log('set '+category.id)
                         });
                     }
                 });
@@ -195,7 +233,7 @@ class EventsPage extends React.Component {
                     items.sort((a, b) => {
                         return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
                     });
-                    console.log('in 1');
+                    //console.log('in 1');
                     this.setState({
                         itemsOrigin: JSON.parse(JSON.stringify(items)),
                         itemsCurrentOrigin: JSON.parse(JSON.stringify(items)),
@@ -214,7 +252,7 @@ class EventsPage extends React.Component {
                 items.sort((a, b) => {
                     return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
                 });
-                console.log('in 2');
+                //console.log('in 2');
                 this.setState({
                     subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                     subCategories: subcategories,
@@ -233,10 +271,10 @@ class EventsPage extends React.Component {
             itemsSet.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
-            console.log('in 3');
+            //console.log('in 3');
 
-            console.log(this.state.subcategoryId);
-            console.log(this.props.eventsObject.subcategoryId);
+            //console.log(this.state.subcategoryId);
+            //console.log(this.props.eventsObject.subcategoryId);
             if (this.props.eventsObject.subcategoryId === '' || !this.props.eventsObject.subcategoryId) {
                 itemsSet.map((event, index) => {
                     itemsCurrent.push(event);
@@ -328,7 +366,7 @@ class EventsPage extends React.Component {
                 [subcategoryId+'order']: order
             }
         };
-        console.log(event);
+        //console.log(event);
 
         this.props.eventsObject.allSubCategories.map((subcategory, index) => {
             let obj = subcategory.categories;
@@ -340,8 +378,8 @@ class EventsPage extends React.Component {
                         categoriesArr.push(keyedObj);
                     }
                 });
-                console.log('befor categoriesArr.map');
-                console.log(event);
+                //console.log('befor categoriesArr.map');
+                //console.log(event);
                 categoriesArr.map((catId, index) => {
                     if (event.categories) {
                         if(event.categories[catId.id] !== true) {
@@ -363,7 +401,7 @@ class EventsPage extends React.Component {
 
 
 
-        console.log(event);
+        //console.log(event);
 
         this.props.startAddItem(event, categoryId, catOrder, subcategoryId, order).then((items)=> {
             this.getAllData(categoryId, subcategoryId);
@@ -445,7 +483,7 @@ class EventsPage extends React.Component {
             this.setState({
                 items: storeEvents
             });
-            console.log(this.state.items);
+            //console.log(this.state.items);
             itemsCurrent = JSON.parse(JSON.stringify(storeEvents));
             //console.log("sorting");
             itemsCurrent.sort((a, b) => {
@@ -610,7 +648,7 @@ class EventsPage extends React.Component {
     toggleHookSubcategory = (e) => {
         const categoryId = this.state.category.id;
         const subcategoryId = e.target.dataset.id;
-        console.log(subcategoryId);
+        //console.log(subcategoryId);
         const subCategoryIndex = e.target.dataset.index;
         let showStatus = e.target.dataset.showstatus;
         if (showStatus === 'true') {
@@ -654,7 +692,7 @@ class EventsPage extends React.Component {
                     subcategoriesArr.map((subcategory, index) => {
                         this.state.allSubCategories.map((allSubcategory, index) => {
                             if(subcategory.id === allSubcategory.id) {
-                                console.log(allSubcategory);
+                                //console.log(allSubcategory);
                                 if(allSubcategory.id !== subcategoryId) {
                                     if (allSubcategory.categories[categoryId] === true) {
                                         eventExists = true;
@@ -677,10 +715,10 @@ class EventsPage extends React.Component {
                 } else {
                     newAllItems.push(event);
                 }
-                console.log(event.subcategories);
+                //console.log(event.subcategories);
             });
 
-            console.log(this.state.subcategories);
+            //console.log(this.state.subcategories);
             
 
             // . reorder category items
@@ -720,7 +758,7 @@ class EventsPage extends React.Component {
                         subcategoriesArr.map((subcategory, index) => {
                             this.state.allSubCategories.map((allSubcategory, index) => {
                                 if(subcategory.id === allSubcategory.id) {
-                                    console.log(allSubcategory);
+                                    //console.log(allSubcategory);
                                     if(allSubcategory.id !== subcategoryId) {
                                         if (allSubcategory.categories[categoryId] === true) {
                                             eventExists = true;
@@ -761,9 +799,9 @@ class EventsPage extends React.Component {
                     if (!subcategoryToAdd.categories) {
                         subcategoryToAdd.categories = {};
                     }
-                    console.log(subcategoryToAdd);
-                    console.log(categoryId);
-                    console.log(showStatus);
+                    // console.log(subcategoryToAdd);
+                    // console.log(categoryId);
+                    // console.log(showStatus);
                     subcategoryToAdd.categories[categoryId] = showStatus;
                     subcategoryToAdd.categories[categoryId+'order'] = categoryOrder;
                     const subcategoryAllOrder = index;
@@ -808,7 +846,7 @@ class EventsPage extends React.Component {
 
 
     toggleShowItem = (e) => {
-        console.log('in toggle show item');
+        //console.log('in toggle show item');
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         const eventId = e.target.dataset.id;
@@ -881,7 +919,7 @@ class EventsPage extends React.Component {
 
 
     toggleHookEvent = (e) => {
-        console.log('in toggle hook event');
+        //console.log('in toggle hook event');
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         const eventId = e.target.dataset.id;
@@ -906,12 +944,12 @@ class EventsPage extends React.Component {
         if (showStatus === null) {
             let eventExists = false;
             let globalEvent = {};
-            console.log('in null');
-            console.log(eventsCurrent);
+            //console.log('in null');
+            //console.log(eventsCurrent);
             this.props.eventsObject.allEvents.map((event, index) => {
                 if (event.id === eventId) {
                     globalEvent = event;
-                    console.log(event);
+                    //console.log(event);
                 }
                 if (event.subcategories) {
                     if (event.subcategories[subcategoryId]===true) {
@@ -919,12 +957,12 @@ class EventsPage extends React.Component {
                     }
                 }
             });
-            console.log(eventsCurrent);
+            //console.log(eventsCurrent);
             eventsCurrent.map((event, index) => {
                 // find un-hooked event in current subcategory
                 if (event.id === eventId) {
                     
-                    console.log(globalEvent);
+                    //console.log(globalEvent);
                     // get event's oreder in category all events
                     eventCategoryIndex = event.categories[categoryId+'order'];
                     // un-hook event from subcategory
@@ -936,24 +974,24 @@ class EventsPage extends React.Component {
                     subcategories.map((subcategory, index) => {
                         if (subcategory.id !== subcategoryId) {
                             if (event.subcategories[subcategory.id] === true) {
-                                console.log('found subcategory - item exists!')
+                                //console.log('found subcategory - item exists!')
                                 eventExists = true;
                             }
                         }
                     });
                 }
-                console.log('unhooked and re-ordering');
-                console.log('event index', eventIndex);
+                //console.log('unhooked and re-ordering');
+                //console.log('event index', eventIndex);
                 // re-order events in sub category after event un-hook
                 if (event.subcategories[subcategoryId+'order'] > eventIndex) {
-                    console.log('in event order', event.subcategories[subcategoryId+'order']);
+                    //console.log('in event order', event.subcategories[subcategoryId+'order']);
                     event.subcategories[subcategoryId+'order'] = event.subcategories[subcategoryId+'order']-1;
                     fbEventsToUpdate[event.id] = event;
                 }
                 eventsToUpdate.push(event);
             });
 
-            console.log(fbEventsToUpdate);
+            //console.log(fbEventsToUpdate);
 
 
 
@@ -971,7 +1009,7 @@ class EventsPage extends React.Component {
                         fbEventsToUpdate[event.id] = event;
                     }
                     // re-set events order in current category all events
-                    console.log(eventCategoryIndex);
+                    //console.log(eventCategoryIndex);
                     if (event.categories[categoryId+'order'] > eventCategoryIndex) {
                         event.categories[categoryId+'order'] = event.categories[categoryId+'order']-1;
                         if (fbEventsToUpdate[event.id]) {
@@ -984,12 +1022,12 @@ class EventsPage extends React.Component {
                 });
             }
             
-            console.log(fbEventsToUpdate);
+            //console.log(fbEventsToUpdate);
 
 
 
 
-            console.log(globalEvent);
+            //console.log(globalEvent);
 
             // get current subcategory object from store all subcategories
             this.props.eventsObject.allSubCategories.map((subcategory, index) => {
@@ -1030,8 +1068,8 @@ class EventsPage extends React.Component {
                                 });
                                 //console.log(eventExists+' for event still exists in category - '+catId.id);
                             }
-                            console.log(globalEvent);
-                            console.log(eventExists);
+                            //console.log(globalEvent);
+                            //console.log(eventExists);
                             // if event does not exist on other subcategory on other category - re-order other category
                             if (eventExists === false) {
                                 // go over all events in other category
@@ -1043,9 +1081,9 @@ class EventsPage extends React.Component {
                                     // console.log('global event order');
                                     // console.log(globalEvent.categories[catId.id+'order']);
                                     // find event and remove other category hook to remove list
-                                    console.log(eventId);
+                                    //console.log(eventId);
                                     if (event.id === eventId) {
-                                        console.log('found');
+                                        //console.log('found');
                                         fbEventsToUpdate[event.id].categories[catId.id] = null;
                                         fbEventsToUpdate[event.id].categories[catId.id+'order'] = null;
                                     } else {
@@ -1066,7 +1104,7 @@ class EventsPage extends React.Component {
                                 });
                             }
                         }
-                        console.log(fbEventsToUpdate);  
+                        //console.log(fbEventsToUpdate);  
                     });
                 }
             });
@@ -1075,7 +1113,7 @@ class EventsPage extends React.Component {
             this.props.eventsObject.allEvents.map((event, index) => {
                 if (event.subcategories) {
                     if (event.subcategories[subcategoryId]===true) {
-                        console.log('found event!!');
+                        //console.log('found event!!');
                         eventsCurrent.push(event);
                     }
                 }
@@ -1083,8 +1121,8 @@ class EventsPage extends React.Component {
             eventsAll.map((event, index) => {
                 
                 if (event.id === eventId) {
-                    console.log(eventsCurrent);
-                    console.log(eventsCurrent.length);
+                    //console.log(eventsCurrent);
+                    //console.log(eventsCurrent.length);
                     if (event.subcategories) {
                         event.subcategories[subcategoryId] = true;
                         event.subcategories[subcategoryId+'order'] = eventsCurrent.length+1;
@@ -1106,8 +1144,8 @@ class EventsPage extends React.Component {
                                     categoriesArr.push(keyedObj);
                                 }
                             });
-                            console.log('befor categoriesArr.map');
-                            console.log(event);
+                            //console.log('befor categoriesArr.map');
+                            //console.log(event);
                             categoriesArr.map((catId, index) => {
                                 if (event.categories) {
                                     if(event.categories[catId.id] !== true) {
@@ -1124,9 +1162,9 @@ class EventsPage extends React.Component {
                             });
                         }
                     });
-                    console.log(fbEventsToUpdate[event.id]);
+                    //console.log(fbEventsToUpdate[event.id]);
                     fbEventsToUpdate[event.id] = event;
-                    console.log(fbEventsToUpdate[event.id]);
+                    //console.log(fbEventsToUpdate[event.id]);
                     eventsToUpdate.push(event);
                 }
                 //console.log(fbEventsToUpdate);
@@ -1134,10 +1172,10 @@ class EventsPage extends React.Component {
         }
 
             
-        console.log('before hook event');
+        //console.log('before hook event');
         this.props.startHookEvent( fbEventsToUpdate ).then((res) => {
             // get all hooked subcategories in current category in redux store and state
-            console.log('in start hook event');
+            //console.log('in start hook event');
             this.getAllData(categoryId, subcategoryId);
             if(showStatus === true) {
                 this.onToggleNewItemName();
@@ -1150,7 +1188,7 @@ class EventsPage extends React.Component {
 
 
     getAllData = (categoryId, subcategoryId) => {
-        console.log('in get all data');
+        //console.log('in get all data');
         this.props.startSetSubcategories(categoryId).then((subCategories)=> {
             if(subCategories.length>1){
                 subCategories.sort((a, b) => {
@@ -1167,7 +1205,7 @@ class EventsPage extends React.Component {
                 if (category.id !== categoryId) {
                     // get items for each other category
                     this.props.startSetItems(category.id).then((items)=> {
-                        console.log('set '+category.id)
+                        //console.log('set '+category.id)
                     });
                 }
             });
@@ -1191,7 +1229,7 @@ class EventsPage extends React.Component {
                         return a.subcategories[subcategoryId+'order'] > b.subcategories[subcategoryId+'order'] ? 1 : -1;
                     });
                 }
-                console.log(itemsCurrent);
+                //console.log(itemsCurrent);
                 this.setState({
                     items,
                     itemsOrigin: JSON.parse(JSON.stringify(items)),
@@ -1200,12 +1238,12 @@ class EventsPage extends React.Component {
                 });
             });
             this.props.startSetAllSubcategories().then(() => {
-                console.log(this.props.eventsObject.allSubCategories);
+                //console.log(this.props.eventsObject.allSubCategories);
                 this.setState({
                     allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
                 });
                 this.props.startSetAllEvents().then(() => {
-                console.log(this.props.eventsObject.allEvents);
+                //console.log(this.props.eventsObject.allEvents);
                 this.setState({
                     allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                 });

@@ -96,13 +96,13 @@ class HomePage extends React.Component {
 	}
 
     uploadWidget = (e) => {
+        console.log('myUploadWidget called');
         const { dataset } = e.target;
         const { name, index, field, action } = dataset;
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        var myUploadWidget;
-        myUploadWidget = cloudinary.openUploadWidget({ 
+        var myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
-            upload_preset: 'umqruyrp', 
+            upload_preset: 'fbznsdxt', 
             // tags: ['test'],
             sources: [
                 "local",
@@ -157,11 +157,12 @@ class HomePage extends React.Component {
                     })
                     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
                     //Step 2.4:  Call the .close() method in order to close the widget
+                    console.log('myUploadWidget.close()');
                     myUploadWidget.close();
                 }
             }
         );
-        myUploadWidget.open();
+        //myUploadWidget.open();
     }
 
     // update database

@@ -47,7 +47,6 @@ const HomePageEventsItem = (props) => (
                         data-index={props.index}
                         data-field='eventImage'
                         data-action={props.action}
-                        onClick={props.uploadWidget}
                         className="homepage__event-item__upload-button"
                     >
                         <img

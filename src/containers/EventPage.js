@@ -413,21 +413,58 @@ class EventPage extends React.Component {
         //console.log(this.state.images);
         //console.log(Number(this.state.images.length)+1);
         //console.log( id );
-        cloudinary.openUploadWidget({ cloud_name: 'dccqlnk3t', upload_preset: 'yardnmw1', tags:['test']},
+        var myUploadWidget;
+        myUploadWidget = cloudinary.openUploadWidget({ 
+            cloud_name: 'orenpro', 
+            upload_preset: 'fbznsdxt', 
+            // tags: ['test'],
+            sources: [
+                "local",
+                "url",
+                "image_search",
+                "facebook",
+                "dropbox",
+                "instagram",
+                "camera"
+            ],
+            //UI Customization
+            // styles: {
+            //     palette: {
+            //         window: "#10173a",
+            //         sourceBg: "#20304b",
+            //         windowBorder: "#9999ff",
+            //         tabIcon: "#33ffcc",
+            //         inactiveTabIcon: "#0e2f5a",
+            //         menuIcons: "#ffccff",
+            //         link: "#ff0066",
+            //         action: "#33ffcc",
+            //         inProgress: "#00ffcc",
+            //         complete: "#33ff00",
+            //         error: "#cc3333",
+            //         textDark: "#000000",
+            //         textLight: "#ffffff"
+            //     }
+            // },
+            fonts: {
+                default: null,
+                "'Cute Font', cursive": "https://fonts.googleapis.com/css?family=Cute+Font",
+                "'Gamja Flower', cursive": "https://fonts.googleapis.com/css?family=Gamja+Flower|PT+Serif"
+            }
+        },
             (error, result) => {
                 if (error) {
                     console.log(error);
                 }
-                if (result) {
+                if (result.event === "success") {
                     //console.log(result);
                     //console.log(result[0].public_id)
                     const categoryId = this.props.categoryId;
                     const order = Number(this.state.images.length)+1;
                     const image = {
-                        publicId: result[0].public_id,
-                        imageUrl: result[0].url,
-                        imageWidth: result[0].width,
-                        imageHeight: result[0].height,
+                        publicId: result.info.public_id,
+                        imageUrl: result.info.secure_url,
+                        imageWidth: result.info.width,
+                        imageHeight: result.info.height,
                         altText: '',
                         events: {
                             [id]: true,
@@ -482,6 +519,7 @@ class EventPage extends React.Component {
                 }
             }
         );
+        myUploadWidget.open();
     }
 
 

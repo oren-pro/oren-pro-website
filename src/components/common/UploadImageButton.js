@@ -6,7 +6,6 @@ const UploadImageButton = (props) => (
         data-field={props.field}
         data-index={props.id}
         data-name={props.name}
-        onClick={props.uploadWidget}
         className={props.cssClass ? props.cassClass : "common__image__upload-button"}
     >
         <img

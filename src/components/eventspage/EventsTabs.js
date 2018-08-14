@@ -18,9 +18,9 @@ class EventsTabs extends React.Component {
                 subCategories: nextProps.subCategories
             });
             return true;
-            console.log('updating tabs from nextprops --------------------');
-            console.log(this.props);
-            console.log(nextProps);
+            //console.log('updating tabs from nextprops --------------------');
+            //console.log(this.props);
+            //console.log(nextProps);
         } else {
             return true;
         }
@@ -28,7 +28,7 @@ class EventsTabs extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log('updating tabs --------------------');
+        //console.log('updating tabs --------------------');
         this.setState({
             subcategoryId: this.props.subcategoryId,
             subCategories: this.props.subCategories
