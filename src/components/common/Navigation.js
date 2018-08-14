@@ -154,6 +154,10 @@ class Navigation extends React.Component {
       window.location = 'tel:0525379515';
   }
 
+  toggleAccessibility = () => {
+    window.StartAccessibility();
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -211,9 +215,12 @@ class Navigation extends React.Component {
                   data-name="accessibility"
                   onMouseOver={this.setIconChangeOn}
                   onMouseOut={this.setIconChangeOut}
+                  onClick={this.toggleAccessibility}
+                  
                 >
                   <IconHoverChange
                     icon={this.state.accessibilityIcon} 
+                    
                   />
                 </NavLink>
               </NavItem>
