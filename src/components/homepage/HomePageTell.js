@@ -46,8 +46,8 @@ class HomePageTell extends React.Component {
         {
                 this.props.isAuthenticated === true ?
                     <div className="homepage__tell__box__auth">
-                        <img className="homepage__tell__image desktop" src="/images/homepage/tell/tell.jpg" />
-                        <img className="homepage__tell__image mobile" src="/images/homepage/tell/tell-mobile.jpg" />
+                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell.jpg" />
+                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell-mobile.jpg" />
                         <h2 className="homepage__tell__header Heebo-Medium">{header}</h2>
                         <div className="homepage__tell__logo__box mobile">
                             <img className="homepage__tell__logo mobile_inline" src={logo} />
