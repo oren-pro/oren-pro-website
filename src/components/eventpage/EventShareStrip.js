@@ -1,5 +1,25 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import ShareLink from 'react-facebook-share-link';
+import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  ViberShareButton,
+  EmailShareButton,
+} from 'react-share';
+ 
+
+
 
 const EventShareStrip = (props) => (
     
@@ -10,9 +30,13 @@ const EventShareStrip = (props) => (
         <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
         <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
         <div className="events__eventshare__share desktop">
-            <div className="events__eventshare__phone" />
-            <div className="events__eventshare__mail" />
-            <div className="events__eventshare__facebook" />
+            <WhatsappShareButton className="events__eventshare__phone" title='אורן ורינת' url={props.currentURL} />
+            <a href={`mailto:?subject="אורן ורינת הפקות"&body=${props.currentURL}`} target='_blank' className="events__eventshare__mail"> </a>
+            <ShareLink link={props.currentURL}>
+            {link => (
+                <a href={link} target='_blank' className="events__eventshare__facebook"> </a>
+            )}
+            </ShareLink>
             <p className="events__eventshare__text Heebo-Regular" dir="rtl">אני חייב לשתף את זה!</p>
         </div>
         <div className="events__eventshare__nav">

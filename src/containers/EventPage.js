@@ -43,8 +43,6 @@ import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 
 
-
-
 class EventPage extends React.Component {
     constructor(props) {
         super(props);
@@ -87,7 +85,8 @@ class EventPage extends React.Component {
                 title: '',
                 description: '',
                 keyWords: '',
-            }
+            },
+            currentURL: ''
         }
     }
 
@@ -102,6 +101,14 @@ class EventPage extends React.Component {
     
 
     componentDidUpdate(prevProps) {
+        
+        if (this.state.currentURL === '') {
+            const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
+            console.log(currentURL);
+            this.setState({
+                currentURL
+            });
+        }
         if(prevProps.match.params.event !== this.props.match.params.event) {
             const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ");
             this.setState({
@@ -256,8 +263,8 @@ class EventPage extends React.Component {
                 let imageHeight = image.imageHeight;
                 let ratioWidth = 1;
                 let ratioHeight = 1;
-                console.log(imageHeight);
-                console.log(imageWidth);
+                // console.log(imageHeight);
+                // console.log(imageWidth);
 
                 const windowWidth = $(window).width();
                 const windowHeight = $(window).height();
@@ -265,8 +272,8 @@ class EventPage extends React.Component {
                 const maxWidth = windowWidth/3*2;
                 const maxHeight = maxWidth/3*2;
 
-                console.log(windowWidth);
-                console.log(windowHeight);
+                // console.log(windowWidth);
+                // console.log(windowHeight);
                 
                 //if (imageHeight < maxHeight && imageWidth < maxWidth) {
                     ratioHeight = maxHeight/imageHeight;
@@ -282,10 +289,10 @@ class EventPage extends React.Component {
                     }
                 //}
 
-                console.log(ratioHeight);
-                console.log(ratioWidth);
-                console.log(imageHeight);
-                console.log(imageWidth);
+                // console.log(ratioHeight);
+                // console.log(ratioWidth);
+                // console.log(imageHeight);
+                // console.log(imageWidth);
                 return slideGalleryImages.push({
                     publicId: image.publicId,
                     image: image,
@@ -329,21 +336,21 @@ class EventPage extends React.Component {
                 allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
             });
             this.props.startSetAllEvents().then(() => {
-                console.log(this.props.eventsObject.allEvents);
+                //console.log(this.props.eventsObject.allEvents);
                 this.setState({
                     allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                 });
-                console.log(this.props.eventsObject.subcategoryId);
+                //console.log(this.props.eventsObject.subcategoryId);
                 if (this.props.eventsObject.subcategoryId === undefined || this.props.eventsObject.subcategoryId === '') {
                     this.setState({
                         subcategoryName: 'הכל'
                     });
                 } else {
                     this.props.eventsObject.allSubCategories.map((subcategory, index) => {
-                        console.log(subcategory);
+                        //console.log(subcategory);
                         if(subcategory.id === this.props.eventsObject.subcategoryId) {
                             const subcategoryName = subcategory.name;
-                            console.log(subcategoryName);
+                            //console.log(subcategoryName);
                             this.setState({
                                 subcategoryName
                             });
@@ -644,14 +651,14 @@ class EventPage extends React.Component {
             return a.order > b.order ? 1 : -1;
         });
 
-        console.log('galleryImages');
-        console.log(galleryImages);
+        // console.log('galleryImages');
+        // console.log(galleryImages);
         galleryImages.map((image, index) => {
             image.image.eventsIds[eventId+'order'] = Number(index)+1;
             images.push(image.image);
         });
-        console.log('images');
-        console.log(images);
+        // console.log('images');
+        // console.log(images);
 
         this.setState({
             images,
@@ -704,8 +711,8 @@ class EventPage extends React.Component {
 
 
     onDeleteImage = (e) => {
-        console.log(e.target.dataset.publicid);
-        console.log(e.target.dataset.id);
+        // console.log(e.target.dataset.publicid);
+        // console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicid = e.target.dataset.publicid;
@@ -735,9 +742,9 @@ class EventPage extends React.Component {
         })
         fbImages[id] = null;
 
-        console.log(galleryImages);
-        console.log(images);
-        console.log(fbImages);
+        // console.log(galleryImages);
+        // console.log(images);
+        // console.log(fbImages);
         this.props.startDeleteImage( fbImages, images, eventId, categoryId, publicid );
 
         const slideGalleryImages = [];
@@ -746,27 +753,27 @@ class EventPage extends React.Component {
             let imageHeight = image.imageHeight;
             let ratioWidth = 1;
             let ratioHeight = 1;
-            console.log(imageHeight);
-            console.log(imageWidth);
+            //console.log(imageHeight);
+            //console.log(imageWidth);
             
             if (imageHeight < 800 && imageWidth < 1000) {
                 ratioHeight = 800/imageHeight;
                 ratioWidth = 1000/imageWidth;
                 if (ratioHeight > ratioWidth) {
-                    console.log('1');
+                    //console.log('1');
                     imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 } else {
-                    console.log('2');
+                    //console.log('2');
                     imageHeight = ratioWidth*imageHeight;
                     imageWidth = ratioWidth*imageWidth;
                 }
             }
 
-            console.log(ratioHeight);
-            console.log(ratioWidth);
-            console.log(imageHeight);
-            console.log(imageWidth);
+            // console.log(ratioHeight);
+            // console.log(ratioWidth);
+            // console.log(imageHeight);
+            // console.log(imageWidth);
 
             return slideGalleryImages.push({
                 publicId: image.public_id,
@@ -1094,6 +1101,7 @@ class EventPage extends React.Component {
                             startAddNewSubcategory={this.startAddNewSubcategory}
                         />
                         <EventShareStrip 
+                            currentURL={this.state.currentURL}
                             navtoCategoryPage={this.navtoCategoryPage}
                             gotoNextEvent={this.gotoNextEvent}
                             gotoPrevEvent={this.gotoPrevEvent}
