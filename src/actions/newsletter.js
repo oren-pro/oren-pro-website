@@ -21,13 +21,13 @@ console.log(email);
             }
         }
 
-        axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', {
+        axios.post('https://api.viplus.com/gates/wsgate.asmx/RMembers_Import', {
             "Access-Control-Allow-Origin": '*',
             "firstname": name,
             "email": email,
             "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
-            "successredirect": "http://oren-pro-website.herokuapp.com",
-            "failedredirect": "http://oren-pro-website.herokuapp.com",
+            "successredirect": "https://oren-pro-website.herokuapp.com",
+            "failedredirect": "https://oren-pro-website.herokuapp.com",
             "viplists": "0",
             "exists": "merge",
             "restore": "restoreondeleted"
