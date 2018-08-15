@@ -11,40 +11,75 @@ export const subscribeToNewsletter = (newsletterData = {}) => {
 console.log(name);
 console.log(email);
 
-        let config = {
-            
-        }
         const payload = {
             "headers":{
+                'Content-Type': 'application/x-www-form-urlencoded',
                 "Access-Control-Allow-Origin": '*',
                 "Accept": 'application/json'
             }
         }
 
-        axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', {
-            "Access-Control-Allow-Origin": '*',
-            "firstname": name,
-            "email": email,
-            "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
-            "successredirect": "http://oren-pro-website.herokuapp.com",
-            "failedredirect": "http://oren-pro-website.herokuapp.com",
-            "viplists": "0",
-            "exists": "merge",
-            "restore": "restoreondeleted"
-        }, {
+
+
+         var postData = {
+            firstname: name,
+            email: email,
+            apikey: "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
+            successredirect: "http://oren-pro-website.herokuapp.com",
+            failedredirect: "http://oren-pro-website.herokuapp.com",
+            viplists: "0",
+            exists: "merge",
+            restore: "restoreondeleted"
+        };
+
+        let axiosConfig = {
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
             }
+        };
+
+        axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', postData, axiosConfig)
+        .then((res) => {
+            console.log("RESPONSE RECEIVED: ", res);
         })
-        .then(function (response) {
-            console.log("response");
-            console.log(response);
+        .catch((err) => {
+            console.log("AXIOS ERROR: ", err);
         })
-        .catch(function (error) {
-            console.log('error');
-            console.log(error);
-        });
+
+
+
+
+
+
+
+
+
+        // axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', {
+        //     "firstname": name,
+        //     "email": email,
+        //     "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
+        //     "successredirect": "http://oren-pro-website.herokuapp.com",
+        //     "failedredirect": "http://oren-pro-website.herokuapp.com",
+        //     "viplists": "0",
+        //     "exists": "merge",
+        //     "restore": "restoreondeleted"
+        // }, {
+        //     headers: {
+        //         "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //         'Access-Control-Allow-Origin': '*',
+        //         'Accept': 'application/json'
+        //     }
+        // })
+        // .then(function (response) {
+        //     console.log("response");
+        //     console.log(response);
+        // })
+        // .catch(function (error) {
+        //     console.log('error');
+        //     console.log(error);
+        // });
 
 
 //         function post(method) {

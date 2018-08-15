@@ -11,7 +11,7 @@ var cloudinary = require('cloudinary');
 
 const app = express();
 
-//app.use(cors());
+app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080',
                       'https://oren-pro-website.herokuapp.com'];
