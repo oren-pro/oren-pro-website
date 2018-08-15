@@ -240,6 +240,7 @@ class Navigation extends React.Component {
                   data-name="accessibility"
                   onMouseOver={this.setIconChangeOn}
                   onMouseOut={this.setIconChangeOut}
+                  onClick={this.toggleAccessibility}
                 >
                   <img className="nav__link__accessibility__mobile" src="/images/navigation/accessibility_mobile.svg" />
                 </NavLink>
