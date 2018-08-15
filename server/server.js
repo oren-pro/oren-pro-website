@@ -11,7 +11,7 @@ var cloudinary = require('cloudinary');
 
 const app = express();
 
-app.use(cors());
+//app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080',
                       'https://oren-pro-website.herokuapp.com'];
@@ -57,6 +57,8 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
     return 'hia';
 });
 
+
+
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -67,13 +69,15 @@ var transporter = nodemailer.createTransport({
 
 
 app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
+  console.log('GMAIL_USER', process.env.GMAIL_USER);
+console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
     console.log('in server');
     console.log(request.body.name);
     console.log(request.body.email);
     console.log(request.body.message);
     if(request.body.name){
         mailOptions = {
-          from: 'CreateYourNecklace@gmail.com',
+          from: 'oren.pro.test@gmail.com',
           to: 'mosh.kainer@gmail.com',
           subject: request.body.email,
           text: request.body.message
