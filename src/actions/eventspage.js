@@ -473,6 +473,7 @@ export const editCategory = ( category ) => ({
 });
 
 export const startEditCategory = ( category ) => {
+    console.log('here');
     return (dispatch) => {
         return database.ref(`eventsCategories/${category.id}`).update(category).then(() => {
             dispatch(editCategory( category ));
