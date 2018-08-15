@@ -77,7 +77,7 @@ export default class HomePageIntouchForm extends React.Component {
                 </Modal>
 
                 {this.state.error && <p>{this.state.error}</p>}
-                <form action="http://api.viplus.com/gates/wsgate.asmx/RMembers_Import" method="post" className="homepage__intouch__form" onSubmit={this.onSubmit} dir="rtl">
+                <form className="homepage__intouch__form" onSubmit={this.onSubmit} dir="rtl">
                     <input
                         type="text"
                         name="firstname"
