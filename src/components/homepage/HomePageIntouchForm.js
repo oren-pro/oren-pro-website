@@ -77,19 +77,31 @@ export default class HomePageIntouchForm extends React.Component {
                 </Modal>
 
                 {this.state.error && <p>{this.state.error}</p>}
-                <form className="homepage__intouch__form" onSubmit={this.onSubmit} dir="rtl">
+                <form action="http://api.viplus.com/gates/wsgate.asmx/RMembers_Import" method="post" className="homepage__intouch__form" onSubmit={this.onSubmit} dir="rtl">
                     <input
                         type="text"
+                        name="firstname"
+                        id="given-name"
                         placeholder="שם:"
                         value={this.state.name}
                         onChange={this.onNameChange}
                     />
                     <input
                         type="email"
+                        name="email"
+                        id="email"
                         placeholder="דוא״ל:"
                         value={this.state.email}
                         onChange={this.onEmailChange}
                     />
+                    
+                    <input type="hidden" name="apikey" value="f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2" />
+                    <input type="hidden" name="successredirect" value="http://www.google.com" />
+                    <input type="hidden" name="failedredirect" value="http://www.google.com" />
+                    <input type="hidden" name="viplists" id="viplists" value="0" />		
+                    <input type="hidden" name="exists" id="exists" value="merge" />
+                    <input type="hidden" name="restore" id="restore" value="restoreondeleted" />
+                    
                     <button className="homepage__intouch__button Heebo-Regular">שלח</button>
                 </form>
             </div>
