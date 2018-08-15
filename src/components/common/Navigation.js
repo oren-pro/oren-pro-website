@@ -161,6 +161,9 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+
+        <div className="collapse__bg__loader" />
+
         <div className='mobile' id="hp_carousel_mobile">
           <button className="carousel__button" onClick={this.pageToTopM}> </button>
           <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />

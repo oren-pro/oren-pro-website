@@ -376,6 +376,13 @@
         align-items: center;
         padding-bottom: 0rem;
     }
+
+    .collapse__bg__loader {
+        background-image: url('/images/navigation/collapse_bg.png');
+        position: absolute;
+        z-index: 7009;
+        opacity: 0;
+    }
 }
 
 
