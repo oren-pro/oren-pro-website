@@ -101,6 +101,7 @@
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     margin-left: 0.5rem;
+    cursor: pointer;
 }
 
 .events__tabs__button--selected {
@@ -244,6 +245,7 @@
     transition: all 20ms ease-in;
     transform: scale(1);
     margin-bottom: 0.2rem;
+    cursor: pointer;
 }
 
 .events__text__button:hover {

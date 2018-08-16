@@ -1615,7 +1615,6 @@ class EventsPage extends React.Component {
                                         <button className="backoffice_button" onClick={this.props.startLogout}>
                                             <img className="backoffice_icon" src="/images/backoffice/exit.svg" />
                                         </button>
-                                        <br />
                                         <button className="backoffice_button" onClick={this.onToggleSeo}>
                                             seo
                                         </button>

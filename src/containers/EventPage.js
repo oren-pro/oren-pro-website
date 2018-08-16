@@ -573,6 +573,7 @@ class EventPage extends React.Component {
     // update database . ---   category data ( name, text, showlines - number of lines to show on load)
 
     onUpdateEvent = () => {
+        console.log('in  click');
         const eventName = JSON.parse(JSON.stringify(this.state.eventName));
         const eventText = JSON.parse(JSON.stringify(this.state.eventText));
         const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));

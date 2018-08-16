@@ -2,9 +2,9 @@
 .about__edit__panel__box {
     position: fixed;
     z-index: 505;
-    left: 0rem;
-    top: 8rem;
-    width: 100%;
+    left: 15%;
+    top: 12rem;
+    width: 20%;
     text-align: center;
 }
 
@@ -21,6 +21,7 @@
 
 .backoffice_icon {
     width: 2rem;
+    cursor: pointer;
 }
 
 .backoffice__events__header__buttons {
@@ -33,20 +34,32 @@
     position: absolute;
     background: none;
     border: none;
-    z-index: 203;
+    z-index: 12503;
     width: 2rem;
     height: 2rem;
     left: 3rem;
+    cursor: pointer;
 }
 
 .backoffice__events__header__save__icon {
     width: 3rem;
     margin-right: -1.3rem;
     margin-top: -1.3rem;
+    border: none;
+    background: none;
+}
+
+.backoffice__events__header__save__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__events__header__save__icon:active {
+    background: green;
 }
 
 .backoffice__events__events__buttons {
     position: absolute;
+    z-index: 1203;
     left: -1rem;
     top: 2rem;
 }
@@ -59,12 +72,23 @@
     width: 2rem;
     height: 2rem;
     left: 0rem;
+    cursor: pointer;
 }
 
 .backoffice__events__events__save__icon {
     width: 3rem;
     margin-right: -1.3rem;
     margin-top: -1.3rem;
+    border: none;
+    background: none;
+}
+
+.backoffice__events__events__save__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__events__events__save__icon:active {
+    background: green;
 }
 
 
@@ -169,12 +193,23 @@
     width: 2rem;
     height: 2rem;
     left: 0rem;
+    cursor: pointer;
 }
 
 .backoffice__add__icon {
     width: 3rem;
     margin-right: -1.3rem;
     margin-top: -1.3rem;
+    background: none;
+    border: none;
+}
+
+.backoffice__add__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__add__icon:active {
+    background: green;
 }
 
 .backoffice__edit__button {
@@ -185,12 +220,21 @@
     width: 2rem;
     height: 2rem;
     left: 3rem;
+    cursor: pointer;
 }
 
 .backoffice__edit__icon {
     width: 3rem;
     margin-right: -1.3rem;
     margin-top: -1.3rem;
+}
+
+.backoffice__edit__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__edit__icon:active {
+    background: green;
 }
 
 
@@ -386,6 +430,15 @@
     border: none;
     background: $white;
     width: 4rem;
+    cursor: pointer;
+}
+
+.backoffice_button:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice_button:active {
+    background: green;
 }
 
 

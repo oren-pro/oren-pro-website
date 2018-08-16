@@ -508,6 +508,7 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
 });
 
 export const startEditEvent = ( eventName, eventText, eventShowLines, eventId ) => {
+    console.log('in event');
     const event = {
         name: eventName,
         text: eventText,
