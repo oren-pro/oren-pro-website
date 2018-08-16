@@ -16,6 +16,7 @@ const app = express();
 //app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080',
+                      'http://oren-pro-website.herokuapp.com',
                       'https://oren-pro-website.herokuapp.com'];
 app.use(cors({
   origin: function(origin, callback){
@@ -95,13 +96,9 @@ console.log('GMAIL_PASSWORD', gmail.password);
     return 'hia';
 });
 
-
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
-
-
-
 
 app.listen(port, () => {
     console.log('Server is up!');
