@@ -56,6 +56,9 @@ export const startSetCostumers = () => {
                     ...childSnapshot.val()
                 });
             });
+            costumers.sort((a, b) => {
+                return a.order > b.order ? 1 : -1;
+            });
             dispatch(setCostumers(costumers));
             //dispatch(check());
         });
