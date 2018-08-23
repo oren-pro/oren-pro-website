@@ -8,6 +8,9 @@ import {
     startSetAllSubcategories,
     startSetAllEvents
 } from './actions/eventspage';
+import {
+    startSetCostumers
+} from './actions/costumers';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -33,7 +36,9 @@ const renderApp = () => {
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 store.dispatch(startSetCategories()).then(() => {
-    renderApp();
+    store.dispatch(startSetCostumers()).then(() => {
+        renderApp();
+    });
 });
 //renderApp();
 firebase.auth().onAuthStateChanged((user) => {

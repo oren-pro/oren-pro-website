@@ -32,7 +32,7 @@ export const startEditAboutPageSeo = ( seo ) => {
 };
 
 
-// set homepage
+// set aboutpage
 
 export const setAboutPage = (aboutpage) => ({
     type: "SET_ABOUTPAGE",

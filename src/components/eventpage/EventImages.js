@@ -7,19 +7,19 @@ const EventImages = (props) => (
     <div>
         <div className="events__events__box events__events__box__gallery desktop">
             { 
-                    props.isAuthenticated === true ? 
-                        <div className="backoffice__events__events__buttons">
-                            <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
-                                <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
-                            </button>
-                            <button className="backoffice__events__events__save__button" onClick={props.updateImages}>
-                                <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
-                            </button>
-                            
-                        </div>
-                    :
-                        null
-                }
+                props.isAuthenticated === true ? 
+                    <div className="backoffice__events__events__buttons">
+                        <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
+                            <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                        </button>
+                        <button className="backoffice__events__events__save__button" onClick={props.updateImages}>
+                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                        </button>
+                        
+                    </div>
+                :
+                    null
+            }
             {
                 props.images ?
 

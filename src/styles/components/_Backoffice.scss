@@ -102,12 +102,27 @@
     left: -3rem;
 }
 
+.backoffice__events__events__save__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__events__events__save__icon:active {
+    background: green;
+}
+
 .backoffice__events__events__add__icon {
     width: 3rem;
     margin-right: -1.3rem;
     margin-top: -1.3rem;
 }
 
+.backoffice__events__events__add__icon:hover {
+    border: 1px solid $gray;
+}
+
+.backoffice__events__events__add__icon:active {
+    background: green;
+}
 
 
 
@@ -220,6 +235,17 @@
     width: 2rem;
     height: 2rem;
     left: 3rem;
+    cursor: pointer;
+}
+
+.backoffice__customers__strip__edit__button {
+    position:absolute;
+    background: none;
+    border: none;
+    z-index: 203;
+    width: 2rem;
+    height: 2rem;
+    left: 0.5rem;
     cursor: pointer;
 }
 

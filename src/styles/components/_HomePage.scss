@@ -592,6 +592,14 @@ input[type="email"]::-webkit-input-placeholder {
     margin-top: -1.3rem;
 }
 
+.homepage__tell__add:hover {
+    border: 1px solid $white;
+}
+
+.homepage__tell__add:active {
+    background: green;
+}
+
 //
 
 

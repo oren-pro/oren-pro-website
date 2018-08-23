@@ -25,8 +25,8 @@ export const startSendMessage = (messageData = {}) => {
 export const sendMessage = ({ name, email, message }) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/sendEmail';
-        var action = '/sendEmail';
+        var action = 'http://localhost:3000/sendEmail';
+        //var action = '/sendEmail';
         var xhr = new XMLHttpRequest();
         var data = '';
         data += 'name=' + name;

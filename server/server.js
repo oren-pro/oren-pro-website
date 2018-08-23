@@ -7,7 +7,7 @@ var cors = require('cors');
 var cloudinary = require('cloudinary');
 
 var gmail = require('../config/gmail');
-
+var cloudinaryVars = require('../config/cloudinary');
 
 
 
@@ -49,9 +49,9 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
     if(request.body.publicid){
 
         cloudinary.config({ 
-          cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-          api_key: process.env.CLOUDINARY_API_KEY, 
-          api_secret: process.env.CLOUDINARY_API_SECRET 
+          cloud_name: process.env.CLOUDINARY_CLOUD_NAME || cloudinaryVars.cloud_name, 
+          api_key: process.env.CLOUDINARY_API_KEY || cloudinaryVars.api_key, 
+          api_secret: process.env.CLOUDINARY_API_SECRET || cloudinaryVars.api_secret
         });
 
 

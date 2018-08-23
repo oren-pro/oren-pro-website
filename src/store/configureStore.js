@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from '../reducers/auth';
 import aboutpageReducer from '../reducers/aboutpage';
+import authReducer from '../reducers/auth';
+import costumersReducer from '../reducers/costumers';
 import eventspageReducer from '../reducers/eventspage';
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
@@ -23,12 +24,13 @@ export default () => {
     /* eslint-disable no-underscore-dangle */
     const store = createStore(
         combineReducers({
+            aboutpage: aboutpageReducer,
             auth: authReducer,
+            costumers: costumersReducer,
             eventspage: eventspageReducer,
             expenses: expensesReducer,
             filters: filtersReducer,
             homepage: homepageReducer,
-            aboutpage: aboutpageReducer,
             messages: messagesReducer,
             navigation: navigationReducer,
             newsletter: newsletterReducer
