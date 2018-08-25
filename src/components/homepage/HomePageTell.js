@@ -46,6 +46,7 @@ class HomePageTell extends React.Component {
             createdAt = this.props.localTell[this.props.tellIndex].createdAt;
             text = this.props.localTell[this.props.tellIndex].text;
             logo = this.props.localTell[this.props.tellIndex].logo;
+            publicid = this.props.localTell[this.props.tellIndex].publicId;
       }
     return (
         <div className="homepage__tell__box">
@@ -129,6 +130,7 @@ class HomePageTell extends React.Component {
                                 data-name="tell"
                                 data-index={id}
                                 data-field='logo'
+                                data-publicid={publicid}
                                 data-action={this.props.action}
                                 onClick={this.props.uploadWidget}
                                 className="homepage__tell__upload-button"
