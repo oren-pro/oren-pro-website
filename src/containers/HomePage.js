@@ -103,6 +103,7 @@ class HomePage extends React.Component {
         const { dataset } = e.target;
         const { name, index, field, action, publicid } = dataset;
         console.log(field);
+        console.log(publicid);
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         var myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
@@ -151,7 +152,7 @@ class HomePage extends React.Component {
                         homepage
                     })
                     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-
+                    console.log(publicid);
                     this.props.startDeleteHomePageImage( homepage, publicid );
                     //Step 2.4:  Call the .close() method in order to close the widget
                     console.log('myUploadWidget.close()');
