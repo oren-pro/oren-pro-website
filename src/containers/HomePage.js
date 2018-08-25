@@ -20,7 +20,8 @@ import {
     startEditHomePage,
     startSetHomePage,
     startAddHomePageTell,
-    startEditHomePageSeo
+    startEditHomePageSeo,
+    startDeleteHomePageImage
 } from '../actions/homepage';
 import $ from 'jquery';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
@@ -30,7 +31,7 @@ import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
-        
+        const tempTell = [];
         this.state = {
             ratio: 1,
             ratioFacebook: 1,
@@ -49,7 +50,9 @@ class HomePage extends React.Component {
                 title: '',
                 description: '',
                 keyWords: '',
-            }
+            },
+            hideTellEditPanel: true,
+            tell: []
         }
     }
 
@@ -98,12 +101,12 @@ class HomePage extends React.Component {
     uploadWidget = (e) => {
         console.log('myUploadWidget called');
         const { dataset } = e.target;
-        const { name, index, field, action } = dataset;
+        const { name, index, field, action, publicid } = dataset;
+        console.log(field);
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         var myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
             upload_preset: 'fbznsdxt', 
-            // tags: ['test'],
             sources: [
                 "local",
                 "url",
@@ -113,24 +116,7 @@ class HomePage extends React.Component {
                 "instagram",
                 "camera"
             ],
-            //UI Customization
-            // styles: {
-            //     palette: {
-            //         window: "#10173a",
-            //         sourceBg: "#20304b",
-            //         windowBorder: "#9999ff",
-            //         tabIcon: "#33ffcc",
-            //         inactiveTabIcon: "#0e2f5a",
-            //         menuIcons: "#ffccff",
-            //         link: "#ff0066",
-            //         action: "#33ffcc",
-            //         inProgress: "#00ffcc",
-            //         complete: "#33ff00",
-            //         error: "#cc3333",
-            //         textDark: "#000000",
-            //         textLight: "#ffffff"
-            //     }
-            // },
+            
             fonts: {
                 default: null,
                 "'Cute Font', cursive": "https://fonts.googleapis.com/css?family=Cute+Font",
@@ -141,28 +127,40 @@ class HomePage extends React.Component {
                 if (error) {
                     console.log(error);
                 }
-                // if (result) {
-                //     console.log(result);
-                //     homepage[name][index][field] = result[0].url;
-                //     this.setState({
-                //         homepage: homepage
-                //     })
-                //     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-                // }
+                
                 if (result.event === "success") {
-                    console.log(result.info.secure_url);
                     homepage[name][index][field] = result.info.secure_url;
+                    homepage[name][index].publicId = result.info.public_id;
+
+                    const tempTell = homepage.tell;
+                    const tell = [];
+                    Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+
+                    const sortedTell = tell.sort((a, b) => {
+                        return a.order > b.order ? 1 : -1;
+                    });
+
+                    const fbTell = {};
+                    sortedTell.map((tellItem, index) => {
+                        fbTell[tellItem.id] = tellItem;
+                    })
+
+                    homepage.tell = fbTell;
                     this.setState({
-                        homepage: homepage
+                        tell,
+                        homepage
                     })
                     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
+
+                    this.props.startDeleteHomePageImage( homepage, publicid );
                     //Step 2.4:  Call the .close() method in order to close the widget
                     console.log('myUploadWidget.close()');
                     myUploadWidget.close();
+
+                    this.onUpdateHomePage();
                 }
             }
         );
-        //myUploadWidget.open();
     }
 
     // update database
@@ -204,8 +202,6 @@ class HomePage extends React.Component {
         this.props.startSetHomePage().then(()=> {
             const homepage = JSON.parse(JSON.stringify(this.props.homepage));
 
-            console.log(homepage);
-
             if (!homepage.seo) {
                 homepage.seo = {
                     title: '',
@@ -214,12 +210,33 @@ class HomePage extends React.Component {
                 }
             }
             
-            this.setState({
-                seo: homepage.seo,
-                homepage: JSON.parse(JSON.stringify(this.props.homepage)),
-                homepageOrigin: JSON.parse(JSON.stringify(this.props.homepage)),
+            const tempTell = this.props.homepage.tell;
+            const tell = [];
+            Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+
+            const sortedTell = tell.sort((a, b) => {
+                return a.order > b.order ? 1 : -1;
             });
-            this.setLocalTell(JSON.parse(JSON.stringify(this.props.homepage)));
+
+            const fbTell = {};
+            sortedTell.map((tellItem, index) => {
+                fbTell[tellItem.id] = tellItem;
+            })
+
+            homepage.tell = fbTell;
+
+            this.setState({
+                tell,
+                //localTell: tell,
+                seo: homepage.seo,
+                homepage,
+                homepageOrigin: JSON.parse(JSON.stringify(homepage)),
+            });
+            
+
+            
+
+            this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
         });
     }
 
@@ -231,8 +248,47 @@ class HomePage extends React.Component {
 
     addNewTell = () => {
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        //console.log(homepage);
-        this.props.startAddHomePageTell(homepage);
+        const order = Number(this.state.tell.length)+1;
+        console.log(order);
+        const tellData = {
+            name: '',
+            position:'',
+            company: 0,
+            createdAt: 0,
+            text: '',
+            order: order,
+            visible: false
+        }
+        this.props.startAddHomePageTell(homepage, tellData).then((res) => {
+            console.log(res);
+
+            const tempTell = res.tell;
+            const tell = [];
+            Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+
+            const sortedTell = tell.sort((a, b) => {
+                return a.order > b.order ? 1 : -1;
+            });
+
+            const fbTell = {};
+            sortedTell.map((tellItem, index) => {
+                fbTell[tellItem.id] = tellItem;
+            })
+
+            homepage.tell = fbTell;
+
+            this.setState({
+                tell,
+                homepage,
+                homepageOrigin: JSON.parse(JSON.stringify(homepage)),
+            });
+
+
+
+
+
+//to od =======================   set tell and localTell
+        });
     }
 
     setLocalTell = (homepage) => {
@@ -243,6 +299,9 @@ class HomePage extends React.Component {
                 const keyedObj = {id: String(key), ...obj[key]};
                 return [keyedObj];
             });
+            // localTell.sort((a, b) => {
+            //     return a.order > b.order ? 1 : -1;
+            // });
             this.setState({
                 localTell: localTell
             });
@@ -266,11 +325,9 @@ class HomePage extends React.Component {
 
 
     onToggleHomepageSeo = () => {
-        console.log('in seo');
         this.setState({
             seoHomepageModalIsOpen: !this.state.seoHomepageModalIsOpen
         });
-        console.log(this.state.seoHomepageModalIsOpen);
     }
 
     onSeoTitleChange = (e) => {
@@ -304,6 +361,135 @@ class HomePage extends React.Component {
         const seo = this.state.seo;
         this.props.startEditHomePageSeo(seo);
         this.onToggleHomepageSeo();
+    }
+
+
+
+
+
+    onDeleteTell = (e) => {
+        // console.log(e.target.dataset.publicid);
+        // console.log(e.target.dataset.id);
+        const id = e.target.dataset.id;
+        const order = e.target.dataset.order;
+        const publicId = e.target.dataset.publicid;
+        const tell = [];
+        const tellOld = this.state.tell;
+
+        for (let i = 0; i < tellOld.length; i++) {
+            if (id !== tellOld[i].id) {
+                if (tellOld[i].order > order) {
+                    tellOld[i].order = tellOld[i].order-1;
+                }
+                tell.push(tellOld[i]);
+            }
+        }
+
+        const fbTell = {};
+        tell.map((tellItem, index) => {
+            fbTell[tellItem.id] = tellItem;
+        })
+        fbTell[id] = null;
+
+        console.log(publicId);
+        console.log(tell);
+        console.log(fbTell);
+        
+        
+        //this.props.startDeleteCostumer( fbTell, tell, publicId );
+        const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        homepage.tell = fbTell;
+        console.log(fbTell);
+        
+        this.setState({
+            tell,
+            homepage
+        });
+
+
+        this.onUpdateHomePage();
+    }
+
+
+
+    onTellOrderBlur = (e) => {
+        const tell = this.state.tell;
+        let newOrder = e.target.value;
+        if (newOrder > tell.length) {
+            newOrder = tell.length;
+        }
+        if (newOrder < 1) {
+            newOrder = 1;
+        }
+        const oldOrder = Number(e.target.dataset.index)+1;
+        const id = e.target.dataset.id;
+        console.log(newOrder);
+        console.log(oldOrder);
+        console.log(id);
+        if ( Number(newOrder) > Number(oldOrder) ) {
+            for (let i = 0; i < tell.length; i++) {
+                if (id !== tell[i].id) {
+                    if (tell[i].order <= newOrder && tell[i].order > oldOrder) {
+                        tell[i].order = tell[i].order-1;
+                    }
+                }
+            }
+        } else if ( Number(newOrder) < Number(oldOrder) ) {
+            for (let i = 0; i < tell.length; i++) {
+                
+                if (id !== tell[i].id) {
+                    if (tell[i].order < oldOrder && tell[i].order >= newOrder) {
+                        tell[i].order = Number(tell[i].order)+1;
+                    }
+                }
+            }
+        }
+        tell.sort((a, b) => {
+            return a.order > b.order ? 1 : -1;
+        });
+
+        const fbTell = {};
+        tell.map((tellItem, index) => {
+            fbTell[tellItem.id] = tellItem;
+        })
+        //fbTell[id] = null;
+        
+        const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        homepage.tell = fbTell;
+        console.log(fbTell);
+
+        this.setState({
+            tell,
+            homepage
+        });
+    }
+
+    onTellOrderChange = (e) => {
+        const tell = this.state.tell;
+        let newOrder = e.target.value;
+        if (newOrder > tell.length) {
+            newOrder = tell.length;
+        }
+        if (newOrder < 1) {
+            newOrder = 1;
+        }
+        const oldOrder = Number(e.target.dataset.index)+1;
+        tell[e.target.dataset.index].order = Number(newOrder);
+        this.setState({
+            tell
+        });
+    }
+
+    onTellOrderKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.onTellOrderBlur(e);
+        }
+    }
+
+    startEditTell = () => {
+        this.setState({
+            hideTellEditPanel: !this.state.hideTellEditPanel
+        });
     }
 
 
@@ -430,12 +616,80 @@ class HomePage extends React.Component {
                             homepage={this.state.homepage}
                             homepageOrigin={this.state.homepageOrigin}
                             tellIndex={this.state.tellIndex}
-                            localTell={this.state.localTell}
+                            localTell={this.state.tell}
                             uploadWidget={this.uploadWidget}
                             setTellIndex={this.setTellIndex}
                             onChange={this.setData}
                             addNewTell={this.addNewTell}
+                            startEditTell={this.startEditTell}
                         />
+
+
+                        { 
+                            this.props.isAuthenticated === true ? 
+                                <div className="backoffice__edit__events__tabs__box" hidden={this.state.hideTellEditPanel}>
+                                    {
+                                        this.state.tell ?
+                                        this.state.tell.length > 0 ?
+                                            
+                                            this.state.tell.map((tell, index) => {
+                                                return  <div className="backoffice__edit__events__tabs__in__box" key={"in"+tell.id} dir="rtl">
+                                                            <Button
+                                                                id="btn-x"
+                                                                data-id={tell.id}
+                                                                data-order={tell.order}
+                                                                data-publicid={tell.publicId}
+                                                                data-index={tell.order}
+                                                                data-showstatus={false}
+                                                                className="backoffice__events__tabs__remove btn-danger"
+                                                                onClick={this.onDeleteTell}
+                                                            >
+                                                                X
+                                                            </Button>
+                                                            
+                                                            <div className="backoffice__events__tabs__order__box">
+                                                                <input
+                                                                    id="number"
+                                                                    data-id={tell.id}
+                                                                    type="number"
+                                                                    value={tell.order}
+                                                                    data-index={index}
+                                                                    onChange={this.onTellOrderChange}
+                                                                    onKeyPress={this.onTellOrderKeyPress}
+                                                                    onBlur={this.onTellOrderBlur}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.name}, </p>
+                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.position} </p>
+                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.company} | {tell.createdAt} </p>
+                                                            </div>
+                                                        </div>
+                                            })
+                                            
+                                        :
+                                            null
+                                        :
+                                            null
+                                    }
+                                    <div className="backoffice__events__tabs__update__box">
+                                        <Button className="backoffice__events__tabs__update btn-success" onClick={this.onUpdateHomePage}>עדכון</Button>
+                                    </div>
+                                </div>
+                            :
+                                null
+                            }
+
+
+
+
+
+
+
+
+
+
+
                         <HomePageEventsToolbar />
                     </div>
                     <SocialMedia
@@ -473,10 +727,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     startLogout: () => dispatch(startLogout()),
-    startAddHomePageTell: (homepage) => dispatch(startAddHomePageTell(homepage)),
+    startAddHomePageTell: (homepage, tellData) => dispatch(startAddHomePageTell(homepage, tellData)),
     startSetHomePage: () => dispatch(startSetHomePage()),
     startEditHomePage: (updates) => dispatch(startEditHomePage(updates)),
-    startEditHomePageSeo: (seo) => dispatch(startEditHomePageSeo(seo))
+    startEditHomePageSeo: (seo) => dispatch(startEditHomePageSeo(seo)),
+    startDeleteHomePageImage: ( homepage, publicid ) => dispatch(startDeleteHomePageImage( homepage, publicid ))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);            

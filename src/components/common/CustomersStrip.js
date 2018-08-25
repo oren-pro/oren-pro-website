@@ -415,7 +415,7 @@ class CustomersStrip extends React.Component {
               </div>
           :
               null
-      }
+        }
 
 
       </div>

@@ -679,8 +679,8 @@ export const deleteImage = ( images, eventId, categoryId ) => ({
 export const startDeleteImage = ( fbImages, images, eventId, categoryId, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        var action = 'http://localhost:3000/deleteImage';
-        //var action = '/deleteImage';
+        //var action = 'http://localhost:3000/deleteImage';
+        var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
         data += 'publicid=' + publicid;

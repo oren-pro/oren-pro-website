@@ -70,20 +70,50 @@ export const check = () => {
 
 
 
-export const startAddHomePageTell = (homepage, tellData = {}) => {
+export const startAddHomePageTell = (homepage, tellData) => {
     return (dispatch, getState) => {
         const {
             name = '',
             position = '',
             company = 0,
             createdAt = 0,
-            text = ''
+            text = '',
+            order = 0
         } = tellData;
-        const tell = {company, createdAt, name, position, text};
+        const tell = {company, createdAt, name, position, text, order};
         return database.ref(`website/homepage/tell`).push(tell).then((ref) => {
+            console.log(ref.key);
+            console.log(homepage);
             const id = ref.key;
             homepage.tell[ref.key] = tell;
+            console.log(homepage);
             dispatch(editHomePage(homepage));
+            return(homepage);
         });
+    };
+};
+
+
+// delete homepage image
+
+export const startDeleteHomePageImage = ( homepage, publicid ) => {
+    return (dispatch) => {
+        var method = 'POST';
+        //var action = 'http://localhost:3000/deleteImage';
+        var action = '/deleteImage';
+        var xhr = new XMLHttpRequest();
+        var data = '';
+        console.log(publicid);
+        data += 'publicid=' + publicid;
+        xhr.open(method, action);
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+        xhr.send(data);
+        xhr.addEventListener('load', function (e) {
+            var data = e.target.responseText;
+            console.log(data);
+        });
+        return database.ref(`website/`).update(homepage).then(() => {
+            dispatch(editHomePage( homepage ));
+        })
     };
 };

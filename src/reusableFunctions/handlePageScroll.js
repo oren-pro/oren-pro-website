@@ -8,7 +8,7 @@ export const handlePageScroll = (pageupImageClassName, navigation, stateNavigati
     const windowScrollTop = $(window).scrollTop();
     if (navigation) {
         if (navigation.homepageCarouselDone !== stateNavigationHomepageCarouselDone) {
-            console.log('1');
+            //console.log('1');
             return {
                 pageupImageClassName: 'pageup__image__absolute',
                 navigation: navigation
@@ -16,16 +16,16 @@ export const handlePageScroll = (pageupImageClassName, navigation, stateNavigati
         }
     }
     if (windowScrollTop >= (pageupImageHeight+10)*2-12 && pageupImageClassName !== 'pageup__image__fixed' && pageupImageClassName !== 'pageup__image') {
-        console.log('2');
+        //console.log('2');
         return { pageupImageClassName: 'pageup__image__fixed' };
     } else if (windowScrollTop < (pageupImageHeight+10)*2-12 && pageupImageClassName === 'pageup__image__fixed') {
-        console.log('3');
+        //console.log('3');
         return { pageupImageClassName: 'pageup__image__absolute' };
     } else if (footerTop < windowHeight - 12 && pageupImageClassName === 'pageup__image__fixed') {
-        console.log('4');
+        //console.log('4');
         return { pageupImageClassName: 'pageup__image' };
     } else if (footerTop > windowHeight - 12 && pageupImageClassName === 'pageup__image') {
-        console.log('5');
+        //console.log('5');
         return { pageupImageClassName: 'pageup__image__fixed' };
     }
 }

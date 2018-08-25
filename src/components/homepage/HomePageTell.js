@@ -23,6 +23,10 @@ class HomePageTell extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+      //console.log(this.props);
+  }
+ 
   render() {
       //console.log(this.props);
       let id = '';
@@ -32,14 +36,16 @@ class HomePageTell extends React.Component {
       let createdAt = '';
       let text = '';
       let logo = '';
+      //console.log(this.props.localTell[this.props.tellIndex] ? this.props.localTell[this.props.tellIndex] : null);
+      //console.log(this.state.tell);
       if(this.props.localTell[this.props.tellIndex]){
-            id = this.props.localTell[this.props.tellIndex][0].id;
-            name = this.props.localTell[this.props.tellIndex][0].name;
-            position = this.props.localTell[this.props.tellIndex][0].position;
-            company = this.props.localTell[this.props.tellIndex][0].company;
-            createdAt = this.props.localTell[this.props.tellIndex][0].createdAt;
-            text = this.props.localTell[this.props.tellIndex][0].text;
-            logo = this.props.localTell[this.props.tellIndex][0].logo;
+            id = this.props.localTell[this.props.tellIndex].id;
+            name = this.props.localTell[this.props.tellIndex].name;
+            position = this.props.localTell[this.props.tellIndex].position;
+            company = this.props.localTell[this.props.tellIndex].company;
+            createdAt = this.props.localTell[this.props.tellIndex].createdAt;
+            text = this.props.localTell[this.props.tellIndex].text;
+            logo = this.props.localTell[this.props.tellIndex].logo;
       }
     return (
         <div className="homepage__tell__box">
@@ -132,7 +138,7 @@ class HomePageTell extends React.Component {
                                     data-index={id}
                                     data-field='logo'
                                     data-action={this.props.action}
-                                    onClick={this.props.uploadWidget}
+                                    
                                     className="homepage__tell__upload-button__image"
                                     src="/images/common/upload-image.svg"
                                 />
@@ -150,6 +156,9 @@ class HomePageTell extends React.Component {
                                 :
                                 null
                             }
+                            <button className="homepage__tell__edit__button" onClick={this.props.startEditTell}>
+                                <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
+                            </button>
                             <button className="homepage__tell__add__button" onClick={this.props.addNewTell}>
                                 <img className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
                             </button>

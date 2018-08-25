@@ -586,6 +586,16 @@ input[type="email"]::-webkit-input-placeholder {
     left: 20rem;
 }
 
+.homepage__tell__edit__button {
+    position:absolute;
+    background: none;
+    border: none;
+    z-index: 204;
+    width: 2rem;
+    height: 2rem;
+    left: 23rem;
+}
+
 .homepage__tell__add {
     width: 3rem;
     margin-right: -1.3rem;
@@ -1379,6 +1389,16 @@ $buttonPagination: 2.3rem;
         width: $buttonPagination;
         height: $buttonPagination;
         left: 20rem;
+    }
+
+    .homepage__tell__edit__button {
+        position: absolute;
+        background: none;
+        border: none;
+        z-index: 204;
+        width: $buttonPagination;
+        height: $buttonPagination;
+        left: 3rem;
     }
 
     .homepage__tell__add {

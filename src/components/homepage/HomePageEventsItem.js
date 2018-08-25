@@ -54,6 +54,7 @@ const HomePageEventsItem = (props) => (
                             data-index={props.index}
                             data-field='eventImage'
                             data-action={props.action}
+                            data-publicid={props.event.publicId}
                             onClick={props.uploadWidget}
                             className="homepage__event-item__upload-button__image"
                             src="/images/common/upload-image.svg"
