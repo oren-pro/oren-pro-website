@@ -36,6 +36,7 @@ class HomePageTell extends React.Component {
       let createdAt = '';
       let text = '';
       let logo = '';
+      let publicid = '';
       //console.log(this.props.localTell[this.props.tellIndex] ? this.props.localTell[this.props.tellIndex] : null);
       //console.log(this.state.tell);
       if(this.props.localTell[this.props.tellIndex]){
