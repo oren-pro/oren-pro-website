@@ -48,6 +48,7 @@ class HomePageTell extends React.Component {
             text = this.props.localTell[this.props.tellIndex].text;
             logo = this.props.localTell[this.props.tellIndex].logo;
             publicid = this.props.localTell[this.props.tellIndex].publicId;
+            console.log(publicid);
       }
     return (
         <div className="homepage__tell__box">
@@ -141,7 +142,7 @@ class HomePageTell extends React.Component {
                                     data-index={id}
                                     data-field='logo'
                                     data-action={this.props.action}
-                                    
+                                    data-publicid={publicid}
                                     className="homepage__tell__upload-button__image"
                                     src="/images/common/upload-image.svg"
                                 />
