@@ -73,6 +73,7 @@ class EventsPage extends React.Component {
             newSubcategoryName: '',
             newItemNameModalIsOpen: false,
             newItemName: '',
+            newItemNameModalAlert: '',
             hideSubcategoriesEditPanel: true,
             pageupImageClassName: 'pageup__image__absolute',
             seoModalIsOpen: false,
@@ -208,7 +209,9 @@ class EventsPage extends React.Component {
             subcategoryId
         });
         const categoryId = this.props.category.id;
+        console.log('before set items');
         if (!this.props.eventsObject[categoryId]) {
+            console.log('in set items');
             this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                 subCategories.sort((a, b) => {
                     return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -222,7 +225,7 @@ class EventsPage extends React.Component {
                 this.props.eventsObject.categories.map((category, index) => {
                     if (category.id !== categoryId) {
                         this.props.startSetItems(category.id).then((items)=> {
-                            //console.log('set '+category.id)
+                            console.log('set '+category.id)
                         });
                     }
                 });
@@ -244,6 +247,14 @@ class EventsPage extends React.Component {
             });
 
         } else if (this.props.eventsObject[categoryId] && !this.props.eventsObject[categoryId+'items']) {
+            console.log('in 2 set items');
+            this.props.eventsObject.categories.map((category, index) => {
+                if (category.id !== categoryId) {
+                    this.props.startSetItems(category.id).then((items)=> {
+                        console.log('set '+category.id)
+                    });
+                }
+            });
             const subcategories = this.props.eventsObject[categoryId];
             subcategories.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -263,6 +274,14 @@ class EventsPage extends React.Component {
                 });
             });
         } else {
+            console.log('in 3 set items');
+            this.props.eventsObject.categories.map((category, index) => {
+                if (category.id !== categoryId) {
+                    this.props.startSetItems(category.id).then((items)=> {
+                        console.log('set '+category.id)
+                    });
+                }
+            });
             const subcategories = this.props.eventsObject[categoryId];
             subcategories.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -348,68 +367,82 @@ class EventsPage extends React.Component {
     }
 
     addNewItem = () => {
-        const categoryId = this.state.category.id;
-        const subcategoryId = this.state.subcategoryId;
-        const name = this.state.newItemName;
-        const order = this.state.itemsCurrent.length+1;
-        const catOrder = this.state.items.length+1;
-        const event = {
-            name: name,
-            image: '',
-            visible: false,
-            categories: {
-                [categoryId]: true,
-                [categoryId+'order']: catOrder
-            },
-            subcategories: {
-                [subcategoryId]: true,
-                [subcategoryId+'order']: order
+        let nameFlag = false;
+        this.props.eventsObject.allEvents.map((event, index) => {
+            if(event.name === this.state.newItemName) {
+                nameFlag = true;
             }
-        };
-        //console.log(event);
+        })
 
-        this.props.eventsObject.allSubCategories.map((subcategory, index) => {
-            let obj = subcategory.categories;
-            if (subcategory.id === subcategoryId) {
-                const categoriesArr = [];
-                Object.keys(obj).map((key) => {
-                    const keyedObj = {id: String(key), ...obj[key]};
-                    if (!String(key).includes("order")) {
-                        categoriesArr.push(keyedObj);
-                    }
-                });
-                //console.log('befor categoriesArr.map');
-                //console.log(event);
-                categoriesArr.map((catId, index) => {
-                    if (event.categories) {
-                        if(event.categories[catId.id] !== true) {
-                            event.categories[catId.id] = true;
-                            event.categories[catId.id+'order'] = this.props.eventsObject[catId.id+'items'].length+1;
-                        }
-                    } else {
-                        const categoryObject = {
-                            [catId.id]: true,
-                            [catId.id+'order']: this.props.eventsObject[catId.id+'items'].length+1
-                        }
-                        event.categories = categoryObject;
-                    }
-                });
-            }
-        });
-
-
-
-
-
-        //console.log(event);
-
-        this.props.startAddItem(event, categoryId, catOrder, subcategoryId, order).then((items)=> {
-            this.getAllData(categoryId, subcategoryId);
+        if(nameFlag === true) {
             this.setState({
-                newItemNameModalIsOpen: false,
-                newItemName: ''
+                newItemNameModalAlert: 'שם אירוע קיים במערכת'
             });
-        });
+        } else if (this.state.newItemName === '') {
+            this.setState({
+                newItemNameModalAlert: 'שם אירוע חייב לכלול אות אחת לפחות'
+            });
+        } else {
+
+            const categoryId = this.state.category.id;
+            const subcategoryId = this.state.subcategoryId;
+            const name = this.state.newItemName;
+            const order = this.state.itemsCurrent.length+1;
+            const catOrder = this.state.items.length+1;
+            const event = {
+                name: name,
+                image: '',
+                visible: false,
+                categories: {
+                    [categoryId]: true,
+                    [categoryId+'order']: catOrder
+                },
+                subcategories: {
+                    [subcategoryId]: true,
+                    [subcategoryId+'order']: order
+                }
+            };
+            //console.log(event);
+
+            this.props.eventsObject.allSubCategories.map((subcategory, index) => {
+                let obj = subcategory.categories;
+                if (subcategory.id === subcategoryId) {
+                    const categoriesArr = [];
+                    Object.keys(obj).map((key) => {
+                        const keyedObj = {id: String(key), ...obj[key]};
+                        if (!String(key).includes("order")) {
+                            categoriesArr.push(keyedObj);
+                        }
+                    });
+                    console.log('befor categoriesArr.map');
+                    console.log(event);
+                    categoriesArr.map((catId, index) => {
+                        if (event.categories) {
+                            if(event.categories[catId.id] !== true) {
+                                console.log(catId.id);
+                                event.categories[catId.id] = true;
+                                event.categories[catId.id+'order'] = this.props.eventsObject[catId.id+'items'].length+1;
+                            }
+                        } else {
+                            const categoryObject = {
+                                [catId.id]: true,
+                                [catId.id+'order']: this.props.eventsObject[catId.id+'items'].length+1
+                            }
+                            event.categories = categoryObject;
+                        }
+                    });
+                }
+            });
+
+            this.props.startAddItem(event, categoryId, catOrder, subcategoryId, order).then((items)=> {
+                this.getAllData(categoryId, subcategoryId);
+                this.setState({
+                    newItemNameModalIsOpen: false,
+                    newItemName: '',
+                    newItemNameModalAlert: ''
+                });
+            });
+        }
         
     }
 
@@ -1514,6 +1547,8 @@ class EventsPage extends React.Component {
                 >
                     <h2 className="Heebo-Medium">הוספת אירוע חדש</h2>
                     <h4 className="Heebo-Regular">נא למלא שם לאירוע החדש</h4>
+                    <h4 className="Heebo-Regular">{this.state.newItemNameModalAlert}</h4>
+                    
                     <div dir="rtl">
                         <AutosizeInput
                             className="events__tabs__button"

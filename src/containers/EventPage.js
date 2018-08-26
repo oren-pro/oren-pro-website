@@ -523,6 +523,7 @@ class EventPage extends React.Component {
                             slideGalleryImages
                         });
                     });
+                    myUploadWidget.close();
                 }
             }
         );
