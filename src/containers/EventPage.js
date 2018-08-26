@@ -930,7 +930,7 @@ class EventPage extends React.Component {
     
 
     render() {
-        
+        console.log(this.state.galleryImages);
         return (
             <div className="container-fluid">
                 <Helmet>

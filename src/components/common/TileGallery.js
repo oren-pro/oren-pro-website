@@ -57,7 +57,7 @@ class TileGallery extends React.Component {
     const thumbs = computeSizes({ width, columns, margin, photos });
     
     return (
-      <div className="react-photo-gallery--gallery">
+      <div className={this.props.style}>
         <div ref={c => (this._gallery = c)}>
           {thumbs.map((photo, index) => {
             const { src, width, height } = photo;

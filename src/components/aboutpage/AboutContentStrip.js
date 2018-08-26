@@ -7,8 +7,8 @@ import $ from 'jquery';
 export default class AboutContentStrip extends React.Component {
     
     state = {
-        height: 0,
-        minHeight: 0
+        height: 5,
+        minHeight: 5
     };
 
     toggle = () => {

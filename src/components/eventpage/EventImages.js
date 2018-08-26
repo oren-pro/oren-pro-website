@@ -1,6 +1,5 @@
 import React from 'react';
 import TileGallery from '../common/TileGallery';
-import EventImage from './EventImage';
 
 const columns = 2;
 const EventImages = (props) => (
@@ -27,6 +26,7 @@ const EventImages = (props) => (
                         photos={props.images}
                         columns={2}
                         margin={4}
+                        style="react-photo-gallery--gallery"
                         isAuthenticated={props.isAuthenticated}
                         onImageOrderBlur={props.onImageOrderBlur}
                         onImageOrderChange={props.onImageOrderChange}

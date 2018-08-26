@@ -12,6 +12,9 @@ const aboutpageReducerDefaultState = [];
             return aboutpage;
         case 'SET_ABOUTPAGE':
             return { ...action.aboutpage };
+        case 'ADD_ABOUT_IMAGE':
+            aboutpage.aboutimages = action.images;
+            return aboutpage;
         default:
             return state;
     }
