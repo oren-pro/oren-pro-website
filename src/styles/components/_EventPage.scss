@@ -108,17 +108,17 @@ $iconMarginBottom: 0.6rem;
 
 @media all and (-ms-high-contrast:none){
     .events__eventshare__button__image {
-        margin-top: 0.8rem;
+        margin-top: 0.6rem;
     }
      *::-ms-backdrop, .events__eventshare__button__image {
-        margin-top: 0.8rem;
+        margin-top: 0.6rem;
     }
 }
 
 /*----MS Edge Browser CSS Start----*/
 @supports ( position:-ms-page ) {
     .events__eventshare__button__image {
-        margin-top: 0.8rem;
+        margin-top: 0.6rem;
     }
 }
 /*----MS Edge Browser CSS End----*/
