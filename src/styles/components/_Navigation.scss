@@ -139,16 +139,16 @@
 
 
 @media all and (-ms-high-contrast:none){
-     .nav__link:hover { border: 0.1rem dotted $gray; } 
-     .nav__link--active { border: 0.1rem dotted $gray; }
-     *::-ms-backdrop, .nav__link:hover { border: 0.1rem dotted $gray; } 
-     *::-ms-backdrop, .nav__link--active { border: 0.1rem dotted $gray; }
+     .nav__link:hover { border: 0.15rem dotted $gray; } 
+     .nav__link--active { border: 0.15rem dotted $gray; }
+     *::-ms-backdrop, .nav__link:hover { border: 0.15rem dotted $gray; } 
+     *::-ms-backdrop, .nav__link--active { border: 0.15rem dotted $gray; }
 }
 
 /*----MS Edge Browser CSS Start----*/
 @supports ( position:-ms-page ) {
-    .nav__link:hover { border: 0.1rem dotted $gray; }
-    .nav__link--active { border: 0.1rem dotted $gray; }
+    .nav__link:hover { border: 0.15rem dotted $gray; }
+    .nav__link--active { border: 0.15rem dotted $gray; }
 }
 /*----MS Edge Browser CSS End----*/
 
