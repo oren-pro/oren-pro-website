@@ -33,7 +33,8 @@ class EventsHeader extends React.Component {
                     :
                         <h3 className="events__header Heebo-Medium">{this.props.categoryName}</h3>
                 }
-                <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                
+                <div className="common__intouch__seperator__desktop desktop"></div>
                 <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
             </div>
         );

@@ -13,7 +13,7 @@ export class HomePageIntouch extends React.Component {
         return (
             <div className="homepage__intouch__box">
 
-                <div className="common__intouch__seperator__desktop"></div>
+                <div className="common__intouch__seperator__desktop desktop"></div>
 
                 <img className="homepage__intouch__header desktop_inline" alt="הישארו מעודכנים" src="/images/homepage/intouch/intouch-header.svg" />
                 <img className="homepage__intouch__header mobile" alt="הישארו מעודכנים" src="/images/homepage/intouch/intouch-header-mobile.svg" />
@@ -22,7 +22,7 @@ export class HomePageIntouch extends React.Component {
                 <HomePageIntouchForm
                     onSubmit={this.onSubmit}
                 />
-                <img className="homepage__intouch__border desktop" src="/images/homepage/intouch/intouch-border.png" />
+                <div className="common__intouch__seperator__desktop desktop"></div>
             </div>
         );
     }

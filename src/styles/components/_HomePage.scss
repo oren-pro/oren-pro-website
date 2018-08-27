@@ -369,23 +369,6 @@
     padding-top: 0.5rem;
 }
 
-@media all and (-ms-high-contrast:none){
-    .homepage__event-item__button__image {
-        padding-top: 0rem;
-    }
-     *::-ms-backdrop, .homepage__event-item__button__image {
-        padding-top: 0rem;
-    }
-}
-
-/*----MS Edge Browser CSS Start----*/
-@supports ( position:-ms-page ) {
-    .homepage__event-item__button__image {
-        padding-top: 0rem;
-    }
-}
-/*----MS Edge Browser CSS End----*/
-
 .homepage__event-item__button__text {
     margin: 0;
     padding: 0;
@@ -395,6 +378,32 @@
     padding-top: 0rem;
     color: $green;
 }
+
+@media all and (-ms-high-contrast:none){
+    .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+     *::-ms-backdrop, .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+    .homepage__event-item__button__text {
+        padding-top: 0.3rem;
+    }
+     *::-ms-backdrop, .homepage__event-item__button__text {
+        padding-top: 0.3rem;
+    }
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+    .homepage__event-item__button__text {
+        padding-top: 0.3rem;
+    }
+}
+/*----MS Edge Browser CSS End----*/
 
 
 //
