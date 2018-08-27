@@ -139,14 +139,17 @@
 
 
 @media all and (-ms-high-contrast:none){
-     .nav__link:hover { border: 0.15rem dotted $gray; } 
-     .nav__link--active { border: 0.15rem dotted $gray; }
-     *::-ms-backdrop, .nav__link:hover { border: 0.15rem dotted $gray; } 
-     *::-ms-backdrop, .nav__link--active { border: 0.15rem dotted $gray; }
+    .nav__link { border: 0.15rem solid rgba(0, 0, 0, 0); }
+    .nav__link:hover { border: 0.15rem dotted $gray; } 
+    .nav__link--active { border: 0.15rem dotted $gray; }
+    *::-ms-backdrop, .nav__link { border: 0.15rem solid rgba(0, 0, 0, 0); }
+    *::-ms-backdrop, .nav__link:hover { border: 0.15rem dotted $gray; }
+    *::-ms-backdrop, .nav__link--active { border: 0.15rem dotted $gray; }
 }
 
 /*----MS Edge Browser CSS Start----*/
 @supports ( position:-ms-page ) {
+    .nav__link { border: 0.15rem solid rgba(0, 0, 0, 0); }
     .nav__link:hover { border: 0.15rem dotted $gray; }
     .nav__link--active { border: 0.15rem dotted $gray; }
 }
