@@ -369,7 +369,7 @@
 
 
 .backoffice__seo__modal {
-    width: 70rem;
+    width: 70vw;
 }
 
 .backoffice__seo__modal textarea {
@@ -377,7 +377,7 @@
     font-weight: 400;
     position: relative;
     height: 6.7rem;
-    width: 60rem;
+    width: 60vw;
     text-align: right;
     color: $gray;
     background: #f1f1f1;
@@ -394,7 +394,7 @@
     font-weight: 400;
     position: relative;
     height: 3rem;
-    width: 60rem;
+    width: 60vw;
     text-align: right;
     color: $gray;
     background: #f1f1f1;
@@ -409,12 +409,12 @@
 
 .backoffice__seo__modal__left {
     display: inline-block;
-    width: 60rem;
+    width: 60vw;
 }
 
 .backoffice__seo__modal__right {
     display: inline-block;
-    width: 9.8rem;
+    width: 9.8vw;
 }
 
 .backoffice__seo__modal__right textarea {
@@ -422,7 +422,7 @@
     font-weight: 400;
     position: relative;
     height: 6.7rem;
-    width: 9.8rem;
+    width: 9.8vw;
     text-align: left;
     color: $gray;
     background: none;
@@ -439,7 +439,7 @@
     font-weight: 400;
     position: relative;
     height: 3rem;
-    width: 9.8rem;
+    width: 9.8vw;
     text-align: left;
     color: $gray;
     background: none;

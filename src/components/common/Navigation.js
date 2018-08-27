@@ -171,7 +171,7 @@ class Navigation extends React.Component {
         </div>
         <div className='desktop' id="hp_carousel_desktop">
           <button className="carousel__button" onClick={this.pageToTopD}> </button>
-          <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" />
+          <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
           <HomePageCarousel media='desktop' />
         </div>
         <div id="fakeNav" className="fakeNav" />
