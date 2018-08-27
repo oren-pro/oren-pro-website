@@ -3,25 +3,25 @@ import UncontrolledCarousel from '../UncontrolledCarousel';
 
 const itemsDesktop = [
   {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_001.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1535351455/carousel_desktop_001.jpg',
     altText: 'Slide 1',
     caption: '',
     header: ''
   },
   {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_002.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1535351455/carousel_desktop_002.jpg',
     altText: 'Slide 2',
     caption: '',
     header: ''
   },
   {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_003.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1535351456/carousel_desktop_003.jpg',
     altText: 'Slide 3',
     caption: '',
     header: ''
   },
   {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carousel_004.jpg',
+    src: 'https://res.cloudinary.com/orenpro/image/upload/v1535351456/carousel_desktop_004.jpg',
     altText: 'Slide 4',
     caption: '',
     header: ''
