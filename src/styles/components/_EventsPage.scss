@@ -270,6 +270,23 @@
     padding-top: 0.5rem;
 }
 
+@media all and (-ms-high-contrast:none){
+    .events__text__more__button__image {
+        padding-top: 0rem;
+    }
+     *::-ms-backdrop, .events__text__more__button__image {
+        padding-top: 0rem;
+    }
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .events__text__more__button__image {
+        padding-top: 0rem;
+    }
+}
+/*----MS Edge Browser CSS End----*/
+
 .events__text__more__button__text {
     margin: 0;
     padding: 0;

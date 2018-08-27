@@ -10,6 +10,8 @@
 
 //
 
+
+
 .homepage__pleased-box {
     display: inline-block;
     width: 90rem;
@@ -89,6 +91,23 @@
     padding-top: 0rem;
     color: $white;
 }
+
+@media all and (-ms-high-contrast:none){
+    .homepage__pleased__button__text {
+        margin-top: 0rem;
+    }
+     *::-ms-backdrop, .homepage__pleased__button__text {
+        margin-top: 0rem;
+    }
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .homepage__pleased__button__text {
+        margin-top: 0rem;
+    }
+}
+/*----MS Edge Browser CSS End----*/
 
 .homepage__pleased__button__image {
     width: 1.65rem;
@@ -350,6 +369,23 @@
     padding-top: 0.5rem;
 }
 
+@media all and (-ms-high-contrast:none){
+    .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+     *::-ms-backdrop, .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .homepage__event-item__button__image {
+        padding-top: 0rem;
+    }
+}
+/*----MS Edge Browser CSS End----*/
+
 .homepage__event-item__button__text {
     margin: 0;
     padding: 0;
@@ -455,7 +491,15 @@ input[type="email"]::-webkit-input-placeholder {
     transform: scale(1.15);
 }
 
+.homepage__intouch__border {
+    width: 100%;
+}
 
+.common__intouch__seperator__desktop {
+    width: 100%;
+    height: 3px;
+    background-image: url('/images/homepage/intouch/intouch-border.png');
+}
 
 
 //
@@ -723,9 +767,7 @@ input[type="email"]::-webkit-input-placeholder {
 }
 
 
-.homepage__intouch__border {
-    width: 100%;
-}
+
 
 
 
