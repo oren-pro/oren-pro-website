@@ -217,24 +217,30 @@ export default class EventHeader extends React.Component {
                     :
                         null
                 }
-                {
-                    this.props.isAuthenticated === true ?
-                        <AutosizeInput
-                            className="event__header__input Heebo-Regular"
-                            name="name"
-                            data-name="name"
-                            data-index={this.props.categoryId}
-                            data-field='name'
-                            data-action={this.props.action}
-                            placeholder="שם קטגוריה"
-                            value={this.props.eventName}
-                            onChange={this.props.onEventNameChange}
-                        />
-                    :
-                        <h3 className="event__header Heebo-Regular">{this.props.eventName}</h3>
-                }
-                <img className="event__header__seperator" src="/images/eventspage/event-header-seperator.svg" />
-                
+                <div className="event__header__in__box">
+                    <div className="event__header__in__in__box">
+                        {
+                            this.props.isAuthenticated === true ?
+                                <AutosizeInput
+                                    className="event__header__input Heebo-Regular"
+                                    name="name"
+                                    data-name="name"
+                                    data-index={this.props.categoryId}
+                                    data-field='name'
+                                    data-action={this.props.action}
+                                    placeholder="שם קטגוריה"
+                                    value={this.props.eventName}
+                                    onChange={this.props.onEventNameChange}
+                                />
+                            :
+                                <h3 className="event__header Heebo-Regular">{this.props.eventName}</h3>
+                        }
+                        
+                        <div className="common__event__header__seperator__box__desktop desktop">
+                            <div className="common__event__header__seperator__desktop desktop"></div>
+                        </div>
+                    </div>
+                </div>
                 <div className="event__text__box">
                     <div className="events__text__flexbox" dir="rtl">
                         
@@ -300,7 +306,9 @@ export default class EventHeader extends React.Component {
                         null
                 }
                 </div>
-                <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                <div className="common__intouch__seperator__box__desktop desktop">
+                    <div className="common__intouch__seperator__desktop desktop"></div>
+                </div>
                 <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
             </div>
         );

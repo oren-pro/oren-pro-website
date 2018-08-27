@@ -26,8 +26,8 @@ const icons = {
       }
       
     ],
-    width: '3.5vw',
-    height: '3.5vw',
+    width: '3rem',
+    height: '3rem',
     vbwidth: 43.8,
     vbheight: 45.18
   },
@@ -54,8 +54,8 @@ const icons = {
         className: "accessibility-color--dark"
       }
     ],
-    width: '3.5vw',
-    height: '3.5vw',
+    width: '3rem',
+    height: '3rem',
     vbwidth: 45.79,
     vbheight: 47.17
   }

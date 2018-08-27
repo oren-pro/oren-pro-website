@@ -26,7 +26,9 @@ const EventsEvents = (props) => (
                 <div className="events__events__oneline__header__box">
                     <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
                     <p className="events__events__oneline__more Heebo-Medium">לאירועים נוספים</p>
-                    <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                    <div className="common__intouch__seperator__box__desktop desktop">
+                        <div className="common__intouch__seperator__desktop desktop"></div>
+                    </div>
                     <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
                     <h3 className="events__events__oneline__header Heebo-Regular">{props.subcategoryName}</h3>
                 </div>
@@ -77,7 +79,9 @@ const EventsEvents = (props) => (
                         <p className="events__eventshare__more__button__text Heebo-Regular">גלו עוד</p>
                         
                     </button> 
-                    <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                    <div className="common__intouch__seperator__box__desktop desktop">
+                        <div className="common__intouch__seperator__desktop desktop"></div>
+                    </div>
                     <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
                 </div>
             :
