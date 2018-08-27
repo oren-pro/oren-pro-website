@@ -84,8 +84,6 @@ const EventShareStrip = (props) => (
             </div>
             
         </div>
-        <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
-        <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
     </div>
 );
 

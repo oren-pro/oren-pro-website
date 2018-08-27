@@ -1768,7 +1768,9 @@ class EventsPage extends React.Component {
                             onChange={this.onCategoryTextChange}
                             onCategoryShowLinesChange={this.onCategoryShowLinesChange}
                         />
-                        <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                        <div className="common__intouch__seperator__box__desktop desktop">
+                            <div className="common__intouch__seperator__desktop desktop"></div>
+                        </div>
                         <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
                         <EventsEvents 
                             categoryName={this.state.category.name}
