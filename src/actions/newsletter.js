@@ -39,7 +39,7 @@ console.log(email);
             }
         };
 
-        axios.post('https://api.viplus.com/gates/wsgate.asmx/RMembers_Import', postData, axiosConfig)
+        axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', postData, axiosConfig)
         .then((res) => {
             console.log("RESPONSE RECEIVED: ", res);
         })
