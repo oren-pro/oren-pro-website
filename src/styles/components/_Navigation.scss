@@ -120,16 +120,7 @@
     padding-right: 0.3rem;
 }
 
-@media all and (-ms-high-contrast:none){
-     .nav__link:hover { border: 0.2rem dotted $gray; } /* IE10 */
-     *::-ms-backdrop, .nav__link:hover { border: 0.2rem dotted $gray; } /* IE11 */
-}
 
-/*----MS Edge Browser CSS Start----*/
-@supports (-ms-accelerator:true) {
-    .nav__link:hover { border: 0.2rem dotted $gray; }
-}
-/*----MS Edge Browser CSS End----*/
 
 .nav__link--active {
     border: 0.2rem solid;
@@ -143,6 +134,21 @@
     padding-left: 0.3rem;
     padding-right: 0.3rem;
 }
+
+
+@media all and (-ms-high-contrast:none){
+     .nav__link:hover { border: 0.2rem dotted $gray; } 
+     .nav__link--active { border: 0.2rem dotted $gray; }
+     *::-ms-backdrop, .nav__link:hover { border: 0.2rem dotted $gray; } 
+     *::-ms-backdrop, .nav__link--active { border: 0.2rem dotted $gray; }
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .nav__link:hover { border: 0.2rem dotted $gray; }
+    .nav__link--active { border: 0.2rem dotted $gray; }
+}
+/*----MS Edge Browser CSS End----*/
 
 
 
