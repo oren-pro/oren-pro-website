@@ -35,11 +35,11 @@ console.log(email);
         let axiosConfig = {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": "http://localhost:8080",
             }
         };
 
-        axios.post('http://api.viplus.com/gates/wsgate.asmx/RMembers_Import', postData, axiosConfig)
+        axios.post('https://api.viplus.com/gates/wsgate.asmx/RMembers_Import', postData, axiosConfig)
         .then((res) => {
             console.log("RESPONSE RECEIVED: ", res);
         })
