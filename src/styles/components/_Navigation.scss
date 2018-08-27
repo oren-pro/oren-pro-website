@@ -52,6 +52,19 @@
     
 }
 
+
+@media all and (-ms-high-contrast:none){
+     .nav__link--accessibility { width: 2.5rem; height: 2.5rem; } 
+     *::-ms-backdrop, .nav__link--accessibility { width: 2.5rem; height: 2.5rem; } 
+}
+
+/*----MS Edge Browser CSS Start----*/
+@supports ( position:-ms-page ) {
+    .nav__link--accessibility { width: 2.5rem; height: 2.5rem; }
+}
+/*----MS Edge Browser CSS End----*/
+
+
 .accessibility-color--dark {
     fill: $gray !important;
 }
