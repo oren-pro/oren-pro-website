@@ -213,7 +213,9 @@ export default class EventsText extends React.Component {
         //console.log(this.props.showLines);
         return (
             <div className="events__text__box">
-                <img className="events__seperator desktop" src="/images/eventspage/events-seperator.png" />
+                <div className="common__intouch__seperator__box__desktop desktop">
+                    <div className="common__intouch__seperator__desktop desktop"></div>
+                </div>
                 <img className="events__seperator events__seperator__w100 mobile" src="/images/eventspage/events-seperator-mobile.png" />
                 <div className="events__text__flexbox" dir="rtl">
                     <AnimateHeight

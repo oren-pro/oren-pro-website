@@ -34,7 +34,7 @@
     position: absolute;
     background: none;
     border: none;
-    z-index: 12503;
+    z-index: 718;
     width: 2rem;
     height: 2rem;
     left: 3rem;
@@ -59,7 +59,7 @@
 
 .backoffice__events__events__buttons {
     position: absolute;
-    z-index: 1203;
+    z-index: 717;
     left: -1rem;
     top: 2rem;
 }
@@ -369,7 +369,7 @@
 
 
 .backoffice__seo__modal {
-    width: 90vw;
+    width: 800px;
 }
 
 .backoffice__seo__modal textarea {
@@ -377,7 +377,7 @@
     font-weight: 400;
     position: relative;
     height: 6.7rem;
-    max-width: 60vw;
+    width: 650px;
     text-align: right;
     color: $gray;
     background: #f1f1f1;
@@ -394,7 +394,7 @@
     font-weight: 400;
     position: relative;
     height: 3rem;
-    max-width: 60vw;
+    width: 650px;
     text-align: right;
     color: $gray;
     background: #f1f1f1;
@@ -409,7 +409,7 @@
 
 .backoffice__seo__modal__left {
     display: inline-block;
-    max-width: 60vw;
+    width: 650px;
 }
 
 .backoffice__seo__modal__right {
@@ -450,6 +450,10 @@
     margin: 0;
     margin-bottom: 0.5rem;
     resize: none;
+}
+
+.backoffice__seo__button {
+    display: block;
 }
 
 .backoffice_button {

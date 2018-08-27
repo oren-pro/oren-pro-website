@@ -71,6 +71,7 @@ class EventsPage extends React.Component {
             editCategoryModalIsOpen: false,
             newSubcategoryNameModalIsOpen: false,
             newSubcategoryName: '',
+            newSubCategoryNameModalAlert: '',
             newItemNameModalIsOpen: false,
             newItemName: '',
             newItemNameModalAlert: '',
@@ -467,24 +468,41 @@ class EventsPage extends React.Component {
     }
 
     addNewSubcategory = () => {
-        const categoryId = this.state.category.id;
-        const subcategoryId = this.state.subcategoryId;
-        const name = this.state.newSubcategoryName;
-        const subcategory = {
-            name: name,
-            visible: false,
-            categories: {
-                [categoryId]: true
+        let nameFlag = false;
+        this.props.eventsObject.allSubCategories.map((subCategory, index) => {
+            if(subCategory.name === this.state.newSubcategoryName) {
+                nameFlag = true;
             }
-        };
-        const order = this.state.subCategories.length+1;
-        this.props.startAddSubcategory(subcategory, order).then((subCategories)=> {
-            this.getAllData(categoryId, subcategoryId);
+        })
+
+        if(nameFlag === true) {
             this.setState({
-                newSubcategoryNameModalIsOpen: false,
-                newSubcategoryName: ''
+                newSubCategoryNameModalAlert: 'שם תת-קטגוריה קיים במערכת'
             });
-        });
+        } else if (this.state.newSubcategoryName === '') {
+            this.setState({
+                newSubCategoryNameModalAlert: 'שם תת-קטגוריה חייב לכלול אות אחת לפחות'
+            });
+        } else {
+            const categoryId = this.state.category.id;
+            const subcategoryId = this.state.subcategoryId;
+            const name = this.state.newSubcategoryName;
+            const subcategory = {
+                name: name,
+                visible: false,
+                categories: {
+                    [categoryId]: true
+                }
+            };
+            const order = this.state.subCategories.length+1;
+            this.props.startAddSubcategory(subcategory, order).then((subCategories)=> {
+                this.getAllData(categoryId, subcategoryId);
+                this.setState({
+                    newSubcategoryNameModalIsOpen: false,
+                    newSubcategoryName: ''
+                });
+            });
+        }
         
     }
 
@@ -1491,6 +1509,7 @@ class EventsPage extends React.Component {
                 >
                     <h2 className="Heebo-Medium">הוספת תת-קטגוריה חדשה</h2>
                     <h4 className="Heebo-Regular">נא למלא שם לתת-הקטגוריה החדשה</h4>
+                    <h4 className="Heebo-Regular">{this.state.newSubCategoryNameModalAlert}</h4>
                     <div dir="rtl">
                         <AutosizeInput
                             className="events__tabs__button"

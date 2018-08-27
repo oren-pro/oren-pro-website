@@ -548,6 +548,7 @@ class HomePage extends React.Component {
                             />
                             <br />
                         </div>
+                        <br />
                         <Button bsStyle="success" onClick={this.updateHomepageSeo}>עדכון</Button>
                     </div>
                 </Modal>
