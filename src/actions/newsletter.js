@@ -90,8 +90,8 @@ console.log(email);
                 "firstname": name,
                 "email": email,
                 "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
-                "successredirect": "https://oren-pro-website.herokuapp.com",
-                "failedredirect": "https://oren-pro-website.herokuapp.com",
+                "successredirect": "https://oren-pro-website.herokuapp.com/newsletter_success",
+                "failedredirect": "https://oren-pro-website.herokuapp.com/newsletter_failed",
                 "viplists": "0",
                 "exists": "merge",
                 "restore": "restoreondeleted"
