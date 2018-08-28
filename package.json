@@ -65,6 +65,7 @@
     "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.1",
+    "sendgrid": "^5.2.3",
     "sendmail": "^1.4.1",
     "slick-carousel": "^1.8.1",
     "sparkpost": "^2.1.2",
