@@ -10,6 +10,36 @@ var cloudinary = require('cloudinary');
 //var cloudinaryVars = require('../config/cloudinary');
 
 
+var SparkPost = require('sparkpost');
+
+var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
+
+sparky.transmissions.send({
+    options: {
+    sandbox: true
+    },
+    content: {
+    from: 'testing@zzz.com',// + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
+    subject: 'Oh hey!',
+    html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+    },
+    recipients: [
+    {address: 'mosh.kainer@gmail.com'}
+    ]
+})
+.then(data => {
+    console.log('Woohoo! You just sent your first mailing!');
+    console.log(data);
+})
+.catch(err => {
+    console.log('Whoops! Something went wrong');
+    console.log(err);
+});
+
+
+
+
+
 
 const app = express();
 
@@ -86,8 +116,8 @@ var transporter = nodemailer.createTransport({
 
 
 app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-    console.log('GMAIL_USER', process.env.GMAIL_USER);
-    console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
+    //console.log('GMAIL_USER', process.env.GMAIL_USER);
+    //console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
     console.log('in server');
     console.log(request.body.name);
     console.log(request.body.email);

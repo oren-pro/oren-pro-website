@@ -67,6 +67,7 @@
     "sass-loader": "^7.0.1",
     "sendmail": "^1.4.1",
     "slick-carousel": "^1.8.1",
+    "sparkpost": "^2.1.2",
     "style-loader": "^0.21.0",
     "uuid": "^3.2.1",
     "validator": "8.0.0",

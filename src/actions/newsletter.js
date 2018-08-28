@@ -82,6 +82,12 @@ console.log(email);
         // });
 
 
+
+
+
+//  post method
+
+
         function post(method) {
             method = method || "post"; // Set method to post by default if not specified.
             console.log('in post');
