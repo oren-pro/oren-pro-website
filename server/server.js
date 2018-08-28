@@ -10,7 +10,7 @@ var cloudinary = require('cloudinary');
 //var cloudinaryVars = require('../config/cloudinary');
 
 
-var SparkPost = require('sparkpost');
+//var SparkPost = require('sparkpost');
 
 
 
@@ -99,65 +99,65 @@ var transporter = nodemailer.createTransport({
 
 
 
-app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-    var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
-
-    sparky.transmissions.send({
-        options: {
-        sandbox: true
-        },
-        content: {
-        from: 'testing@zzz.com',// + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
-        subject: 'Oh hey!',
-        html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
-        },
-        recipients: [
-        {address: 'mosh.kainer@gmail.com'}
-        ]
-    })
-    .then(data => {
-        console.log('Woohoo! You just sent your first mailing!');
-        console.log(data);
-    })
-    .catch(err => {
-        console.log('Whoops! Something went wrong');
-        console.log(err);
-    });
-    return 'hia';
-});
-
-
-
-
 // app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-//     //console.log('GMAIL_USER', process.env.GMAIL_USER);
-//     //console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
-//     console.log('in server');
-//     console.log(request.body.name);
-//     console.log(request.body.email);
-//     console.log(request.body.message);
-//     if(request.body.name){
-//         mailOptions = {
-//           from: 'oren.pro.test@gmail.com',
-//           to: 'mosh.kainer@gmail.com',
-//           subject: request.body.email,
-//           text: request.body.message
-//         };
-//         transporter.sendMail (mailOptions, function(error, info){
-//           if(error){
-//             console.log(error);
-//           } else {
-//             console.log('Email sent: ' + info.response);
-//           }
-//         });
-//     }
+//     var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
+
+//     sparky.transmissions.send({
+//         options: {
+//         sandbox: true
+//         },
+//         content: {
+//         from: 'testing@zzz.com',// + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
+//         subject: 'Oh hey!',
+//         html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+//         },
+//         recipients: [
+//         {address: 'mosh.kainer@gmail.com'}
+//         ]
+//     })
+//     .then(data => {
+//         console.log('Woohoo! You just sent your first mailing!');
+//         console.log(data);
+//     })
+//     .catch(err => {
+//         console.log('Whoops! Something went wrong');
+//         console.log(err);
+//     });
 //     return 'hia';
 // });
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(publicPath, 'index.html'));
-// });
 
-// app.listen(port, () => {
-//     console.log('Server is up!');
-// })
+
+
+app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
+    //console.log('GMAIL_USER', process.env.GMAIL_USER);
+    //console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
+    console.log('in server');
+    console.log(request.body.name);
+    console.log(request.body.email);
+    console.log(request.body.message);
+    if(request.body.name){
+        mailOptions = {
+          from: 'oren.pro.test@gmail.com',
+          to: 'mosh.kainer@gmail.com',
+          subject: request.body.email,
+          text: request.body.message
+        };
+        transporter.sendMail (mailOptions, function(error, info){
+          if(error){
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+    }
+    return 'hia';
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+app.listen(port, () => {
+    console.log('Server is up!');
+})
