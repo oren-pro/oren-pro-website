@@ -119,12 +119,14 @@ app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
     .then(data => {
         console.log('Woohoo! You just sent your first mailing!');
         console.log(data);
+        return 'hia';
     })
     .catch(err => {
         console.log('Whoops! Something went wrong');
         console.log(err);
+        return 'hia';
     });
-    return 'hia';
+    
 });
 
 
