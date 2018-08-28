@@ -100,7 +100,7 @@ var transporter = nodemailer.createTransport({
 
 
 app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-    
+    console.log("in sparky");
 
     sparky.transmissions.send({
         options: {
