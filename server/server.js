@@ -114,7 +114,6 @@ app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
         html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
         },
         recipients: [
-            {address: 'mosh.kainer@gmail.com'},
             {address: 'halivao@gmail.com'}
         ]
     })
