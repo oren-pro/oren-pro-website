@@ -41,25 +41,6 @@ export const sendMessage = ({ name, email, message }) => {
             console.log('in send mail');
             console.log(data);
         });
-
-
-
         return ("done");
-        // const res = fetch('http://localhost:3000/sendEmail', {
-        //     method : 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         name,
-        //         email,
-        //         message
-        //     })
-        // }).then(() => console.log('server response'));
-
-        // const json = res;
-        // console.log(res);
-        // return json;
-
     };
 };
