@@ -10,7 +10,7 @@ var cloudinary = require('cloudinary');
 //var cloudinaryVars = require('../config/cloudinary');
 
 
-//var SparkPost = require('sparkpost');
+var SparkPost = require('sparkpost');
 
 
 
