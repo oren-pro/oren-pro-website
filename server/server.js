@@ -11,7 +11,7 @@ var cloudinary = require('cloudinary');
 
 
 var SparkPost = require('sparkpost');
-
+var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
 
 
 
@@ -100,7 +100,7 @@ var transporter = nodemailer.createTransport({
 
 
 // app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-//     var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
+//     
 
 //     sparky.transmissions.send({
 //         options: {
