@@ -6,7 +6,15 @@ module.exports = {
 
 
 
-
+// let transporter = nodemailer.createTransport({
+//     host: 'webmail.frixell.net',
+//     port: 25,
+//     secure: false,
+//     auth: {
+//       user: "message@frixell.net",
+//       pass: "kS58x!l6"
+//     }
+// });
 
 
 

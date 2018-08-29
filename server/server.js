@@ -85,12 +85,23 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
 //   }
 // });
 
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD
-  }
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.GMAIL_USER,
+//     pass: process.env.GMAIL_PASSWORD
+//   }
+// });
+
+
+let transporter = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
+    secure: false,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD
+    }
 });
 
 
@@ -105,7 +116,7 @@ app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
     console.log(request.body.message);
     if(request.body.name){
         mailOptions = {
-          from: 'oren.pro.test@gmail.com',
+          from: 'message@frixell.net',
           to: 'mosh.kainer@gmail.com',
           subject: request.body.email,
           text: request.body.name + "/n" + request.body.email + "/n" + request.body.message
