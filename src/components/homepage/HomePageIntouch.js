@@ -23,7 +23,7 @@ export class HomePageIntouch extends React.Component {
                     onSubmit={this.onSubmit}
                 />
 
-                <form action="https://api.viplus.com/gates/wsgate.asmx/RMembers_Import" method="post">
+                <form action="http://api.viplus.com/gates/wsgate.asmx/RMembers_Import" method="post">
                 <input type="email" name="email" id="email"  />
                 <input type="text" name="firstname" id="given-name" />
                 <br/>
