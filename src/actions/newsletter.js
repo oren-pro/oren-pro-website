@@ -95,7 +95,7 @@ console.log(email);
             const params = {
                 "firstname": name,
                 "email": email,
-                "apikey": "f6c20ab2-9ce5-403b-aeb3-b05c1f6b0af2",
+                "apikey": "3f2f5b05-96cd-4f48-858c-67b302f2915a",
                 "successredirect": "https://oren-pro-website.herokuapp.com/newsletter_success",
                 "failedredirect": "https://oren-pro-website.herokuapp.com/newsletter_failed",
                 "viplists": "0",
