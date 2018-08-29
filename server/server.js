@@ -117,9 +117,9 @@ app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
     if(request.body.name){
         mailOptions = {
           from: 'message@frixell.net',
-          to: 'mosh.kainer@gmail.com',
+          to: 'halivao@gmail.com',
           subject: request.body.email,
-          text: request.body.name + "/n" + request.body.email + "/n" + request.body.message
+          text: request.body.name + '\r\n' + request.body.email + '\r\n' + request.body.message
         };
         transporter.sendMail (mailOptions, function(error, info){
           if(error){
