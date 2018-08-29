@@ -6,12 +6,12 @@ var cors = require('cors');
 
 var cloudinary = require('cloudinary');
 
-//var gmail = require('../config/gmail');
+var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
 
-var SparkPost = require('sparkpost');
-var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
+//var SparkPost = require('sparkpost');
+//var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
 
 
 
@@ -77,69 +77,13 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
 
 
 
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.GMAIL_USER || gmail.user,
-//     pass: process.env.GMAIL_PASSWORD || gmail.password
-//   }
-// });
-
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.GMAIL_USER,
-//     pass: process.env.GMAIL_PASSWORD
-//   }
-// });
-
-let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        type: 'OAuth2',
-        user: process.env.GMAIL_USER,
-        accessToken: process.env.GMAIL_ACCESS_TOKEN
-    }
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER || gmail.user,
+    pass: process.env.GMAIL_PASSWORD || gmail.password
+  }
 });
-
-
-
-
-
-
-
-// app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-//     console.log("in sparky");
-//     console.log(request.body.name);
-//     console.log(request.body.email);
-//     console.log(request.body.message);
-//     sparky.transmissions.send({
-//         options: {
-//         sandbox: true
-//         },
-//         content: {
-//         from: 'message@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
-//         subject: 'Oh hey!',
-//         html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
-//         },
-//         recipients: [
-//             {address: 'halivao@gmail.com'}
-//         ]
-//     })
-//     .then(data => {
-//         console.log('Woohoo! You just sent your first mailing!');
-//         console.log(data);
-//         return 'hia';
-//     })
-//     .catch(err => {
-//         console.log('Whoops! Something went wrong');
-//         console.log(err);
-//         return 'hia';
-//     });
-    
-// });
 
 
 
@@ -156,7 +100,7 @@ app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
           from: 'oren.pro.test@gmail.com',
           to: 'mosh.kainer@gmail.com',
           subject: request.body.email,
-          text: request.body.message
+          text: request.body.name + "/n" + request.body.email + "/n" + request.body.message
         };
         transporter.sendMail (mailOptions, function(error, info){
           if(error){
