@@ -93,24 +93,26 @@ console.log(email);
             console.log('in post');
 
             const params = {
-                "firstname": name,
+                "firstName": name,
                 "email": email,
                 "apikey": "3f2f5b05-96cd-4f48-858c-67b302f2915a",
                 "successredirect": "https://oren-pro-website.herokuapp.com/newsletter_success",
                 "failedredirect": "https://oren-pro-website.herokuapp.com/newsletter_failed",
-                "viplists": "0",
-                "exists": "merge",
-                "restore": "restoreondeleted"
+                "lists_ToSubscribe": "0"
             }
 
             // The rest of this code assumes you are not using a library.
             // It can be made less wordy if you use one.
             var form = document.createElement("form");
             form.setAttribute("method", method);
-            form.setAttribute("action", "http://api.viplus.com/gates/wsgate.asmx/RMembers_Import");
+            //form.setAttribute("action", "http://api.viplus.com/gates/wsgate.asmx/RMembers_Import");
+            form.setAttribute("action", "https://ssl-vp.com/rest/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true&api_key=3f2f5b05-96cd-4f48-858c-67b302f2915a");
+
 
             for(var key in params) {
                 if(params.hasOwnProperty(key)) {
+                    console.log(key);
+                    console.log(params[key]);
                     var hiddenField = document.createElement("input");
                     hiddenField.setAttribute("type", "hidden");
                     hiddenField.setAttribute("name", key);
@@ -119,9 +121,9 @@ console.log(email);
                     form.appendChild(hiddenField);
                 }
             }
-
+            console.log(form);
             document.body.appendChild(form);
-            form.submit();
+            //form.submit();
         }
 
 
