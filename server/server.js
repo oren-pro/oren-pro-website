@@ -6,7 +6,7 @@ var cors = require('cors');
 
 var cloudinary = require('cloudinary');
 
-var gmail = require('../config/gmail');
+//var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
 
@@ -77,11 +77,19 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
 
 
 
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.GMAIL_USER || gmail.user,
+//     pass: process.env.GMAIL_PASSWORD || gmail.password
+//   }
+// });
+
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_USER || gmail.user,
-    pass: process.env.GMAIL_PASSWORD || gmail.password
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD
   }
 });
 
