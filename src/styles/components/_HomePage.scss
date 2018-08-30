@@ -451,6 +451,7 @@
     width: 20rem;
     height: 3.4rem;
     padding-right: 1rem;
+    padding-left: 1rem;
     font-family: $font;
     font-weight: 400;
     border: 1px solid $gray;
@@ -1273,6 +1274,7 @@ input[type="email"]::-webkit-input-placeholder {
         width: 92vw;
         height: 7rem;
         padding-right: 1rem;
+        padding-left: 1rem;
         margin-bottom: 1rem;
         font-family: $font;
         font-weight: 400;
