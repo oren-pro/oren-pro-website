@@ -7,7 +7,6 @@ import { subscribeToNewsletter } from '../../actions/newsletter';
 export class HomePageIntouch extends React.Component {
     onSubmit = (subscriber) => {
         this.props.subscribeToNewsletter(subscriber);
-        //this.props.history.push('/');
     };
     render() {
         return (

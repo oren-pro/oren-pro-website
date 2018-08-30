@@ -30,48 +30,6 @@ function PrevArrow(props) {
   );
 }
 
-// const costumers = [
-//   {
-//     "image": "/images/customersStrip/images/galil.png",
-//     "order": "1"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/cme.png",
-//     "order": "2"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/bd.png",
-//     "order": "3"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/unitask.png",
-//     "order": "4"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/yoelgeva.png",
-//     "order": "5"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/wedo.png",
-//     "order": "6"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/technion.png",
-//     "order": "7"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/taro.png",
-//     "order": "8"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/hofcarmel.png",
-//     "order": "9"
-//   },
-//   {
-//     "image": "/images/customersStrip/images/dyckam.png",
-//     "order": "10"
-//   }
-// ]
 
 class CustomersStrip extends React.Component {
     constructor(props) {
@@ -81,38 +39,6 @@ class CustomersStrip extends React.Component {
             hideCostumersEditPanel: true,
             costumers: this.props.costumers.costumers
         }
-    }
-
-    componentDidMount = () => {
-      // console.log(this.props.costumers);
-      // if (this.state.costumers !== [] && this.props.costumers) {
-      //   this.setState({
-      //     costumers: this.props.costumers
-      //   })
-      // }
-    }
-
-    // shouldComponentUpdate = (nextProps, nextState) => {
-    //   console.log(nextProps);
-    //   return true;
-    // }
-
-    componentDidUpdate = () => {
-      console.log(this.props.costumers)
-      // if (this.state.costumers === [] && this.props.costumers) {
-      //   this.setState({
-      //     costumers: this.props.costumers
-      //   })
-      // }
-    }
-
-    UNSAFE_componentWillUpdate= () => {
-      console.log(this.props.costumers)
-      // if (this.state.costumers === [] && this.props.costumers) {
-      //   this.setState({
-      //     costumers: this.props.costumers
-      //   })
-      // }
     }
 
     uploadWidget = (e) => {
@@ -151,55 +77,11 @@ class CustomersStrip extends React.Component {
                     }
                         
                     this.props.startAddCostumers( costumer ).then(( costumers ) => {
-                      console.log(costumers);
                       this.props.startSetCostumers().then(() => {
-                        console.log(this.props.costumers);
                         this.setState({
                             costumers: this.props.costumers.costumers
                         });
                       });
-                    //     images.sort((a, b) => {
-                    //         return a.eventsIds[id+'order'] > b.eventsIds[id+'order'] ? 1 : -1;
-                    //     });
-                    //     const galleryImages = [];
-                    //     images.map((image) => {
-                    //         return galleryImages.push({
-                    //             publicId: image.public_id,
-                    //             image: image,
-                    //             id: image.id,
-                    //             order: image.eventsIds[id+'order'],
-                    //             src: image.imageUrl,
-                    //             alt: image.imageText,
-                    //             width: image.imageWidth,
-                    //             height: image.imageHeight
-                    //         });
-                    //     });
-                    //     const slideGalleryImages = [];
-                    //     images.map((image) => {
-                    //         let imageWidth = image.imageWidth;
-                    //         let imageHeight = image.imageHeight;
-                    //         const ratio = 600/imageHeight;
-                    //         imageWidth = ratio*imageWidth;
-                    //         imageHeight = ratio*imageHeight;
-                    //         return slideGalleryImages.push({
-                    //             publicId: image.public_id,
-                    //             image: image,
-                    //             id: image.id,
-                    //             order: image.eventsIds[eventId+'order'],
-                    //             src: image.imageUrl,
-                    //             altText: image.imageText,
-                    //             width: imageWidth,
-                    //             height: imageHeight,
-                    //             caption: '',
-                    //             header: ''
-                    //         });
-                    //     });
-                    //     this.setState({
-                    //         imagesOrigin: JSON.parse(JSON.stringify(images)),
-                    //         images,
-                    //         galleryImages,
-                    //         slideGalleryImages
-                    //     });
                       myUploadWidget.close();
                     });
                 }
@@ -216,8 +98,6 @@ class CustomersStrip extends React.Component {
 
 
     onDeleteCostumer = (e) => {
-        // console.log(e.target.dataset.publicid);
-        // console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicId = e.target.dataset.publicid;
@@ -238,15 +118,7 @@ class CustomersStrip extends React.Component {
             fbCostumers[costumer.id] = costumer;
         })
         fbCostumers[id] = null;
-
-        console.log(publicId);
-        console.log(costumers);
-        console.log(fbCostumers);
-        
-        
         this.props.startDeleteCostumer( fbCostumers, costumers, publicId );
-
-        
         this.setState({
             costumers
         });
@@ -320,8 +192,6 @@ class CustomersStrip extends React.Component {
         costumers.map((costumer, index) => {
             fbCostumers[costumer.id] = costumer;
         })
-        console.log(costumers);
-        console.log(fbCostumers);
         this.props.startEditCostumers(costumers, fbCostumers);
     }
 

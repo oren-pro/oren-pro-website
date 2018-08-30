@@ -557,7 +557,6 @@ class HomePage extends React.Component {
 
 
 
-
                 
                 <Navigation {...this.props} categories={this.props.eventsCategories}/>
                 <div className="homepage__structure">
@@ -680,7 +679,7 @@ class HomePage extends React.Component {
                                 </div>
                             :
                                 null
-                            }
+                        }
 
 
 

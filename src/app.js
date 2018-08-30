@@ -11,6 +11,9 @@ import {
 import {
     startSetCostumers
 } from './actions/costumers';
+import {
+    startSetDesktopGallery
+} from './actions/desktopGallery';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -36,8 +39,10 @@ const renderApp = () => {
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 store.dispatch(startSetCategories()).then(() => {
-    store.dispatch(startSetCostumers()).then(() => {
-        renderApp();
+    store.dispatch(startSetDesktopGallery()).then(() => {
+        store.dispatch(startSetCostumers()).then(() => {
+            renderApp();
+        });
     });
 });
 //renderApp();

@@ -9,6 +9,24 @@
 }
 
 
+.backoffice__desktop__gallery__buttons {
+    position: absolute;
+    z-index: 87;
+    left: 5%;
+    top: 25rem;
+    width: 20%;
+    text-align: center;
+}
+
+.backoffice__mobile__gallery__buttons {
+    position: absolute;
+    z-index: 87;
+    left: 5%;
+    top: 30rem;
+    width: 20%;
+    text-align: center;
+}
+
 
 .about__edit__panel {
     width: 94rem;
@@ -473,6 +491,41 @@
 
 
 
+
+.backoffice__gallery__modal {
+    width: 800px;
+    top: 100rem;
+}
+
+.backoffice__gallery__modal__in__box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 750px;
+}
+
+
+.backoffice__gallery__modal input {
+    font-family: $font;
+    font-weight: 400;
+    position: relative;
+    height: 3rem;
+    width: 4rem;
+    text-align: right;
+    color: $gray;
+    border: 1px solid $gray;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    padding: 0.5rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    resize: none;
+}
+
+.backoffice__gallery__image__container {
+    width: 200px;
+}
 
 
 .homepage__event-item__upload-button {

@@ -22,11 +22,9 @@ export default class HomePageIntouchForm extends React.Component {
         this.setState(() => ({ email }));
     };
     onToggleMailSentModal = () => {
-        console.log('toggle');
         this.setState({
             mailSentModalIsOpen: !this.state.mailSentModalIsOpen
         });
-        console.log(this.state.mailSentModalIsOpen);
     }
     
     onSubmit = (e) => {
