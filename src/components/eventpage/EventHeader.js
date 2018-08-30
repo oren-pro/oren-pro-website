@@ -217,6 +217,10 @@ export default class EventHeader extends React.Component {
                     :
                         null
                 }
+                <div className="common__intouch__seperator__box__desktop desktop">
+                    <div className="common__intouch__seperator__desktop desktop"></div>
+                </div>
+                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
                 <div className="event__header__in__box">
                     <div className="event__header__in__in__box">
                         {
@@ -242,10 +246,7 @@ export default class EventHeader extends React.Component {
                     </div>
                 </div>
                 <div className="event__text__box">
-                    <div className="common__intouch__seperator__box__desktop desktop">
-                        <div className="common__intouch__seperator__desktop desktop"></div>
-                    </div>
-                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                    
                     <div className="events__text__flexbox" dir="rtl">
                         
                         <AnimateHeight

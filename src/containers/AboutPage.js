@@ -1,6 +1,6 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import { Button } from "react-bootstrap";
+import { Button, Modal as ModalRB } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
 import AboutTopStrip from '../components/aboutpage/AboutTopStrip';
 import AboutContentStrip from '../components/aboutpage/AboutContentStrip';
@@ -18,6 +18,7 @@ import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import TileGallery from '../components/common/TileGallery';
+import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
 
 
 
@@ -34,6 +35,7 @@ class AboutPage extends React.Component {
             ratioPhone: 1,
             ratioGreenArrow: 1,
             pageupImageClassName: 'pageup__image__absolute',
+            slideGalleryModalIsOpen: false,
             seoAboutpageModalIsOpen: false,
             seo: {
                 title: '',
@@ -41,7 +43,8 @@ class AboutPage extends React.Component {
                 keyWords: '',
             },
             images: [],
-            galleryImages: []
+            galleryImages: [],
+            slideGalleryImages: []
         }
     }
 
@@ -147,9 +150,34 @@ class AboutPage extends React.Component {
                             height: image.height
                         });
                     });
+                    const slideGalleryImages = [];
+                    aboutimages.map((image) => {
+                        let imageWidth = image.width;
+                        let imageHeight = image.height;
+                        const ratio = 600/imageHeight;
+                        imageWidth = ratio*imageWidth;
+                        imageHeight = ratio*imageHeight;
+                        if (imageWidth > 960) {
+                            const widthRatio = 960/imageWidth;
+                            imageWidth = widthRatio*imageWidth;
+                            imageHeight = widthRatio*imageHeight;
+                        }
+                        return slideGalleryImages.push({
+                            publicId: image.publicId,
+                            id: image.id,
+                            order: image.order,
+                            src: image.src,
+                            altText: image.alt,
+                            width: imageWidth,
+                            height: imageHeight,
+                            caption: '',
+                            header: ''
+                        });
+                    });
                     this.setState({
                         images: aboutimages,
-                        galleryImages: galleryImages
+                        galleryImages,
+                        slideGalleryImages
                     });
                 }
 
@@ -288,6 +316,11 @@ class AboutPage extends React.Component {
                             const ratio = 600/imageHeight;
                             imageWidth = ratio*imageWidth;
                             imageHeight = ratio*imageHeight;
+                            if (imageWidth > 800) {
+                                const widthRatio = 800/imageWidth;
+                                imageWidth = widthRatio*imageWidth;
+                                imageHeight = widthRatio*imageHeight;
+                            }
                             return slideGalleryImages.push({
                                 publicId: image.publicId,
                                 id: image.id,
@@ -509,6 +542,87 @@ class AboutPage extends React.Component {
         });
     }
 
+    onOpenSlideGallery = (e) => {
+        //console.log(e.target.dataset.id);
+        //console.log(e.target.dataset.order);
+        const currentImage = e.target.dataset.order-1;
+        //console.log(currentImage);
+        this.onToggleSlideGallery(e, currentImage);
+    }
+
+    onToggleSlideGallery = (e, currentImage = this.state.currentImage) => {
+        //console.log(currentImage);
+        //console.log(this.state.slideGalleryImages);
+        //const width = (100-this.state.slideGalleryImages[currentImage].width/10)/2+3.5;
+        //const crouselControlsRight = {right: `${width}rem`}
+        //const crouselControlsWidth = $('#crouselControlsRight').width();
+        const crouselControlsWidth = 140;
+        //console.log(crouselControlsWidth);
+        const width = this.state.slideGalleryImages[currentImage].width/2-crouselControlsWidth/2-23;
+        //console.log(width);
+        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
+        this.setState({
+            crouselControlsRight,
+            currentImage,
+            slideGalleryModalIsOpen: !this.state.slideGalleryModalIsOpen
+        });
+    }
+
+    onCurrentImageChange = (currentImage) => {
+        //console.log('onCurrentImageChange');
+        //console.log(currentImage);
+        this.setState({
+            currentImage
+        });
+    }
+
+    onNext = () => {
+        if (this.animating) return;
+        const nextIndex = this.state.currentImage === this.state.slideGalleryImages.length - 1 ? 0 : this.state.currentImage + 1;
+        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
+        const crouselControlsWidth = $('#crouselControlsRight').width();
+        const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
+        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
+        this.setState({
+            crouselControlsRight
+        });
+        if (this.onCurrentImageChange) {
+        this.onCurrentImageChange(nextIndex);
+        }
+    }
+
+    previous = () => {
+        if (this.animating) return;
+        const nextIndex = this.state.currentImage === 0 ? this.state.slideGalleryImages.length - 1 : this.state.currentImage - 1;
+        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
+        const crouselControlsWidth = $('#crouselControlsRight').width();
+        const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
+        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
+        this.setState({
+            crouselControlsRight
+        });
+        this.onCurrentImageChange(nextIndex);
+    }
+
+    onExiting = () => {
+        //console.log('onExiting');
+        this.animating = true;
+    }
+
+    onExited = () => {
+        //console.log('onExited');
+        //const width = (100-this.state.slideGalleryImages[this.state.currentImage].width/10)/2+3.5;
+        //const crouselControlsRight = {right: `${width}rem`, opacity: 1};
+        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
+        const crouselControlsWidth = $('#crouselControlsRight').width();
+        const width = this.state.slideGalleryImages[this.state.currentImage].width/2-crouselControlsWidth/2-23;
+        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
+        this.setState({
+            crouselControlsRight
+        });
+        this.animating = false;
+    }
+
 
     render() {
         return (
@@ -566,6 +680,88 @@ class AboutPage extends React.Component {
                         <Button bsStyle="success" onClick={this.updateAboutpageSeo}>עדכון</Button>
                     </div>
                 </Modal>
+
+                <ModalRB show={this.state.slideGalleryModalIsOpen} onHide={this.onToggleSlideGallery} dir="rtl">
+                    
+                    <ModalRB.Body bsClass="modalBody carousel__fade">
+                        <div id="crouselControlsRight" className="events__event__carousel__controls">
+                            <div className="events__eventshare__button__box">
+                                <button 
+                                    type='button'
+                                    className="events__event__carousel__button"
+                                    data-name="greenArrow"
+                                    onMouseEnter={this.setIconRatioOn}
+                                    onMouseLeave={this.setIconRatioOut}
+                                    onClick={this.onToggleSlideGallery}
+                                >
+                                    <img className="events__event__carousel__button__image__x" src="/images/eventspage/carousel-x.svg" />
+                                </button> 
+                            </div>
+                            
+                            <div hidden={this.state.slideGalleryImages.length<2} className="events__eventshare__button__box">
+                                <button 
+                                    type='button'
+                                    className="events__event__carousel__button"
+                                    data-name="greenArrow"
+                                    onMouseEnter={this.setIconRatioOn}
+                                    onMouseLeave={this.setIconRatioOut}
+                                    onClick={this.previous}
+                                >
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-right.svg" />
+                                </button> 
+                            </div>
+
+                            <div hidden={this.state.slideGalleryImages.length<2} className="events__eventshare__button__box">
+                                <button 
+                                    type='button'
+                                    className="events__event__carousel__button"
+                                    data-name="greenArrow"
+                                    onMouseEnter={this.setIconRatioOn}
+                                    onMouseLeave={this.setIconRatioOut}
+                                    onClick={this.onNext}
+                                >
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    
+                                </button> 
+                            </div>
+
+                            <div hidden={this.state.slideGalleryImages.length>1} className="events__eventshare__button__box">
+                                <div 
+                                    className="events__event__carousel__button"
+                                >
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-right.svg" />
+                                </div> 
+                            </div>
+
+                            <div hidden={this.state.slideGalleryImages.length>1} className="events__eventshare__button__box">
+                                <div 
+                                    className="events__event__carousel__button"
+                                >
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    
+                                </div> 
+                            </div>
+
+
+
+
+                        </div>
+                        <UncontrolledCarousel
+                            slide={false}
+                            activeIndex={Number(this.state.currentImage)}
+                            pause="hover"
+                            controls={true}
+                            keyboard={false}
+                            ride='carousel'
+                            interval='150000000'
+                            items={this.state.slideGalleryImages}
+                            onCurrentImageChange={this.onCurrentImageChange}
+                            onExiting={this.onExiting}
+                            onExited={this.onExited}
+                        />
+                    </ModalRB.Body>
+                    
+                </ModalRB>
                 
                 <Navigation />
                 <div className="about__structure">

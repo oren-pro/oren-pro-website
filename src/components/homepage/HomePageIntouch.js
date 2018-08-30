@@ -23,25 +23,6 @@ export class HomePageIntouch extends React.Component {
                     onSubmit={this.onSubmit}
                 />
 
-                <form action="http://api.viplus.com/gates/wsgate.asmx/RMembers_Import" method="post">
-                <input type="email" name="email" id="email"  />
-                <input type="text" name="firstname" id="given-name" />
-                <br/>
-                <input type="hidden" name="apikey" value="3f2f5b05-96cd-4f48-858c-67b302f2915a" />
-                <input type="hidden" name="successredirect" value="http://www.google.com" />
-                <input type="hidden" name="failedredirect" value="http://www.google.com" />
-                <input type="hidden" name="viplists" id="viplists" value="0" />		
-                <input type="hidden" name="exists" id="exists" value="merge" />
-                <input type="hidden" name="restore" id="restore" value="restoreondeleted" />
-                
-
-            <button type="submit">Submit</button>
-            </form>
-
-
-
-
-
                 <div className="common__intouch__seperator__desktop desktop"></div>
             </div>
         );
