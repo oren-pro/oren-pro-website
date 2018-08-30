@@ -148,7 +148,7 @@ class Navigation extends React.Component {
       window.open('https://www.instagram.com/oren_rinat_pro/');
   }
   gotoMail = () => {
-      window.location = 'mailto:mosh.kainer@gmail.com';
+      window.location = 'mailto:info@oren-pro.com';
   }
   gotoPhone = () => {
       window.location = 'tel:0525379515';

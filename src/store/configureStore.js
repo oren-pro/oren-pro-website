@@ -11,6 +11,7 @@ import navigationReducer from '../reducers/navigation';
 import newsletterReducer from '../reducers/newsletter';
 import messagesReducer from '../reducers/messages';
 import desktopGalleryReducer from '../reducers/desktopGallery';
+import mobileGalleryReducer from '../reducers/mobileGallery';
 
 //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENTION_COMPOSE__ || compose;
 
@@ -35,7 +36,8 @@ export default () => {
             messages: messagesReducer,
             navigation: navigationReducer,
             newsletter: newsletterReducer,
-            desktopGallery: desktopGalleryReducer
+            desktopGallery: desktopGalleryReducer,
+            mobileGallery: mobileGalleryReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
         //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

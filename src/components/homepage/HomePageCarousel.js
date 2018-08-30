@@ -9,29 +9,12 @@ import {
     startEditDesktopGallery,
     startDeleteDesktopGallery
 } from '../../actions/desktopGallery';
-
-
-const itemsMobile = [
-  {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_01.jpg',
-    altText: 'Slide 1',
-    caption: '',
-    header: ''
-  },
-  {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_02.jpg',
-    altText: 'Slide 2',
-    caption: '',
-    header: ''
-  },
-  {
-    src: 'https://res.cloudinary.com/orenpro/image/upload/v1534248940/carouselMobile_03.jpg',
-    altText: 'Slide 3',
-    caption: '',
-    header: ''
-  }
-];
-
+import {
+    startAddMobileGallery,
+    startSetMobileGallery,
+    startEditMobileGallery,
+    startDeleteMobileGallery
+} from '../../actions/mobileGallery';
 
 
 class HomePageCarousel extends React.Component {
@@ -40,7 +23,9 @@ class HomePageCarousel extends React.Component {
 
         this.state = {
             desktopGalleryModalIsOpen: false,
-            desktopImages: this.props.desktopGallery
+            mobileGalleryModalIsOpen: false,
+            desktopImages: this.props.desktopGallery,
+            mobileImages: this.props.mobileGallery
         }
     }
 
@@ -50,8 +35,16 @@ class HomePageCarousel extends React.Component {
         });
     }
 
+    onToggleMobileGallery = () => {
+        this.setState({
+            mobileGalleryModalIsOpen: !this.state.mobileGalleryModalIsOpen
+        });
+    }
+
 
     uploadWidget = (e) => {
+        const screen = e.target.dataset.screen;
+        console.log(screen);
         var myUploadWidget;
         myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
@@ -73,14 +66,25 @@ class HomePageCarousel extends React.Component {
             }
         },
             (error, result) => {
+                
+
                 if (error) {
                     console.log(error);
                 }
                 if (result.event === "success") {
-                    const order = Number(this.state.desktopImages.length)+1;
+                    let order = 1;
+                    if(screen === "desktop") {
+                        if (this.state.desktopImages){
+                          order = Number(this.state.desktopImages.length)+1;
+                        }
+                    } else {
+                        if (this.state.mobileImages){
+                            order = Number(this.state.mobileImages.length)+1;
+                        }
+                    }
                     const image = result.info.secure_url;
                     const publicId = result.info.public_id;
-                    const desktopImage = {
+                    const newImage = {
                       src: image,
                       altText: 'Homepage Galley Image',
                       caption: '',
@@ -88,16 +92,28 @@ class HomePageCarousel extends React.Component {
                       publicId,
                       order
                     }
-                        
-                    this.props.startAddDesktopGallery( desktopImage ).then(() => {
-                      this.props.startSetDesktopGallery().then((desktopImages) => {
-                        console.log(desktopImages);
-                        this.setState({
-                            desktopImages
+                    if(screen === "desktop") {
+                        this.props.startAddDesktopGallery( newImage ).then(() => {
+                          this.props.startSetDesktopGallery().then((desktopImages) => {
+                            console.log(desktopImages);
+                            this.setState({
+                                desktopImages
+                            });
+                          });
+                          myUploadWidget.close();
                         });
-                      });
-                      myUploadWidget.close();
-                    });
+                    } else {
+                        this.props.startAddMobileGallery( newImage ).then(() => {
+                          this.props.startSetMobileGallery().then((mobileImages) => {
+                            console.log(mobileImages);
+                            this.setState({
+                                mobileImages
+                            });
+                          });
+                          myUploadWidget.close();
+                        });
+                    }
+                    
                 }
             }
         );
@@ -204,6 +220,103 @@ class HomePageCarousel extends React.Component {
     }
 
 
+    onDeleteMobileImage = (e) => {
+        const id = e.target.dataset.id;
+        const order = e.target.dataset.order;
+        const publicId = e.target.dataset.publicid;
+        const mobileImages = [];
+        const mobileImagesOld = this.state.mobileImages;
+
+        for (let i = 0; i < mobileImagesOld.length; i++) {
+            if (id !== mobileImagesOld[i].id) {
+                if (mobileImagesOld[i].order > order) {
+                    mobileImagesOld[i].order = mobileImagesOld[i].order-1;
+                }
+                mobileImages.push(mobileImagesOld[i]);
+            }
+        }
+
+        const fbMobileImages = {};
+        mobileImages.map((mobileImage, index) => {
+            fbMobileImages[mobileImage.id] = mobileImage;
+        })
+        fbMobileImages[id] = null;
+        this.props.startDeleteMobileGallery( fbMobileImages, mobileImages, publicId );
+        this.setState({
+            mobileImages
+        });
+    }
+
+
+
+    onMobileImageOrderBlur = (e) => {
+        const mobileImages = this.state.mobileImages;
+        let newOrder = e.target.value;
+        if (newOrder > mobileImages.length) {
+            newOrder = mobileImages.length;
+        }
+        if (newOrder < 1) {
+            newOrder = 1;
+        }
+        const oldOrder = Number(e.target.dataset.index)+1;
+        const id = e.target.dataset.id;
+        if ( Number(newOrder) > Number(oldOrder) ) {
+            for (let i = 0; i < mobileImages.length; i++) {
+                if (id !== mobileImages[i].id) {
+                    if (mobileImages[i].order <= newOrder && mobileImages[i].order > oldOrder) {
+                        mobileImages[i].order = mobileImages[i].order-1;
+                    }
+                }
+            }
+        } else if ( Number(newOrder) < Number(oldOrder) ) {
+            for (let i = 0; i < mobileImages.length; i++) {
+                
+                if (id !== mobileImages[i].id) {
+                    if (mobileImages[i].order < oldOrder && mobileImages[i].order >= newOrder) {
+                        mobileImages[i].order = Number(mobileImages[i].order)+1;
+                    }
+                }
+            }
+        }
+        mobileImages.sort((a, b) => {
+            return a.order > b.order ? 1 : -1;
+        });
+        this.setState({
+            mobileImages
+        });
+    }
+
+    onMobileImageOrderChange = (e) => {
+        const mobileImages = this.state.mobileImages;
+        let newOrder = e.target.value;
+        if (newOrder > mobileImages.length) {
+            newOrder = mobileImages.length;
+        }
+        if (newOrder < 1) {
+            newOrder = 1;
+        }
+        const oldOrder = Number(e.target.dataset.index)+1;
+        mobileImages[e.target.dataset.index].order = Number(newOrder);
+        this.setState({
+            mobileImages
+        });
+    }
+
+    onMobileImageOrderKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.onMobileImageOrderBlur(e);
+        }
+    }
+
+
+    updateMobileGallery = () => {
+        const mobileImages = this.state.mobileImages;
+        const fbMobileImages = {};
+        mobileImages.map((mobileImage, index) => {
+            fbMobileImages[mobileImage.id] = mobileImage;
+        })
+        this.props.startEditMobileGallery(mobileImages, fbMobileImages);
+    }
 
     render() {
         return (
@@ -260,17 +373,69 @@ class HomePageCarousel extends React.Component {
             </Modal>
 
 
+
+            <Modal open={this.state.mobileGalleryModalIsOpen} onClose={this.onToggleMobileGallery} dir="rtl">
+                <div className="backoffice__gallery__modal">
+                    <h4 className="Heebo-Regular">mobile gallery</h4>
+                    {
+                        this.state.mobileImages ?
+                        this.state.mobileImages.length > 0 ?
+                            
+                            this.state.mobileImages.map((image, index) => {
+                                return  <div className="backoffice__gallery__modal__in__box" key={"in"+image.id} dir="rtl">
+                                            <Button
+                                                id="btn-x"
+                                                data-id={image.id}
+                                                data-order={image.order}
+                                                data-publicid={image.publicId}
+                                                data-index={image.order}
+                                                data-showstatus={false}
+                                                className="backoffice__events__tabs__remove btn-danger"
+                                                onClick={this.onDeleteMobileImage}
+                                            >
+                                                X
+                                            </Button>
+                                            
+                                            <div className="backoffice__events__tabs__order__box">
+                                                <input
+                                                    id="number"
+                                                    data-id={image.id}
+                                                    type="number"
+                                                    value={image.order}
+                                                    data-index={index}
+                                                    onChange={this.onMobileImageOrderChange}
+                                                    onKeyPress={this.onMobileImageOrderKeyPress}
+                                                    onBlur={this.onMobileImageOrderBlur}
+                                                />
+                                            </div>
+                                            <div className="backoffice__gallery__image__container">
+                                              <img width="100%" height="100%" src={image.src} />
+                                            </div>
+                                        </div>
+                            })
+                            
+                        :
+                            null
+                        :
+                            null
+                    }
+                    <br />
+                    <Button bsStyle="success" onClick={this.updateMobileGallery}>עדכון</Button>
+                </div>
+            </Modal>
+
+
             { 
                 this.props.isAuthenticated === true ? 
 
                     
-                    <div className="backoffice__desktop__gallery__buttons" hidden={this.state.hideTellEditPanel}>
+                    <div className="backoffice__desktop__gallery__buttons">
                       <p className="homepage__tell__details">desktop gallery</p>
                       <button className="homepage__tell__edit__button" onClick={this.onToggleDesktopGallery}>
                           <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
                       </button>
                       <button className="homepage__tell__add__button" onClick={this.uploadWidget}>
-                          <img className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
+                          <img data-screen="desktop" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
                       </button>
                     </div>
                 :
@@ -281,13 +446,13 @@ class HomePageCarousel extends React.Component {
                 this.props.isAuthenticated === true ? 
 
                     
-                    <div className="backoffice__mobile__gallery__buttons" hidden={this.state.hideTellEditPanel}>
+                    <div className="backoffice__mobile__gallery__buttons">
                       <p className="homepage__tell__details">mobile gallery</p>
-                      <button className="homepage__tell__edit__button" onClick={this.onToggleDesktopGallery}>
+                      <button className="homepage__tell__edit__button" onClick={this.onToggleMobileGallery}>
                           <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
                       </button>
                       <button className="homepage__tell__add__button" onClick={this.uploadWidget}>
-                          <img className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
+                          <img data-screen="mobile" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
                       </button>
                     </div>
                 :
@@ -298,7 +463,7 @@ class HomePageCarousel extends React.Component {
 
 
             {
-              this.props.desktopGallery ?
+              this.props.desktopGallery && this.props.mobileGallery ?
                 <UncontrolledCarousel className="carousel__fade"
                   slide={false}
                   pause={false}
@@ -306,7 +471,7 @@ class HomePageCarousel extends React.Component {
                   keyboard={false}
                   ride='carousel'
                   interval='5000'
-                  items={this.props.media === 'mobile' ? itemsMobile : this.state.desktopImages}
+                  items={this.props.media === 'mobile' ? this.state.mobileImages : this.state.desktopImages}
               />
               :
               null
@@ -322,14 +487,19 @@ class HomePageCarousel extends React.Component {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.auth.uid,
-    desktopGallery: state.desktopGallery.desktopGallery
+    desktopGallery: state.desktopGallery.desktopGallery,
+    mobileGallery: state.mobileGallery.mobileGallery
 });
 
 const mapDispatchToProps = (dispatch) => ({
     startAddDesktopGallery: (desktopImage) => dispatch(startAddDesktopGallery(desktopImage)),
     startSetDesktopGallery: (desktopImages) => dispatch(startSetDesktopGallery(desktopImages)),
     startEditDesktopGallery: (desktopImages, fbDesktopImages) => dispatch(startEditDesktopGallery(desktopImages, fbDesktopImages)),
-    startDeleteDesktopGallery: (fbDesktopImages, desktopImages, publicId) => dispatch(startDeleteDesktopGallery(fbDesktopImages, desktopImages, publicId))
+    startDeleteDesktopGallery: (fbDesktopImages, desktopImages, publicId) => dispatch(startDeleteDesktopGallery(fbDesktopImages, desktopImages, publicId)),
+    startAddMobileGallery: (mobileImage) => dispatch(startAddMobileGallery(mobileImage)),
+    startSetMobileGallery: (mobileImages) => dispatch(startSetMobileGallery(mobileImages)),
+    startEditMobileGallery: (mobileImages, fbMobileImages) => dispatch(startEditMobileGallery(mobileImages, fbMobileImages)),
+    startDeleteMobileGallery: (fbMobileImages, mobileImages, publicId) => dispatch(startDeleteMobileGallery(fbMobileImages, mobileImages, publicId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePageCarousel); 

@@ -14,6 +14,9 @@ import {
 import {
     startSetDesktopGallery
 } from './actions/desktopGallery';
+import {
+    startSetMobileGallery
+} from './actions/mobileGallery';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -40,8 +43,10 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 store.dispatch(startSetCategories()).then(() => {
     store.dispatch(startSetDesktopGallery()).then(() => {
-        store.dispatch(startSetCostumers()).then(() => {
-            renderApp();
+        store.dispatch(startSetMobileGallery()).then(() => {
+            store.dispatch(startSetCostumers()).then(() => {
+                renderApp();
+            });
         });
     });
 });
