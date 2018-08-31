@@ -4,8 +4,6 @@ import aboutpageReducer from '../reducers/aboutpage';
 import authReducer from '../reducers/auth';
 import costumersReducer from '../reducers/costumers';
 import eventspageReducer from '../reducers/eventspage';
-import expensesReducer from '../reducers/expenses';
-import filtersReducer from '../reducers/filters';
 import homepageReducer from '../reducers/homepage';
 import navigationReducer from '../reducers/navigation';
 import newsletterReducer from '../reducers/newsletter';
@@ -30,8 +28,6 @@ export default () => {
             auth: authReducer,
             costumers: costumersReducer,
             eventspage: eventspageReducer,
-            expenses: expensesReducer,
-            filters: filtersReducer,
             homepage: homepageReducer,
             messages: messagesReducer,
             navigation: navigationReducer,
