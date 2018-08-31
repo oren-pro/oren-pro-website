@@ -119,6 +119,7 @@ class HomePageTell extends React.Component {
                                     dir="rtl"
                                     data-name="tell"
                                     data-index={id}
+                                    data-order={this.props.tellIndex}
                                     data-field='text'
                                     data-action={this.props.action}
                                     placeholder="טקסט המלצה"

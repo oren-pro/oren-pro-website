@@ -59,20 +59,23 @@ class HomePage extends React.Component {
 
     setData = (e) => {
 		const { value, dataset } = e.target;
-		const { name, index, field, action } = dataset;
+		const { name, index, field, action, order } = dataset;
 		const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        const tell = JSON.parse(JSON.stringify(this.state.tell));
 
         switch (action) {
 			case "setString":
-                //console.log(value);
+                console.log(value);
                 if (field) {
                     if( name === "tell" ) {
-                        // console.log(homepage);
-                        // console.log(name);
-                        // console.log(index);
-                        // console.log(field);
-                        //homepage[name[index]][field] = value;
+                         console.log(homepage);
+                         console.log(tell);
+                         console.log(order);
+                         console.log(name);
+                         console.log(index);
+                         console.log(field);
                         homepage[name][index][field] = value;
+                        tell[order][field] = value;
                     } else {
                         homepage[name][index][field] = value;
                     }
@@ -80,14 +83,16 @@ class HomePage extends React.Component {
                     homepage[name] = value;
                 }
                 
-                //console.log(homepage);
+                console.log(homepage);
+                console.log(tell);
                 break;
 			default:
 				break;
         };
 
         this.setState({
-            homepage: homepage
+            homepage,
+            tell
         });
 
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));        
@@ -304,7 +309,7 @@ class HomePage extends React.Component {
             //     return a.order > b.order ? 1 : -1;
             // });
             this.setState({
-                localTell: localTell
+                localTell: localTell,
             });
         }
     }

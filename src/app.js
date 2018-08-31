@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactLoading from "react-loading";
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
@@ -39,7 +40,7 @@ const renderApp = () => {
     }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
 
 store.dispatch(startSetCategories()).then(() => {
     store.dispatch(startSetDesktopGallery()).then(() => {

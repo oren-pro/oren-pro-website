@@ -53,6 +53,7 @@
     "react-facebook-share-link": "^1.0.4",
     "react-helmet": "^5.2.0",
     "react-input-autosize": "^2.2.1",
+    "react-loading": "^2.0.3",
     "react-modal": "^3.4.4",
     "react-photo-gallery": "^6.0.28",
     "react-redux": "^5.0.7",
