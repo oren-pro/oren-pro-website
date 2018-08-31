@@ -55,9 +55,6 @@ module.exports = (env) => {
                 'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
                 'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
                 'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor'
             })
         ],
         devtool: isProduction ? 'source-map' : 'inline-source-map',
