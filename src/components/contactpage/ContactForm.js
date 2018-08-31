@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
-import moment from 'moment';
+//import moment from 'moment';
 import { startSendMessage } from '../../actions/messages';
 
-const currentTime = moment();
+//const currentTime = moment();
 
 export class ContactForm extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export class ContactForm extends React.Component {
             phone: '',
             email: '',
             message: '',
-            createdAt: currentTime,
+            createdAt: '',
             error: '',
             mailSentModalIsOpen: false
         }
