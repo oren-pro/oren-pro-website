@@ -56,29 +56,10 @@ module.exports = (env) => {
                 'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
                 'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
             }),
-            new webpack.DefinePlugin({ //<--key to reduce React's size
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-            }),
-            new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.UglifyJsPlugin(),
-            new webpack.optimize.AggressiveMergingPlugin(),
-            new CompressionPlugin({
-            asset: "[path].gz[query]",
-            algorithm: "gzip",
-            test: /\.js$|\.css$|\.html$/,
-            threshold: 10240,
-            minRatio: 0.8
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor'
             })
         ],
-        resolve: {
-            extensions: ['', '.js', '.jsx'],
-            "alias": {
-            "react": "preact-compat",
-            "react-dom": "preact-compat"
-            }
-        },
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
             contentBase: path.join(__dirname, 'public'),
