@@ -3,6 +3,15 @@ import AnimateHeight from 'react-animate-height';
 import Textarea from 'react-expanding-textarea';
 import $ from 'jquery';
 
+const shouldHighLight = (org, update) => {
+    console.log(org);
+    console.log(update);
+    if ( org === update ) {
+        return 'edit__bg';
+    } else {
+        return 'edit__changed__bg';
+    }
+};
 
 export default class EventsText extends React.Component {
     
@@ -18,28 +27,30 @@ export default class EventsText extends React.Component {
         });
     };
 
+    // onHeightChange = (e) => {
+    //     let height = e.target.value * 18;
+    //     let minHeight = e.target.value * 18;
+    //     const windowWidth = $(window).width();
+    //     if (windowWidth < 768) {
+    //         height = Math.round(e.target.value * 2.667) * 24;
+    //         minHeight = Math.round(e.target.value * 2.667) * 24;
+    //     } else {
+    //         height = e.target.value * 18;
+    //         minHeight = e.target.value * 18;
+    //     }
+    //     this.setState({
+    //         height,
+    //         minHeight
+    //     });
+    //     this.props.onCategoryShowLinesChange(e);
+    // }
+
     onHeightChange = (e) => {
-        let height = e.target.value * 18;
-        let minHeight = e.target.value * 18;
-        const windowWidth = $(window).width();
-        if (windowWidth < 768) {
-            height = Math.round(e.target.value * 2.667) * 24;
-            minHeight = Math.round(e.target.value * 2.667) * 24;
-        } else {
-            height = e.target.value * 18;
-            minHeight = e.target.value * 18;
-        }
-        this.setState({
-            height,
-            minHeight
-        });
+        this.setHeight(e.target.value);
         this.props.onCategoryShowLinesChange(e);
     }
  
-
-
-    componentDidMount = () => {
-        
+    setHeight = (showLines) => {
         const fontSize = $("html").css("fontSize");
         const windowWidth = $(window).width();
         let windowRatio = 100;
@@ -67,8 +78,8 @@ export default class EventsText extends React.Component {
             }
 
             this.setState({
-                height: Math.round(this.props.showLines * ratio) * lineHeight,
-                minHeight: Math.round(this.props.showLines* ratio) * lineHeight
+                height: Math.round(showLines * ratio) * lineHeight,
+                minHeight: Math.round(showLines* ratio) * lineHeight
             });
         } else {
             //console.log('componentDidMount');
@@ -201,16 +212,29 @@ export default class EventsText extends React.Component {
                 ratio = ratio * 0.29;
             }
             this.setState({
-                height: this.props.showLines * ratio * (windowWidth/100),
-                minHeight: this.props.showLines * ratio * (windowWidth/100)
+                height: showLines * ratio * (windowWidth/100),
+                minHeight: showLines * ratio * (windowWidth/100),
+                showLines: showLines
             });
         }
+    }
+
+    componentDidMount = () => {
+        this.setHeight(this.props.showLines);
+    }
+
+    shouldComponentUpdate = () => {
+        if (this.props.showLines !== this.state.showLines) {
+            this.setHeight(this.props.showLines);
+            return true;
+        }
+        return true;
     }
 
 
     render() {
         const { height } = this.state;
-        //console.log(this.props.showLines);
+        console.log(this.props.showLines);
         return (
             <div className="events__text__box">
                 <div className="common__intouch__seperator__box__desktop desktop">
@@ -223,19 +247,21 @@ export default class EventsText extends React.Component {
                     height={ height }>
                         { 
                             this.props.isAuthenticated === true ? 
-                                <Textarea
-                                    className="events__text Heebo-Regular"
-                                    value={this.props.categoryText}
-                                    data-field="text"
-                                    data-action='setString'
-                                    data-name={`item${this.props.index}`}
-                                    data-index={this.props.index}
-                                    placeholder="תוכן"
-                                    onChange={ this.props.onChange }
-                                />
+                                <div className={shouldHighLight(this.props.categoryOrigin.text, this.props.categoryText)}>
+                                    <Textarea
+                                        className="events__text Heebo-Regular"
+                                        value={this.props.categoryText}
+                                        data-field="text"
+                                        data-action='setString'
+                                        data-name={`item${this.props.index}`}
+                                        data-index={this.props.index}
+                                        placeholder="תוכן"
+                                        onChange={ this.props.onChange }
+                                    />
+                                </div>
 
                             :
-                                    <Textarea
+                                <Textarea
                                     className="events__text Heebo-Regular"
                                     value={this.props.categoryText}
                                     readOnly
@@ -259,6 +285,7 @@ export default class EventsText extends React.Component {
                 { 
                     this.props.isAuthenticated === true ? 
                         <input
+                            className={shouldHighLight(this.props.categoryOrigin.showLines, this.props.showLines)}
                             id="number"
                             type="number"
                             value={this.props.showLines}

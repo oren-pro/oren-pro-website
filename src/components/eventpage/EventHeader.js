@@ -4,6 +4,16 @@ import AutosizeInput from 'react-input-autosize';
 import Textarea from 'react-expanding-textarea';
 import $ from 'jquery';
 
+const shouldHighLight = (org, update) => {
+    //console.log(org);
+    //console.log(update);
+    if ( org === update ) {
+        return 'edit__bg';
+    } else {
+        return 'edit__changed__bg';
+    }
+};
+
 export default class EventHeader extends React.Component {
     
     state = {
@@ -19,21 +29,11 @@ export default class EventHeader extends React.Component {
     };
 
     onHeightChange = (e) => {
-        const height = e.target.value * 18;
-        const minHeight = e.target.value * 18;
-        this.setState({
-            height,
-            minHeight
-        });
+        this.setHeight(e.target.value);
         this.props.onEventShowLinesChange(e);
     }
- 
-    componentDidUpdate = (prevProps) => {
-        
-    }
 
-    componentDidMount = () => {
-        
+    setHeight = (showLines) => {
         const fontSize = $("html").css("fontSize");
         const windowWidth = $(window).width();
         let windowRatio = 100;
@@ -61,11 +61,11 @@ export default class EventHeader extends React.Component {
             }
 
             this.setState({
-                height: Math.round(this.props.showLines * ratio) * lineHeight,
-                minHeight: Math.round(this.props.showLines* ratio) * lineHeight
+                height: Math.round(showLines * ratio) * lineHeight,
+                minHeight: Math.round(showLines* ratio) * lineHeight
             });
         } else {
-            console.log('componentDidMount');
+            //console.log('componentDidMount');
             ratio = 2.2;
             if (windowWidth >= 768 && windowWidth < 800) {
                 ratio = ratio * 0.68;
@@ -195,10 +195,23 @@ export default class EventHeader extends React.Component {
                 ratio = ratio * 0.29;
             }
             this.setState({
-                height: this.props.showLines * ratio * (windowWidth/100),
-                minHeight: this.props.showLines * ratio * (windowWidth/100)
+                height: showLines * ratio * (windowWidth/100),
+                minHeight: showLines * ratio * (windowWidth/100),
+                showLines: showLines
             });
         }
+    }
+
+    componentDidMount = () => {
+        this.setHeight(this.props.showLines);
+    }
+
+    shouldComponentUpdate = () => {
+        if (this.props.showLines !== this.state.showLines) {
+            this.setHeight(this.props.showLines);
+            return true;
+        }
+        return true;
     }
 
 
@@ -225,17 +238,20 @@ export default class EventHeader extends React.Component {
                     <div className="event__header__in__in__box">
                         {
                             this.props.isAuthenticated === true ?
-                                <AutosizeInput
-                                    className="event__header__input Heebo-Regular"
-                                    name="name"
-                                    data-name="name"
-                                    data-index={this.props.categoryId}
-                                    data-field='name'
-                                    data-action={this.props.action}
-                                    placeholder="שם קטגוריה"
-                                    value={this.props.eventName}
-                                    onChange={this.props.onEventNameChange}
-                                />
+                                <div className={shouldHighLight(this.props.eventNameOrigin, this.props.eventName)}>
+                                    <AutosizeInput
+                                        className="event__header__input Heebo-Regular"
+                                        name="name"
+                                        data-name="name"
+                                        data-index={this.props.categoryId}
+                                        data-field='name'
+                                        data-action={this.props.action}
+                                        placeholder="שם קטגוריה"
+                                        value={this.props.eventName}
+                                        onChange={this.props.onEventNameChange}
+                                        dir="rtl"
+                                    />
+                                </div>
                             :
                                 <h3 className="event__header Heebo-Regular">{this.props.eventName}</h3>
                         }
@@ -254,20 +270,21 @@ export default class EventHeader extends React.Component {
                         height={ height }>
                             { 
                                 this.props.isAuthenticated === true ? 
-                                    
-                                    <Textarea
-                                        className="events__text Heebo-Regular"
-                                        value={this.props.eventText}
-                                        data-field="text"
-                                        data-action='setString'
-                                        data-name={`item${this.props.index}`}
-                                        data-index={this.props.index}
-                                        placeholder="תוכן"
-                                        onChange={ this.props.onEventTextChange }
-                                    />
+                                    <div className={shouldHighLight(this.props.eventTextOrigin, this.props.eventText)}>
+                                        <Textarea
+                                            className="events__text Heebo-Regular"
+                                            value={this.props.eventText}
+                                            data-field="text"
+                                            data-action='setString'
+                                            data-name={`item${this.props.index}`}
+                                            data-index={this.props.index}
+                                            placeholder="תוכן"
+                                            onChange={ this.props.onEventTextChange }
+                                        />
+                                    </div>
 
                                 :
-                                        <Textarea
+                                    <Textarea
                                         className="events__text Heebo-Regular"
                                         value={this.props.eventText}
                                         readOnly
@@ -278,35 +295,37 @@ export default class EventHeader extends React.Component {
 
                     </div>
                     <div className="events__text__more__box">
-                    <button 
-                        type='button'
-                        className="events__text__button"
-                        data-name="greenArrow"
-                        onMouseEnter={this.props.setIconRatioOn}
-                        onMouseLeave={this.props.setIconRatioOut}
-                        onClick={this.toggle}
-                    >
-                        <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
-                        <p className="events__text__more__button__text Heebo-Regular">קראו עוד</p>
-                        
-                    </button> 
+                        <button 
+                            type='button'
+                            className="events__text__button"
+                            data-name="greenArrow"
+                            onMouseEnter={this.props.setIconRatioOn}
+                            onMouseLeave={this.props.setIconRatioOut}
+                            onClick={this.toggle}
+                        >
+                            <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
+                            <p className="events__text__more__button__text Heebo-Regular">קראו עוד</p>
+                            
+                        </button> 
 
                     
-                </div>
+                    </div>
 
 
                 { 
-                    this.props.isAuthenticated === true ? 
-                        <input
-                            id="number"
-                            type="number"
-                            value={this.props.showLines}
-                            data-field="linesShow"
-                            data-action='setNumber'
-                            data-name={`item${this.props.index}`}
-                            data-index={this.props.index}
-                            onChange={this.onHeightChange}
-                        />
+                    this.props.isAuthenticated === true ?
+                        <div className={`event__text__box__input ${shouldHighLight(this.props.showLinesOrigin, this.props.showLines)}`}>
+                            <input
+                                id="number"
+                                type="number"
+                                value={this.props.showLines}
+                                data-field="linesShow"
+                                data-action='setNumber'
+                                data-name={`item${this.props.index}`}
+                                data-index={this.props.index}
+                                onChange={this.onHeightChange}
+                            />
+                        </div>
                     :
                         null
                 }

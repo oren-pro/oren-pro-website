@@ -1,8 +1,19 @@
 import React from 'react';
 import EventsEvent from './EventsEvent';
+import { isEqual } from "lodash";
+
+const shouldHighLight = (org, update) => {
+    if (isEqual(org, update)) {
+        
+        return 'edit__bg';
+    } else {
+        return 'edit__changed__bg';
+    }
+};
+
 
 const EventsEvents = (props) => (
-    <div className="events__events__box">
+    <div className={`events__events__box ${shouldHighLight(props.itemsCurrentOrigin, props.itemsCurrentCheck)}`}>
         { 
             props.isAuthenticated === true && props.oneLine !== true ? 
                 <div className="backoffice__events__events__buttons">

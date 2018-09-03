@@ -1,5 +1,16 @@
 import React from 'react';
+import { isEqual } from "lodash";
 
+const shouldHighLight = (org, update) => {
+    // console.log(org);
+    // console.log(update);
+    // console.log("in highlight");
+    if (isEqual(org, update)) {
+        return 'edit__bg';
+    } else {
+        return 'edit__changed__bg';
+    }
+};
 
 
 class EventsTabs extends React.Component {
@@ -40,6 +51,7 @@ class EventsTabs extends React.Component {
             <div className="events__tabs__box">
                 <div className="events__tabs__box--right">
                     <h3 className="events__tabs__header Heebo-Medium" dir="rtl">מה מעניין אתכם?</h3>
+                    <div className={this.props.subCategoriesOrigin ? shouldHighLight(this.state.subCategories, this.props.subCategoriesOrigin) : ""}>
                     <div className="events__tabs__tabs__box" dir="rtl">
                         <button data-id='' className={this.state.subcategoryId === '' ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
                             הכל
@@ -67,6 +79,7 @@ class EventsTabs extends React.Component {
                             :
                                 null
                         }
+                    </div>
                     </div>
                 </div>
             </div>

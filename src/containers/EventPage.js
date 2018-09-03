@@ -1,9 +1,9 @@
 import React from 'react';
+import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import AutosizeInput from 'react-input-autosize';
 import { Button, Modal as ModalRB, Popover, Tooltip, OverlayTrigger } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
-import { Prompt } from "react-router";
 import ContactStrip from '../components/contactpage/ContactStrip';
 import CustomersStrip from '../components/common/CustomersStrip';
 import Footer from '../components/common/Footer';
@@ -41,6 +41,7 @@ import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
+import { isEqual } from "lodash";
 
 
 class EventPage extends React.Component {
@@ -62,7 +63,10 @@ class EventPage extends React.Component {
             stripItems: [],
             eventName: '',
             eventText: '',
-            eventShowLines: 5,
+            eventShowLines: 1,
+            eventNameOrigin: '',
+            eventTextOrigin: '',
+            eventShowLinesOrigin: 5,
             eventId: '',
             itemLocation: 0,
             slideGalleryModalIsOpen: false,
@@ -101,10 +105,10 @@ class EventPage extends React.Component {
     
 
     componentDidUpdate(prevProps) {
-        
+        console.log("in componentDidUpdate");
         if (this.state.currentURL === '') {
             const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
-            console.log(currentURL);
+            //console.log(currentURL);
             this.setState({
                 currentURL
             });
@@ -148,11 +152,15 @@ class EventPage extends React.Component {
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
+        let eventShowLines = "";
         let seo = {};
         items.map((item) => {
+            console.log(item.name);
             if (eventName === item.name) {
                 eventId = item.id;
                 eventText = item.text;
+                console.log(item.text);
+                eventShowLines = item.showLines;
                 if (!item.seo) {
                     item.seo = {
                         title: '',
@@ -233,6 +241,9 @@ class EventPage extends React.Component {
         this.setState({
             eventId,
             eventText,
+            eventTextOrigin: eventText,
+            eventShowLines,
+            eventShowLinesOrigin: eventShowLines,
             itemLocation,
             nextItem,
             prevItem,
@@ -263,36 +274,19 @@ class EventPage extends React.Component {
                 let imageHeight = image.imageHeight;
                 let ratioWidth = 1;
                 let ratioHeight = 1;
-                // console.log(imageHeight);
-                // console.log(imageWidth);
-
                 const windowWidth = $(window).width();
                 const windowHeight = $(window).height();
-
                 const maxWidth = windowWidth/3*2;
                 const maxHeight = maxWidth/3*2;
-
-                // console.log(windowWidth);
-                // console.log(windowHeight);
-                
-                //if (imageHeight < maxHeight && imageWidth < maxWidth) {
-                    ratioHeight = maxHeight/imageHeight;
-                    ratioWidth = maxWidth/imageWidth;
-                    if (imageWidth > imageHeight) {
-                        console.log('1');
-                        imageHeight = ratioWidth*imageHeight;
-                        imageWidth = maxWidth;
-                    } else {
-                        console.log('2');
-                        imageHeight = maxHeight;
-                        imageWidth = ratioHeight*imageWidth;
-                    }
-                //}
-
-                // console.log(ratioHeight);
-                // console.log(ratioWidth);
-                // console.log(imageHeight);
-                // console.log(imageWidth);
+                ratioHeight = maxHeight/imageHeight;
+                ratioWidth = maxWidth/imageWidth;
+                if (imageWidth > imageHeight) {
+                    imageHeight = ratioWidth*imageHeight;
+                    imageWidth = maxWidth;
+                } else {
+                    imageHeight = maxHeight;
+                    imageWidth = ratioHeight*imageWidth;
+                }
                 return slideGalleryImages.push({
                     publicId: image.publicId,
                     image: image,
@@ -319,9 +313,8 @@ class EventPage extends React.Component {
         this.setState(handlePageScroll(this.state.pageupImageClassName));
     }
 
-    componentDidMount = () => {
-        window.addEventListener('scroll', this.handleScroll);
-
+    setData = () => {
+        console.log("in setdata");
         let subcategoryId = '';
         if (this.props.eventsObject.subcategoryId) {
             subcategoryId = this.props.eventsObject.subcategoryId;
@@ -336,7 +329,7 @@ class EventPage extends React.Component {
                 allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
             });
             this.props.startSetAllEvents().then(() => {
-                //console.log(this.props.eventsObject.allEvents);
+                console.log(this.props.eventsObject.allEvents);
                 this.setState({
                     allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                 });
@@ -361,12 +354,11 @@ class EventPage extends React.Component {
 
             });
         });
-
-        
-        //console.log("component mounted ----------------- !!!!!!!!!!!!");
         const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ");
+        console.log(eventName);
         this.setState({
-            eventName
+            eventName,
+            eventNameOrigin: eventName
         });
         const categoryId = this.props.categoryId;
         if (!this.props.eventsObject[this.props.categoryId]) {
@@ -403,6 +395,12 @@ class EventPage extends React.Component {
             });
             this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
         }
+    }
+
+    componentDidMount = () => {
+        window.addEventListener('scroll', this.handleScroll);
+
+        this.setData();
     }
 
 
@@ -571,16 +569,38 @@ class EventPage extends React.Component {
         //console.log(e.target.dataset.name);
     }
 
-    // update database . ---   category data ( name, text, showlines - number of lines to show on load)
+    // update database . ---   event data ( name, text, showlines - number of lines to show on load)
 
     onUpdateEvent = () => {
-        console.log('in  click');
+        //console.log('in  click');
         const eventName = JSON.parse(JSON.stringify(this.state.eventName));
         const eventText = JSON.parse(JSON.stringify(this.state.eventText));
         const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
         const eventId = JSON.parse(JSON.stringify(this.state.eventId));
         this.props.startEditEvent(eventName, eventText, eventShowLines, eventId);
-        this.setState(() => ({ homepageOrigin: event }));
+        let gotoNewLocation = false;
+        if(eventName !== this.state.eventNameOrigin) {
+            gotoNewLocation = true;
+        }
+        this.setState(() => ({
+            eventName,
+            eventText,
+            eventShowLines,
+            eventNameOrigin: eventName,
+            eventTextOrigin: eventText,
+            eventShowLinesOrigin: eventShowLines
+        }));
+        window.removeEventListener("beforeunload", this.unloadFunc);
+        if(gotoNewLocation === true) {
+             this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_")}`);
+             this.setData();
+        }
+    }
+
+    unloadFunc = (e) => {
+        var confirmationMessage = "o/";
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
     }
 
     onEventNameChange = (e) => {
@@ -588,6 +608,13 @@ class EventPage extends React.Component {
         this.setState({
             eventName
         });
+        if(isEqual(this.state.eventNameOrigin, eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onEventTextChange = (e) => {
@@ -595,13 +622,27 @@ class EventPage extends React.Component {
         this.setState({
             eventText
         });
+        if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onEventShowLinesChange = (e) => {
-        const eventShowLines = e.target.value;
+        const eventShowLines = Number(e.target.value);
         this.setState({
             eventShowLines
         });
+        if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, eventShowLines)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
 
@@ -886,11 +927,11 @@ class EventPage extends React.Component {
 
 
     onToggleEventSeo = () => {
-        console.log('in seo');
+        //console.log('in seo');
         this.setState({
             seoEventModalIsOpen: !this.state.seoEventModalIsOpen
         });
-        console.log(this.state.seoEventModalIsOpen);
+        //console.log(this.state.seoEventModalIsOpen);
     }
 
     onSeoTitleChange = (e) => {
@@ -931,9 +972,16 @@ class EventPage extends React.Component {
     
 
     render() {
-        console.log(this.state.galleryImages);
+        //console.log(this.state.galleryImages);
         return (
             <div className="container-fluid">
+
+                <Prompt
+                    style={{background: "red"}}
+                    when={!isEqual(this.state.eventNameOrigin, this.state.eventName) || !isEqual(this.state.eventTextOrigin, this.state.eventText) || !isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)}
+                    message="Changes you made may not be saved."
+                />
+
                 <Helmet>
                     <title>{`אורן הפקות - ${this.props.categoryName} - ${this.state.eventName} - ${this.state.seo.title}`}</title>
                     <meta name="description" content={this.state.seo.description} />
@@ -1112,6 +1160,9 @@ class EventPage extends React.Component {
                             eventName={this.state.eventName}
                             eventText={this.state.eventText}
                             showLines={this.state.eventShowLines}
+                            eventNameOrigin={this.state.eventNameOrigin}
+                            eventTextOrigin={this.state.eventTextOrigin}
+                            showLinesOrigin={this.state.eventShowLinesOrigin}
                             isAuthenticated={this.props.isAuthenticated}
                             onEventNameChange={this.onEventNameChange}
                             onEventTextChange={this.onEventTextChange}

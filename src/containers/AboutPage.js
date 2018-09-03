@@ -1,4 +1,5 @@
 import React from 'react';
+import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import { Button, Modal as ModalRB } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
@@ -19,7 +20,7 @@ import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import TileGallery from '../components/common/TileGallery';
 import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
-
+import { isEqual } from "lodash";
 
 
 class AboutPage extends React.Component {
@@ -74,13 +75,20 @@ class AboutPage extends React.Component {
             aboutpage: aboutpage
         });
       
-        // if(isEqual(this.state.itemOrigin,itemUpdate)){ 
-        //     window.removeEventListener("beforeunload", this.unloadFunc);
-        // } else {
-        //     window.addEventListener("beforeunload", this.unloadFunc);
-        // }
+        if(isEqual(this.state.aboutpageOrigin, aboutpage)){ 
+            console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
 	}
 
+    unloadFunc = (e) => {
+        var confirmationMessage = "o/";
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+    }
 
 
     // update database
@@ -97,6 +105,7 @@ class AboutPage extends React.Component {
         });
         this.props.startEditAboutPage(fbAboutpage, aboutpage);
         this.setState(() => ({ aboutpageOrigin: aboutpage }));
+        window.removeEventListener("beforeunload", this.unloadFunc);
     }
 
 
@@ -628,6 +637,12 @@ class AboutPage extends React.Component {
         return (
             <div className="container-fluid">
 
+                <Prompt
+                    style={{background: "red"}}
+                    when={!isEqual(this.state.aboutpageOrigin, this.state.aboutpage)}
+                    message="Changes you made may not be saved."
+                />
+
                 <Helmet>
                     <title>אורן הפקות - נעים להכיר</title>
                     <meta name="description" content="תאור הדף עבור מנועי חיפוש" />
@@ -790,20 +805,20 @@ class AboutPage extends React.Component {
                                 this.state.aboutpage.map((item,index) => {
                                     
                                     return  index < this.state.aboutpage.length - 2 ?
-                                                <AboutContentStrip
-                                                            isAuthenticated={this.props.isAuthenticated}
-                                                            action='setString'
-                                                            name={index}
-                                                            index={index}
-                                                            key={`homepage-events-item-${index}`}
-                                                            item={item}
-                                                            aboutpageOrigin={this.state.aboutpageOrigin}
-                                                            aboutpage={this.state.aboutpage}
-                                                            ratioGreenArrow={this.state.ratioGreenArrow}
-                                                            setIconRatioOn={this.state.setIconRatioOn}
-                                                            setIconRatioOut={this.state.setIconRatioOut}
-                                                            setData={this.setData}
-                                                        />
+                                                    <AboutContentStrip
+                                                        isAuthenticated={this.props.isAuthenticated}
+                                                        action='setString'
+                                                        name={index}
+                                                        index={index}
+                                                        key={`homepage-events-item-${index}`}
+                                                        item={item}
+                                                        aboutpageOrigin={this.state.aboutpageOrigin}
+                                                        aboutpage={this.state.aboutpage}
+                                                        ratioGreenArrow={this.state.ratioGreenArrow}
+                                                        setIconRatioOn={this.state.setIconRatioOn}
+                                                        setIconRatioOut={this.state.setIconRatioOut}
+                                                        setData={this.setData}
+                                                    />
                                                 :
                                                     null
                                 })

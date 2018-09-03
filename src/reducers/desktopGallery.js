@@ -7,7 +7,7 @@ const desktopGalleryReducerDefaultState = {};
     switch (action.type) {   
         case 'SET_DESKTOP_GALLERY':
             events.desktopGallery = action.desktopImages.map((image) => image);
-            console.log(events.desktopGallery);
+            //console.log(events.desktopGallery);
             return events;
         default:
             return state;

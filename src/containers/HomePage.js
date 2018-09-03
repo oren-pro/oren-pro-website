@@ -1,4 +1,5 @@
 import React from 'react';
+import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import { Button } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
@@ -27,6 +28,7 @@ import $ from 'jquery';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
+import { isEqual } from "lodash";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -41,7 +43,6 @@ class HomePage extends React.Component {
             ratioGreenArrow: 1,
             homepageOrigin: {},
             homepage: {},
-            localTell: [],
             tellIndex: 0,
             pageupImageClassName: 'pageup__image__absolute__homepage',
             navigation: {},
@@ -52,7 +53,10 @@ class HomePage extends React.Component {
                 keyWords: '',
             },
             hideTellEditPanel: true,
-            tell: []
+            tellOrigin: [],
+            tell: [],
+            localTell: [],
+            localTellOrigin: []
         }
     }
 
@@ -96,12 +100,22 @@ class HomePage extends React.Component {
         });
 
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));        
-        // if(isEqual(this.state.itemOrigin,itemUpdate)){ 
-        //     window.removeEventListener("beforeunload", this.unloadFunc);
-        // } else {
-        //     window.addEventListener("beforeunload", this.unloadFunc);
-        // }
+        if(isEqual(this.state.homepageOrigin, homepage)){ 
+            console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
 	}
+
+    
+
+    unloadFunc = (e) => {
+        var confirmationMessage = "o/";
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+    }
 
     uploadWidget = (e) => {
         console.log('myUploadWidget called');
@@ -177,6 +191,9 @@ class HomePage extends React.Component {
             homepage: homepage
         });
         this.setState(() => ({ homepageOrigin: homepage }));
+        this.setTell(JSON.parse(JSON.stringify(homepage)));
+        this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
+        window.removeEventListener("beforeunload", this.unloadFunc);
     }
 
 
@@ -233,16 +250,26 @@ class HomePage extends React.Component {
 
             this.setState({
                 tell,
-                //localTell: tell,
+                tellOrigin: tell,
                 seo: homepage.seo,
                 homepage,
-                homepageOrigin: JSON.parse(JSON.stringify(homepage)),
+                homepageOrigin: JSON.parse(JSON.stringify(homepage))
             });
             
 
             
-
+            this.setTell(JSON.parse(JSON.stringify(homepage)));
             this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
+        });
+    }
+
+    setTell = (homepage) => {
+        const tempTell = homepage.tell;
+        const tell = [];
+        Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+        this.setState({
+            tell,
+            tellOrigin: tell
         });
     }
 
@@ -310,6 +337,7 @@ class HomePage extends React.Component {
             // });
             this.setState({
                 localTell: localTell,
+                localTellOrigin: JSON.parse(JSON.stringify(localTell))
             });
         }
     }
@@ -498,11 +526,17 @@ class HomePage extends React.Component {
         });
     }
 
-
+                   
 
     render() {
         return (
             <div className="container-fluid">
+                
+                <Prompt
+                    style={{background: "red"}}
+                    when={!isEqual(this.state.homepageOrigin, this.state.homepage)}
+                    message="Changes you made may not be saved."
+                /> 
 
                 <Helmet>
                     <title>{`אורן הפקות - מפיקי אירועים | מפיקת אירועים - ${this.state.eventName} - ${this.state.seo.title}`}</title>
@@ -622,7 +656,10 @@ class HomePage extends React.Component {
                             homepage={this.state.homepage}
                             homepageOrigin={this.state.homepageOrigin}
                             tellIndex={this.state.tellIndex}
-                            localTell={this.state.tell}
+                            tellOrigin={this.state.tellOrigin}
+                            tell={this.state.tell}
+                            localTellOrigin={this.state.localTellOrigin}
+                            localTell={this.state.localTell}
                             uploadWidget={this.uploadWidget}
                             setTellIndex={this.setTellIndex}
                             onChange={this.setData}

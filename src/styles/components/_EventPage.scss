@@ -416,6 +416,14 @@ $eventsEventImageHeight: 14.2rem;
 .event__text__box input {
     font-family: $font;
     font-weight: $fontRegular;
+    width: 5rem;
+    height: 2rem;
+    background: none;
+    border: 1px solid $gray;
+}
+
+.event__text__box__input {
+    display: inline-block;
     position: absolute;
     width: 5rem;
     height: 2rem;

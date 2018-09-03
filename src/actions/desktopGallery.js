@@ -45,10 +45,10 @@ export const setDesktopGallery = (desktopImages) => ({
 export const startSetDesktopGallery = () => {
     return (dispatch) => {
         return database.ref(`website/desktopGallery/`).once('value').then((snapshot) => {
-            console.log('in set desktopGallery ============');
+            //console.log('in set desktopGallery ============');
             const desktopImages = [];
             snapshot.forEach((childSnapshot) => {
-                console.log(childSnapshot.val());
+                //console.log(childSnapshot.val());
                 desktopImages.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -57,7 +57,7 @@ export const startSetDesktopGallery = () => {
             desktopImages.sort((a, b) => {
                 return a.order > b.order ? 1 : -1;
             });
-            console.log(desktopImages);
+            //console.log(desktopImages);
             dispatch(setDesktopGallery(desktopImages));
             return (desktopImages);
             //dispatch(check());
@@ -82,7 +82,7 @@ export const startDeleteDesktopGallery = ( fbDesktopImages, desktopImages, publi
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
+            //console.log(data);
         });
         return database.ref('website/desktopGallery').update(fbDesktopImages).then(() => {
             dispatch(setDesktopGallery(desktopImages));

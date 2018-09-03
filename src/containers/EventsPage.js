@@ -1,9 +1,9 @@
 import React from 'react';
+import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import AutosizeInput from 'react-input-autosize';
-import { Button, Popover, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
-import { Prompt } from "react-router";
 import ContactStrip from '../components/contactpage/ContactStrip';
 import CustomersStrip from '../components/common/CustomersStrip';
 import Footer from '../components/common/Footer';
@@ -40,6 +40,9 @@ import $ from 'jquery';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
+import { isEqual } from "lodash";
+
+
 
 class EventsPage extends React.Component {
     constructor(props) {
@@ -57,7 +60,7 @@ class EventsPage extends React.Component {
                 id: '',
                 name: '',
                 text: '',
-                showLines: 6
+                showLines: 1
             },
             allSubCategories: this.props.eventsObject.allSubCategories,
             subCategoriesOrigin: [],
@@ -67,6 +70,7 @@ class EventsPage extends React.Component {
             itemsOrigin: [],
             items: [],
             itemsCurrentOrigin: [],
+            itemsCurrentCheck: [],
             itemsCurrent: [],
             editCategoryModalIsOpen: false,
             newSubcategoryNameModalIsOpen: false,
@@ -143,7 +147,7 @@ class EventsPage extends React.Component {
                         image: result.info.secure_url
                     };
                     this.props.startUpdateEventImage(index, image).then((items)=> {
-                        console.log('done page');
+                        //console.log('done page');
                         this.setState({
                             items
                         });
@@ -210,9 +214,9 @@ class EventsPage extends React.Component {
             subcategoryId
         });
         const categoryId = this.props.category.id;
-        console.log('before set items');
+        //console.log('before set items');
         if (!this.props.eventsObject[categoryId]) {
-            console.log('in set items');
+            //console.log('in set items');
             this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                 subCategories.sort((a, b) => {
                     return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -226,7 +230,7 @@ class EventsPage extends React.Component {
                 this.props.eventsObject.categories.map((category, index) => {
                     if (category.id !== categoryId) {
                         this.props.startSetItems(category.id).then((items)=> {
-                            console.log('set '+category.id)
+                            //console.log('set '+category.id)
                         });
                     }
                 });
@@ -241,18 +245,19 @@ class EventsPage extends React.Component {
                     this.setState({
                         itemsOrigin: JSON.parse(JSON.stringify(items)),
                         itemsCurrentOrigin: JSON.parse(JSON.stringify(items)),
+                        itemsCurrentCheck: JSON.parse(JSON.stringify(items)),
                         itemsCurrent: JSON.parse(JSON.stringify(items)),
-                        items
+                        items: JSON.parse(JSON.stringify(items)),
                     });
                 });
             });
 
         } else if (this.props.eventsObject[categoryId] && !this.props.eventsObject[categoryId+'items']) {
-            console.log('in 2 set items');
+            //console.log('in 2 set items');
             this.props.eventsObject.categories.map((category, index) => {
                 if (category.id !== categoryId) {
                     this.props.startSetItems(category.id).then((items)=> {
-                        console.log('set '+category.id)
+                        //console.log('set '+category.id)
                     });
                 }
             });
@@ -270,16 +275,17 @@ class EventsPage extends React.Component {
                     subCategories: subcategories,
                     itemsOrigin: JSON.parse(JSON.stringify(items)),
                     itemsCurrentOrigin: JSON.parse(JSON.stringify(items)),
+                    itemsCurrentCheck: JSON.parse(JSON.stringify(items)),
                     itemsCurrent: JSON.parse(JSON.stringify(items)),
-                    items
+                    items: JSON.parse(JSON.stringify(items))
                 });
             });
         } else {
-            console.log('in 3 set items');
+            //console.log('in 3 set items');
             this.props.eventsObject.categories.map((category, index) => {
                 if (category.id !== categoryId) {
                     this.props.startSetItems(category.id).then((items)=> {
-                        console.log('set '+category.id)
+                        //console.log('set '+category.id)
                     });
                 }
             });
@@ -313,10 +319,11 @@ class EventsPage extends React.Component {
             this.setState({
                 subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                 subCategories: subcategories,
-                itemsOrigin: JSON.parse(JSON.stringify(itemsSet)),
+                itemsOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
                 itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
                 itemsCurrent: JSON.parse(JSON.stringify(itemsCurrent)),
-                items: itemsSet
+                items: JSON.parse(JSON.stringify(itemsCurrent))
             });
         }
         
@@ -334,7 +341,23 @@ class EventsPage extends React.Component {
     onUpdateCategory = () => {
         const category = JSON.parse(JSON.stringify(this.state.category));
         this.props.startEditCategory(category);
-        this.setState(() => ({ homepageOrigin: category }));
+        this.setState(() => ({ 
+            category: category,
+            categoryOrigin: JSON.parse(JSON.stringify(category))
+        }));
+        if(isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
+    }
+
+    unloadFunc = (e) => {
+        var confirmationMessage = "o/";
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
     }
 
     onCategoryNameChange = (e) => {
@@ -343,6 +366,13 @@ class EventsPage extends React.Component {
         this.setState({
             category
         });
+        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onCategoryTextChange = (e) => {
@@ -351,14 +381,30 @@ class EventsPage extends React.Component {
         this.setState({
             category
         });
+        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onCategoryShowLinesChange = (e) => {
         const category = this.state.category;
         category.showLines = e.target.value;
+        console.log(this.state.categoryOrigin);
+        console.log(category);
         this.setState({
             category
         });
+        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     startAddNewItem = () => {        
@@ -415,12 +461,12 @@ class EventsPage extends React.Component {
                             categoriesArr.push(keyedObj);
                         }
                     });
-                    console.log('befor categoriesArr.map');
-                    console.log(event);
+                    //console.log('befor categoriesArr.map');
+                    //console.log(event);
                     categoriesArr.map((catId, index) => {
                         if (event.categories) {
                             if(event.categories[catId.id] !== true) {
-                                console.log(catId.id);
+                                //console.log(catId.id);
                                 event.categories[catId.id] = true;
                                 event.categories[catId.id+'order'] = this.props.eventsObject[catId.id+'items'].length+1;
                             }
@@ -561,6 +607,7 @@ class EventsPage extends React.Component {
         
         this.setState({
             itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+            itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrent
         });
     }
@@ -661,6 +708,13 @@ class EventsPage extends React.Component {
         this.setState({
             subCategories
         });
+        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onSubcategoryOrderChange = (e) => {
@@ -694,6 +748,21 @@ class EventsPage extends React.Component {
             fbSubCategories[subcategory.id] = subcategory;
         })
         this.props.startEditSubCategories(fbSubCategories, subcategories, categoryId);
+
+        this.setState({
+            subCategoriesOrigin: subcategories
+        });
+        // console.log(this.state.categoryOrigin);
+        // console.log(this.state.category);
+        // console.log(this.state.subCategoriesOrigin);
+        // console.log(this.state.subCategories);
+        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     toggleHookSubcategory = (e) => {
@@ -850,9 +919,6 @@ class EventsPage extends React.Component {
                     if (!subcategoryToAdd.categories) {
                         subcategoryToAdd.categories = {};
                     }
-                    // console.log(subcategoryToAdd);
-                    // console.log(categoryId);
-                    // console.log(showStatus);
                     subcategoryToAdd.categories[categoryId] = showStatus;
                     subcategoryToAdd.categories[categoryId+'order'] = categoryOrder;
                     const subcategoryAllOrder = index;
@@ -860,35 +926,9 @@ class EventsPage extends React.Component {
                 }
             });
         }
-
-
         this.props.startHookSubcategory( fbSubcategoriesToUpdate, fbEventsToUpdate ).then((res) => {
             this.getAllData(categoryId, subcategoryId);
-            // this.props.startSetSubcategories(categoryId).then((subCategories)=> {
-            //     if(subCategories.length>1){
-            //         subCategories.sort((a, b) => {
-            //             return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
-            //         });
-            //     }
-            //     this.setState({
-            //         subCategoriesOrigin: JSON.parse(JSON.stringify(subCategories)),
-            //         subCategories
-            //     });
-            //     this.props.startSetItems(categoryId).then((items)=> {
-            //         this.setState({
-            //             items,
-            //             itemsOrigin: JSON.parse(JSON.stringify(items)),
-            //             itemsCurrentOrigin: JSON.parse(JSON.stringify(items)),
-            //             itemsCurrent: JSON.parse(JSON.stringify(items))
-            //         });
-            //     });
-            //     this.props.startSetAllSubcategories().then(() => {
-            //         this.setState({
-            //             allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
-            //         });
-            //         this.props.startSetAllEvents();
-            //     });
-            // });
+            
             if(showStatus === true) {
                 this.onToggleNewSubcategoryName();
             }
@@ -897,7 +937,6 @@ class EventsPage extends React.Component {
 
 
     toggleShowItem = (e) => {
-        //console.log('in toggle show item');
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         const eventId = e.target.dataset.id;
@@ -928,6 +967,7 @@ class EventsPage extends React.Component {
                 itemsOrigin: JSON.parse(JSON.stringify(items)),
                 items: items,
                 itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
                 itemsCurrent: itemsCurrent
             });
         });
@@ -1282,9 +1322,10 @@ class EventsPage extends React.Component {
                 }
                 //console.log(itemsCurrent);
                 this.setState({
-                    items,
-                    itemsOrigin: JSON.parse(JSON.stringify(items)),
+                    items: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
                     itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
                     itemsCurrent: JSON.parse(JSON.stringify(itemsCurrent))
                 });
             });
@@ -1378,11 +1419,21 @@ class EventsPage extends React.Component {
         }
 
 
-        
+        console.log(itemsCurrent);
+        console.log(this.state.itemsOrigin);
         this.setState({
-            items,
+            items: JSON.parse(JSON.stringify(itemsCurrent)),
+            itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrent
         });
+
+        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(itemsCurrent, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onItemOrderChange = (e) => {
@@ -1431,8 +1482,22 @@ class EventsPage extends React.Component {
         const fbEvents = {};
         itemsCurrent.map((item, index) => {
             fbEvents[item.id] = item;
-        })
+        });
+
+        this.setState({
+            items: itemsCurrent,
+            itemsOrigin: itemsCurrent,
+            itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+            itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent))
+        });
         this.props.startEditEvents(fbEvents, events, categoryId);
+        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
     onToggleSeo = () => {
@@ -1478,14 +1543,16 @@ class EventsPage extends React.Component {
 
 
     render() {
-        const popover = (
-        <Popover id="modal-popover" title="popover">
-            very popover. such engagement
-        </Popover>
-        );
-        const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
+
         return (
             <div className="container-fluid">
+
+                <Prompt
+                    style={{background: "red"}}
+                    when={!isEqual(this.state.categoryOrigin, this.state.category) || !isEqual(this.state.subCategoriesOrigin, this.state.subCategories) || !isEqual(this.state.itemsCurrentOrigin, this.state.itemsCurrentCheck)}
+                    message="Changes you made may not be saved."
+                />
+
                 <Helmet>
                     <title>{`אורן הפקות - ${this.props.category.name} - ${this.state.seo.title}`}</title>
                     <meta name="description" content={this.state.seo.description} />
@@ -1540,13 +1607,6 @@ class EventsPage extends React.Component {
                         }
                     </div>
                 </Modal>
-
-
-
-
-
-
-
 
 
                 <Modal
@@ -1679,6 +1739,7 @@ class EventsPage extends React.Component {
                         }
 
                         <EventsHeader
+                            categoryOrigin={this.state.categoryOrigin}
                             categoryName={this.state.category.name}
                             categoryId={this.state.category.id}
                             isAuthenticated={this.props.isAuthenticated}
@@ -1688,6 +1749,7 @@ class EventsPage extends React.Component {
                         <EventsTabs
                             categoryId={this.state.category.id}
                             subcategoryId={this.state.subcategoryId}
+                            subCategoriesOrigin={this.state.subCategoriesOrigin}
                             subCategories={this.state.subCategories}
                             isAuthenticated={this.props.isAuthenticated}
                             setSubcategoryId={this.setSubcategoryId}
@@ -1761,6 +1823,7 @@ class EventsPage extends React.Component {
                                 null
                         }
                         <EventsText 
+                            categoryOrigin={this.state.categoryOrigin}
                             categoryText={this.state.category.text}
                             showLines={this.state.category.showLines}
                             categoryId={this.state.category.id}
@@ -1778,8 +1841,11 @@ class EventsPage extends React.Component {
                             categoryId={this.state.category.id}
                             subcategoryId={this.state.subcategoryId}
                             isAuthenticated={this.props.isAuthenticated}
+                            itemsOrigin={this.state.itemsOrigin}
                             items={this.state.items}
+                            itemsCurrentOrigin={this.state.itemsCurrentOrigin}
                             itemsCurrent={this.state.itemsCurrent}
+                            itemsCurrentCheck={this.state.itemsCurrentCheck}
                             startAddNewItem={this.startAddNewItem}
                             ratioGreenArrow={this.state.ratioGreenArrow}
                             setIconRatioOn={this.setIconRatioOn}
@@ -1847,72 +1913,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);
-
-
-
-
-// <Prompt
-//                         style={{background: "red"}}
-//                         when={!isEqual(itemOrigin, itemUpdate)}
-//                         message="Are you sure you want to leave me?"
-//                     />
-
-
-
-
-
-
-
-
-
-
-
-
-// <Modal show={this.state.newSubcategoryNameModalIsOpen} onHide={this.onToggleNewSubcategoryName} dir="rtl">
-//                     <Modal.Header bsClass="modalHeader" closeButton>
-//                         <Modal.Title bsClass="modalTitle Heebo-Medium">
-//                         הוספת תת-קטגוריה חדשה
-//                         </Modal.Title>
-//                     </Modal.Header>
-//                     <Modal.Body bsClass="modalBody">
-//                         <h4 className="Heebo-Regular">נא למלא שם לתת-הקטגוריה החדשה</h4>
-//                         <AutosizeInput
-//                             className="events__tabs__button"
-//                             type="text"
-//                             placeholder="שם תת-הקטגוריה"
-//                             value={this.state.newSubcategoryName}
-//                             onChange={this.onNewSubcategoryNameChange}
-//                         />
-//                     </Modal.Body>
-//                     <Modal.Footer className="modalFooter">
-//                         <Button bsStyle="success" onClick={this.addNewSubcategory}>המשך</Button>
-//                     </Modal.Footer>
-//                 </Modal>
-
-
-
-
-
-
-
-
-// <Modal show={this.state.newItemNameModalIsOpen} onHide={this.onToggleNewItemName} dir="rtl">
-//                     <Modal.Header bsClass="modalHeader" closeButton>
-//                         <Modal.Title bsClass="modalTitle Heebo-Medium">
-//                         הוספת אירוע חדש
-//                         </Modal.Title>
-//                     </Modal.Header>
-//                     <Modal.Body bsClass="modalBody">
-//                         <h4 className="Heebo-Regular">נא למלא שם לאירוע החדש</h4>
-//                         <AutosizeInput
-//                             className="events__tabs__button"
-//                             type="text"
-//                             placeholder="שם אירוע"
-//                             value={this.state.newItemName}
-//                             onChange={this.onNewItemNameChange}
-//                         />
-//                     </Modal.Body>
-//                     <Modal.Footer className="modalFooter">
-//                         <Button bsStyle="success" onClick={this.addNewItem}>המשך</Button>
-//                     </Modal.Footer>
-//                 </Modal>

@@ -1,5 +1,15 @@
 import React from 'react';
 import AutosizeInput from 'react-input-autosize';
+
+const shouldHighLight = (org, update) => {
+    //console.log('in highlight')
+    if ( org === update ) {
+        return 'events__header__input Heebo-Medium edit__bg';
+    } else {
+        return 'events__header__input Heebo-Medium edit__changed__bg';
+    }
+};
+
 class EventsHeader extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +30,7 @@ class EventsHeader extends React.Component {
                 {
                     this.props.isAuthenticated === true ?
                         <AutosizeInput
-                            className="events__header__input Heebo-Medium"
+                            className={shouldHighLight(this.props.categoryOrigin.name, this.props.categoryName)}
                             name="name"
                             data-name="name"
                             data-index={this.props.categoryId}
@@ -29,6 +39,7 @@ class EventsHeader extends React.Component {
                             placeholder="שם קטגוריה"
                             value={this.props.categoryName}
                             onChange={this.props.onChange}
+                            dir="rtl"
                         />
                     :
                         <h3 className="events__header Heebo-Medium">{this.props.categoryName}</h3>

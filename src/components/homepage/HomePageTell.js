@@ -5,9 +5,9 @@ import Textarea from 'react-expanding-textarea';
 const shouldHighLight = (org, update) => {
     //console.log('in highlight')
     if ( org === update ) {
-        return 'edit__bg';
+        return 'edit__bg inline-block';
     } else {
-        return 'edit__changed__bg';
+        return 'edit__changed__bg inline-block';
     }
 };
 
@@ -39,15 +39,19 @@ class HomePageTell extends React.Component {
       let publicid = '';
       //console.log(this.props.localTell[this.props.tellIndex] ? this.props.localTell[this.props.tellIndex] : null);
       //console.log(this.state.tell);
-      if(this.props.localTell[this.props.tellIndex]){
-            id = this.props.localTell[this.props.tellIndex].id;
-            name = this.props.localTell[this.props.tellIndex].name;
-            position = this.props.localTell[this.props.tellIndex].position;
-            company = this.props.localTell[this.props.tellIndex].company;
-            createdAt = this.props.localTell[this.props.tellIndex].createdAt;
-            text = this.props.localTell[this.props.tellIndex].text;
-            logo = this.props.localTell[this.props.tellIndex].logo;
-            publicid = this.props.localTell[this.props.tellIndex].publicId;
+      console.log(this.props.tell);
+      console.log(this.props.tellOrigin);
+      console.log(this.props.localTell);
+      console.log(this.props.localTellOrigin);
+      if(this.props.tell[this.props.tellIndex]){
+            id = this.props.tell[this.props.tellIndex].id;
+            name = this.props.tell[this.props.tellIndex].name;
+            position = this.props.tell[this.props.tellIndex].position;
+            company = this.props.tell[this.props.tellIndex].company;
+            createdAt = this.props.tell[this.props.tellIndex].createdAt;
+            text = this.props.tell[this.props.tellIndex].text;
+            logo = this.props.tell[this.props.tellIndex].logo;
+            publicid = this.props.tell[this.props.tellIndex].publicId;
             console.log(publicid);
       }
     return (
@@ -64,69 +68,108 @@ class HomePageTell extends React.Component {
                         <div className="homepage__tell__body">
                             <div className="homepage__tell__body__text" dir="rtl">
                                 <div className="homepage__tell__details__block">
-                                    <AutosizeInput
-                                        className="homepage__tell__details Heebo-Medium"
-                                        name="name"
-                                        data-name="tell"
-                                        data-index={id}
-                                        data-field='name'
-                                        data-action={this.props.action}
-                                        placeholder="שם ומשפחה"
-                                        value={name}
-                                        onChange={this.props.onChange}
-                                    />
+                                    {
+                                        this.props.tell[this.props.tellIndex] ?
+                                            <div className={shouldHighLight(this.props.tellOrigin[this.props.tellIndex].name, this.props.tell[this.props.tellIndex].name)}>
+                                            <AutosizeInput
+                                                className="homepage__tell__details Heebo-Medium"
+                                                name="name"
+                                                data-name="tell"
+                                                data-index={id}
+                                                data-order={this.props.tellIndex}
+                                                data-field='name'
+                                                data-action={this.props.action}
+                                                placeholder="שם ומשפחה"
+                                                value={name}
+                                                onChange={this.props.onChange}
+                                            />
+                                            </div>
+                                        :
+                                            null
+                                    }
                                     <div className="homepage__tell__details homepage__tell__details--coma Heebo-Medium">, </div>
                                </div>
                                <div className="homepage__tell__details__block">
-                                    <AutosizeInput
-                                        className="homepage__tell__details Heebo-Medium"
-                                        name="position"
-                                        data-name="tell"
-                                        data-index={id}
-                                        data-field='position'
-                                        data-action={this.props.action}
-                                        placeholder="תפקיד"
-                                        value={position}
-                                        onChange={this.props.onChange}
-                                    />
+                                    {
+                                        this.props.tell[this.props.tellIndex] ?
+                                            <div className={shouldHighLight(this.props.tellOrigin[this.props.tellIndex].position, this.props.tell[this.props.tellIndex].position)}>
+                                                <AutosizeInput
+                                                    className="homepage__tell__details Heebo-Medium"
+                                                    name="position"
+                                                    data-name="tell"
+                                                    data-index={id}
+                                                    data-order={this.props.tellIndex}
+                                                    data-field='position'
+                                                    data-action={this.props.action}
+                                                    placeholder="תפקיד"
+                                                    value={position}
+                                                    onChange={this.props.onChange}
+                                                />
+                                            </div>
+                                        :
+                                            null
+                                    }
                                 </div>
                                 <div className="homepage__tell__details__block">
-                                    <AutosizeInput
-                                        className="homepage__tell__details Heebo-Medium"
-                                        name="company"
-                                        data-name="tell"
-                                        data-index={id}
-                                        data-field='company'
-                                        data-action={this.props.action}
-                                        placeholder="חברה"
-                                        value={company}
-                                        onChange={this.props.onChange}
-                                    />
+                                    {
+                                        this.props.tell[this.props.tellIndex] ?
+                                            <div className={shouldHighLight(this.props.tellOrigin[this.props.tellIndex].company, this.props.tell[this.props.tellIndex].company)}>
+                                            <AutosizeInput
+                                                className="homepage__tell__details Heebo-Medium"
+                                                name="company"
+                                                data-name="tell"
+                                                data-index={id}
+                                                data-order={this.props.tellIndex}
+                                                data-field='company'
+                                                data-action={this.props.action}
+                                                placeholder="חברה"
+                                                value={company}
+                                                onChange={this.props.onChange}
+                                            />
+                                            </div>
+                                        :
+                                            null
+                                    }
                                     <p className="homepage__tell__details homepage__tell__details--seperator Heebo-Medium"> | </p>
-                                    <AutosizeInput
-                                        className="homepage__tell__details Heebo-Medium"
-                                        name="createdAt"
-                                        data-name="tell"
-                                        data-index={id}
-                                        data-field='createdAt'
-                                        data-action={this.props.action}
-                                        placeholder="תאריך"
-                                        value={createdAt}
-                                        onChange={this.props.onChange}
-                                    />
+                                    {
+                                        this.props.tell[this.props.tellIndex] ?
+                                            <div className={shouldHighLight(this.props.tellOrigin[this.props.tellIndex].createdAt, this.props.tell[this.props.tellIndex].createdAt)}>
+                                            <AutosizeInput
+                                                className="homepage__tell__details Heebo-Medium"
+                                                name="createdAt"
+                                                data-name="tell"
+                                                data-index={id}
+                                                data-order={this.props.tellIndex}
+                                                data-field='createdAt'
+                                                data-action={this.props.action}
+                                                placeholder="תאריך"
+                                                value={createdAt}
+                                                onChange={this.props.onChange}
+                                            />
+                                            </div>
+                                        :
+                                            null
+                                    }
                                 </div>
-                                <textarea
-                                    dir="rtl"
-                                    data-name="tell"
-                                    data-index={id}
-                                    data-order={this.props.tellIndex}
-                                    data-field='text'
-                                    data-action={this.props.action}
-                                    placeholder="טקסט המלצה"
-                                    value={text}
-                                    onChange={this.props.onChange}
-                                >
-                                </textarea>
+                                {
+                                    this.props.tell[this.props.tellIndex] ?
+                                        <div className={shouldHighLight(this.props.tellOrigin[this.props.tellIndex].text, this.props.tell[this.props.tellIndex].text)}>
+                                            <textarea
+                                                dir="rtl"
+                                                data-name="tell"
+                                                data-index={id}
+                                                data-order={this.props.tellIndex}
+                                                data-field='text'
+                                                data-action={this.props.action}
+                                                placeholder="טקסט המלצה"
+                                                value={text}
+                                                onChange={this.props.onChange}
+                                            >
+                                            </textarea>
+                                        </div>
+                                    :
+                                        null
+                                }
                             </div>
                             <img className="homepage__tell__logo desktop_inline" src={logo} />
                             <button
@@ -151,8 +194,8 @@ class HomePageTell extends React.Component {
                         </div>
                         <div className="homepage__tell__pagination__box" dir="rtl">
                             {
-                                this.props.localTell[this.props.tellIndex] ?
-                                this.props.localTell.map((event,index) => {
+                                this.props.tell[this.props.tellIndex] ?
+                                this.props.tell.map((event,index) => {
                                     return  <button disabled={String(index) === String(this.props.tellIndex)} data-index={index} key={index} className="homepage__tell__pagination__button" onClick={this.props.setTellIndex}>
                                                 <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
                                                 <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
@@ -193,8 +236,8 @@ class HomePageTell extends React.Component {
                         </div>
                         <div className="homepage__tell__pagination__box" dir="rtl">
                             {
-                                this.props.localTell[this.props.tellIndex] ?
-                                this.props.localTell.map((event,index) => {
+                                this.props.tell[this.props.tellIndex] ?
+                                this.props.tell.map((event,index) => {
                                     return  <button disabled={String(index) === String(this.props.tellIndex)} data-index={index} key={index} className="homepage__tell__pagination__button" onClick={this.props.setTellIndex}>
                                                 <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
                                                 <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />

@@ -3,6 +3,14 @@ import AnimateHeight from 'react-animate-height';
 import Textarea from 'react-expanding-textarea';
 import $ from 'jquery';
 
+const shouldHighLight = (org, update) => {
+    //console.log('in highlight')
+    if ( org === update ) {
+        return 'about__content__text Heebo-Regular edit__bg';
+    } else {
+        return 'about__content__text Heebo-Regular edit__changed__bg';
+    }
+};
 
 export default class AboutContentStrip extends React.Component {
     
@@ -399,7 +407,7 @@ export default class AboutContentStrip extends React.Component {
                     { 
                         this.props.isAuthenticated === true ? 
                             <Textarea
-                                className="about__content__text Heebo-Regular"
+                                className={shouldHighLight(this.props.aboutpageOrigin[this.props.index].text, this.props.aboutpage[this.props.index].text)}
                                 defaultValue={this.props.aboutpage[this.props.index].text}
                                 data-field="text"
                                 data-action='setString'
@@ -408,7 +416,6 @@ export default class AboutContentStrip extends React.Component {
                                 placeholder="תוכן"
                                 onChange={ this.props.setData }
                             />
-
                         :
                              <Textarea
                                 className="about__content__text Heebo-Regular"

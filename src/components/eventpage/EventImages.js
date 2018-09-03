@@ -7,7 +7,7 @@ const EventImages = (props) => (
         <div className="events__events__box events__events__box__gallery desktop">
             { 
                 props.isAuthenticated === true ? 
-                    <div className="backoffice__events__events__buttons">
+                    <div className="backoffice__events__images__buttons">
                         <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
                             <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
                         </button>
@@ -43,7 +43,7 @@ const EventImages = (props) => (
         <div className="events__events__box events__events__box__gallery mobile">
             { 
                     props.isAuthenticated === true ? 
-                        <div className="backoffice__events__events__buttons">
+                        <div className="backoffice__events__images__buttons">
                             <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
                                 <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
                             </button>
