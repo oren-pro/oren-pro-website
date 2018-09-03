@@ -470,7 +470,7 @@ class HomePageCarousel extends React.Component {
                   controls={false}
                   keyboard={false}
                   ride='carousel'
-                  interval='5000'
+                  interval='50000'
                   items={this.props.media === 'mobile' ? this.state.mobileImages : this.state.desktopImages}
               />
               :
