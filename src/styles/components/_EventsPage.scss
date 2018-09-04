@@ -348,6 +348,28 @@ $slideCrouselControlsTransitionStyle: ease-out;
   }
 }
 
+@media all and (-ms-high-contrast:none){
+    
+    .carousel__fade .carousel-inner {
+        .carousel-item {
+            top: -50%;
+
+            &:first-of-type {
+            margin-top: 50%;
+            }
+        }
+    }
+    *::-ms-backdrop, .carousel__fade .carousel-inner {
+        .carousel-item {
+            top: -50%;
+
+            &:first-of-type {
+            margin-top: 50%;
+            }
+        }
+    }
+}
+
 
 
 @media (max-width: $tabletMaxWidth) {
