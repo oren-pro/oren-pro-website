@@ -72,6 +72,7 @@
     "uuid": "^3.2.1",
     "validator": "8.0.0",
     "webpack": "^4.6.0",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^2.0.15",
     "xoauth2": "^1.2.0"
   },
