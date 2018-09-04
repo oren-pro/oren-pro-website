@@ -15,7 +15,7 @@ module.exports = (env) => {
     const CSSExtract = new ExtractTextPlugin('styles.css');
     
     return {
-        entry: ['babel-polyfill', './src/app.js'],
+        entry: './src/app.js',
         devtool: 'inline-source-map',
         output: {
             filename: 'bundle.js',
