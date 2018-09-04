@@ -464,15 +464,15 @@ class HomePageCarousel extends React.Component {
 
             {
               this.props.desktopGallery && this.props.mobileGallery ?
-                <UncontrolledCarousel
-                  slide={true}
+                <UncontrolledCarousel className="carousel__fade"
+                  slide={false}
                   pause={false}
                   controls={false}
                   keyboard={false}
                   ride='carousel'
                   interval='5000'
                   items={this.props.media === 'mobile' ? this.state.mobileImages : this.state.desktopImages}
-              />
+                />
               :
               null
             }
