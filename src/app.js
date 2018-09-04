@@ -42,8 +42,9 @@ const renderApp = () => {
 };
 
 console.log(navigator.userAgent);
-if (navigator.userAgent.match('/msie/i') || navigator.userAgent.match('/trident/i') ){
-    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}>Loading...</div>, document.getElementById('app'));
+if (navigator.userAgent.match('msie') || navigator.userAgent.match('trident') ){
+    console.log("found");
+    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
 } else {
     ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
 }
