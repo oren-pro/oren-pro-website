@@ -2,7 +2,7 @@ import React from 'react';
 import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import AutosizeInput from 'react-input-autosize';
-import { Button, Modal as ModalRB, Popover, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Button, Modal as ModalRB } from "react-bootstrap";
 import Modal from 'react-responsive-modal';
 import ContactStrip from '../components/contactpage/ContactStrip';
 import CustomersStrip from '../components/common/CustomersStrip';
@@ -67,11 +67,12 @@ class EventPage extends React.Component {
             eventShowLines: 1,
             eventNameOrigin: '',
             eventTextOrigin: '',
-            eventShowLinesOrigin: 5,
+            eventShowLinesOrigin: 1,
             eventId: '',
             itemLocation: 0,
             slideGalleryModalIsOpen: false,
-            newItemNameModalIsOpen: false,
+            itemNameModalAlert: '',
+            itemNameModalIsOpen: false,
             subcategoryId: '',
             subcategoryName: '',
             imagesOrigin: [],
@@ -155,7 +156,10 @@ class EventPage extends React.Component {
         let eventText = '';
         let eventShowLines = "";
         let seo = {};
+        console.log("name");
+        console.log(eventName);
         items.map((item) => {
+            //console.log("in map");
             console.log(item.name);
             if (eventName === item.name) {
                 eventId = item.id;
@@ -238,19 +242,22 @@ class EventPage extends React.Component {
             }
             stripItems.splice(3, stripItems.length-3);
         }
-
-        this.setState({
-            eventId,
-            eventText,
-            eventTextOrigin: eventText,
-            eventShowLines,
-            eventShowLinesOrigin: eventShowLines,
-            itemLocation,
-            nextItem,
-            prevItem,
-            currentItems,
-            stripItems
-        });
+        console.log(eventText);
+        console.log(eventShowLines);
+        if(eventShowLines) {
+            this.setState({
+                eventId,
+                eventText,
+                eventTextOrigin: eventText,
+                eventShowLines,
+                eventShowLinesOrigin: eventShowLines,
+                itemLocation,
+                nextItem,
+                prevItem,
+                currentItems,
+                stripItems
+            });
+        }
 
         this.props.startSetImages(eventId, this.props.categoryId, itemLocation).then((images)=> {
             images.sort((a, b) => {
@@ -353,49 +360,66 @@ class EventPage extends React.Component {
                 }
                 
 
-            });
-        });
-        const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ");
-        console.log(eventName);
-        this.setState({
-            eventName,
-            eventNameOrigin: eventName
-        });
-        const categoryId = this.props.categoryId;
-        if (!this.props.eventsObject[this.props.categoryId]) {
-            this.props.startSetSubcategories(categoryId).then((subCategories)=> {
-                //console.log("from 1");
-                //console.log(subCategories);
+
+
+                const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ");
+                //console.log(eventName);
                 this.setState({
-                    subCategories
+                    eventName,
+                    eventNameOrigin: eventName
                 });
-                this.props.startSetItems(categoryId).then((items)=> {
-                    this.setState({
-                        items
+                const categoryId = this.props.categoryId;
+                if (!this.props.eventsObject[this.props.categoryId]) {
+                    this.props.startSetSubcategories(categoryId).then((subCategories)=> {
+                        //console.log("from 1");
+                        //console.log(subCategories);
+                        this.setState({
+                            subCategories
+                        });
+                        this.props.startSetItems(categoryId).then((items)=> {
+                            this.setState({
+                                items
+                            });
+                            this.getEventId(eventName, this.state.items);
+                        });
                     });
-                    this.getEventId(eventName, this.state.items);
-                });
+                } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
+                    
+                    this.props.startSetItems(categoryId).then((items)=> {
+                        //console.log("from 2");
+                        this.setState({
+                            subCategories: this.props.eventsObject[this.props.categoryId],
+                            items
+                        });
+                        this.getEventId(eventName, this.state.items);
+                    });
+                } else {
+                    this.props.startSetItems(categoryId).then((items)=> {
+                        //console.log("from 3");
+                        //console.log(this.props.eventsObject[this.props.categoryId+'items']);
+                        this.setState({
+                            subCategories: this.props.eventsObject[this.props.categoryId],
+                            items
+                        });
+                        this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
+                    });
+                    
+                }
+
+
+
+
+
+
+
+
+
+
+
+
             });
-        } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
-            
-            this.props.startSetItems(categoryId).then((items)=> {
-                //console.log("from 2");
-                this.setState({
-                    subCategories: this.props.eventsObject[this.props.categoryId],
-                    items
-                });
-                this.getEventId(eventName, this.state.items);
-            });
-        } else {
-            //console.log(this.props.eventsObject[this.props.categoryId]);
-            //console.log(this.props.eventsObject[this.props.categoryId+'items']);
-            //console.log("from 3");
-            this.setState({
-                subCategories: this.props.eventsObject[this.props.categoryId],
-                items: this.props.eventsObject[this.props.categoryId+'items']
-            });
-            this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
-        }
+        });
+        
     }
 
     componentDidMount = () => {
@@ -573,28 +597,48 @@ class EventPage extends React.Component {
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)
 
     onUpdateEvent = () => {
-        //console.log('in  click');
-        const eventName = JSON.parse(JSON.stringify(this.state.eventName));
-        const eventText = JSON.parse(JSON.stringify(this.state.eventText));
-        const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
-        const eventId = JSON.parse(JSON.stringify(this.state.eventId));
-        this.props.startEditEvent(eventName, eventText, eventShowLines, eventId);
-        let gotoNewLocation = false;
-        if(eventName !== this.state.eventNameOrigin) {
-            gotoNewLocation = true;
-        }
-        this.setState(() => ({
-            eventName,
-            eventText,
-            eventShowLines,
-            eventNameOrigin: eventName,
-            eventTextOrigin: eventText,
-            eventShowLinesOrigin: eventShowLines
-        }));
-        window.removeEventListener("beforeunload", this.unloadFunc);
-        if(gotoNewLocation === true) {
-             this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_")}`);
-             this.setData();
+        let nameFlag = false;
+        this.props.eventsObject.allEvents.map((event, index) => {
+            if(event.name === this.state.eventName && this.state.eventName !== this.state.eventNameOrigin) {
+                nameFlag = true;
+            }
+        })
+
+        if(nameFlag === true) {
+            this.setState({
+                itemNameModalAlert: 'שם אירוע קיים במערכת',
+                itemNameModalIsOpen: true
+            });
+        } else if (this.state.eventName === '') {
+            this.setState({
+                itemNameModalAlert: 'שם אירוע חייב לכלול אות אחת לפחות',
+                itemNameModalIsOpen: true
+            });
+        } else {
+            const eventName = JSON.parse(JSON.stringify(this.state.eventName));
+            const eventText = JSON.parse(JSON.stringify(this.state.eventText));
+            const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
+            const eventId = JSON.parse(JSON.stringify(this.state.eventId));
+            this.props.startEditEvent(eventName, eventText, eventShowLines, eventId).then(() => {
+                let gotoNewLocation = false;
+                if(eventName !== this.state.eventNameOrigin) {
+                    gotoNewLocation = true;
+                }
+                this.setState(() => ({
+                    eventName,
+                    eventText,
+                    eventShowLines,
+                    eventNameOrigin: eventName,
+                    eventTextOrigin: eventText,
+                    eventShowLinesOrigin: eventShowLines
+                }));
+                window.removeEventListener("beforeunload", this.unloadFunc);
+                if(gotoNewLocation === true) {
+                    
+                    this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_")}`);
+                    this.setData();
+                }
+            });
         }
     }
 
@@ -935,6 +979,14 @@ class EventPage extends React.Component {
         //console.log(this.state.seoEventModalIsOpen);
     }
 
+    onToggleItemNameModal = () => {
+        //console.log('in seo');
+        this.setState({
+            itemNameModalIsOpen: !this.state.itemNameModalIsOpen
+        });
+        //console.log(this.state.seoEventModalIsOpen);
+    }
+
     onSeoTitleChange = (e) => {
         const title = e.target.value;
         const seo = this.state.seo;
@@ -1033,6 +1085,13 @@ class EventPage extends React.Component {
                             <br />
                         </div>
                         <Button bsStyle="success" onClick={this.updateEventSeo}>עדכון</Button>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.itemNameModalIsOpen} onClose={this.onToggleItemNameModal} center dir="rtl">
+                    <div className="backoffice__seo__modal">
+                        <h4 className="Heebo-Regular">{this.state.itemNameModalAlert}</h4>
+                        <Button bsStyle="success" onClick={this.onToggleItemNameModal}>הבנתי</Button>
                     </div>
                 </Modal>
 

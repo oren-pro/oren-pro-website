@@ -671,6 +671,54 @@ class EventsPage extends React.Component {
         this.setState({
             subCategories
         });
+        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+            //console.log("remove listener");
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        } else {
+            //console.log("add listener");
+            window.addEventListener("beforeunload", this.unloadFunc);
+        }
+    }
+
+    onSubcategoryNameBlur = (e) => {
+        let nameFlag = false;
+        let oldName = '';
+        const allSubCategories = this.state.allSubCategories;
+        const subCategories = this.state.subCategories;
+        console.log(subCategories);
+        const subCategoryNewName = e.target.value;
+        const subCategoryId = e.target.dataset.id;
+        allSubCategories.map((subcategory, index) => {
+            if (subcategory.id === subCategoryId) {
+                oldName = subcategory.name;
+            }
+        })
+        allSubCategories.map((subcategory, index) => {
+            if (subcategory.name === subCategoryNewName && subcategory.id !== subCategoryId) {
+                nameFlag = true;
+            }
+        })
+        if (nameFlag === true) {
+            alert("שם תת-קטגוריה קיים במערכת");
+            e.target.value = oldName;
+            subCategories.map((subcategory, index) => {
+                if (subcategory.id === subCategoryId) {
+                    subCategories[index].name = oldName;
+                    this.setState({
+                        subCategories
+                    });
+                }
+            })
+            //e.target.focus();
+        } else {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                //console.log("remove listener");
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                //console.log("add listener");
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
+        }
     }
 
     onSubcategoryOrderBlur = (e) => {
@@ -1809,6 +1857,7 @@ class EventsPage extends React.Component {
                                                                 placeholder="שם תת קטגוריה"
                                                                 value={this.state.subCategories[index].name}
                                                                 onChange={this.onSubategoryNameChange}
+                                                                onBlur={this.onSubcategoryNameBlur}
                                                             />
                                                         </div>
                                             })

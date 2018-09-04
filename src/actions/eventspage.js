@@ -141,6 +141,7 @@ export const startSetAllEvents = () => {
                     ...childSnapshot.val()
                 });
             });
+            //console.log(events);
             dispatch(setAllEvents(events));
         });
     };
