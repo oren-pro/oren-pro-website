@@ -42,7 +42,7 @@ const renderApp = () => {
 };
 
 console.log(navigator.userAgent);
-if (navigator.userAgent.match('msie') || navigator.userAgent.match('trident') ){
+if (navigator.userAgent.match('msie') || navigator.userAgent.match('Trident') ){
     console.log("found");
     ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
 } else {
