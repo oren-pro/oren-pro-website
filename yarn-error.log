@@ -50,7 +50,6 @@ npm manifest:
       "hoist-non-react-statics": "^2.5.5",
       "jquery": "^3.3.1",
       "lodash": "^4.17.10",
-      "moment": "^2.22.1",
       "node-sass": "^4.8.3",
       "nodemailer": "^4.6.7",
       "nodemailer-smtp-transport": "^2.7.4",
@@ -69,6 +68,7 @@ npm manifest:
       "react-facebook-share-link": "^1.0.4",
       "react-helmet": "^5.2.0",
       "react-input-autosize": "^2.2.1",
+      "react-loading": "^2.0.3",
       "react-modal": "^3.4.4",
       "react-photo-gallery": "^6.0.28",
       "react-redux": "^5.0.7",
@@ -81,9 +81,9 @@ npm manifest:
       "redux-mock-store": "^1.5.1",
       "redux-thunk": "^2.3.0",
       "sass-loader": "^7.0.1",
+      "sendgrid": "^5.2.3",
       "sendmail": "^1.4.1",
       "slick-carousel": "^1.8.1",
-      "sparkpost": "^2.1.2",
       "style-loader": "^0.21.0",
       "uuid": "^3.2.1",
       "validator": "8.0.0",
@@ -284,7 +284,7 @@ Lockfile:
     version "5.6.0"
     resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.6.0.tgz#572bedb377a1c61b7a289e72b8c5cfeb7baaf0bf"
   
-  addressparser@1.0.1:
+  addressparser@1.0.1, addressparser@~1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
   
@@ -569,6 +569,64 @@ Lockfile:
   async-limiter@~1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
+  
+  async.ensureasync@^0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.ensureasync/-/async.ensureasync-0.5.2.tgz#c3c7e4a4e9b31d96875d56b8504598446e1e305d"
+    dependencies:
+      async.util.ensureasync "0.5.2"
+  
+  async.queue@^0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.queue/-/async.queue-0.5.2.tgz#8d5d90812e1481066bc0904e8cc1712b17c3bd7c"
+    dependencies:
+      async.util.queue "0.5.2"
+  
+  async.util.arrayeach@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.arrayeach/-/async.util.arrayeach-0.5.2.tgz#58c4e98028d55d69bfb05aeb3af44e0a555a829c"
+  
+  async.util.ensureasync@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.ensureasync/-/async.util.ensureasync-0.5.2.tgz#10907f2cbd067a061f99ae6d22e08ced30db0d68"
+    dependencies:
+      async.util.restparam "0.5.2"
+      async.util.setimmediate "0.5.2"
+  
+  async.util.isarray@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.isarray/-/async.util.isarray-0.5.2.tgz#e62dac8f2636f65875dcf7521c2d24d0dfb2bbdf"
+  
+  async.util.map@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.map/-/async.util.map-0.5.2.tgz#e588ef86e0b3ab5f027d97af4d6835d055ca69d6"
+  
+  async.util.noop@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.noop/-/async.util.noop-0.5.2.tgz#bdd62b97cb0aa3f60b586ad148468698975e58b9"
+  
+  async.util.onlyonce@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.onlyonce/-/async.util.onlyonce-0.5.2.tgz#b8e6fc004adc923164d79e32f2813ee465c24ff2"
+  
+  async.util.queue@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.queue/-/async.util.queue-0.5.2.tgz#57f65abe1a3cdf273d31abd28ab95425f8222ee5"
+    dependencies:
+      async.util.arrayeach "0.5.2"
+      async.util.isarray "0.5.2"
+      async.util.map "0.5.2"
+      async.util.noop "0.5.2"
+      async.util.onlyonce "0.5.2"
+      async.util.setimmediate "0.5.2"
+  
+  async.util.restparam@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.restparam/-/async.util.restparam-0.5.2.tgz#03efebf3c0277b97220e525aba750f5e04fc80cd"
+  
+  async.util.setimmediate@0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/async.util.setimmediate/-/async.util.setimmediate-0.5.2.tgz#2812ebabf2a58027758d4bc7793d1ccfaf10255f"
   
   async@^1.4.0, async@^1.5.0, async@^1.5.2:
     version "1.5.2"
@@ -1531,6 +1589,10 @@ Lockfile:
   bootstrap@^4.1.1:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
+  
+  bottleneck@^1.12.0:
+    version "1.16.0"
+    resolved "https://registry.yarnpkg.com/bottleneck/-/bottleneck-1.16.0.tgz#d6ce13808527afc80b69092f15606655e5b21f1a"
   
   bowser@^1.7.3:
     version "1.9.3"
@@ -2791,7 +2853,7 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
   
-  encoding@^0.1.11:
+  encoding@^0.1.11, encoding@^0.1.12, encoding@~0.1.12:
     version "0.1.12"
     resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
     dependencies:
@@ -2911,7 +2973,7 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   
-  escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
+  escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5, escape-string-regexp@~1.0.5:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   
@@ -5241,6 +5303,10 @@ Lockfile:
     version "4.3.0"
     resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   
+  lodash.chunk@^4.2.0:
+    version "4.2.0"
+    resolved "https://registry.yarnpkg.com/lodash.chunk/-/lodash.chunk-4.2.0.tgz#66e5ce1f76ed27b4303d8c6512e8d1216e8106bc"
+  
   lodash.clonedeep@^4.3.2:
     version "4.5.0"
     resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
@@ -5381,6 +5447,15 @@ Lockfile:
     dependencies:
       buildmail "3.10.0"
       libmime "2.1.0"
+  
+  mailparser@^0.6.1:
+    version "0.6.2"
+    resolved "https://registry.yarnpkg.com/mailparser/-/mailparser-0.6.2.tgz#03c486039bdf4df6cd3b6adcaaac4107dfdbc068"
+    dependencies:
+      encoding "^0.1.12"
+      mime "^1.3.4"
+      mimelib "^0.3.0"
+      uue "^3.1.0"
   
   make-dir@^1.0.0, make-dir@^1.1.0:
     version "1.2.0"
@@ -5549,9 +5624,20 @@ Lockfile:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   
+  mime@^1.3.4:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
+  
   mime@^2.1.0, mime@^2.2.0:
     version "2.3.1"
     resolved "https://registry.yarnpkg.com/mime/-/mime-2.3.1.tgz#b1621c54d63b97c47d3cfe7f7215f7d64517c369"
+  
+  mimelib@^0.3.0:
+    version "0.3.1"
+    resolved "https://registry.yarnpkg.com/mimelib/-/mimelib-0.3.1.tgz#787add2415d827acb3af6ec4bca1ea9596418853"
+    dependencies:
+      addressparser "~1.0.1"
+      encoding "~0.1.12"
   
   mimic-fn@^1.0.0:
     version "1.2.0"
@@ -5639,7 +5725,7 @@ Lockfile:
     dependencies:
       minimist "0.0.8"
   
-  moment@>=1.6.0, moment@^2.22.1:
+  moment@>=1.6.0:
     version "2.22.1"
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
   
@@ -7066,6 +7152,10 @@ Lockfile:
     version "3.0.4"
     resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   
+  react-loading@^2.0.3:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
+  
   react-minimalist-portal@^2.3.1:
     version "2.3.1"
     resolved "https://registry.yarnpkg.com/react-minimalist-portal/-/react-minimalist-portal-2.3.1.tgz#4853e3f48a74a32c1b8767601887cdf7941eeba3"
@@ -7839,6 +7929,22 @@ Lockfile:
       on-finished "~2.3.0"
       range-parser "~1.2.0"
       statuses "~1.4.0"
+  
+  sendgrid-rest@^2.3.0:
+    version "2.4.0"
+    resolved "https://registry.yarnpkg.com/sendgrid-rest/-/sendgrid-rest-2.4.0.tgz#88e11a86375ec0e14b5faf1b4a0a191639ce90ef"
+  
+  sendgrid@^5.2.3:
+    version "5.2.3"
+    resolved "https://registry.yarnpkg.com/sendgrid/-/sendgrid-5.2.3.tgz#37cd28ddd93fca2d3fa7dda10a323b1f43ffecfc"
+    dependencies:
+      async.ensureasync "^0.5.2"
+      async.queue "^0.5.2"
+      bottleneck "^1.12.0"
+      debug "^2.2.0"
+      lodash.chunk "^4.2.0"
+      mailparser "^0.6.1"
+      sendgrid-rest "^2.3.0"
   
   sendmail@^1.4.1:
     version "1.4.1"
@@ -8775,6 +8881,13 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   
+  uue@^3.1.0:
+    version "3.1.2"
+    resolved "https://registry.yarnpkg.com/uue/-/uue-3.1.2.tgz#e99368414e87200012eb37de4dbaebaa1c742ad2"
+    dependencies:
+      escape-string-regexp "~1.0.5"
+      extend "~3.0.0"
+  
   uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0, uuid@^3.2.1:
     version "3.2.1"
     resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
@@ -9317,7 +9430,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 127
+  Exit code: 1
   Command: sh
   Arguments: -c webpack-dev-server --mode development
   Directory: /Users/moshkainer/projects/oren-pro-website
