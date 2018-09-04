@@ -352,7 +352,7 @@ $slideCrouselControlsTransitionStyle: ease-out;
     
     .carousel__fade .carousel-inner {
         .carousel-item {
-            top: -50%;
+            top: 0;
 
             &:first-of-type {
             margin-top: 50%;
@@ -361,7 +361,7 @@ $slideCrouselControlsTransitionStyle: ease-out;
     }
     *::-ms-backdrop, .carousel__fade .carousel-inner {
         .carousel-item {
-            top: -50%;
+            top: 0;
 
             &:first-of-type {
             margin-top: 50%;
