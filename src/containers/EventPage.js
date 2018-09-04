@@ -44,6 +44,7 @@ import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import { isEqual } from "lodash";
 
 
+
 class EventPage extends React.Component {
     constructor(props) {
         super(props);

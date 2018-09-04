@@ -24,6 +24,7 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import { firebase } from './firebase/firebase';
 
+
 const store = configureStore();
 
 const jsx = (
@@ -40,7 +41,13 @@ const renderApp = () => {
     }
 };
 
-ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
+console.log(navigator.userAgent);
+if (navigator.userAgent.match('/msie/i') || navigator.userAgent.match('/trident/i') ){
+    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}>Loading...</div>, document.getElementById('app'));
+} else {
+    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
+}
+
 
 store.dispatch(startSetCategories()).then(() => {
     store.dispatch(startSetDesktopGallery()).then(() => {
@@ -51,19 +58,14 @@ store.dispatch(startSetCategories()).then(() => {
         });
     });
 });
-//renderApp();
+
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        console.log('login from onAuthStateChange');
         store.dispatch(login(user.uid));
         store.dispatch(startSetAllSubcategories()).then(() => {
             store.dispatch(startSetAllEvents());
         });
-        //renderApp();
     } else {
-        //console.log('logout from onAuthStateChange');
         store.dispatch(logout());
-        //renderApp();
-        
     }
 });
