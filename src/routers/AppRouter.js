@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactLoading from "react-loading";
-import Loadable from 'react-loadable';
+//import Loadable from 'react-loadable';
 //import Loading from './Loading';
 
 let loadImage = "";
