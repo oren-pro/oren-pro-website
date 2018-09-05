@@ -42,9 +42,9 @@ app.use(cors({
 }));
 
 
-var compression = require('compression');
+//var compression = require('compression');
 
-app.use(compression());
+//app.use(compression());
 
 const publicPath = path.join(__dirname, '../', 'public');
 
