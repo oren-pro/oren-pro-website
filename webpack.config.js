@@ -69,10 +69,9 @@ module.exports = (env) => {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
-                    include: /\/includes/,
                     minify(file, sourceMap) {
-                        // https://github.com/mishoo/UglifyJS2#minify-options
-                        const uglifyJsOptions = { /* your `uglify-js` package options */ };
+                        
+                        const uglifyJsOptions = { include: /\/includes/ };
 
                         if (sourceMap) {
                             uglifyJsOptions.sourceMap = {
