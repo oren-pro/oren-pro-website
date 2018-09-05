@@ -1,12 +1,58 @@
 import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import AboutPage from '../containers/AboutPage';
-import ContactPage from '../containers/ContactPage';
-import DifferentPage from '../containers/DifferentPage';
-import EventsPage from '../containers/EventsPage';
-import EventPage from '../containers/EventPage';
-import HomePage from '../containers/HomePage';
+
+import Loadable from 'react-loadable';
+//import Loading from './Loading';
+
+const AboutPage = Loadable({
+  loader: () => import('../containers/AboutPage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const ContactPage = Loadable({
+  loader: () => import('../containers/ContactPage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const DifferentPage = Loadable({
+  loader: () => import('../containers/DifferentPage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const EventsPage = Loadable({
+  loader: () => import('../containers/EventsPage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const EventPage = Loadable({
+  loader: () => import('../containers/EventPage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const HomePage = Loadable({
+  loader: () => import('../containers/HomePage'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+//import AboutPage from '../containers/AboutPage';
+//import ContactPage from '../containers/ContactPage';
+//import DifferentPage from '../containers/DifferentPage';
+//import EventsPage from '../containers/EventsPage';
+//import EventPage from '../containers/EventPage';
+//import HomePage from '../containers/HomePage';
 import NotFoundPage from '../containers/NotFoundPage';
 import LoginPage from '../components/LoginPage';
 import PrivateRoute from './PrivateRoute';

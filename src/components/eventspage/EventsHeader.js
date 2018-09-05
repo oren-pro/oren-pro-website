@@ -29,18 +29,7 @@ class EventsHeader extends React.Component {
                 }
                 {
                     this.props.isAuthenticated === true ?
-                        <AutosizeInput
-                            className={shouldHighLight(this.props.categoryOrigin.name, this.props.categoryName)}
-                            name="name"
-                            data-name="name"
-                            data-index={this.props.categoryId}
-                            data-field='name'
-                            data-action={this.props.action}
-                            placeholder="שם קטגוריה"
-                            value={this.props.categoryName}
-                            onChange={this.props.onChange}
-                            dir="rtl"
-                        />
+                        <h3 className="events__header Heebo-Medium">{this.props.categoryName}</h3>
                     :
                         <h3 className="events__header Heebo-Medium">{this.props.categoryName}</h3>
                 }
@@ -54,3 +43,19 @@ class EventsHeader extends React.Component {
 }
 
 export default EventsHeader;
+
+
+
+
+// <AutosizeInput
+//                             className={shouldHighLight(this.props.categoryOrigin.name, this.props.categoryName)}
+//                             name="name"
+//                             data-name="name"
+//                             data-index={this.props.categoryId}
+//                             data-field='name'
+//                             data-action={this.props.action}
+//                             placeholder="שם קטגוריה"
+//                             value={this.props.categoryName}
+//                             onChange={this.props.onChange}
+//                             dir="rtl"
+//                         />

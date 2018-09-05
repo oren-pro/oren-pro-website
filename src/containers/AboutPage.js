@@ -116,12 +116,8 @@ class AboutPage extends React.Component {
 
 
     componentDidMount = () => {
-        console.log("did mount");
         window.addEventListener('scroll', this.handleScroll);
-
         this.props.startSetAboutPage().then(()=> {
-            console.log(this.props.aboutpage);
-
             let aboutpage= [];
             const obj = JSON.parse(JSON.stringify(this.props.aboutpage));
             if ( obj ){
@@ -132,7 +128,6 @@ class AboutPage extends React.Component {
                     } else {
                         keyedObj = {index: String(key), ...obj[key]};
                     }
-                    
                     aboutpage.push(keyedObj);
                 });
 
@@ -217,11 +212,9 @@ class AboutPage extends React.Component {
 
 
     onToggleAboutpageSeo = () => {
-        console.log('in seo');
         this.setState({
             seoAboutpageModalIsOpen: !this.state.seoAboutpageModalIsOpen
         });
-        console.log(this.state.seoAboutpageModalIsOpen);
     }
 
     onSeoTitleChange = (e) => {
@@ -262,9 +255,6 @@ class AboutPage extends React.Component {
         const { dataset } = e.target;
         const { id } = dataset;
         const eventId = this.state.eventId;
-        //console.log(this.state.images);
-        //console.log(Number(this.state.images.length)+1);
-        //console.log( id );
         var myUploadWidget;
         myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
@@ -289,8 +279,6 @@ class AboutPage extends React.Component {
                     console.log(error);
                 }
                 if (result.event === "success") {
-                    console.log(result);
-                    console.log(result.info.public_id)
                     const order = Number(this.state.images.length)+1;
                     const image = {
                         publicId: result.info.public_id,
@@ -302,7 +290,6 @@ class AboutPage extends React.Component {
                     };
                         
                     this.props.startAddAboutImage(image, order).then((images)=> {
-                        console.log(images);
                         images.sort((a, b) => {
                             return a.order > b.order ? 1 : -1;
                         });
@@ -365,11 +352,6 @@ class AboutPage extends React.Component {
         const imageId = e.target.dataset.id;
         const index = e.target.dataset.index;
         const order = e.target.dataset.order;
-
-        console.log(imageId);
-        console.log(index);
-        console.log(order);
-
         let newOrder = e.target.value;
         if (newOrder > galleryImages.length) {
             newOrder = galleryImages.length;
@@ -379,7 +361,6 @@ class AboutPage extends React.Component {
         }
         const oldOrder = Number(e.target.dataset.index)+1;
         const id = e.target.dataset.id;
-
         if ( Number(newOrder) > Number(oldOrder) ) {
             for (let i = 0; i < galleryImages.length; i++) {
                 if (id !== galleryImages[i].id) {
@@ -390,7 +371,6 @@ class AboutPage extends React.Component {
             }
         } else if ( Number(newOrder) < Number(oldOrder) ) {
             for (let i = 0; i < galleryImages.length; i++) {
-                
                 if (id !== galleryImages[i].id) {
                     if (galleryImages[i].order < oldOrder && galleryImages[i].order >= newOrder) {
                         galleryImages[i].order = Number(galleryImages[i].order)+1;
@@ -398,21 +378,13 @@ class AboutPage extends React.Component {
                 }
             }
         }
-
-
         galleryImages.sort((a, b) => {
             return a.order > b.order ? 1 : -1;
         });
-
-        console.log('galleryImages');
-        console.log(galleryImages);
         galleryImages.map((image, index) => {
             image.order = Number(index)+1;
             images.push(image.image);
         });
-        // console.log('images');
-        // console.log(images);
-
         this.setState({
             images,
             galleryImages
@@ -425,7 +397,6 @@ class AboutPage extends React.Component {
         const imageId = e.target.dataset.id;
         const index = e.target.dataset.index;
         const order = e.target.dataset.order;
-        
         let newOrder = e.target.value;
         if (newOrder > galleryImages.length) {
             newOrder = galleryImages.length;
@@ -433,9 +404,7 @@ class AboutPage extends React.Component {
         if (newOrder < 1) {
             newOrder = 1;
         }
-       
         galleryImages[index].order = Number(newOrder);
-        
         this.setState({
             galleryImages
         });
@@ -447,37 +416,28 @@ class AboutPage extends React.Component {
         }
     }
 
-
-
     updateImages = () => {
         const aboutpage = this.state.aboutpage;
         const galleryImages = this.state.galleryImages;
         const images = this.state.images;
-        
         const fbImages = {};
         galleryImages.map((image, index) => {
             fbImages[image.id] = image;
         })
-
         aboutpage[aboutpage.length-2] = fbImages;
-        console.log(aboutpage);
         this.setState({
             aboutpage
         });
-
         this.onUpdateAboutPage();
     }
 
     onDeleteImage = (e) => {
-        // console.log(e.target.dataset.publicid);
-        // console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicid = e.target.dataset.publicid;
         const galleryImages = [];
         const galleryImagesOld = this.state.galleryImages;
         const images = [];
-
         for (let i = 0; i < galleryImagesOld.length; i++) {
             if (id !== galleryImagesOld[i].id) {
                 if (galleryImagesOld[i].order > order) {
@@ -486,51 +446,33 @@ class AboutPage extends React.Component {
                 galleryImages.push(galleryImagesOld[i]);
             }
         }
-
         galleryImages.map((image, index) => {
             image.order = Number(index)+1;
             images.push(image);
         });
-
         const fbImages = {};
         images.map((image, index) => {
             fbImages[image.id] = image;
         })
         fbImages[id] = null;
-
-         console.log(galleryImages);
-         console.log(images);
-         console.log(fbImages);
         this.props.startDeleteAboutImage( fbImages, images, publicid );
-
         const slideGalleryImages = [];
         images.map((image) => {
             let imageWidth = image.width;
             let imageHeight = image.height;
             let ratioWidth = 1;
             let ratioHeight = 1;
-            //console.log(imageHeight);
-            //console.log(imageWidth);
-            
             if (imageHeight < 800 && imageWidth < 1000) {
                 ratioHeight = 800/imageHeight;
                 ratioWidth = 1000/imageWidth;
                 if (ratioHeight > ratioWidth) {
-                    //console.log('1');
                     imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 } else {
-                    //console.log('2');
                     imageHeight = ratioWidth*imageHeight;
                     imageWidth = ratioWidth*imageWidth;
                 }
             }
-
-            // console.log(ratioHeight);
-            // console.log(ratioWidth);
-            // console.log(imageHeight);
-            // console.log(imageWidth);
-
             return slideGalleryImages.push({
                 publicId: image.publicId,
                 id: image.id,
@@ -552,23 +494,13 @@ class AboutPage extends React.Component {
     }
 
     onOpenSlideGallery = (e) => {
-        //console.log(e.target.dataset.id);
-        //console.log(e.target.dataset.order);
         const currentImage = e.target.dataset.order-1;
-        //console.log(currentImage);
         this.onToggleSlideGallery(e, currentImage);
     }
 
     onToggleSlideGallery = (e, currentImage = this.state.currentImage) => {
-        //console.log(currentImage);
-        //console.log(this.state.slideGalleryImages);
-        //const width = (100-this.state.slideGalleryImages[currentImage].width/10)/2+3.5;
-        //const crouselControlsRight = {right: `${width}rem`}
-        //const crouselControlsWidth = $('#crouselControlsRight').width();
         const crouselControlsWidth = 140;
-        //console.log(crouselControlsWidth);
         const width = this.state.slideGalleryImages[currentImage].width/2-crouselControlsWidth/2-23;
-        //console.log(width);
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
         this.setState({
             crouselControlsRight,
@@ -578,8 +510,6 @@ class AboutPage extends React.Component {
     }
 
     onCurrentImageChange = (currentImage) => {
-        //console.log('onCurrentImageChange');
-        //console.log(currentImage);
         this.setState({
             currentImage
         });
@@ -588,7 +518,6 @@ class AboutPage extends React.Component {
     onNext = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === this.state.slideGalleryImages.length - 1 ? 0 : this.state.currentImage + 1;
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -603,7 +532,6 @@ class AboutPage extends React.Component {
     previous = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === 0 ? this.state.slideGalleryImages.length - 1 : this.state.currentImage - 1;
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -614,15 +542,10 @@ class AboutPage extends React.Component {
     }
 
     onExiting = () => {
-        //console.log('onExiting');
         this.animating = true;
     }
 
     onExited = () => {
-        //console.log('onExited');
-        //const width = (100-this.state.slideGalleryImages[this.state.currentImage].width/10)/2+3.5;
-        //const crouselControlsRight = {right: `${width}rem`, opacity: 1};
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[this.state.currentImage].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -637,64 +560,74 @@ class AboutPage extends React.Component {
         return (
             <div className="container-fluid">
 
-                <Prompt
-                    style={{background: "red"}}
-                    when={!isEqual(this.state.aboutpageOrigin, this.state.aboutpage)}
-                    message="Changes you made may not be saved."
-                />
+                { 
+                    this.props.isAuthenticated === true ? 
+                        <Prompt
+                            style={{background: "red"}}
+                            when={!isEqual(this.state.aboutpageOrigin, this.state.aboutpage)}
+                            message="Changes you made may not be saved."
+                        />
+                    :
+                        null
+                }
 
                 <Helmet>
                     <title>אורן הפקות - נעים להכיר</title>
                     <meta name="description" content="תאור הדף עבור מנועי חיפוש" />
                 </Helmet>
-
-                <Modal open={this.state.seoAboutpageModalIsOpen} onClose={this.onToggleAboutpageSeo} center dir="rtl">
-                    <div className="backoffice__seo__modal">
-                        <h4 className="Heebo-Regular">seo</h4>
-                        <div className="backoffice__seo__modal__left">
-                            <input
-                                className="events__tabs__button"
-                                type="text"
-                                placeholder="כותרת לדף (title)"
-                                value={this.state.seo.title}
-                                onChange={this.onSeoTitleChange}
-                            />
-                            <br />
-                            <textarea
-                                type="text"
-                                placeholder="תאור"
-                                value={this.state.seo.description}
-                                onChange={this.onSeoDescriptionChange}
-                            />
-                            <br />
-                            <textarea
-                                type="text"
-                                placeholder="מילות מפתח"
-                                value={this.state.seo.keyWords}
-                                onChange={this.onSeoKeyWordsChange}
-                            />
-                            <br />
-                        </div>
-                        <div className="backoffice__seo__modal__right">
-                            <input
-                                value="כותרת"
-                                readOnly
-                            />
-                            <br />
-                            <textarea
-                                value="תאור"
-                                readOnly
-                            />
-                            <br />
-                            <textarea
-                                value="מילות מפתח"
-                                readOnly
-                            />
-                            <br />
-                        </div>
-                        <Button bsStyle="success" onClick={this.updateAboutpageSeo}>עדכון</Button>
-                    </div>
-                </Modal>
+                
+                { 
+                    this.props.isAuthenticated === true ? 
+                        <Modal open={this.state.seoAboutpageModalIsOpen} onClose={this.onToggleAboutpageSeo} center dir="rtl">
+                            <div className="backoffice__seo__modal">
+                                <h4 className="Heebo-Regular">seo</h4>
+                                <div className="backoffice__seo__modal__left">
+                                    <input
+                                        className="events__tabs__button"
+                                        type="text"
+                                        placeholder="כותרת לדף (title)"
+                                        value={this.state.seo.title}
+                                        onChange={this.onSeoTitleChange}
+                                    />
+                                    <br />
+                                    <textarea
+                                        type="text"
+                                        placeholder="תאור"
+                                        value={this.state.seo.description}
+                                        onChange={this.onSeoDescriptionChange}
+                                    />
+                                    <br />
+                                    <textarea
+                                        type="text"
+                                        placeholder="מילות מפתח"
+                                        value={this.state.seo.keyWords}
+                                        onChange={this.onSeoKeyWordsChange}
+                                    />
+                                    <br />
+                                </div>
+                                <div className="backoffice__seo__modal__right">
+                                    <input
+                                        value="כותרת"
+                                        readOnly
+                                    />
+                                    <br />
+                                    <textarea
+                                        value="תאור"
+                                        readOnly
+                                    />
+                                    <br />
+                                    <textarea
+                                        value="מילות מפתח"
+                                        readOnly
+                                    />
+                                    <br />
+                                </div>
+                                <Button bsStyle="success" onClick={this.updateAboutpageSeo}>עדכון</Button>
+                            </div>
+                        </Modal>
+                    :
+                        null
+                }
 
                 <ModalRB show={this.state.slideGalleryModalIsOpen} onHide={this.onToggleSlideGallery} dir="rtl">
                     
@@ -753,13 +686,8 @@ class AboutPage extends React.Component {
                                     className="events__event__carousel__button"
                                 >
                                     <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" />
-                                    
                                 </div> 
                             </div>
-
-
-
-
                         </div>
                         <UncontrolledCarousel
                             slide={false}
