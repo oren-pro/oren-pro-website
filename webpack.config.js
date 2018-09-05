@@ -69,7 +69,6 @@ module.exports = (env) => {
         optimization: {
             minimizer: [
                 new UglifyJsPlugin({
-                    test: /\.js($|\?)/i,
                     include: /\/includes/
                 })
             ]
