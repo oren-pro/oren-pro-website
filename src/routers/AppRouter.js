@@ -14,33 +14,33 @@ if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgen
 }
 
 
-const AboutPage = Loadable({
-  loader: () => import('../containers/AboutPage'),
-  loading() {
-    return loadImage
-  }
-});
+// const AboutPage = Loadable({
+//   loader: () => import('../containers/AboutPage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
-const ContactPage = Loadable({
-  loader: () => import('../containers/ContactPage'),
-  loading() {
-    return loadImage
-  }
-});
+// const ContactPage = Loadable({
+//   loader: () => import('../containers/ContactPage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
-const DifferentPage = Loadable({
-  loader: () => import('../containers/DifferentPage'),
-  loading() {
-    return loadImage
-  }
-});
+// const DifferentPage = Loadable({
+//   loader: () => import('../containers/DifferentPage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
-const EventsPage = Loadable({
-  loader: () => import('../containers/EventsPage'),
-  loading() {
-    return loadImage
-  }
-});
+// const EventsPage = Loadable({
+//   loader: () => import('../containers/EventsPage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
 // const EventPage = Loadable({
 //   loader: () => import('../containers/EventPage'),
@@ -49,19 +49,19 @@ const EventsPage = Loadable({
 //   }
 // });
 
-const HomePage = Loadable({
-  loader: () => import('../containers/HomePage'),
-  loading() {
-    return loadImage
-  }
-});
+// const HomePage = Loadable({
+//   loader: () => import('../containers/HomePage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
-//import AboutPage from '../containers/AboutPage';
-//import ContactPage from '../containers/ContactPage';
-//import DifferentPage from '../containers/DifferentPage';
-//import EventsPage from '../containers/EventsPage';
+import AboutPage from '../containers/AboutPage';
+import ContactPage from '../containers/ContactPage';
+import DifferentPage from '../containers/DifferentPage';
+import EventsPage from '../containers/EventsPage';
 import EventPage from '../containers/EventPage';
-//import HomePage from '../containers/HomePage';
+import HomePage from '../containers/HomePage';
 import NotFoundPage from '../containers/NotFoundPage';
 import LoginPage from '../components/LoginPage';
 import PrivateRoute from './PrivateRoute';
