@@ -6,7 +6,7 @@ import Loadable from 'react-loadable';
 //import Loading from './Loading';
 
 let loadImage = "";
-if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 ){
+if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
     console.log("found");
     loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>;
 } else {
@@ -42,12 +42,12 @@ const EventsPage = Loadable({
   }
 });
 
-const EventPage = Loadable({
-  loader: () => import('../containers/EventPage'),
-  loading() {
-    return loadImage
-  }
-});
+// const EventPage = Loadable({
+//   loader: () => import('../containers/EventPage'),
+//   loading() {
+//     return loadImage
+//   }
+// });
 
 const HomePage = Loadable({
   loader: () => import('../containers/HomePage'),
@@ -60,7 +60,7 @@ const HomePage = Loadable({
 //import ContactPage from '../containers/ContactPage';
 //import DifferentPage from '../containers/DifferentPage';
 //import EventsPage from '../containers/EventsPage';
-//import EventPage from '../containers/EventPage';
+import EventPage from '../containers/EventPage';
 //import HomePage from '../containers/HomePage';
 import NotFoundPage from '../containers/NotFoundPage';
 import LoginPage from '../components/LoginPage';
@@ -89,12 +89,12 @@ class AppRouter extends React.Component {
                                     
                                 {
                                     this.props.events.categories.map((category, index) => {
-                                        return <Route path={`/${category.name.replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventsPage {...props} category={category} categoryIndex={index} />)} exact={true} />;
+                                        return <Route path={`/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventsPage {...props} category={category} categoryIndex={index} />)} exact={true} />;
                                     })
                                 }
                                 {
                                     this.props.events.categories.map((category) => {
-                                        return <Route path={`/:event/${category.name.replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)} exact={true} />;
+                                        return <Route path={`/:event/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)} exact={true} />;
                                     })
                                 }
                                 

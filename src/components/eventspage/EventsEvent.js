@@ -114,7 +114,7 @@ class EventsEvent extends React.Component {
                     <div className="events__event__button__box"
                         onMouseEnter={this.onMouseEnter}
                         onMouseLeave={this.onMouseLeave}
-                        onClick={() => { history.push(`/${this.props.title.replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_")}`) }}
+                        onClick={() => { history.push(`/${this.props.title.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`) }}
                         
                     >
                             <button
