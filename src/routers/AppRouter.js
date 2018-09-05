@@ -1,49 +1,58 @@
 import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-
+import ReactLoading from "react-loading";
 import Loadable from 'react-loadable';
 //import Loading from './Loading';
+
+let loadImage = "";
+if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 ){
+    console.log("found");
+    loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>;
+} else {
+    loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>;
+}
+
 
 const AboutPage = Loadable({
   loader: () => import('../containers/AboutPage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
 const ContactPage = Loadable({
   loader: () => import('../containers/ContactPage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
 const DifferentPage = Loadable({
   loader: () => import('../containers/DifferentPage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
 const EventsPage = Loadable({
   loader: () => import('../containers/EventsPage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
 const EventPage = Loadable({
   loader: () => import('../containers/EventPage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
 const HomePage = Loadable({
   loader: () => import('../containers/HomePage'),
   loading() {
-    return <div>Loading...</div>
+    return loadImage
   }
 });
 
