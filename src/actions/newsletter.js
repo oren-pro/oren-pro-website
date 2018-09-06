@@ -1,5 +1,5 @@
 import database from '../firebase/firebase';
-const axios = require('axios');
+//const axios = require('axios');
 
 export const subscribeToNewsletter = (newsletterData = {}) => {
     return () => {
@@ -9,19 +9,19 @@ export const subscribeToNewsletter = (newsletterData = {}) => {
         } = newsletterData;
         const subscriber = {name, email};
 
-        axios.post('https://ssl-vp.com/rest/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true&api_key=3d0dae7b-3b92-4f99-aabe-18c7d34c0229', {
-            "firstName": name,
-            "email": email,
-            "lists_ToSubscribe[]": "77046"
-        })
-        .then(function (response) {
-            console.log("response");
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log('error');
-            console.log(error);
-        });
+        // axios.post('https://ssl-vp.com/rest/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true&api_key=3d0dae7b-3b92-4f99-aabe-18c7d34c0229', {
+        //     "firstName": name,
+        //     "email": email,
+        //     "lists_ToSubscribe[]": "77046"
+        // })
+        // .then(function (response) {
+        //     console.log("response");
+        //     console.log(response);
+        // })
+        // .catch(function (error) {
+        //     console.log('error');
+        //     console.log(error);
+        // });
 
         return database.ref(`newsletter`).push(subscriber);
     };

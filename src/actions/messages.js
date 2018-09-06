@@ -1,8 +1,5 @@
 import database from '../firebase/firebase';
 import bodyParser from 'body-parser';
-//const {google} = require('googleapis');
-//var nodemailer = require('nodemailer');
-//var SparkPost = require('sparkpost');
 
 export const startSendMessage = (messageData = {}) => {
     return (dispatch) => {
