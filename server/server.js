@@ -1,5 +1,5 @@
 const path = require('path');
-//const compression = require('compression');
+const compression = require('compression');
 const express = require('express');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
@@ -32,7 +32,7 @@ const port = process.env.PORT || 3000;
 
 let oneYear = 1 * 365 * 24 * 60 * 60 * 1000;
 
-//app.use(compression());
+app.use(compression());
 
 app.use(express.static(publicPath));
 
