@@ -3,7 +3,6 @@ import AutosizeInput from 'react-input-autosize';
 import Textarea from 'react-expanding-textarea';
 
 const shouldHighLight = (org, update) => {
-    //console.log('in highlight')
     if ( org === update ) {
         return 'edit__bg inline-block';
     } else {
@@ -22,13 +21,8 @@ class HomePageTell extends React.Component {
         minHeight: 100
     };
   }
-
-  componentDidMount = () => {
-      //console.log(this.props);
-  }
  
   render() {
-      //console.log(this.props);
       let id = '';
       let name = '';
       let position = '';
@@ -37,12 +31,6 @@ class HomePageTell extends React.Component {
       let text = '';
       let logo = '';
       let publicid = '';
-      //console.log(this.props.localTell[this.props.tellIndex] ? this.props.localTell[this.props.tellIndex] : null);
-      //console.log(this.state.tell);
-      console.log(this.props.tell);
-      console.log(this.props.tellOrigin);
-      console.log(this.props.localTell);
-      console.log(this.props.localTellOrigin);
       if(this.props.tell[this.props.tellIndex]){
             id = this.props.tell[this.props.tellIndex].id;
             name = this.props.tell[this.props.tellIndex].name;
@@ -52,7 +40,6 @@ class HomePageTell extends React.Component {
             text = this.props.tell[this.props.tellIndex].text;
             logo = this.props.tell[this.props.tellIndex].logo;
             publicid = this.props.tell[this.props.tellIndex].publicId;
-            console.log(publicid);
       }
     return (
         <div className="homepage__tell__box">

@@ -67,15 +67,9 @@
     "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.1",
-    "sendgrid": "^5.2.3",
-    "sendmail": "^1.4.1",
     "slick-carousel": "^1.8.1",
-    "style-loader": "^0.21.0",
-    "uuid": "^3.2.1",
-    "validator": "8.0.0",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15",
-    "xoauth2": "^1.2.0"
+    "webpack-cli": "^2.0.15"
   },
   "devDependencies": {
     "cross-env": "^5.1.6",

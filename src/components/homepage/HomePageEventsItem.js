@@ -88,33 +88,36 @@ const HomePageEventsItem = (props) => (
                     />
                 </div>
             :
-                <div className="homepage__event-item__box__in">
+                <Route render={({ history }) => (
+                <div className="homepage__event-item__box__in cursor__hand" onClick={() => { history.push(props.homepage.events[props.index].eventLink) }}>
                     <div className="homepage__event-item__header">
                         <h3 className="Heebo-Medium homepage__event-item__header-text">{props.event.eventHeader}</h3>
                     </div>
-                    <div className="homepage__event-item__text Heebo-Regular" dir="rtl">
+                    <div className="homepage__event-item__text Heebo-Regular cursor__hand" dir="rtl">
                         <textarea
                             readOnly
+                            className="cursor__hand"
                             value={props.homepage.events[props.index].eventText}
                         />
                     </div>
                     <img className="homepage__event-item__image" src={props.event.eventImage} />
                     <div className="homepage__event-item__more">
-                        <Route render={({ history }) => (
+                        
                             <button 
                                 type='button'
                                 className="homepage__event-item__button"
                                 data-name="greenArrow"
                                 onMouseEnter={props.setIconRatioOn}
                                 onMouseLeave={props.setIconRatioOut}
-                                onClick={() => { history.push(props.homepage.events[props.index].eventLink) }}
+                                
                             >
                                 <p className="homepage__event-item__button__text Heebo-Regular">גלו עוד</p>
                                 <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" />
                             </button> 
-                        )} />
+                        
                     </div>
                 </div>
+                )} />
         }
     </div>
         
