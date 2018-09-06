@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import { Button } from "react-bootstrap";
-//import Button from 'react-bootstrap/lib/Button';
+//import { Button } from "react-bootstrap";
+import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
 import {
     startAddCostumers,

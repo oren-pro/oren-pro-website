@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Button } from "react-bootstrap";
-//import Button from 'react-bootstrap/lib/Button';
+//import { Button } from "react-bootstrap";
+import Button from 'react-bootstrap/lib/Button';
 import UploadImageButton from '../common/UploadImageButton';
 
 
