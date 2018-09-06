@@ -1,9 +1,9 @@
 import React from 'react';
 import { Prompt } from "react-router-dom";
 import {Helmet} from 'react-helmet';
-//import { Button, Modal as ModalRB } from "react-bootstrap";
-import Button from 'react-bootstrap/lib/Button';
-import ModalRB from 'react-bootstrap/lib/Modal';
+import { Button, Modal as ModalRB } from "react-bootstrap";
+//import Button from 'react-bootstrap/lib/Button';
+//import ModalRB from 'react-bootstrap/lib/Modal';
 import Modal from 'react-responsive-modal';
 import AboutTopStrip from '../components/aboutpage/AboutTopStrip';
 import AboutContentStrip from '../components/aboutpage/AboutContentStrip';
