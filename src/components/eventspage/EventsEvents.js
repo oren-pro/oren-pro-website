@@ -1,6 +1,5 @@
 import React from 'react';
 import EventsEvent from './EventsEvent';
-//import { isEqual } from "lodash";
 import isEqual from 'lodash.isequal';
 
 const shouldHighLight = (org, update) => {
@@ -11,7 +10,6 @@ const shouldHighLight = (org, update) => {
         return 'edit__changed__bg';
     }
 };
-
 
 const EventsEvents = (props) => (
     <div className={`events__events__box ${shouldHighLight(props.itemsCurrentOrigin, props.itemsCurrentCheck)}`}>
@@ -103,8 +101,3 @@ const EventsEvents = (props) => (
 );
 
 export default EventsEvents;
-
-
-
-
-//order={Number(index)+1}

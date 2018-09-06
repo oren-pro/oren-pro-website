@@ -1,18 +1,13 @@
 import React from 'react';
-//import { isEqual } from "lodash";
 import isEqual from 'lodash.isequal';
 
 const shouldHighLight = (org, update) => {
-    // console.log(org);
-    // console.log(update);
-    // console.log("in highlight");
     if (isEqual(org, update)) {
         return 'edit__bg';
     } else {
         return 'edit__changed__bg';
     }
 };
-
 
 class EventsTabs extends React.Component {
     constructor(props) {
@@ -30,9 +25,6 @@ class EventsTabs extends React.Component {
                 subCategories: nextProps.subCategories
             });
             return true;
-            //console.log('updating tabs from nextprops --------------------');
-            //console.log(this.props);
-            //console.log(nextProps);
         } else {
             return true;
         }
@@ -40,7 +32,6 @@ class EventsTabs extends React.Component {
     }
 
     componentDidMount = () => {
-        //console.log('updating tabs --------------------');
         this.setState({
             subcategoryId: this.props.subcategoryId,
             subCategories: this.props.subCategories

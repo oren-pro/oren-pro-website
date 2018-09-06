@@ -1,5 +1,6 @@
 import React from 'react';
-import TweenLite from 'gsap';
+import TweenLite from 'gsap/TweenLite';
+
 import scrollTo from 'gsap/ScrollToPlugin';
 
 const pageToTop = () => {

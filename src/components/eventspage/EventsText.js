@@ -27,24 +27,6 @@ export default class EventsText extends React.Component {
         });
     };
 
-    // onHeightChange = (e) => {
-    //     let height = e.target.value * 18;
-    //     let minHeight = e.target.value * 18;
-    //     const windowWidth = $(window).width();
-    //     if (windowWidth < 768) {
-    //         height = Math.round(e.target.value * 2.667) * 24;
-    //         minHeight = Math.round(e.target.value * 2.667) * 24;
-    //     } else {
-    //         height = e.target.value * 18;
-    //         minHeight = e.target.value * 18;
-    //     }
-    //     this.setState({
-    //         height,
-    //         minHeight
-    //     });
-    //     this.props.onCategoryShowLinesChange(e);
-    // }
-
     onHeightChange = (e) => {
         this.setHeight(e.target.value);
         this.props.onCategoryShowLinesChange(e);
