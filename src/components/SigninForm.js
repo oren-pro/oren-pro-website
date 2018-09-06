@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-dates/initialize';
 
 export default class SigninForm extends React.Component {
     constructor(props) {
