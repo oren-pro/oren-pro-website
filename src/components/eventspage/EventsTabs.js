@@ -1,5 +1,6 @@
 import React from 'react';
-import { isEqual } from "lodash";
+//import { isEqual } from "lodash";
+import isEqual from 'lodash.isequal';
 
 const shouldHighLight = (org, update) => {
     // console.log(org);

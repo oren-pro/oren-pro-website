@@ -41,8 +41,8 @@ import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
-import { isEqual } from "lodash";
-
+//import { isEqual } from "lodash";
+import isEqual from 'lodash.isequal';
 
 
 class EventPage extends React.Component {

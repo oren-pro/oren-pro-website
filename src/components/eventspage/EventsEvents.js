@@ -1,6 +1,7 @@
 import React from 'react';
 import EventsEvent from './EventsEvent';
-import { isEqual } from "lodash";
+//import { isEqual } from "lodash";
+import isEqual from 'lodash.isequal';
 
 const shouldHighLight = (org, update) => {
     if (isEqual(org, update)) {
