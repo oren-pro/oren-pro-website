@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UncontrolledCarousel from '../UncontrolledCarousel';
-//import { Button } from "react-bootstrap";
-import Button from 'react-bootstrap/lib/Button';
+import { Button } from "react-bootstrap";
+//import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import {
