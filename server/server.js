@@ -34,7 +34,7 @@ let oneYear = 1 * 365 * 24 * 60 * 60 * 1000;
 
 app.use(compression());
 
-//app.use(express.static(publicPath));
+app.use(express.static(publicPath));
 
 app.post("/deleteImage", bodyParser.urlencoded({ extended: true }), function(request, response) {
     if(request.body.publicid){
