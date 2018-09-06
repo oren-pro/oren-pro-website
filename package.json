@@ -39,8 +39,6 @@
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",
     "normalize.css": "^8.0.0",
-    "numeral": "^2.0.6",
-    "raf": "^3.4.0",
     "react": "16.3.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-shallow-compare": "^15.6.2",

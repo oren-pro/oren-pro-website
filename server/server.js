@@ -3,34 +3,18 @@ const express = require('express');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 var cors = require('cors');
-
 var cloudinary = require('cloudinary');
 
 //var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
-
-//var SparkPost = require('sparkpost');
-//var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
-
-
-
-
-
-
-
-
 const app = express();
-
-//app.use(cors());
 
 var allowedOrigins = ['http://localhost:8080',
                       'http://oren-pro-website.herokuapp.com',
                       'https://oren-pro-website.herokuapp.com'];
 app.use(cors({
   origin: function(origin, callback){
-    // allow requests with no origin 
-    // (like mobile apps or curl requests)
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){
       var msg = 'The CORS policy for this site does not ' +
@@ -41,22 +25,13 @@ app.use(cors({
   }
 }));
 
-
-//var compression = require('compression');
-
-//app.use(compression());
-
 const publicPath = path.join(__dirname, '../', 'public');
 
 const port = process.env.PORT || 3000;
 
 app.use(express.static(publicPath));
 
-
-
 app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
-    console.log('in server deleteImage');
-    console.log(request.body.publicid);
     if(request.body.publicid){
 
         // cloudinary.config({ 
@@ -70,31 +45,10 @@ app.post("/deleteImage", bodyParser.urlencoded(), function(request, response) {
           api_key: process.env.CLOUDINARY_API_KEY, 
           api_secret: process.env.CLOUDINARY_API_SECRET
         });
-
-
         cloudinary.v2.uploader.destroy(request.body.publicid, function(error, result){console.log(result, error)});
     }
     return 'hia';
 });
-
-
-
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.GMAIL_USER || gmail.user,
-//     pass: process.env.GMAIL_PASSWORD || gmail.password
-//   }
-// });
-
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.GMAIL_USER,
-//     pass: process.env.GMAIL_PASSWORD
-//   }
-// });
-
 
 let transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
@@ -106,16 +60,7 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-
-
-
 app.post("/sendEmail", bodyParser.urlencoded(), function(request, response) {
-    //console.log('GMAIL_USER', process.env.GMAIL_USER);
-    //console.log('GMAIL_PASSWORD', process.env.GMAIL_PASSWORD);
-    console.log('in server');
-    console.log(request.body.name);
-    console.log(request.body.email);
-    console.log(request.body.message);
     if(request.body.name){
         mailOptions = {
           from: 'message@frixell.net',
