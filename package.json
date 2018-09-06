@@ -46,6 +46,7 @@
     "react-addons-transition-group": "^15.6.2",
     "react-animate-height": "^2.0.2",
     "react-bootstrap": "^0.32.1",
+    "react-dates": "^18.0.0",
     "react-dom": "16.0.0",
     "react-expanding-textarea": "^0.1.10",
     "react-facebook-share-link": "^1.0.4",
