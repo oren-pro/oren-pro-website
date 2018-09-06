@@ -4,8 +4,6 @@ import Textarea from 'react-expanding-textarea';
 import $ from 'jquery';
 
 const shouldHighLight = (org, update) => {
-    console.log(org);
-    console.log(update);
     if ( org === update ) {
         return 'edit__bg';
     } else {
@@ -204,13 +202,13 @@ export default class EventsText extends React.Component {
         this.setHeight(this.props.showLines);
     }
 
-    shouldComponentUpdate = () => {
-        if (this.props.showLines !== this.state.showLines) {
-            this.setHeight(this.props.showLines);
-            return true;
-        }
-        return true;
-    }
+    // shouldComponentUpdate = () => {
+    //     if (this.props.showLines !== this.state.showLines) {
+    //         this.setHeight(this.props.showLines);
+    //         return true;
+    //     }
+    //     return true;
+    // }
 
 
     render() {
