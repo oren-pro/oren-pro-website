@@ -198,7 +198,6 @@ export default class AboutContentStrip extends React.Component {
  
 
     componentDidMount = () => {
-        const fontSize = $("html").css("fontSize");
         const windowWidth = $(window).width();
         let windowRatio = 100;
         let ratio = 2.2;

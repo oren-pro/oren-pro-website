@@ -36,7 +36,7 @@ import {
     startSetAllEvents,
     startEditSeo
 } from '../actions/eventspage';
-import $ from 'jquery';
+
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';

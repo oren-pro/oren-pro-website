@@ -14,7 +14,6 @@ import SocialMedia from '../components/common/SocialMedia';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { startSetAboutPage, startEditAboutPage, startEditAboutPageSeo, startAddAboutImage, startDeleteAboutImage } from '../actions/aboutpage';
-import $ from 'jquery';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
@@ -499,11 +498,7 @@ class AboutPage extends React.Component {
     }
 
     onToggleSlideGallery = (e, currentImage = this.state.currentImage) => {
-        const crouselControlsWidth = 140;
-        const width = this.state.slideGalleryImages[currentImage].width/2-crouselControlsWidth/2-23;
-        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
         this.setState({
-            crouselControlsRight,
             currentImage,
             slideGalleryModalIsOpen: !this.state.slideGalleryModalIsOpen
         });
@@ -518,12 +513,6 @@ class AboutPage extends React.Component {
     onNext = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === this.state.slideGalleryImages.length - 1 ? 0 : this.state.currentImage + 1;
-        const crouselControlsWidth = $('#crouselControlsRight').width();
-        const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
-        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
-        this.setState({
-            crouselControlsRight
-        });
         if (this.onCurrentImageChange) {
         this.onCurrentImageChange(nextIndex);
         }
@@ -532,12 +521,6 @@ class AboutPage extends React.Component {
     previous = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === 0 ? this.state.slideGalleryImages.length - 1 : this.state.currentImage - 1;
-        const crouselControlsWidth = $('#crouselControlsRight').width();
-        const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
-        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
-        this.setState({
-            crouselControlsRight
-        });
         this.onCurrentImageChange(nextIndex);
     }
 
@@ -546,12 +529,6 @@ class AboutPage extends React.Component {
     }
 
     onExited = () => {
-        const crouselControlsWidth = $('#crouselControlsRight').width();
-        const width = this.state.slideGalleryImages[this.state.currentImage].width/2-crouselControlsWidth/2-23;
-        const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
-        this.setState({
-            crouselControlsRight
-        });
         this.animating = false;
     }
 

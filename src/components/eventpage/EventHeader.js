@@ -34,7 +34,6 @@ export default class EventHeader extends React.Component {
     }
 
     setHeight = (showLines) => {
-        const fontSize = $("html").css("fontSize");
         const windowWidth = $(window).width();
         let windowRatio = 100;
         let ratio = 2.2;

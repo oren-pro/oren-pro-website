@@ -24,7 +24,7 @@ import {
     startEditHomePageSeo,
     startDeleteHomePageImage
 } from '../actions/homepage';
-import $ from 'jquery';
+
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
