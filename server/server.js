@@ -38,7 +38,7 @@ app.get('*.js', function (request, response, next) {
     next();
 });
 
-app.get('*.css', function (request, response, next) {
+app.get('styles.css', function (request, response, next) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
     next();
