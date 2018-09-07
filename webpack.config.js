@@ -50,7 +50,8 @@ module.exports = (env) => {
         plugins: [
             new CompressionPlugin({
             test: /\.(js|css)$/,
-            algorithm: 'gzip'
+            algorithm: 'gzip',
+            deleteOriginalAssets: true
             }),
             CSSExtract,
             new webpack.DefinePlugin({
