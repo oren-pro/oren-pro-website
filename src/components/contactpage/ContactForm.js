@@ -4,7 +4,9 @@ import Modal from 'react-responsive-modal';
 //import moment from 'moment';
 import { startSendMessage } from '../../actions/messages';
 
-//const currentTime = moment();
+const currentDate = new Date();
+//const currentTime = Date.now();
+console.log(currentDate);
 
 export class ContactForm extends React.Component {
     constructor(props) {
@@ -44,26 +46,25 @@ export class ContactForm extends React.Component {
         } else {
             //cleare error message
             this.setState(() => ({ error: '' }));
-            //console.log('submitted');
             this.onSendMail({
                 name: this.state.name,
                 phone: this.state.phone,
                 email: this.state.email,
                 message: this.state.message,
-                createdAt: currentTime.valueOf()
+                createdAt: currentDate
             });
         }
     };
     onToggleMailSentModal = () => {
-        console.log('toggle');
+        //console.log('toggle');
         this.setState({
             mailSentModalIsOpen: !this.state.mailSentModalIsOpen
         });
-        console.log(this.state.mailSentModalIsOpen);
+        //console.log(this.state.mailSentModalIsOpen);
     }
     onSendMail = (userMessage) => {
         this.props.startSendMessage(userMessage).then((res) => {
-            console.log(res);
+            //console.log(res);
             this.onToggleMailSentModal();
         });
     };
