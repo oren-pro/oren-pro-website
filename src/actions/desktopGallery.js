@@ -1,8 +1,6 @@
 import database from '../firebase/firebase';
 
 
-
-
 // add desktopGalley image
 
 

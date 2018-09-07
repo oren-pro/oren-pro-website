@@ -1,7 +1,6 @@
 import database from '../firebase/firebase';
 
 
-
 // add costumer
 
 export const addCostumers = ( costumers ) => ({

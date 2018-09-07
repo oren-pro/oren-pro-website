@@ -202,6 +202,11 @@ export default class EventsText extends React.Component {
         this.setHeight(this.props.showLines);
     }
 
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        if (this.props.showLines !== prevProps.showLines) {
+            this.setHeight(this.props.showLines);
+        }
+    }
     // shouldComponentUpdate = () => {
     //     if (this.props.showLines !== this.state.showLines) {
     //         this.setHeight(this.props.showLines);

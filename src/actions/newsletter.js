@@ -1,5 +1,4 @@
 import database from '../firebase/firebase';
-
 const axios = require('axios');
 
 export const subscribeToNewsletter = (newsletterData = {}) => {
