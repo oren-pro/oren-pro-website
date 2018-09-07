@@ -33,7 +33,12 @@ const port = process.env.PORT || 3000;
 let oneYear = 1 * 365 * 24 * 60 * 60 * 1000;
 
 app.get('*.js', function (request, response, next) {
-    console.log('js requested');
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+    next();
+});
+
+app.get('*.css', function (request, response, next) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
     next();
@@ -95,9 +100,9 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 
 
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(publicPath, 'index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 app.listen(port, () => {
     console.log('Server is up!');
