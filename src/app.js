@@ -21,7 +21,9 @@ import {
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import { firebase } from './firebase/firebase';
+//import { firebase } from './firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/auth");
 
 
 const store = configureStore();
