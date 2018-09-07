@@ -394,8 +394,8 @@ class EventsPage extends React.Component {
     onCategoryShowLinesChange = (e) => {
         const category = this.state.category;
         category.showLines = e.target.value;
-        console.log(this.state.categoryOrigin);
-        console.log(category);
+        // console.log(this.state.categoryOrigin);
+        // console.log(category);
         this.setState({
             category
         });
@@ -685,7 +685,7 @@ class EventsPage extends React.Component {
         let oldName = '';
         const allSubCategories = this.state.allSubCategories;
         const subCategories = this.state.subCategories;
-        console.log(subCategories);
+        //console.log(subCategories);
         const subCategoryNewName = e.target.value;
         const subCategoryId = e.target.dataset.id;
         allSubCategories.map((subcategory, index) => {

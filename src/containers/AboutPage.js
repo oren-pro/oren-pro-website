@@ -71,16 +71,16 @@ class AboutPage extends React.Component {
 			default:
 				break;
         };
-        console.log(aboutpage);
+        //console.log(aboutpage);
         this.setState({
             aboutpage: aboutpage
         });
       
         if(isEqual(this.state.aboutpageOrigin, aboutpage)){ 
-            console.log("remove listener");
+            //console.log("remove listener");
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
-            console.log("add listener");
+            //console.log("add listener");
             window.addEventListener("beforeunload", this.unloadFunc);
         }
 	}

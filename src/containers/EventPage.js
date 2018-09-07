@@ -108,7 +108,7 @@ class EventPage extends React.Component {
     
 
     componentDidUpdate(prevProps) {
-        console.log("in componentDidUpdate");
+        //console.log("in componentDidUpdate");
         if (this.state.currentURL === '') {
             const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
             //console.log(currentURL);
@@ -157,15 +157,15 @@ class EventPage extends React.Component {
         let eventText = '';
         let eventShowLines = "";
         let seo = {};
-        console.log("name");
-        console.log(eventName);
+        // console.log("name");
+        // console.log(eventName);
         items.map((item) => {
             //console.log("in map");
-            console.log(item.name);
+            //console.log(item.name);
             if (eventName === item.name) {
                 eventId = item.id;
                 eventText = item.text;
-                console.log(item.text);
+                //console.log(item.text);
                 eventShowLines = item.showLines;
                 if (!item.seo) {
                     item.seo = {
@@ -243,8 +243,8 @@ class EventPage extends React.Component {
             }
             stripItems.splice(3, stripItems.length-3);
         }
-        console.log(eventText);
-        console.log(eventShowLines);
+        // console.log(eventText);
+        // console.log(eventShowLines);
         if(eventShowLines) {
             this.setState({
                 eventId,
@@ -323,7 +323,7 @@ class EventPage extends React.Component {
     }
 
     setData = () => {
-        console.log("in setdata");
+        //console.log("in setdata");
         let subcategoryId = '';
         if (this.props.eventsObject.subcategoryId) {
             subcategoryId = this.props.eventsObject.subcategoryId;
@@ -338,7 +338,7 @@ class EventPage extends React.Component {
                 allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
             });
             this.props.startSetAllEvents().then(() => {
-                console.log(this.props.eventsObject.allEvents);
+                //console.log(this.props.eventsObject.allEvents);
                 this.setState({
                     allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                 });

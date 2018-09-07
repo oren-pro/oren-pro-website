@@ -6,7 +6,7 @@ import { startSendMessage } from '../../actions/messages';
 
 const currentDate = new Date();
 //const currentTime = Date.now();
-console.log(currentDate);
+//console.log(currentDate);
 
 export class ContactForm extends React.Component {
     constructor(props) {
