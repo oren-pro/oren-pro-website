@@ -733,7 +733,7 @@ class AboutPage extends React.Component {
                                 null
                         }
                         
-                        <div className="about__gallery">
+                        <div className="about__gallery desktop">
                             { 
                                 this.props.isAuthenticated === true ? 
                                     <div className="backoffice__events__events__buttons">
@@ -756,6 +756,40 @@ class AboutPage extends React.Component {
                                         columns={2}
                                         margin={3}
                                         style="react-photo-gallery--about"
+                                        isAuthenticated={this.props.isAuthenticated}
+                                        onImageOrderBlur={this.onImageOrderBlur}
+                                        onImageOrderChange={this.onImageOrderChange}
+                                        onImageOrderKeyPress={this.onImageOrderKeyPress}
+                                        onDeleteImage={this.onDeleteImage}
+                                        onOpenSlideGallery={this.onOpenSlideGallery}
+                                    />
+
+                                :
+                                    null
+                            }
+                        </div>
+                        <div className="about__gallery mobile">
+                            { 
+                                this.props.isAuthenticated === true ? 
+                                    <div className="backoffice__events__events__buttons">
+                                        <button className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
+                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                        </button>
+                                        <button className="backoffice__events__events__save__button" onClick={this.updateImages}>
+                                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                                        </button>
+                                        
+                                    </div>
+                                :
+                                    null
+                            }
+                            {
+                                this.state.galleryImages ?
+
+                                    <TileGallery
+                                        photos={this.state.galleryImages}
+                                        columns={1}
+                                        margin={3}
                                         isAuthenticated={this.props.isAuthenticated}
                                         onImageOrderBlur={this.onImageOrderBlur}
                                         onImageOrderChange={this.onImageOrderChange}

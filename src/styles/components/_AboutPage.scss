@@ -249,6 +249,13 @@
 
 
 @media (max-width: $mobileMaxWidth) {
+
+    .about__gallery {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
     .about__topstrip__box {
         display: flex;
         flex-direction: column;
@@ -332,6 +339,7 @@
         text-align: center;
         max-width: 96vw;
         font-size: 3.8rem;
+        line-height: 2.9rem;
     }
 
     .about__content__text__box {
