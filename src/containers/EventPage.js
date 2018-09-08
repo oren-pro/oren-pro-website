@@ -107,65 +107,70 @@ class EventPage extends React.Component {
 
     
 
-    componentDidUpdate(prevProps) {
-        //console.log("in componentDidUpdate");
-        if (this.state.currentURL === '') {
-            const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
-            //console.log(currentURL);
-            this.setState({
-                currentURL
-            });
-        }
-        if(prevProps.match.params.event !== this.props.match.params.event) {
-            const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
-            this.setState({
-                eventName
-            });
-            const categoryId = this.props.categoryId;
-            if (!this.props.eventsObject[this.props.categoryId]) {
-                this.props.startSetSubcategories(categoryId).then((subCategories)=> {
-                    this.setState({
-                        subCategories
-                    });
-                    this.props.startSetItems(categoryId).then((items)=> {
-                        this.setState({
-                            items
-                        });
-                        this.getEventId(eventName, this.state.items);
-                    });
-                });
-            } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
-                this.props.startSetItems(categoryId).then((items)=> {
-                    this.setState({
-                        subCategories: this.props.eventsObject[this.props.categoryId],
-                        items
-                    });
-                    this.getEventId(eventName, this.state.items);
-                });
-            } else {
-                this.setState({
-                    subCategories: this.props.eventsObject[this.props.categoryId],
-                    items: this.props.eventsObject[this.props.categoryId+'items']
-                });
-                this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
-            }
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     //console.log("in componentDidUpdate");
+    //     if (this.state.currentURL === '') {
+    //         const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
+    //         //console.log(currentURL);
+    //         this.setState({
+    //             currentURL
+    //         });
+    //     }
+    //     if(prevProps.match.params.event !== this.props.match.params.event) {
+    //         const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+    //         this.setState({
+    //             eventName
+    //         });
+    //         const categoryId = this.props.categoryId;
+    //         if (!this.props.eventsObject[this.props.categoryId]) {
+    //             this.props.startSetSubcategories(categoryId).then((subCategories)=> {
+    //                 this.setState({
+    //                     subCategories
+    //                 });
+    //                 this.props.startSetItems(categoryId).then((items)=> {
+    //                     this.setState({
+    //                         items
+    //                     });
+    //                     this.getEventId(eventName, this.state.items);
+    //                 });
+    //             });
+    //         } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
+    //             this.props.startSetItems(categoryId).then((items)=> {
+    //                 this.setState({
+    //                     subCategories: this.props.eventsObject[this.props.categoryId],
+    //                     items
+    //                 });
+    //                 this.getEventId(eventName, this.state.items);
+    //             });
+    //         } else {
+    //             this.setState({
+    //                 subCategories: this.props.eventsObject[this.props.categoryId],
+    //                 items: this.props.eventsObject[this.props.categoryId+'items']
+    //             });
+    //             this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
+    //         }
+    //     }
+    // }
 
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
-        let eventShowLines = "";
+        let eventShowLines = 1;
         let seo = {};
-        // console.log("name");
-        // console.log(eventName);
+        console.log("name");
+        console.log(eventName);
+        console.log(items);
         items.map((item) => {
             //console.log("in map");
             //console.log(item.name);
             if (eventName === item.name) {
                 eventId = item.id;
                 eventText = item.text;
-                //console.log(item.text);
+                console.log("in map");
+                console.log(item.id);
+                console.log(item.text);
+                console.log(item.name);
+                console.log(item.showLines);
                 eventShowLines = item.showLines;
                 if (!item.seo) {
                     item.seo = {
@@ -243,9 +248,17 @@ class EventPage extends React.Component {
             }
             stripItems.splice(3, stripItems.length-3);
         }
-        // console.log(eventText);
-        // console.log(eventShowLines);
-        if(eventShowLines) {
+        console.log('eventShowLines');
+        console.log(eventShowLines);
+        if( eventShowLines === undefined){
+            eventShowLines = 1;
+        }
+        if( eventText === undefined){
+            eventText = "";
+        }
+        //if(eventId) {
+            console.log('in eventShowLines');
+            console.log(eventId);
             this.setState({
                 eventId,
                 eventText,
@@ -258,7 +271,7 @@ class EventPage extends React.Component {
                 currentItems,
                 stripItems
             });
-        }
+        //}
 
         this.props.startSetImages(eventId, this.props.categoryId, itemLocation).then((images)=> {
             images.sort((a, b) => {
@@ -323,7 +336,7 @@ class EventPage extends React.Component {
     }
 
     setData = () => {
-        //console.log("in setdata");
+        console.log("in setdata");
         let subcategoryId = '';
         if (this.props.eventsObject.subcategoryId) {
             subcategoryId = this.props.eventsObject.subcategoryId;
@@ -364,7 +377,7 @@ class EventPage extends React.Component {
 
 
                 const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
-                //console.log(eventName);
+                console.log(eventName);
                 this.setState({
                     eventName,
                     eventNameOrigin: eventName
@@ -406,35 +419,26 @@ class EventPage extends React.Component {
                     });
                     
                 }
-
-
-
-
-
-
-
-
-
-
-
-
             });
         });
-        
     }
 
     componentDidMount = () => {
+        console.log("did mount")
         window.addEventListener('scroll', this.handleScroll);
-
         this.setData();
     }
 
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        if (this.props !== prevProps) {
+            this.setData();
+        }
+    }
 
 
     componentWillUnmount = () => {
         window.removeEventListener('scroll', this.handleScroll);
     }
-
 
 
     uploadWidget = (e) => {
@@ -582,10 +586,13 @@ class EventPage extends React.Component {
     }
 
     gotoNextEvent = () => {
+        console.log('this.state.nextItem');
+        console.log(this.state.nextItem);
         this.props.history.push(`/${this.state.nextItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
     
     gotoPrevEvent = () => {
+        console.log(this.state.prevItem);
         this.props.history.push(`/${this.state.prevItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
 
