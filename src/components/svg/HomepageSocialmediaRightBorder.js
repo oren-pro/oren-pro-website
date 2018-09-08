@@ -1,9 +1,14 @@
 import React from 'react';
 
+let measure = 'vw';
+if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
+    measure = 'em';
+}
+
 const HomepageSocialmediaRightBorder = () => {
     return(
         <div className="homepage__socialmedia__right-border">
-            <svg width={'0.2vw'} height={'105%'} viewBox="0 40 4 90">
+            <svg width={'0.2'+measure} height={'105%'} viewBox="0 40 4 90">
                 <path d="M1.9,13.08c-.07.18-.23.28-.25.5a1.47,1.47,0,0,0,.75.36c.13-.17.31-.31.25-.65-.45.1-.51-.14-.75-.22m1.25-.5c.75,1.15-.48,2.52-1.41,2.16a2,2,0,0,1-.83-1.95c.21-.57,1.64-.71,2.24-.21"/>
                 <path d="M1.33,7.16c.34-.56-.32-.52,0,0m.91,0a.31.31,0,1,0,0,.58c.05-.16.16-.44,0-.58m1-.14A1.24,1.24,0,0,1,2.16,8.53c-.94.06-2.27-1.9-1-2.45A1.71,1.71,0,0,1,3.24,7"/>
                 <path d="M2,1c-.59,0-.69,1,0,.94.46-.19.11-.64,0-.94M1.1.17c2.35-1,2.39,2.84.41,2.38C.8,2.38.63.81,1.1.17"/>

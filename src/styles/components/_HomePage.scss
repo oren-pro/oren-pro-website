@@ -170,10 +170,16 @@
     justify-content: flex-end;
     border: none;
     background: none;
-    height: 3em;
+    height: 3vw;
     padding-right: 0.9rem;
     padding-left: 0.3rem;
     cursor: pointer;
+}
+
+@-moz-document url-prefix() {
+    .homepage__socialmedia-button {
+        height: 3em;
+    }
 }
 
 .homepage__socialmedia__right-border {

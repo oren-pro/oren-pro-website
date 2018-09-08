@@ -48,8 +48,12 @@ const ratioFixer = 0.73;
 class IconHoverGrow extends React.Component {
   
   render() {
-    const width = (icons[this.props.icon].width * this.props.ratio * ratioFixer) + 'em';
-    const height = (icons[this.props.icon].height * this.props.ratio * ratioFixer) + 'em';
+    let measure = 'rem';
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
+        measure = 'em';
+    }
+    const width = (icons[this.props.icon].width * this.props.ratio * ratioFixer) + measure;
+    const height = (icons[this.props.icon].height * this.props.ratio * ratioFixer) + measure;
     const vbwidth = icons[this.props.icon].vbwidth;
     const vbheight = icons[this.props.icon].vbheight;
     return(

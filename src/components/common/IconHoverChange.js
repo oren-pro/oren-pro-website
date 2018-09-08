@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+let measure = 'rem';
+if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
+    measure = 'em';
+}
+
 const icons = {
   accessibility: {
     paths: [
@@ -26,8 +31,8 @@ const icons = {
       }
       
     ],
-    width: '3em',
-    height: '3em',
+    width: '3' + measure,
+    height: '3' + measure,
     vbwidth: 43.8,
     vbheight: 45.18
   },
@@ -54,8 +59,8 @@ const icons = {
         className: "accessibility-color--dark"
       }
     ],
-    width: '3em',
-    height: '3em',
+    width: '3' + measure,
+    height: '3' + measure,
     vbwidth: 45.79,
     vbheight: 47.17
   }
