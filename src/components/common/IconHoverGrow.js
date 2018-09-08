@@ -48,7 +48,7 @@ const ratioFixer = 0.73;
 class IconHoverGrow extends React.Component {
   
   render() {
-    let measure = 'rem';
+    let measure = 'vw';
     if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
         measure = 'em';
     }
