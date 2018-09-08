@@ -32,21 +32,50 @@ const port = process.env.PORT || 3000;
 
 let oneYear = 1 * 365 * 24 * 60 * 60 * 1000;
 
-app.get('*.js', function (request, response, next) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-    next();
-});
+// app.get('*.js', function (request, response, next) {
+//     request.url = request.url + '.gz';
+//     response.set('Content-Encoding', 'gzip');
+//     next();
+// });
 
-app.get('dist/styles.css', function (request, response, next) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-    next();
-});
+// app.get('dist/styles.css', function (request, response, next) {
+//     request.url = request.url + '.gz';
+//     response.set('Content-Encoding', 'gzip');
+//     next();
+// });
+
+
+
+
+const checkForHTML = req => {
+    const url = req.url.split('.');
+    const extension = url[url.length -1];
+
+    if (['/'].indexOf(extension) > -1) {
+        return true; //compress only .html files sent from server
+    }
+
+    return false;
+};
+
 
 app.use(express.static(publicPath));
 
-app.use(compression());
+var compress = require('compression');
+app.use(compress({filter: checkForHTML}));
+
+const encodeResToGzip = contentType => (req, res, next) => {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', contentType);
+
+    next();
+};
+
+app.get("*.js", encodeResToGzip('text/javascript'));
+app.get("*.css", encodeResToGzip('text/css'));
+
+//app.use(compression());
 
 app.post("/deleteImage", bodyParser.urlencoded({ extended: true }), function(request, response) {
     if(request.body.publicid){
