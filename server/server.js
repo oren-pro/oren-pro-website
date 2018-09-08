@@ -34,21 +34,23 @@ const port = process.env.PORT || 3000;
 
 
 
-
 app.get('*.js', function (request, response, next) {
   console.log(request.headers['user-agent']);
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
+  }
     next();
 });
 
 app.get('*.css', function (request, response, next) {
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
     response.set('Content-Type', 'text/css');
+  }
     next();
 });
-
 
 app.use(express.static(publicPath));
 
