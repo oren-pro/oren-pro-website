@@ -9,6 +9,8 @@ var cloudinary = require('cloudinary');
 //var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
+
+
 const app = express();
 
 var allowedOrigins = ['http://localhost:8080',
@@ -33,18 +35,19 @@ const port = process.env.PORT || 3000;
 
 
 
-// app.get('*.js', function (request, response, next) {
-//     request.url = request.url + '.gz';
-//     response.set('Content-Encoding', 'gzip');
-//     next();
-// });
+app.get('*.js', function (request, response, next) {
+  console.log(request.headers['user-agent']);
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+    next();
+});
 
-// app.get('*.css', function (request, response, next) {
-//     request.url = request.url + '.gz';
-//     response.set('Content-Encoding', 'gzip');
-//     response.set('Content-Type', 'text/css');
-//     next();
-// });
+app.get('*.css', function (request, response, next) {
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+    response.set('Content-Type', 'text/css');
+    next();
+});
 
 
 app.use(express.static(publicPath));
