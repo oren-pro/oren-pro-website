@@ -1,12 +1,13 @@
-import database from '../firebase/firebase';
-
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 
 // add desktopGalley image
 
 
 export const startAddDesktopGallery = ( desktopImage ) => {
     return (dispatch) => {
-        return database.ref(`website/desktopGallery`).push(desktopImage).then(() => {
+        return firebase.database().ref(`website/desktopGallery`).push(desktopImage).then(() => {
             //dispatch(addCostumers( costumers ));
         })
     };
@@ -24,7 +25,7 @@ export const editDesktopGallery = ( desktopImages ) => ({
 
 export const startEditDesktopGallery = ( desktopImages, fbDesktopImages ) => {
     return (dispatch) => {
-        return database.ref(`website/desktopGallery`).update({...fbDesktopImages}).then(() => {
+        return firebase.database().ref(`website/desktopGallery`).update({...fbDesktopImages}).then(() => {
             dispatch(editDesktopGallery( desktopImages ));
         })
     };
@@ -42,7 +43,7 @@ export const setDesktopGallery = (desktopImages) => ({
 
 export const startSetDesktopGallery = () => {
     return (dispatch) => {
-        return database.ref(`website/desktopGallery/`).once('value').then((snapshot) => {
+        return firebase.database().ref(`website/desktopGallery/`).once('value').then((snapshot) => {
             //console.log('in set desktopGallery ============');
             const desktopImages = [];
             snapshot.forEach((childSnapshot) => {
@@ -82,7 +83,7 @@ export const startDeleteDesktopGallery = ( fbDesktopImages, desktopImages, publi
             var data = e.target.responseText;
             //console.log(data);
         });
-        return database.ref('website/desktopGallery').update(fbDesktopImages).then(() => {
+        return firebase.database().ref('website/desktopGallery').update(fbDesktopImages).then(() => {
             dispatch(setDesktopGallery(desktopImages));
         })
     };

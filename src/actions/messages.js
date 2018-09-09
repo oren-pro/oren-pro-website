@@ -1,4 +1,6 @@
-import database from '../firebase/firebase';
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 import bodyParser from 'body-parser';
 
 export const startSendMessage = (messageData = {}) => {
@@ -11,7 +13,7 @@ export const startSendMessage = (messageData = {}) => {
             createdAt = 0
         } = messageData;
         const userMessage = {name, phone, email, message, createdAt};
-        return database.ref(`messages`).push(userMessage).then((ref) => {
+        return firebase.database().ref(`messages`).push(userMessage).then((ref) => {
             dispatch(sendMessage({
                 id: ref.key,
                 ...userMessage

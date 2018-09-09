@@ -1,5 +1,6 @@
-import database from '../firebase/firebase';
-
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 
 
 
@@ -8,7 +9,7 @@ import database from '../firebase/firebase';
 
 export const startAddMobileGallery = ( mobileImage ) => {
     return (dispatch) => {
-        return database.ref(`website/mobileGallery`).push(mobileImage).then(() => {
+        return firebase.database().ref(`website/mobileGallery`).push(mobileImage).then(() => {
             //dispatch(addCostumers( costumers ));
         })
     };
@@ -26,7 +27,7 @@ export const editMobileGallery = ( mobileImages ) => ({
 
 export const startEditMobileGallery = ( mobileImages, fbMobileImages ) => {
     return (dispatch) => {
-        return database.ref(`website/mobileGallery`).update({...fbMobileImages}).then(() => {
+        return firebase.database().ref(`website/mobileGallery`).update({...fbMobileImages}).then(() => {
             dispatch(editMobileGallery( mobileImages ));
         })
     };
@@ -44,7 +45,7 @@ export const setMobileGallery = (mobileImages) => ({
 
 export const startSetMobileGallery = () => {
     return (dispatch) => {
-        return database.ref(`website/mobileGallery/`).once('value').then((snapshot) => {
+        return firebase.database().ref(`website/mobileGallery/`).once('value').then((snapshot) => {
             //console.log('in set mobileGallery ============');
             const mobileImages = [];
             snapshot.forEach((childSnapshot) => {
@@ -84,7 +85,7 @@ export const startDeleteMobileGallery = ( fbMobileImages, mobileImages, publicid
             var data = e.target.responseText;
             console.log(data);
         });
-        return database.ref('website/mobileGallery').update(fbMobileImages).then(() => {
+        return firebase.database().ref('website/mobileGallery').update(fbMobileImages).then(() => {
             dispatch(setMobileGallery(mobileImages));
         })
     };

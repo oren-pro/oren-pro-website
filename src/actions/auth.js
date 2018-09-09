@@ -1,4 +1,6 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase';
+//import { firebase } from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/auth");
 
 export const signin = ( email, password ) => {
     return () => {

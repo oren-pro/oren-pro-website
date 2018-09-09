@@ -1,4 +1,6 @@
-import database from '../firebase/firebase';
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 const axios = require('axios');
 
 export const subscribeToNewsletter = (newsletterData = {}) => {
@@ -23,6 +25,6 @@ export const subscribeToNewsletter = (newsletterData = {}) => {
             console.log(error);
         });
 
-        return database.ref(`newsletter`).push(subscriber);
+        return firebase.database().ref(`newsletter`).push(subscriber);
     };
 };

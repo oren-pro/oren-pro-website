@@ -1,4 +1,7 @@
-import database from '../firebase/firebase';
+//import database from '../firebase/firebase';
+
+var firebase = require("firebase/app");
+require("firebase/database");
 
 // edit homepage
 
@@ -8,10 +11,9 @@ export const editHomePage = ( homepage ) => ({
 });
 
 export const startEditHomePage = ( homepage ) => {
-    console.log('err');
     return (dispatch) => {
         
-        return database.ref(`website/`).update(homepage).then(() => {
+        return firebase.database().ref(`website/`).update(homepage).then(() => {
             dispatch(editHomePage( homepage ));
         })
     };
@@ -27,7 +29,7 @@ export const editHomePageSeo = ( seo ) => ({
 
 export const startEditHomePageSeo = ( seo ) => {
     return (dispatch) => {
-        return database.ref(`website/homepage/seo`).update(seo).then(() => {
+        return firebase.database().ref(`website/homepage/seo`).update(seo).then(() => {
             dispatch(editHomePage( seo ));
         })
     };
@@ -43,8 +45,7 @@ export const setHomePage = (homepage) => ({
 
 export const startSetHomePage = () => {
     return (dispatch) => {
-        return database.ref(`website/homepage/`).once('value').then((snapshot) => {
-            //console.log('in set homepage ============');
+        return firebase.database().ref(`website/homepage/`).once('value').then((snapshot) => {
             const homepage = snapshot.val();
             dispatch(setHomePage(homepage));
             dispatch(check());
@@ -55,15 +56,11 @@ export const startSetHomePage = () => {
 // ADD_HOMEPAGE_TELL
 
 export const check = () => {
-    //console.log('in check ============');
     return (dispatch) => {
-        return database.ref("website/homepage/events").once('value').then((snapshot) => {
+        return firebase.database().ref("website/homepage/events").once('value').then((snapshot) => {
             snapshot.forEach(function (childSnap) {
-                // console.log('event', childSnap.val().eventHeader);
-                // console.log('event', childSnap.val());
+
             });
-            // console.log('check');
-            // console.log(snapshot.val());
         });
     };
 };
@@ -81,12 +78,9 @@ export const startAddHomePageTell = (homepage, tellData) => {
             order = 0
         } = tellData;
         const tell = {company, createdAt, name, position, text, order};
-        return database.ref(`website/homepage/tell`).push(tell).then((ref) => {
-            console.log(ref.key);
-            console.log(homepage);
+        return firebase.database().ref(`website/homepage/tell`).push(tell).then((ref) => {
             const id = ref.key;
             homepage.tell[ref.key] = tell;
-            console.log(homepage);
             dispatch(editHomePage(homepage));
             return(homepage);
         });
@@ -112,7 +106,7 @@ export const startDeleteHomePageImage = ( homepage, publicid ) => {
             var data = e.target.responseText;
             console.log(data);
         });
-        return database.ref(`website/`).update(homepage).then(() => {
+        return firebase.database().ref(`website/`).update(homepage).then(() => {
             dispatch(editHomePage( homepage ));
         })
     };

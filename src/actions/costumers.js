@@ -1,5 +1,6 @@
-import database from '../firebase/firebase';
-
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 
 // add costumer
 
@@ -10,7 +11,7 @@ export const addCostumers = ( costumers ) => ({
 
 export const startAddCostumers = ( costumer ) => {
     return (dispatch) => {
-        return database.ref(`website/costumers`).push(costumer).then(() => {
+        return firebase.database().ref(`website/costumers`).push(costumer).then(() => {
             //dispatch(addCostumers( costumers ));
         })
     };
@@ -28,7 +29,7 @@ export const editCostumers = ( costumers ) => ({
 
 export const startEditCostumers = ( costumers, fbCostumers ) => {
     return (dispatch) => {
-        return database.ref(`website/costumers`).update({...fbCostumers}).then(() => {
+        return firebase.database().ref(`website/costumers`).update({...fbCostumers}).then(() => {
             dispatch(editCostumers( costumers ));
         })
     };
@@ -45,7 +46,7 @@ export const setCostumers = (costumers) => ({
 
 export const startSetCostumers = () => {
     return (dispatch) => {
-        return database.ref(`website/costumers/`).once('value').then((snapshot) => {
+        return firebase.database().ref(`website/costumers/`).once('value').then((snapshot) => {
             //console.log('in set homepage ============');
             const costumers = [];
             snapshot.forEach((childSnapshot) => {
@@ -82,7 +83,7 @@ export const startDeleteCostumer = ( fbCostumers, costumers, publicid ) => {
             var data = e.target.responseText;
             console.log(data);
         });
-        return database.ref('website/costumers').update(fbCostumers).then(() => {
+        return firebase.database().ref('website/costumers').update(fbCostumers).then(() => {
             //dispatch(editCostumers( costumers ));
         })
     };

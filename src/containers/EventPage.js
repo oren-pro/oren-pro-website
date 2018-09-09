@@ -105,72 +105,15 @@ class EventPage extends React.Component {
         this.setState(iconRatioOut(e));
     }
 
-    
-
-    // componentDidUpdate(prevProps) {
-    //     //console.log("in componentDidUpdate");
-    //     if (this.state.currentURL === '') {
-    //         const currentURL = 'http://oren-pro-website.herokuapp.com'+this.props.match.url;
-    //         //console.log(currentURL);
-    //         this.setState({
-    //             currentURL
-    //         });
-    //     }
-    //     if(prevProps.match.params.event !== this.props.match.params.event) {
-    //         const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
-    //         this.setState({
-    //             eventName
-    //         });
-    //         const categoryId = this.props.categoryId;
-    //         if (!this.props.eventsObject[this.props.categoryId]) {
-    //             this.props.startSetSubcategories(categoryId).then((subCategories)=> {
-    //                 this.setState({
-    //                     subCategories
-    //                 });
-    //                 this.props.startSetItems(categoryId).then((items)=> {
-    //                     this.setState({
-    //                         items
-    //                     });
-    //                     this.getEventId(eventName, this.state.items);
-    //                 });
-    //             });
-    //         } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
-    //             this.props.startSetItems(categoryId).then((items)=> {
-    //                 this.setState({
-    //                     subCategories: this.props.eventsObject[this.props.categoryId],
-    //                     items
-    //                 });
-    //                 this.getEventId(eventName, this.state.items);
-    //             });
-    //         } else {
-    //             this.setState({
-    //                 subCategories: this.props.eventsObject[this.props.categoryId],
-    //                 items: this.props.eventsObject[this.props.categoryId+'items']
-    //             });
-    //             this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
-    //         }
-    //     }
-    // }
-
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
         let eventShowLines = 1;
         let seo = {};
-        console.log("name");
-        console.log(eventName);
-        console.log(items);
         items.map((item) => {
-            //console.log("in map");
-            //console.log(item.name);
             if (eventName === item.name) {
                 eventId = item.id;
                 eventText = item.text;
-                console.log("in map");
-                console.log(item.id);
-                console.log(item.text);
-                console.log(item.name);
-                console.log(item.showLines);
                 eventShowLines = item.showLines;
                 if (!item.seo) {
                     item.seo = {
@@ -248,30 +191,24 @@ class EventPage extends React.Component {
             }
             stripItems.splice(3, stripItems.length-3);
         }
-        console.log('eventShowLines');
-        console.log(eventShowLines);
         if( eventShowLines === undefined){
             eventShowLines = 1;
         }
         if( eventText === undefined){
             eventText = "";
         }
-        //if(eventId) {
-            console.log('in eventShowLines');
-            console.log(eventId);
-            this.setState({
-                eventId,
-                eventText,
-                eventTextOrigin: eventText,
-                eventShowLines,
-                eventShowLinesOrigin: eventShowLines,
-                itemLocation,
-                nextItem,
-                prevItem,
-                currentItems,
-                stripItems
-            });
-        //}
+        this.setState({
+            eventId,
+            eventText,
+            eventTextOrigin: eventText,
+            eventShowLines,
+            eventShowLinesOrigin: eventShowLines,
+            itemLocation,
+            nextItem,
+            prevItem,
+            currentItems,
+            stripItems
+        });
 
         this.props.startSetImages(eventId, this.props.categoryId, itemLocation).then((images)=> {
             images.sort((a, b) => {
@@ -336,7 +273,6 @@ class EventPage extends React.Component {
     }
 
     setData = () => {
-        console.log("in setdata");
         let subcategoryId = '';
         if (this.props.eventsObject.subcategoryId) {
             subcategoryId = this.props.eventsObject.subcategoryId;
@@ -351,21 +287,17 @@ class EventPage extends React.Component {
                 allSubCategories: JSON.parse(JSON.stringify(this.props.eventsObject.allSubCategories))
             });
             this.props.startSetAllEvents().then(() => {
-                //console.log(this.props.eventsObject.allEvents);
                 this.setState({
                     allEvents: JSON.parse(JSON.stringify(this.props.eventsObject.allEvents))
                 });
-                //console.log(this.props.eventsObject.subcategoryId);
                 if (this.props.eventsObject.subcategoryId === undefined || this.props.eventsObject.subcategoryId === '') {
                     this.setState({
                         subcategoryName: 'הכל'
                     });
                 } else {
                     this.props.eventsObject.allSubCategories.map((subcategory, index) => {
-                        //console.log(subcategory);
                         if(subcategory.id === this.props.eventsObject.subcategoryId) {
                             const subcategoryName = subcategory.name;
-                            //console.log(subcategoryName);
                             this.setState({
                                 subcategoryName
                             });
@@ -377,7 +309,6 @@ class EventPage extends React.Component {
 
 
                 const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
-                console.log(eventName);
                 this.setState({
                     eventName,
                     eventNameOrigin: eventName
@@ -385,8 +316,6 @@ class EventPage extends React.Component {
                 const categoryId = this.props.categoryId;
                 if (!this.props.eventsObject[this.props.categoryId]) {
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
-                        //console.log("from 1");
-                        //console.log(subCategories);
                         this.setState({
                             subCategories
                         });
@@ -400,7 +329,7 @@ class EventPage extends React.Component {
                 } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
                     
                     this.props.startSetItems(categoryId).then((items)=> {
-                        //console.log("from 2");
+
                         this.setState({
                             subCategories: this.props.eventsObject[this.props.categoryId],
                             items
@@ -409,8 +338,6 @@ class EventPage extends React.Component {
                     });
                 } else {
                     this.props.startSetItems(categoryId).then((items)=> {
-                        //console.log("from 3");
-                        //console.log(this.props.eventsObject[this.props.categoryId+'items']);
                         this.setState({
                             subCategories: this.props.eventsObject[this.props.categoryId],
                             items
@@ -424,7 +351,6 @@ class EventPage extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log("did mount")
         window.addEventListener('scroll', this.handleScroll);
         this.setData();
     }
@@ -445,14 +371,10 @@ class EventPage extends React.Component {
         const { dataset } = e.target;
         const { id } = dataset;
         const eventId = this.state.eventId;
-        //console.log(this.state.images);
-        //console.log(Number(this.state.images.length)+1);
-        //console.log( id );
         var myUploadWidget;
         myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
             upload_preset: 'fbznsdxt', 
-            // tags: ['test'],
             sources: [
                 "local",
                 "url",
@@ -462,24 +384,6 @@ class EventPage extends React.Component {
                 "instagram",
                 "camera"
             ],
-            //UI Customization
-            // styles: {
-            //     palette: {
-            //         window: "#10173a",
-            //         sourceBg: "#20304b",
-            //         windowBorder: "#9999ff",
-            //         tabIcon: "#33ffcc",
-            //         inactiveTabIcon: "#0e2f5a",
-            //         menuIcons: "#ffccff",
-            //         link: "#ff0066",
-            //         action: "#33ffcc",
-            //         inProgress: "#00ffcc",
-            //         complete: "#33ff00",
-            //         error: "#cc3333",
-            //         textDark: "#000000",
-            //         textLight: "#ffffff"
-            //     }
-            // },
             fonts: {
                 default: null,
                 "'Cute Font', cursive": "https://fonts.googleapis.com/css?family=Cute+Font",
@@ -491,8 +395,6 @@ class EventPage extends React.Component {
                     console.log(error);
                 }
                 if (result.event === "success") {
-                    //console.log(result);
-                    //console.log(result[0].public_id)
                     const categoryId = this.props.categoryId;
                     const order = Number(this.state.images.length)+1;
                     const image = {
@@ -558,20 +460,6 @@ class EventPage extends React.Component {
         myUploadWidget.open();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     setSubcategoryId = (e) => {
         const subcategoryId = e.target.dataset.id;
         this.setState({
@@ -586,20 +474,11 @@ class EventPage extends React.Component {
     }
 
     gotoNextEvent = () => {
-        console.log('this.state.nextItem');
-        console.log(this.state.nextItem);
         this.props.history.push(`/${this.state.nextItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
     
     gotoPrevEvent = () => {
-        console.log(this.state.prevItem);
         this.props.history.push(`/${this.state.prevItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
-    }
-
-    onEventRollOver = (e) => {
-        //console.log(e.target);
-        //console.log(e.target.dataset.id);
-        //console.log(e.target.dataset.name);
     }
 
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)
@@ -662,10 +541,8 @@ class EventPage extends React.Component {
             eventName
         });
         if(isEqual(this.state.eventNameOrigin, eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-            //console.log("remove listener");
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
-            //console.log("add listener");
             window.addEventListener("beforeunload", this.unloadFunc);
         }
     }
@@ -676,10 +553,8 @@ class EventPage extends React.Component {
             eventText
         });
         if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-            //console.log("remove listener");
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
-            //console.log("add listener");
             window.addEventListener("beforeunload", this.unloadFunc);
         }
     }
@@ -690,20 +565,11 @@ class EventPage extends React.Component {
             eventShowLines
         });
         if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, eventShowLines)){ 
-            //console.log("remove listener");
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
-            //console.log("add listener");
             window.addEventListener("beforeunload", this.unloadFunc);
         }
     }
-
-
-
-
-
-
-
 
     onImageOrderBlur = (e) => {
         const images = [];
@@ -747,14 +613,10 @@ class EventPage extends React.Component {
             return a.order > b.order ? 1 : -1;
         });
 
-        // console.log('galleryImages');
-        // console.log(galleryImages);
         galleryImages.map((image, index) => {
             image.image.eventsIds[eventId+'order'] = Number(index)+1;
             images.push(image.image);
         });
-        // console.log('images');
-        // console.log(images);
 
         this.setState({
             images,
@@ -790,8 +652,6 @@ class EventPage extends React.Component {
         }
     }
 
-
-
     updateImages = () => {
         const categoryId = this.props.categoryId;
         const eventId = this.state.eventId;
@@ -807,8 +667,6 @@ class EventPage extends React.Component {
 
 
     onDeleteImage = (e) => {
-        // console.log(e.target.dataset.publicid);
-        // console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicid = e.target.dataset.publicid;
@@ -838,9 +696,6 @@ class EventPage extends React.Component {
         })
         fbImages[id] = null;
 
-        // console.log(galleryImages);
-        // console.log(images);
-        // console.log(fbImages);
         this.props.startDeleteImage( fbImages, images, eventId, categoryId, publicid );
 
         const slideGalleryImages = [];
@@ -849,27 +704,18 @@ class EventPage extends React.Component {
             let imageHeight = image.imageHeight;
             let ratioWidth = 1;
             let ratioHeight = 1;
-            //console.log(imageHeight);
-            //console.log(imageWidth);
             
             if (imageHeight < 800 && imageWidth < 1000) {
                 ratioHeight = 800/imageHeight;
                 ratioWidth = 1000/imageWidth;
                 if (ratioHeight > ratioWidth) {
-                    //console.log('1');
                     imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 } else {
-                    //console.log('2');
                     imageHeight = ratioWidth*imageHeight;
                     imageWidth = ratioWidth*imageWidth;
                 }
             }
-
-            // console.log(ratioHeight);
-            // console.log(ratioWidth);
-            // console.log(imageHeight);
-            // console.log(imageWidth);
 
             return slideGalleryImages.push({
                 publicId: image.public_id,
@@ -895,24 +741,14 @@ class EventPage extends React.Component {
 
 
     onOpenSlideGallery = (e) => {
-        //console.log(e.target.dataset.id);
-        //console.log(e.target.dataset.order);
         const currentImage = e.target.dataset.order-1;
-        //console.log(currentImage);
         this.onToggleSlideGallery(e, currentImage);
     }
 
 
     onToggleSlideGallery = (e, currentImage = this.state.currentImage) => {
-        //console.log(currentImage);
-        //console.log(this.state.slideGalleryImages);
-        //const width = (100-this.state.slideGalleryImages[currentImage].width/10)/2+3.5;
-        //const crouselControlsRight = {right: `${width}rem`}
-        //const crouselControlsWidth = $('#crouselControlsRight').width();
         const crouselControlsWidth = 140;
-        //console.log(crouselControlsWidth);
         const width = this.state.slideGalleryImages[currentImage].width/2-crouselControlsWidth/2-23;
-        //console.log(width);
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
         this.setState({
             crouselControlsRight,
@@ -922,19 +758,14 @@ class EventPage extends React.Component {
     }
 
     onCurrentImageChange = (currentImage) => {
-        //console.log('onCurrentImageChange');
-        //console.log(currentImage);
         this.setState({
             currentImage
         });
     }
 
-
-
     onNext = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === this.state.slideGalleryImages.length - 1 ? 0 : this.state.currentImage + 1;
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -949,7 +780,6 @@ class EventPage extends React.Component {
     previous = () => {
         if (this.animating) return;
         const nextIndex = this.state.currentImage === 0 ? this.state.slideGalleryImages.length - 1 : this.state.currentImage - 1;
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[nextIndex].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -960,15 +790,10 @@ class EventPage extends React.Component {
     }
 
     onExiting = () => {
-        //console.log('onExiting');
         this.animating = true;
     }
 
     onExited = () => {
-        //console.log('onExited');
-        //const width = (100-this.state.slideGalleryImages[this.state.currentImage].width/10)/2+3.5;
-        //const crouselControlsRight = {right: `${width}rem`, opacity: 1};
-        //const width = (100-this.state.slideGalleryImages[nextIndex].width/10)/2+3.5;
         const crouselControlsWidth = $('#crouselControlsRight').width();
         const width = this.state.slideGalleryImages[this.state.currentImage].width/2-crouselControlsWidth/2-23;
         const crouselControlsRight = {marginLeft: `${width}px`, opacity: 1};
@@ -978,21 +803,16 @@ class EventPage extends React.Component {
         this.animating = false;
     }
 
-
     onToggleEventSeo = () => {
-        //console.log('in seo');
         this.setState({
             seoEventModalIsOpen: !this.state.seoEventModalIsOpen
         });
-        //console.log(this.state.seoEventModalIsOpen);
     }
 
     onToggleItemNameModal = () => {
-        //console.log('in seo');
         this.setState({
             itemNameModalIsOpen: !this.state.itemNameModalIsOpen
         });
-        //console.log(this.state.seoEventModalIsOpen);
     }
 
     onSeoTitleChange = (e) => {
@@ -1030,10 +850,7 @@ class EventPage extends React.Component {
         this.onToggleEventSeo();
     }
 
-    
-
     render() {
-        //console.log(this.state.galleryImages);
         return (
             <div className="container-fluid">
 

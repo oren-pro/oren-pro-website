@@ -1,5 +1,6 @@
-import database from '../firebase/firebase';
-
+//import database from '../firebase/firebase';
+var firebase = require("firebase/app");
+require("firebase/database");
 
 /////////////////////////////////////////// .   set     . ///////////////////////////////////////////////////
 
@@ -14,7 +15,7 @@ export const setCategories = (categories) => ({
 
 export const startSetCategories = () => {
     return (dispatch) => {
-        return database.ref('eventsCategories').once('value').then((snapshot) => {
+        return firebase.database().ref('eventsCategories').once('value').then((snapshot) => {
             const categories = [];
             snapshot.forEach((childSnapshot) => {
                 dispatch(startSetSubcategories(childSnapshot.key));
@@ -40,7 +41,7 @@ export const setSubcategories = (subcategories, categoryId) => ({
 export const startSetSubcategories = (categoryId) => {
     //console.log(categoryId);
     return (dispatch) => {
-        return database.ref('eventsSubcategories').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
+        return firebase.database().ref('eventsSubcategories').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
             //console.log(snapshot.val());
             const subcategories = [];
             snapshot.forEach((childSnapshot) => {
@@ -68,7 +69,7 @@ export const setAllSubcategories = (subcategories) => ({
 export const startSetAllSubcategories = () => {
     //console.log(categoryId);
     return (dispatch) => {
-        return database.ref('eventsSubcategories').once('value').then((snapshot) => {
+        return firebase.database().ref('eventsSubcategories').once('value').then((snapshot) => {
             //console.log(snapshot.val());
             const subcategories = [];
             snapshot.forEach((childSnapshot) => {
@@ -97,7 +98,7 @@ export const setItems = (items, categoryId) => ({
 export const startSetItems = (categoryId) => {
     //console.log(categoryId);
     return (dispatch) => {
-        return database.ref('eventsItems').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
+        return firebase.database().ref('eventsItems').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
             //console.log(snapshot.val());
             const items = [];
             snapshot.forEach((childSnapshot) => {
@@ -127,7 +128,7 @@ export const setAllEvents = (items) => ({
 export const startSetAllEvents = () => {
     //console.log(categoryId);
     return (dispatch) => {
-        return database.ref('eventsItems').once('value').then((snapshot) => {
+        return firebase.database().ref('eventsItems').once('value').then((snapshot) => {
             //console.log(snapshot.val());
             const events = [];
             snapshot.forEach((childSnapshot) => {
@@ -161,7 +162,7 @@ export const setImages = ( images, eventId, categoryId, itemLocation ) => ({
 export const startSetImages = ( eventId, categoryId, itemLocation ) => {
    //console.log(eventId);
     return (dispatch) => {
-        return database.ref('eventsImages').orderByChild(`eventsIds/${eventId}`).equalTo(true).once('value').then((snapshot) => {
+        return firebase.database().ref('eventsImages').orderByChild(`eventsIds/${eventId}`).equalTo(true).once('value').then((snapshot) => {
             //console.log(snapshot);
             const images = [];
             snapshot.forEach((childSnapshot) => {
@@ -207,7 +208,7 @@ export const startAddCategory = (categoryData = {}) => {
             name = ''
         } = categoryData;
         const category = {name};
-        return database.ref('eventsCategories').push(category).then((ref) => {
+        return firebase.database().ref('eventsCategories').push(category).then((ref) => {
             dispatch(addCategory({
                 id: ref.key,
                 ...category
@@ -251,7 +252,7 @@ export const startAddSubcategory = (subcategoryData = {}, order) => {
                 [categoryId+'order']: order
             }
         };
-        return database.ref('eventsSubcategories').push(subcategory).then((ref) => {
+        return firebase.database().ref('eventsSubcategories').push(subcategory).then((ref) => {
             if(ref) {
                 const localSubcategory = {
                     id: ref.key,
@@ -292,7 +293,7 @@ export const startAddItem = (itemData = {}, categoryId, catOrder, subcategoryId,
             categories,
             subcategories
         };
-        return database.ref('eventsItems').push(item).then((ref) => {
+        return firebase.database().ref('eventsItems').push(item).then((ref) => {
             if(ref) {
                 const localItem = {
                     id: ref.key,
@@ -340,7 +341,7 @@ export const startAddImage = (imageData = {}, categoryId, order) => {
                 [eventId+'order']: order
             }
         };
-        return database.ref('eventsImages').push(image).then((ref) => {
+        return firebase.database().ref('eventsImages').push(image).then((ref) => {
             
             const localImage = {
                 id: ref.key,
@@ -397,7 +398,7 @@ export const updateEventImage = ( id, image ) => ({
 export const startUpdateEventImage = ( id, image ) => {
     //console.log(id, image);
     return (dispatch, getState) => {
-        return database.ref(`eventsItems/${id}`).update(image).then(() => {
+        return firebase.database().ref(`eventsItems/${id}`).update(image).then(() => {
             //console.log('done actions');
             //dispatch(updateEventImage( id, updates ));
         })
@@ -435,7 +436,7 @@ export const editSeo = ( seo, categoryId ) => ({
 
 export const startEditSeo = ( seo, categoryId ) => {
     return (dispatch) => {
-        return database.ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
+        return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
             dispatch(editSeo( seo, categoryId ));
         })
     };
@@ -454,7 +455,7 @@ export const editEventSeo = ( seo, categoryId, eventId ) => ({
 
 export const startEditEventSeo = ( seo, categoryId, eventId ) => {
     return (dispatch) => {
-        return database.ref(`eventsItems/${eventId}/seo`).update(seo).then(() => {
+        return firebase.database().ref(`eventsItems/${eventId}/seo`).update(seo).then(() => {
             dispatch(editEventSeo( seo, categoryId, eventId ));
         })
     };
@@ -473,7 +474,7 @@ export const editCategory = ( category ) => ({
 export const startEditCategory = ( category ) => {
     console.log('here');
     return (dispatch) => {
-        return database.ref(`eventsCategories/${category.id}`).update(category).then(() => {
+        return firebase.database().ref(`eventsCategories/${category.id}`).update(category).then(() => {
             dispatch(editCategory( category ));
         })
     };
@@ -490,7 +491,7 @@ export const editSubCategories = ( subcategories, categoryId ) => ({
 
 export const startEditSubCategories = ( fbSubcategories, subcategories, categoryId ) => {
     return (dispatch) => {
-        return database.ref().child(`eventsSubcategories`).update(fbSubcategories).then(() => {
+        return firebase.database().ref().child(`eventsSubcategories`).update(fbSubcategories).then(() => {
             dispatch(editSubCategories( subcategories, categoryId ));
         })
     };
@@ -517,7 +518,7 @@ export const startEditEvent = ( eventName, eventText, eventShowLines, eventId ) 
         showLines: eventShowLines
     }
     return (dispatch) => {
-        return database.ref(`eventsItems/${eventId}`).update(event).then(() => {
+        return firebase.database().ref(`eventsItems/${eventId}`).update(event).then(() => {
             //dispatch(editCategory( eventName, eventText, eventShowLines, eventId ));
         })
     };
@@ -529,8 +530,8 @@ export const startEditEvent = ( eventName, eventText, eventShowLines, eventId ) 
 
 export const startHookSubcategory = (  fbSubcategoriesToUpdate, fbEventsToUpdate  ) => {
     return (dispatch) => {
-        return database.ref().child(`eventsSubcategories`).update(fbSubcategoriesToUpdate).then(() => {
-                database.ref().child(`eventsItems`).update(fbEventsToUpdate).then(() => {
+        return firebase.database().ref().child(`eventsSubcategories`).update(fbSubcategoriesToUpdate).then(() => {
+                firebase.database().ref().child(`eventsItems`).update(fbEventsToUpdate).then(() => {
                     //dispatch(startSetAllSubcategories());
                     //dispatch(startSetAllEvents());
                     return 'done';
@@ -544,7 +545,7 @@ export const startHookSubcategory = (  fbSubcategoriesToUpdate, fbEventsToUpdate
 
 export const startHookEvent = ( fbEventsToUpdate ) => {
     return (dispatch) => {
-        return database.ref().child(`eventsItems`).update(fbEventsToUpdate).then(() => {
+        return firebase.database().ref().child(`eventsItems`).update(fbEventsToUpdate).then(() => {
             //dispatch(startSetAllSubcategories());
             //dispatch(startSetAllEvents());
             return 'done';
@@ -583,7 +584,7 @@ export const startToggleShowEvent = ( categoryId, subcategoryId, eventId, visibl
     console.log(visible);
     console.log(visibleObj);
     return (dispatch) => {
-        return database.ref().child(`eventsItems/${eventId}`).update(visibleObj).then(() => {
+        return firebase.database().ref().child(`eventsItems/${eventId}`).update(visibleObj).then(() => {
             dispatch(toggleShowEvent( categoryId, subcategoryId, eventId, visible ));
             dispatch(toggleAllShowEvent( categoryId, subcategoryId, eventId, visible ));
             return 'done';
@@ -618,7 +619,7 @@ export const startToggleShowSubcategory = ( categoryId, subcategoryId, visible )
     //console.log(visible);
     //console.log(visibleObj);
     return (dispatch) => {
-        return database.ref().child(`eventsSubcategories/${subcategoryId}`).update(visibleObj).then(() => {
+        return firebase.database().ref().child(`eventsSubcategories/${subcategoryId}`).update(visibleObj).then(() => {
             dispatch(toggleShowSubcategory( categoryId, subcategoryId, visible ));
             dispatch(toggleAllShowSubcategory( categoryId, subcategoryId, visible ));
             return 'done';
@@ -640,7 +641,7 @@ export const editEvents = ( events, categoryId ) => ({
 
 export const startEditEvents = ( fbEvents, events, categoryId ) => {
     return (dispatch) => {
-        return database.ref().child(`eventsItems`).update(fbEvents).then(() => {
+        return firebase.database().ref().child(`eventsItems`).update(fbEvents).then(() => {
             dispatch(editEvents( events, categoryId ));
         })
     };
@@ -661,7 +662,7 @@ export const editImages = ( images, eventId, categoryId ) => ({
 
 export const startEditImages = ( fbImages, images, eventId, categoryId ) => {
     return (dispatch) => {
-        return database.ref().child(`eventsImages`).update(fbImages).then(() => {
+        return firebase.database().ref().child(`eventsImages`).update(fbImages).then(() => {
             dispatch(editImages( images, eventId, categoryId ));
         })
     };
@@ -693,7 +694,7 @@ export const startDeleteImage = ( fbImages, images, eventId, categoryId, publici
             var data = e.target.responseText;
             console.log(data);
         });
-        return database.ref().child(`eventsImages`).update(fbImages).then(() => {
+        return firebase.database().ref().child(`eventsImages`).update(fbImages).then(() => {
             dispatch(editImages( images, eventId, categoryId ));
         })
     };
