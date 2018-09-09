@@ -6,12 +6,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink as RSNavlink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavItem
+} from 'reactstrap';
 import HomePageCarousel from '../homepage/HomePageCarousel';
 import IconHoverChange from './IconHoverChange';
 import { connect } from 'react-redux';

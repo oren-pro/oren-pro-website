@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption
+  CarouselItem
 } from 'reactstrap';
 
 const propTypes = {
@@ -133,8 +130,3 @@ UncontrolledCarousel.defaultProps = {
 };
 
 export default UncontrolledCarousel;
-
-
-
-
-//<CarouselCaption captionText={item.caption} captionHeader={item.header || item.caption} />

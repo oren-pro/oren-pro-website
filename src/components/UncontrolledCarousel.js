@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Carousel,
   CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
 
