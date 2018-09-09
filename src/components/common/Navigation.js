@@ -208,8 +208,7 @@ class Navigation extends React.Component {
                 <NavLink exact to="/" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</NavLink>
               </NavItem>
               <NavItem className="nav-item--accessibility">
-                <NavLink
-                  to="/"
+                <div
                   className="nav__link--accessibility"
                   data-name="accessibility"
                   onMouseOver={this.setIconChangeOn}
@@ -221,7 +220,7 @@ class Navigation extends React.Component {
                     icon={this.state.accessibilityIcon} 
                     
                   />
-                </NavLink>
+                </div>
               </NavItem>
             </Nav>
           </Collapse>
