@@ -1,5 +1,6 @@
 //import database from '../firebase/firebase';
-
+//import * as firebase from 'firebase/app';
+//import 'firebase/database';
 var firebase = require("firebase/app");
 require("firebase/database");
 
