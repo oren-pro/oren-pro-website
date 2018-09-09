@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import ReactLoading from "react-loading";
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
@@ -37,7 +37,7 @@ const jsx = (
 let hasRendered = false;
 const renderApp = () => {
     if (!hasRendered) {
-        ReactDOM.render(jsx, document.getElementById('app'));
+        render(jsx, document.getElementById('app'));
         hasRendered = true;
     }
 };
@@ -45,9 +45,9 @@ const renderApp = () => {
 //console.log(navigator.userAgent);
 if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
     console.log("found");
-    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
+    render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
 } else {
-    ReactDOM.render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
+    render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
 }
 
 
