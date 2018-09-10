@@ -113,17 +113,8 @@ $tabletMarginLeft: 43vw;
     }
 }
 
-
-
 @media (max-width: $mobileMaxWidth) {
     .pageup__image {
-        position: relative;
         left: 30rem;
-        width: 3.5rem;
-        height: 3.6rem;
-        background-image: url('/images/common/pageup.svg');
-        background-repeat: no-repeat;
-        background-size: 3.5rem 3.6rem;
-        margin-bottom: 1rem;
     }
 }
