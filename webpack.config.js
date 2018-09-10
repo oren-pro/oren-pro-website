@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 //,
 //            new BundleAnalyzerPlugin()
@@ -51,9 +52,9 @@ module.exports = (env) => {
         },
         plugins: [
             new CompressionPlugin({
-            test: /\.(js|css)$/,
-            algorithm: 'gzip',
-            //deleteOriginalAssets: true
+                test: /\.(js|css)$/,
+                algorithm: 'gzip',
+                //deleteOriginalAssets: true
             }),
             CSSExtract,
             new webpack.DefinePlugin({
