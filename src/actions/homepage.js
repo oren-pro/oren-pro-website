@@ -39,39 +39,39 @@ export const startEditHomePageSeo = ( seo ) => {
 
 // set homepage
 
+function makeRequest (method, url, done) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+        done(null, xhr.response);
+    };
+    xhr.onerror = function () {
+        done(xhr.response);
+    };
+    xhr.send();
+}
+
+
+
 export const setHomePage = (homepage) => ({
     type: "SET_HOMEPAGE",
     homepage
 });
 
-export const startSetHomePage = () => {
-
-    // return (dispatch) => {
-    //     //https://[PROJECT_ID].firebaseio.com/users/jack/name.json
-    //     var method = 'GET';
-    //     //var action = 'http://localhost:3000/deleteImage';
-    //     var action = 'https://oren-pro.firebaseio.com/website/homepage.json';
-    //     var xhr = new XMLHttpRequest();
-    //     var data = '';
-    //     //console.log(publicid);
-    //     //data += 'publicid=' + publicid;
-    //     xhr.open(method, action);
-    //     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
-    //     xhr.send(data);
-    //     xhr.addEventListener('load', function (e) {
-    //         var homepage = JSON.parse(e.target.responseText);
-    //         console.log(homepage);
-    //         dispatch(setHomePage(homepage));
-    //     });
-    //     return 'done';
-    // };
+export const startSetHomePage = (done) => {
 
     return (dispatch) => {
-        return firebase.database().ref(`website/homepage/`).once('value').then((snapshot) => {
-            const homepage = snapshot.val();
-            console.log(homepage);
-            dispatch(setHomePage(homepage));
-        });
+        var method = 'GET';
+        var action = 'https://oren-pro.firebaseio.com/website/homepage.json';
+        var xhr = new XMLHttpRequest();
+        var data = '';
+        xhr.open(method, action);
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            done(null, JSON.parse(xhr.response));
+            dispatch(setHomePage(JSON.parse(xhr.response)));
+        };
+        xhr.send(data);
     };
 };
 

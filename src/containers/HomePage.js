@@ -223,8 +223,10 @@ class HomePage extends React.Component {
         
         
 
-        this.props.startSetHomePage().then(()=> {
-            const homepage = JSON.parse(JSON.stringify(this.props.homepage));
+        this.props.startSetHomePage((err, startSetHomePageResponse) => {
+            if (err) { throw err; }
+            //console.log(startSetHomePageResponse);
+            const homepage = JSON.parse(JSON.stringify(startSetHomePageResponse));
 
             if (!homepage.seo) {
                 homepage.seo = {
@@ -234,7 +236,7 @@ class HomePage extends React.Component {
                 }
             }
             
-            const tempTell = this.props.homepage.tell;
+            const tempTell = startSetHomePageResponse.tell;
             const tell = [];
             Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
 
@@ -772,7 +774,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     startLogout: () => dispatch(startLogout()),
     startAddHomePageTell: (homepage, tellData) => dispatch(startAddHomePageTell(homepage, tellData)),
-    startSetHomePage: () => dispatch(startSetHomePage()),
+    startSetHomePage: (done) => dispatch(startSetHomePage(done)),
     startEditHomePage: (updates) => dispatch(startEditHomePage(updates)),
     startEditHomePageSeo: (seo) => dispatch(startEditHomePageSeo(seo)),
     startDeleteHomePageImage: ( homepage, publicid ) => dispatch(startDeleteHomePageImage( homepage, publicid ))
