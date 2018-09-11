@@ -10,7 +10,7 @@ const HomePageEventsToolbar = () => (
                 </div>
                 <p className="homepage__events__toolbar__text Heebo-Regular" dir="rtl">עיצוב אירועים</p>
             </NavLink>
-            <NavLink to="/פסטיבלים" className="homepage__events__toolbar__item">
+            <NavLink to="/פסטיבלים_ואירועי_חוצות" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="fest" src="/images/homepage/events/toolbar/events-toolbar-fest.svg" />
                 </div>

@@ -39,12 +39,12 @@ class AppRouter extends React.Component {
                             <Route path="/contact" component={ContactPage} exact={true} />
                             {
                                 this.props.events.categories.map((category, index) => {
-                                    return <Route path={`/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventsPage {...props} category={category} categoryIndex={index} />)} exact={true} />;
+                                    return <Route path={`/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventsPage {...props} category={category} categoryIndex={index} />)} exact={true} />;
                                 })
                             }
                             {
                                 this.props.events.categories.map((category) => {
-                                    return <Route path={`/:event/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)} exact={true} />;
+                                    return <Route path={`/:event/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)} exact={true} />;
                                 })
                             }
                             <Route path="/events" component={EventsPage} exact={true} />

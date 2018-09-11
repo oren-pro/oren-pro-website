@@ -45,28 +45,38 @@ export const setHomePage = (homepage) => ({
 });
 
 export const startSetHomePage = () => {
+
+    // return (dispatch) => {
+    //     //https://[PROJECT_ID].firebaseio.com/users/jack/name.json
+    //     var method = 'GET';
+    //     //var action = 'http://localhost:3000/deleteImage';
+    //     var action = 'https://oren-pro.firebaseio.com/website/homepage.json';
+    //     var xhr = new XMLHttpRequest();
+    //     var data = '';
+    //     //console.log(publicid);
+    //     //data += 'publicid=' + publicid;
+    //     xhr.open(method, action);
+    //     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+    //     xhr.send(data);
+    //     xhr.addEventListener('load', function (e) {
+    //         var homepage = JSON.parse(e.target.responseText);
+    //         console.log(homepage);
+    //         dispatch(setHomePage(homepage));
+    //     });
+    //     return 'done';
+    // };
+
     return (dispatch) => {
         return firebase.database().ref(`website/homepage/`).once('value').then((snapshot) => {
             const homepage = snapshot.val();
+            console.log(homepage);
             dispatch(setHomePage(homepage));
-            dispatch(check());
         });
     };
 };
+
 
 // ADD_HOMEPAGE_TELL
-
-export const check = () => {
-    return (dispatch) => {
-        return firebase.database().ref("website/homepage/events").once('value').then((snapshot) => {
-            snapshot.forEach(function (childSnap) {
-
-            });
-        });
-    };
-};
-
-
 
 export const startAddHomePageTell = (homepage, tellData) => {
     return (dispatch, getState) => {

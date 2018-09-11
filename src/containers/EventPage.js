@@ -153,12 +153,12 @@ class EventPage extends React.Component {
         let doneId = false;
         currentItems.map((item, index) => {
             if (index === 0) {
-                firstListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+                firstListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             } else if (index === currentItems.length-1) {
-                lastListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+                lastListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             }
             inId = item.id;
-            inName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+            inName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
             if (item.id === eventId) {
                 prevItem = inPrevName;
                 doneId = true;
@@ -170,7 +170,7 @@ class EventPage extends React.Component {
                 }
                 stripItems.push(item);
             }
-            inPrevName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+            inPrevName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
         });
         if (prevItem === '') {
             prevItem = lastListName;
@@ -308,7 +308,7 @@ class EventPage extends React.Component {
 
 
 
-                const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+                const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
                 this.setState({
                     eventName,
                     eventNameOrigin: eventName
@@ -470,15 +470,15 @@ class EventPage extends React.Component {
     }
 
     navtoCategoryPage = () => {
-        this.props.history.push(`/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
 
     gotoNextEvent = () => {
-        this.props.history.push(`/${this.state.nextItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.nextItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
     
     gotoPrevEvent = () => {
-        this.props.history.push(`/${this.state.prevItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.prevItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
 
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)
@@ -522,7 +522,7 @@ class EventPage extends React.Component {
                 window.removeEventListener("beforeunload", this.unloadFunc);
                 if(gotoNewLocation === true) {
                     
-                    this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+                    this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
                     this.setData();
                 }
             });
