@@ -43,11 +43,30 @@ class AppRouter extends React.Component {
                                 })
                             }
                             {
-                                this.props.events.categories.map((category) => {
-                                    return <Route path={`/:event/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} key={category.id} render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)} exact={true} />;
+                                this.props.events.categories.map((category, index) => {
+                                    
+                                    return <Route
+                                                path={`/:subcategory/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`}
+                                                key={category.id}
+                                                render={(props) => ( <EventsPage {...props} category={category} categoryIndex={index} />)}
+                                                exact={true}
+                                            />;
+                                    
                                 })
                             }
-                            <Route path="/events" component={EventsPage} exact={true} />
+                            {
+                                this.props.events.categories.map((category) => {
+                                    //this.props.events.allSubCategories.map((subcategory, index) => {
+                                        return <Route
+                                                    path={`/:event/:subcategory/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`}
+                                                    key={category.id}
+                                                    render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)}
+                                                    exact={true}
+                                                />;
+                                    //})
+                                })
+                            }
+                            
                             <Route path="/signin" component={SigninPage} exact={true} />
                             <PublicRoute path="/login" component={LoginPage} exact={true} />
                             <Route path="/קצת_אחרת" component={DifferentPage} exact={true} />

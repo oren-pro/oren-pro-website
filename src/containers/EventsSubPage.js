@@ -183,21 +183,10 @@ class EventsPage extends React.Component {
         let subcategoryId = '';
         if (this.props.eventsObject.subcategoryId) {
             subcategoryId = this.props.eventsObject.subcategoryId;
-            this.setState({
-                subcategoryId
-            });
-        }
-
-        let subcategoryName = '';
-
-        if(this.props.match.params.subcategory) {
-            subcategoryName = this.props.match.params.subcategory.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
-        }
-
+        } 
         this.setState({
-            subcategoryName
+            subcategoryId
         });
-
         const categoryId = this.props.category.id;
         if (!this.props.eventsObject[categoryId]) {
             this.props.startSetSubcategories(categoryId).then((subCategories)=> {
@@ -208,7 +197,7 @@ class EventsPage extends React.Component {
                     subCategoriesOrigin: JSON.parse(JSON.stringify(subCategories)),
                     subCategories
                 });
-                this.getSubcategorytId(subcategoryName, subCategories);
+                
                 this.props.eventsObject.categories.map((category, index) => {
                     if (category.id !== categoryId) {
                         this.props.startSetItems(category.id).then((items)=> {
@@ -243,7 +232,6 @@ class EventsPage extends React.Component {
             subcategories.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
-            this.getSubcategorytId(subcategoryName, subcategories);
             this.props.startSetItems(categoryId).then((items)=> {
                 items.sort((a, b) => {
                     return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -270,7 +258,6 @@ class EventsPage extends React.Component {
             subcategories.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
-            this.getSubcategorytId(subcategoryName, subcategories);
             const itemsSet = this.props.eventsObject[categoryId+'items'];
             itemsSet.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
@@ -302,37 +289,6 @@ class EventsPage extends React.Component {
             });
         }
         
-    }
-
-    getSubcategorytId = (subcategoryName, subcategories) => {
-        let subcategoryId = '';
-        let subcategoryText = '';
-        let subcategoryShowLines = 1;
-        let seo = {};
-        //console.log(subcategories);
-        subcategories.map((subcategory) => {
-            //console.log(subcategory.name);
-            if (subcategoryName === subcategory.name) {
-                subcategoryId = subcategory.id;
-                subcategoryText = subcategory.text;
-                subcategoryShowLines = subcategory.showLines;
-                if (!subcategory.seo) {
-                    subcategory.seo = {
-                        title: '',
-                        description: '',
-                        keyWords: ''
-                    }
-                }
-                // this.setState({
-                //     seo: subcategory.seo
-                // });
-            }
-        });
-        //console.log(subcategoryName);
-        //console.log(subcategoryId);
-        this.setState({
-            subcategoryId
-        });
     }
 
     componentWillUnmount = () => {
@@ -555,10 +511,8 @@ class EventsPage extends React.Component {
     setSubcategoryId = (e) => {
         const categoryId = this.state.category.id;
         const subcategoryId = e.target.dataset.id;
-        const subcategoryName = e.target.dataset.name;
         this.setState({
-            subcategoryId,
-            subcategoryName
+            subcategoryId
         });
         this.props.setCategoryId(categoryId);
         this.props.setSubcategoryId(subcategoryId);
@@ -595,12 +549,6 @@ class EventsPage extends React.Component {
             itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrent
         });
-        if(subcategoryId === '') {
-            this.props.history.push(`/${this.state.category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
-        } else {
-            this.props.history.push(`/${subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.state.category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
-        }
-        
     }
 
     startEditSubcategory = () => {
@@ -1678,7 +1626,6 @@ class EventsPage extends React.Component {
                             categoryName={this.state.category.name}
                             categoryText={this.state.category.text}
                             categoryId={this.state.category.id}
-                            subcategoryName={this.state.subcategoryName}
                             subcategoryId={this.state.subcategoryId}
                             isAuthenticated={this.props.isAuthenticated}
                             itemsOrigin={this.state.itemsOrigin}

@@ -58,6 +58,7 @@ const EventsEvents = (props) => (
                             order={item.subcategories[props.subcategoryId+'order']}
                             categoryId={props.categoryId}
                             subcategoryId={props.subcategoryId}
+                            subcategoryName={props.subcategoryName}
                             categoryName={props.categoryName}
                             eventName={props.eventName}
                             image={item.image}

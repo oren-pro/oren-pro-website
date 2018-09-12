@@ -25,6 +25,10 @@ class EventsEvent extends React.Component {
     };
 
     render() {
+        let categoryLink = 'הכל';
+        if (this.props.subcategoryName !== '' && this.props.subcategoryName !== undefined) {
+            categoryLink = this.props.subcategoryName;
+        }
         //console.log(this.props);
         return (
             <div data-id={this.props.id} hidden={(this.props.subcategories[this.props.subcategoryId] !== true && this.props.subcategoryId !== '') || (this.props.isAuthenticated !== true && this.props.visible !== true)} className={`events__event__box${ this.props.oneLine === true ? ' events__event__box--event' : ''}`} onMouseEnter={this.props.onRollOver} dir="rtl">
@@ -115,7 +119,7 @@ class EventsEvent extends React.Component {
                     <div className="events__event__button__box"
                         onMouseEnter={this.onMouseEnter}
                         onMouseLeave={this.onMouseLeave}
-                        onClick={() => { history.push(`/${this.props.title.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`) }}
+                        onClick={() => { history.push(`/${this.props.title.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${categoryLink.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`) }}
                         
                     >
                         <button

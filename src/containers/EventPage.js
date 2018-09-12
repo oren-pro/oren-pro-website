@@ -105,6 +105,37 @@ class EventPage extends React.Component {
         this.setState(iconRatioOut(e));
     }
 
+    getSubcategorytId = (subcategoryName, subcategories) => {
+        let subcategoryId = '';
+        let subcategoryText = '';
+        let subcategoryShowLines = 1;
+        let seo = {};
+        //console.log(subcategories);
+        subcategories.map((subcategory) => {
+            //console.log(subcategory.name);
+            if (subcategoryName === subcategory.name) {
+                subcategoryId = subcategory.id;
+                subcategoryText = subcategory.text;
+                subcategoryShowLines = subcategory.showLines;
+                if (!subcategory.seo) {
+                    subcategory.seo = {
+                        title: '',
+                        description: '',
+                        keyWords: ''
+                    }
+                }
+                // this.setState({
+                //     seo: subcategory.seo
+                // });
+            }
+        });
+        //console.log(subcategoryName);
+        //console.log(subcategoryId);
+        this.setState({
+            subcategoryId
+        });
+    }
+
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
@@ -129,13 +160,14 @@ class EventPage extends React.Component {
         });
 
         const currentItems = [];
-        if ( this.props.eventsObject.subcategoryId === undefined || this.props.eventsObject.subcategoryId === '' ) {
+        //console.log(this.state.subcategoryId);
+        if ( this.state.subcategoryId === undefined || this.state.subcategoryId === '' ) {
             items.map((item, index) => {
                 currentItems.push(item);
             });
         } else {
             items.map((item, index) => {
-                if(item.subcategories[this.props.eventsObject.subcategoryId]){
+                if(item.subcategories[this.state.subcategoryId]){
                     currentItems.push(item);
                 }
             });
@@ -306,7 +338,13 @@ class EventPage extends React.Component {
                 }
                 
 
+                const subcategoryName = this.props.match.params.subcategory.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+                this.setState({
+                    subcategoryName
+                });
 
+                //console.log(subcategoryName);
+                
 
                 const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
                 this.setState({
@@ -315,10 +353,12 @@ class EventPage extends React.Component {
                 });
                 const categoryId = this.props.categoryId;
                 if (!this.props.eventsObject[this.props.categoryId]) {
+                    console.log('1');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         this.setState({
                             subCategories
                         });
+                        this.getSubcategorytId(subcategoryName, subCategories);
                         this.props.startSetItems(categoryId).then((items)=> {
                             this.setState({
                                 items
@@ -327,24 +367,33 @@ class EventPage extends React.Component {
                         });
                     });
                 } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
-                    
-                    this.props.startSetItems(categoryId).then((items)=> {
-
+                    console.log('2');
+                    this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         this.setState({
-                            subCategories: this.props.eventsObject[this.props.categoryId],
-                            items
+                            subCategories
                         });
-                        this.getEventId(eventName, this.state.items);
+                        this.getSubcategorytId(subcategoryName, subCategories);
+                        this.props.startSetItems(categoryId).then((items)=> {
+                            this.setState({
+                                items
+                            });
+                            this.getEventId(eventName, this.state.items);
+                        });
                     });
                 } else {
-                    this.props.startSetItems(categoryId).then((items)=> {
+                    console.log('3');
+                    this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         this.setState({
-                            subCategories: this.props.eventsObject[this.props.categoryId],
-                            items
+                            subCategories
                         });
-                        this.getEventId(eventName, this.props.eventsObject[this.props.categoryId+'items']);
+                        this.getSubcategorytId(subcategoryName, subCategories);
+                        this.props.startSetItems(categoryId).then((items)=> {
+                            this.setState({
+                                items
+                            });
+                            this.getEventId(eventName, this.state.items);
+                        });
                     });
-                    
                 }
             });
         });
@@ -462,23 +511,29 @@ class EventPage extends React.Component {
 
     setSubcategoryId = (e) => {
         const subcategoryId = e.target.dataset.id;
+        const subcategoryName = e.target.dataset.name;
         this.setState({
             subcategoryId
         });
         this.props.setSubcategoryId(subcategoryId);
-        this.navtoCategoryPage();
+        this.navtoCategoryPage(subcategoryName);
     }
 
-    navtoCategoryPage = () => {
-        this.props.history.push(`/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+    navtoCategoryPage = (subcategoryName) => {
+        if (subcategoryName !== '' && subcategoryName !== undefined) {
+            this.props.history.push(`/${subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        } else {
+            this.props.history.push(`/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        }
+        
     }
 
     gotoNextEvent = () => {
-        this.props.history.push(`/${this.state.nextItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.nextItem}/${this.state.subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
     
     gotoPrevEvent = () => {
-        this.props.history.push(`/${this.state.prevItem}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.prevItem}/${this.state.subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
     }
 
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)

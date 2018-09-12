@@ -53,7 +53,7 @@ class EventsTabs extends React.Component {
                                 this.state.subCategories.map((subCategory) => {
 
                                     if(this.props.isAuthenticated || subCategory.visible === true) {
-                                        return  <button key={subCategory.id} data-id={subCategory.id} className={this.props.subcategoryId === subCategory.id ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
+                                        return  <button key={subCategory.id} data-id={subCategory.id} data-name={subCategory.name} className={this.props.subcategoryId === subCategory.id ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
                                                     {subCategory.name}
                                                 </button>
                                     }
