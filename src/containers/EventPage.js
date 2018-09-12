@@ -183,6 +183,11 @@ class EventPage extends React.Component {
         let lastListName = '';
         let inPrevName = '';
         let doneId = false;
+        items.map((item, index) => {
+            if (item.id === eventId) {
+                itemLocation = index;
+            }
+        });
         currentItems.map((item, index) => {
             if (index === 0) {
                 firstListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
@@ -194,7 +199,7 @@ class EventPage extends React.Component {
             if (item.id === eventId) {
                 prevItem = inPrevName;
                 doneId = true;
-                itemLocation = index;
+                //itemLocation = index;
             } else {
                 if (doneId) {
                     nextItem = inName;
@@ -355,6 +360,11 @@ class EventPage extends React.Component {
                 if (!this.props.eventsObject[this.props.categoryId]) {
                     console.log('1');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
+                        if(subCategories.length>1){
+                            subCategories.sort((a, b) => {
+                                return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
+                            });
+                        }
                         this.setState({
                             subCategories
                         });
@@ -369,6 +379,11 @@ class EventPage extends React.Component {
                 } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
                     console.log('2');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
+                        if(subCategories.length>1){
+                            subCategories.sort((a, b) => {
+                                return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
+                            });
+                        }
                         this.setState({
                             subCategories
                         });
@@ -383,6 +398,11 @@ class EventPage extends React.Component {
                 } else {
                     console.log('3');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
+                        if(subCategories.length>1){
+                            subCategories.sort((a, b) => {
+                                return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
+                            });
+                        }
                         this.setState({
                             subCategories
                         });

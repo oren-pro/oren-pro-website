@@ -160,13 +160,13 @@ export const setImages = ( images, eventId, categoryId, itemLocation ) => ({
 });
 
 export const startSetImages = ( eventId, categoryId, itemLocation ) => {
-   //console.log(eventId);
+   console.log(eventId);
     return (dispatch) => {
         return firebase.database().ref('eventsImages').orderByChild(`eventsIds/${eventId}`).equalTo(true).once('value').then((snapshot) => {
-            //console.log(snapshot);
+            //addImaconsole.log(snapshot);
             const images = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
+                console.log(childSnapshot.val());
                 images.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -357,17 +357,17 @@ export const startAddImage = (imageData = {}, categoryId, order) => {
                 }
             });
 
-            //console.log(catItems[itemLocation]);
+            console.log(catItems[itemLocation]);
             let images = [];
             if ( catItems[itemLocation].images ) {
                 images = catItems[itemLocation].images;
             }
-            //console.log(images);
+            console.log(images);
             images.push({
                 id: ref.key,
                 ...image
             });
-            //console.log(images);
+            console.log(images);
             //catItems[itemLocation].images = images;
 
              dispatch(addImage(images, eventId, categoryId));

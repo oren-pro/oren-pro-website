@@ -25,6 +25,9 @@ const eventsReducerDefaultState = {};
             events.allEvents = action.items;
             return events;
         case 'SET_IMAGES':
+        console.log(action.categoryId);
+        console.log(action.itemLocation);
+        console.log(action.images);
             events[action.categoryId+'items'][action.itemLocation].images = action.images;
             return events;
         
