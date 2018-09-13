@@ -15,7 +15,9 @@ export default class EventsText extends React.Component {
     
     state = {
         height: this.props.showLines * 18,
-        minHeight: this.props.showLines * 18
+        minHeight: this.props.showLines * 18,
+        categoryText: '',
+        showLines: 1
     };
 
     toggle = () => {
@@ -203,7 +205,7 @@ export default class EventsText extends React.Component {
     }
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
-        if (this.props.showLines !== prevProps.showLines) {
+        if (this.props.showLines !== prevProps.showLines && this.props.showLines) {
             this.setHeight(this.props.showLines);
         }
     }
@@ -224,10 +226,10 @@ export default class EventsText extends React.Component {
                     height={ height }>
                         { 
                             this.props.isAuthenticated === true ? 
-                                <div className={shouldHighLight(this.props.categoryOrigin.text, this.props.categoryText)}>
+                                <div className={shouldHighLight(this.props.categoryTextOrigin, this.props.categoryText)}>
                                     <Textarea
                                         className="events__text Heebo-Regular"
-                                        value={this.props.categoryText}
+                                        value={this.props.categoryText ? this.props.categoryText : this.state.categoryText}
                                         data-field="text"
                                         data-action='setString'
                                         data-name={`item${this.props.index}`}
@@ -262,10 +264,10 @@ export default class EventsText extends React.Component {
                 { 
                     this.props.isAuthenticated === true ? 
                         <input
-                            className={shouldHighLight(this.props.categoryOrigin.showLines, this.props.showLines)}
+                            className={shouldHighLight(this.props.showLinesOrigin, this.props.showLines)}
                             id="number"
                             type="number"
-                            value={this.props.showLines}
+                            value={this.props.showLines ? this.props.showLines : this.state.showLines}
                             data-field="linesShow"
                             data-action='setNumber'
                             data-name={`item${this.props.index}`}

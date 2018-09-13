@@ -63,6 +63,10 @@ class EventsPage extends React.Component {
                 text: '',
                 showLines: 1
             },
+            subcategory: {
+                text: '',
+                showLines: 1
+            },
             allSubCategories: this.props.eventsObject.allSubCategories,
             subCategoriesOrigin: [],
             subCategories: [],
@@ -311,21 +315,26 @@ class EventsPage extends React.Component {
         let subcategoryShowLines = 1;
         let seo = {};
         //console.log(subcategories);
-        subcategories.map((subcategory) => {
+        subcategories.map((subCategory) => {
             //console.log(subcategory.name);
-            if (subcategoryName === subcategory.name) {
-                subcategoryId = subcategory.id;
-                subcategoryText = subcategory.text;
-                subcategoryShowLines = subcategory.showLines;
-                if (!subcategory.seo) {
-                    subcategory.seo = {
+            if (subcategoryName === subCategory.name) {
+                subcategoryId = subCategory.id;
+                subcategoryText = subCategory.text;
+                subcategoryShowLines = subCategory.showLines;
+                if (!subCategory.seo) {
+                    subCategory.seo = {
                         title: '',
                         description: '',
                         keyWords: ''
                     }
                 }
+                const subcategory = {
+                    text: subcategoryText,
+                    showLines: subcategoryShowLines
+                }
                 this.setState({
-                    seo: subcategory.seo
+                    seo: subCategory.seo,
+                    subcategory
                 });
             }
         });
@@ -343,12 +352,30 @@ class EventsPage extends React.Component {
     // update database . ---   category data ( name, text, showlines - number of lines to show on load)
 
     onUpdateCategory = () => {
-        const category = JSON.parse(JSON.stringify(this.state.category));
-        this.props.startEditCategory(category);
-        this.setState(() => ({ 
-            category: category,
-            categoryOrigin: JSON.parse(JSON.stringify(category))
-        }));
+        if (this.state.subcategoryId === '') {
+            const category = JSON.parse(JSON.stringify(this.state.category));
+            this.props.startEditCategory(category);
+            this.setState(() => ({ 
+                category: category,
+                categoryOrigin: JSON.parse(JSON.stringify(category))
+            }));
+        } else {
+            const categoryId = this.state.category.id;
+            const subcategories = this.state.subCategories;
+            subcategories.map((subcategory, index) => {
+                if (this.state.subcategoryId === subcategory.id) {
+                    subcategories[index].text = this.state.subcategory.text;
+                    subcategories[index].showLines = this.state.subcategory.showLines;
+                }
+            })
+            const fbSubCategories = {};
+            subcategories.map((subcategory, index) => {
+                fbSubCategories[subcategory.id] = subcategory;
+            })
+            this.props.startEditSubCategories(fbSubCategories, subcategories, categoryId);
+
+        }
+        
         if(isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
@@ -377,10 +404,19 @@ class EventsPage extends React.Component {
 
     onCategoryTextChange = (e) => {
         const category = this.state.category;
-        category.text = e.target.value;
-        this.setState({
-            category
-        });
+        const subcategory = this.state.subcategory;
+        if (this.state.subcategoryId === '') {
+            category.text = e.target.value;
+            this.setState({
+                category
+            });
+        } else {
+            subcategory.text = e.target.value;
+            this.setState({
+                subcategory
+            });
+        }
+        
         if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
@@ -390,10 +426,18 @@ class EventsPage extends React.Component {
 
     onCategoryShowLinesChange = (e) => {
         const category = this.state.category;
-        category.showLines = e.target.value;
-        this.setState({
-            category
-        });
+        const subcategory = this.state.subcategory;
+        if (this.state.subcategoryId === '') {
+            category.showLines = e.target.value;
+            this.setState({
+                category
+            });
+        } else {
+            subcategory.showLines = e.target.value;
+            this.setState({
+                subcategory
+            });
+        }
         if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
             window.removeEventListener("beforeunload", this.unloadFunc);
         } else {
@@ -605,6 +649,8 @@ class EventsPage extends React.Component {
             this.state.subCategories.map((subcategory) => {
                 console.log(subcategory.name);
                 if (subcategoryName === subcategory.name) {
+                    const subcategoryText = subcategory.text;
+                    const subcategoryShowLines = subcategory.showLines;
                     if (!subcategory.seo) {
                         subcategory.seo = {
                             title: '',
@@ -612,8 +658,15 @@ class EventsPage extends React.Component {
                             keyWords: ''
                         }
                     }
+                    const subCategory = {
+                        text: subcategoryText,
+                        showLines: subcategoryShowLines
+                    }
+                    
+                
                     this.setState({
-                        seo: subcategory.seo
+                        seo: subcategory.seo,
+                        subcategory: subCategory
                     });
                 }
             });
@@ -1688,9 +1741,11 @@ class EventsPage extends React.Component {
                                 null
                         }
                         <EventsText 
-                            categoryOrigin={this.state.categoryOrigin}
-                            categoryText={this.state.category.text}
-                            showLines={this.state.category.showLines}
+                            subCategories={this.state.subCategories}
+                            categoryTextOrigin={this.state.subcategoryId === '' ? this.state.categoryOrigin.text : this.state.subcategory.text}
+                            showLinesOrigin={this.state.subcategoryId === '' ? this.state.categoryOrigin.showLines : this.state.subcategory.showLines}
+                            categoryText={this.state.subcategoryId === '' ? this.state.category.text : this.state.subcategory.text}
+                            showLines={this.state.subcategoryId === '' ? this.state.category.showLines : this.state.subcategory.showLines}
                             categoryId={this.state.category.id}
                             isAuthenticated={this.props.isAuthenticated}
                             onChange={this.onCategoryTextChange}
