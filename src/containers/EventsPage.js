@@ -34,7 +34,8 @@ import {
     startEditEvents,
     startSetAllSubcategories,
     startSetAllEvents,
-    startEditSeo
+    startEditSeo,
+    startEditSubSeo
 } from '../actions/eventspage';
 
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
@@ -323,9 +324,9 @@ class EventsPage extends React.Component {
                         keyWords: ''
                     }
                 }
-                // this.setState({
-                //     seo: subcategory.seo
-                // });
+                this.setState({
+                    seo: subcategory.seo
+                });
             }
         });
         //console.log(subcategoryName);
@@ -1393,7 +1394,12 @@ class EventsPage extends React.Component {
     updateSeo = () => {
         const seo = this.state.seo;
         const categoryId = this.state.category.id;
-        this.props.startEditSeo(seo, categoryId);
+        const subcategoryId = this.state.subcategoryId;
+        if(this.state.subcategoryId === '') {
+            this.props.startEditSeo(seo, categoryId);
+        } else {
+            this.props.startEditSubSeo(seo, categoryId, subcategoryId);
+        }
         this.onToggleSeo();
     }
 
@@ -1749,7 +1755,8 @@ const mapDispatchToProps = (dispatch) => ({
     startEditEvents: ( fbEvents, events, categoryId ) => dispatch(startEditEvents( fbEvents, events, categoryId )),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),
     startSetAllEvents: () => dispatch(startSetAllEvents()),
-    startEditSeo: (seo, categoryId) => dispatch(startEditSeo(seo, categoryId))
+    startEditSeo: (seo, categoryId) => dispatch(startEditSeo(seo, categoryId)),
+    startEditSubSeo: (seo, categoryId, subcategoryId) => dispatch(startEditSubSeo(seo, categoryId, subcategoryId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);

@@ -443,6 +443,29 @@ export const startEditSeo = ( seo, categoryId ) => {
 };
 
 
+// EDIT__SUB_SEO
+
+export const editSubSeo = ( seo, categoryId, subcategoryId ) => ({
+    type: 'EDIT_SUB_SEO',
+    seo,
+    categoryId
+});
+
+export const startEditSubSeo = ( seo, categoryId, subcategoryId ) => {
+    return (dispatch, getState) => {
+        return firebase.database().ref(`eventsSubcategories/${subcategoryId}/seo`).update(seo).then(() => {
+            const eventspage = getState().eventspage;
+            eventspage[categoryId].map((subcategory, index) => {
+                if (subcategory.id === subcategoryId) {
+                    eventspage[categoryId][index].seo = seo;
+                }
+            })
+            dispatch(editSubCategories( eventspage[categoryId], categoryId ));
+        })
+    };
+};
+
+
 
 // EDIT_EVENT_SEO
 

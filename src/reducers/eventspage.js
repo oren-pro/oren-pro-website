@@ -25,12 +25,9 @@ const eventsReducerDefaultState = {};
             events.allEvents = action.items;
             return events;
         case 'SET_IMAGES':
-        console.log(action.categoryId);
-        console.log(action.itemLocation);
-        console.log(action.images);
             events[action.categoryId+'items'][action.itemLocation].images = action.images;
             return events;
-        
+    
         case 'ADD_CATEGORY':
             events.categories = events.categories.push(action.category);
             return events;
@@ -44,6 +41,15 @@ const eventsReducerDefaultState = {};
             return events;
         
         case 'EDIT_SEO':
+            categoryIndex = 0;
+            events.categories.map((category, index) => {
+                if(category.id === action.categoryId) {
+                    categoryIndex = index;
+                }
+            });
+            events.categories[categoryIndex].seo = action.seo;
+            return events;
+        case 'EDIT_SUB_SEO':
             categoryIndex = 0;
             events.categories.map((category, index) => {
                 if(category.id === action.categoryId) {
