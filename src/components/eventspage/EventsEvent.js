@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 //import { Button } from "react-bootstrap";
 import Button from 'react-bootstrap/lib/Button';
 import UploadImageButton from '../common/UploadImageButton';
-
+import { stringReplace } from '../../reusableFunctions/stringReplace';
 
 
 class EventsEvent extends React.Component {
@@ -11,7 +11,8 @@ class EventsEvent extends React.Component {
         super(props);
 
         this.state = {
-            hover: false
+            hover: false,
+            order: 0
         }
     }
     onMouseEnter = () => {
@@ -66,7 +67,7 @@ class EventsEvent extends React.Component {
                                     data-id={this.props.id}
                                     data-categoryindex={this.props.categoryIndex}
                                     type="number"
-                                    value={this.props.order}
+                                    value={this.props.order ? this.props.order : this.state.order}
                                     onChange={this.props.onItemOrderChange}
                                     data-index={this.props.index}
                                     data-subcategoryid={this.props.subcategoryId}
@@ -119,7 +120,7 @@ class EventsEvent extends React.Component {
                     <div className="events__event__button__box"
                         onMouseEnter={this.onMouseEnter}
                         onMouseLeave={this.onMouseLeave}
-                        onClick={() => { history.push(`/${this.props.title.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${categoryLink.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`) }}
+                        onClick={() => { history.push(`/${stringReplace(this.props.title, ' ', '_')}/${stringReplace(categoryLink, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`) }}
                         
                     >
                         <button

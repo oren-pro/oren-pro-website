@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { setHomePageCarouselDone } from '../../actions/navigation';
 import $ from 'jquery';
 import IconHoverGrow from './IconHoverGrow';
+import { stringReplace } from '../../reusableFunctions/stringReplace';
 
 
 class Navigation extends React.Component {
@@ -192,7 +193,7 @@ class Navigation extends React.Component {
                       this.state.eventsCategoriesReverse.map((category) => {
                           if(category.navbar === true) {
                             return <NavItem key={category.id}>
-                                      <NavLink to={`/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">{category.name}</NavLink>
+                                      <NavLink to={`/${stringReplace(category.name, ' ', '_')}`} className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">{category.name}</NavLink>
                                   </NavItem>
                           } else {
                             return null;
@@ -290,7 +291,7 @@ class Navigation extends React.Component {
                       this.state.eventsCategoriesReverse.map((category) => {
                           if(category.navbar === true) {
                             return <NavItem key={category.id}>
-                                      <NavLink to={`/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`} className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">{category.name}</NavLink>
+                                      <NavLink to={`/${stringReplace(category.name, ' ', '_')}`} className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">{category.name}</NavLink>
                                   </NavItem>
                           } else {
                             return null;

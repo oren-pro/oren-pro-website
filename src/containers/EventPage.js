@@ -44,6 +44,7 @@ import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import isEqual from 'lodash.isequal';
+import { stringReplace } from '../reusableFunctions/stringReplace';
 
 
 class EventPage extends React.Component {
@@ -190,12 +191,12 @@ class EventPage extends React.Component {
         });
         currentItems.map((item, index) => {
             if (index === 0) {
-                firstListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+                firstListName = stringReplace(item.name, ' ', '_');
             } else if (index === currentItems.length-1) {
-                lastListName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+                lastListName = stringReplace(item.name, ' ', '_');
             }
             inId = item.id;
-            inName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+            inName = stringReplace(item.name, ' ', '_');
             if (item.id === eventId) {
                 prevItem = inPrevName;
                 doneId = true;
@@ -207,7 +208,7 @@ class EventPage extends React.Component {
                 }
                 stripItems.push(item);
             }
-            inPrevName = item.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_");
+            inPrevName = stringReplace(item.name, ' ', '_');
         });
         if (prevItem === '') {
             prevItem = lastListName;
@@ -343,7 +344,7 @@ class EventPage extends React.Component {
                 }
                 
 
-                const subcategoryName = this.props.match.params.subcategory.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+                const subcategoryName = stringReplace(this.props.match.params.subcategory, '_', ' ');
                 this.setState({
                     subcategoryName
                 });
@@ -351,7 +352,7 @@ class EventPage extends React.Component {
                 //console.log(subcategoryName);
                 
 
-                const eventName = this.props.match.params.event.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+                const eventName = stringReplace(this.props.match.params.event, '_', ' ');
                 this.setState({
                     eventName,
                     eventNameOrigin: eventName
@@ -541,19 +542,19 @@ class EventPage extends React.Component {
 
     navtoCategoryPage = (subcategoryName) => {
         if (subcategoryName !== '' && subcategoryName !== undefined) {
-            this.props.history.push(`/${subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+            this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
         } else {
-            this.props.history.push(`/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+            this.props.history.push(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
         }
         
     }
 
     gotoNextEvent = () => {
-        this.props.history.push(`/${this.state.nextItem}/${this.state.subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.nextItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
     }
     
     gotoPrevEvent = () => {
-        this.props.history.push(`/${this.state.prevItem}/${this.state.subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+        this.props.history.push(`/${this.state.prevItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
     }
 
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)
@@ -597,7 +598,7 @@ class EventPage extends React.Component {
                 window.removeEventListener("beforeunload", this.unloadFunc);
                 if(gotoNewLocation === true) {
                     
-                    this.props.history.push(`/${eventName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.props.categoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+                    this.props.history.push(`/${stringReplace(eventName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
                     this.setData();
                 }
             });

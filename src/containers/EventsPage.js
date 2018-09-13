@@ -42,6 +42,7 @@ import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import isEqual from 'lodash.isequal';
+import { stringReplace } from '../reusableFunctions/stringReplace';
 
 
 
@@ -196,7 +197,7 @@ class EventsPage extends React.Component {
         let subcategoryName = '';
 
         if(this.props.match.params.subcategory) {
-            subcategoryName = this.props.match.params.subcategory.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ");
+            subcategoryName = stringReplace(this.props.match.params.subcategory, '_', ' ');
         }
 
         this.setState({
@@ -641,13 +642,13 @@ class EventsPage extends React.Component {
             itemsCurrent
         });
         if(subcategoryId === '') {
-            this.props.history.push(`/${this.state.category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+            this.props.history.push(`/${stringReplace(this.state.category.name, ' ', '_')}`);
         } else {
-            this.props.history.push(`/${subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.state.category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
+            this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.state.category.name, ' ', '_')}`);
         }
         if (subcategoryId !== '') {
             this.state.subCategories.map((subcategory) => {
-                console.log(subcategory.name);
+                //console.log(subcategory.name);
                 if (subcategoryName === subcategory.name) {
                     const subcategoryText = subcategory.text;
                     const subcategoryShowLines = subcategory.showLines;
