@@ -601,7 +601,27 @@ class EventsPage extends React.Component {
         } else {
             this.props.history.push(`/${subcategoryName.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}/${this.state.category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`);
         }
-        
+        if (subcategoryId !== '') {
+            this.state.subCategories.map((subcategory) => {
+                console.log(subcategory.name);
+                if (subcategoryName === subcategory.name) {
+                    if (!subcategory.seo) {
+                        subcategory.seo = {
+                            title: '',
+                            description: '',
+                            keyWords: ''
+                        }
+                    }
+                    this.setState({
+                        seo: subcategory.seo
+                    });
+                }
+            });
+        } else {
+            this.setState({
+                seo: this.state.category.seo
+            });
+        }
     }
 
     startEditSubcategory = () => {
