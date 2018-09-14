@@ -52,7 +52,7 @@ app.get('*.css', function (request, response, next) {
 });
 
 app.use(compression());
-
+app.use(require('prerender-node'));
 app.use(express.static(publicPath));
 
 
