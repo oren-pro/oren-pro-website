@@ -52,9 +52,10 @@ app.get('*.css', function (request, response, next) {
 });
 
 app.use(compression());
-app.use(require('prerender-node'));
+
 app.use(express.static(publicPath));
 
+app.use(require('prerender-node'));
 
 
 app.post("/deleteImage", bodyParser.urlencoded({ extended: true }), function(request, response) {
