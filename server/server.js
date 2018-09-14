@@ -9,8 +9,6 @@ var cloudinary = require('cloudinary');
 //var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
-
-
 const app = express();
 
 var allowedOrigins = ['http://localhost:8080',
@@ -52,10 +50,10 @@ app.get('*.css', function (request, response, next) {
 });
 
 app.use(compression());
-
+app.use(require('prerender-node'));
 app.use(express.static(publicPath));
 
-app.use(require('prerender-node'));
+
 
 
 app.post("/deleteImage", bodyParser.urlencoded({ extended: true }), function(request, response) {
