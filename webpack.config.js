@@ -48,17 +48,11 @@ module.exports = (env) => {
                         }
                     ]
                 })
-            },{
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: "url?limit=10000"
-            },{
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml'
             }]
         },
         plugins: [
             new CompressionPlugin({
-                test: /\.(js|css|svg)$/,
+                test: /\.(js|css)$/,
                 algorithm: 'gzip',
                 //deleteOriginalAssets: true
             }),

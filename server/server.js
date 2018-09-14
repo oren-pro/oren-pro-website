@@ -42,15 +42,6 @@ app.get('*.js', function (request, response, next) {
     next();
 });
 
-app.get('*.svg', function (request, response, next) {
-  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-    res.set('Content-Type', 'image/svg+xml');
-  }
-    next();
-});
-
 app.get('*.css', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
