@@ -380,8 +380,8 @@ class EventsPage extends React.Component {
             const subcategories = this.state.subCategories;
             subcategories.map((subcategory, index) => {
                 if (this.state.subcategoryId === subcategory.id) {
-                    subcategories[index].text = this.state.subcategory.text;
-                    subcategories[index].showLines = this.state.subcategory.showLines;
+                    subcategories[index].text = this.state.subcategory.text ? this.state.subcategory.text : '';
+                    subcategories[index].showLines = this.state.subcategory.showLines ? this.state.subcategory.showLines : '3';
                 }
             })
             const fbSubCategories = {};
