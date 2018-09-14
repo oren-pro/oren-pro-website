@@ -201,8 +201,8 @@ class HomePageTell extends React.Component {
                     </div>
                 :
                     <div>
-                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell.jpg" />
-                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell-mobile.jpg" />
+                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1536952256/tell.jpg" />
+                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1536952408/tell-mobile.jpg" />
                         <h2 className="homepage__tell__header Heebo-Medium">{header}</h2>
                         <div className="homepage__tell__logo__box mobile_inline">
                             <img className="homepage__tell__logo mobile_inline" src={logo} />
