@@ -39,10 +39,8 @@ export const setSubcategories = (subcategories, categoryId) => ({
 });
 
 export const startSetSubcategories = (categoryId) => {
-    //console.log(categoryId);
     return (dispatch) => {
         return firebase.database().ref('eventsSubcategories').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
-            //console.log(snapshot.val());
             const subcategories = [];
             snapshot.forEach((childSnapshot) => {
                 subcategories.push({
@@ -67,10 +65,8 @@ export const setAllSubcategories = (subcategories) => ({
 });
 
 export const startSetAllSubcategories = () => {
-    //console.log(categoryId);
     return (dispatch) => {
         return firebase.database().ref('eventsSubcategories').once('value').then((snapshot) => {
-            //console.log(snapshot.val());
             const subcategories = [];
             snapshot.forEach((childSnapshot) => {
                 subcategories.push({
@@ -96,13 +92,10 @@ export const setItems = (items, categoryId) => ({
 });
 
 export const startSetItems = (categoryId) => {
-    //console.log(categoryId);
     return (dispatch) => {
         return firebase.database().ref('eventsItems').orderByChild(`categories/${categoryId}`).equalTo(true).once('value').then((snapshot) => {
-            //console.log(snapshot.val());
             const items = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
                 items.push({
                     id: childSnapshot.key,
                     images: [],
@@ -126,20 +119,16 @@ export const setAllEvents = (items) => ({
 });
 
 export const startSetAllEvents = () => {
-    //console.log(categoryId);
     return (dispatch) => {
         return firebase.database().ref('eventsItems').once('value').then((snapshot) => {
-            //console.log(snapshot.val());
             const events = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
                 events.push({
                     id: childSnapshot.key,
                     images: [],
                     ...childSnapshot.val()
                 });
             });
-            //console.log(events);
             dispatch(setAllEvents(events));
         });
     };
@@ -160,13 +149,10 @@ export const setImages = ( images, eventId, categoryId, itemLocation ) => ({
 });
 
 export const startSetImages = ( eventId, categoryId, itemLocation ) => {
-   console.log(eventId);
     return (dispatch) => {
         return firebase.database().ref('eventsImages').orderByChild(`eventsIds/${eventId}`).equalTo(true).once('value').then((snapshot) => {
-            //addImaconsole.log(snapshot);
             const images = [];
             snapshot.forEach((childSnapshot) => {
-                console.log(childSnapshot.val());
                 images.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -241,9 +227,6 @@ export const startAddSubcategory = (subcategoryData = {}, order) => {
         } = subcategoryData;
         const categoryId = Object.keys(categories)[0];
         const subcategories = getState().eventspage[categoryId];
-        //console.log(subcategoryData);
-        //console.log(categoryId);
-        //console.log(subcategories);
         const subcategory = {
             name,
             visible,
@@ -350,26 +333,19 @@ export const startAddImage = (imageData = {}, categoryId, order) => {
 
             const catItems = getState().eventspage[categoryId+'items'];
             let itemLocation = 0;
-            //console.log(localImage);
             catItems.map((item, index) => {
                 if (item.id === eventId) {
                     itemLocation = index;
                 }
             });
-
-            console.log(catItems[itemLocation]);
             let images = [];
             if ( catItems[itemLocation].images ) {
                 images = catItems[itemLocation].images;
             }
-            console.log(images);
             images.push({
                 id: ref.key,
                 ...image
             });
-            console.log(images);
-            //catItems[itemLocation].images = images;
-
              dispatch(addImage(images, eventId, categoryId));
              return images;
         });
@@ -396,10 +372,8 @@ export const updateEventImage = ( id, image ) => ({
 });
 
 export const startUpdateEventImage = ( id, image ) => {
-    //console.log(id, image);
     return (dispatch, getState) => {
         return firebase.database().ref(`eventsItems/${id}`).update(image).then(() => {
-            //console.log('done actions');
             //dispatch(updateEventImage( id, updates ));
         })
     };
@@ -495,7 +469,6 @@ export const editCategory = ( category ) => ({
 });
 
 export const startEditCategory = ( category ) => {
-    console.log('here');
     return (dispatch) => {
         return firebase.database().ref(`eventsCategories/${category.id}`).update(category).then(() => {
             dispatch(editCategory( category ));
@@ -530,11 +503,6 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
 });
 
 export const startEditEvent = ( eventName, eventText, eventShowLines, eventId ) => {
-    console.log('in event');
-    console.log(eventId);
-    console.log(eventName);
-    console.log(eventText);
-    console.log(eventShowLines);
     const event = {
         name: eventName,
         text: eventText,
@@ -601,11 +569,6 @@ export const startToggleShowEvent = ( categoryId, subcategoryId, eventId, visibl
     const visibleObj = {
         visible: visible
     };
-    console.log(categoryId);
-    console.log(subcategoryId);
-    console.log(eventId);
-    console.log(visible);
-    console.log(visibleObj);
     return (dispatch) => {
         return firebase.database().ref().child(`eventsItems/${eventId}`).update(visibleObj).then(() => {
             dispatch(toggleShowEvent( categoryId, subcategoryId, eventId, visible ));
@@ -638,9 +601,6 @@ export const startToggleShowSubcategory = ( categoryId, subcategoryId, visible )
     const visibleObj = {
         visible: visible
     };
-    //console.log(subcategoryId);
-    //console.log(visible);
-    //console.log(visibleObj);
     return (dispatch) => {
         return firebase.database().ref().child(`eventsSubcategories/${subcategoryId}`).update(visibleObj).then(() => {
             dispatch(toggleShowSubcategory( categoryId, subcategoryId, visible ));
@@ -715,7 +675,6 @@ export const startDeleteImage = ( fbImages, images, eventId, categoryId, publici
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
         });
         return firebase.database().ref().child(`eventsImages`).update(fbImages).then(() => {
             dispatch(editImages( images, eventId, categoryId ));

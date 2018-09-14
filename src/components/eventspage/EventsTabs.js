@@ -2,8 +2,6 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 
 const shouldHighLight = (org, update) => {
-    console.log(org);
-    console.log(update);
     if (isEqual(org, update)) {
         return 'edit__bg';
     } else {
@@ -22,7 +20,6 @@ class EventsTabs extends React.Component {
 
     shouldComponentUpdate = (nextProps, nextState) => {
         if(nextProps !== this.props) {
-            console.log('should update');
             this.setState({
                 subcategoryId: nextProps.subcategoryId,
                 subCategories: nextProps.subCategories
@@ -35,7 +32,6 @@ class EventsTabs extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log('did mount');
         this.setState({
             subcategoryId: this.props.subcategoryId,
             subCategories: this.props.subCategories
@@ -55,9 +51,14 @@ class EventsTabs extends React.Component {
                         {
                             this.state.subCategories.length > 0 ?
                                 this.state.subCategories.map((subCategory) => {
-
-                                    if(this.props.isAuthenticated || subCategory.visible === true) {
-                                        return  <button key={subCategory.id} data-id={subCategory.id} data-name={subCategory.name} className={this.props.subcategoryId === subCategory.id ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
+                                    if (this.props.isAuthenticated || subCategory.visible === true) {
+                                        return  <button
+                                                    key={subCategory.id}
+                                                    data-id={subCategory.id}
+                                                    data-name={subCategory.name}
+                                                    className={this.props.subcategoryId === subCategory.id ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"}
+                                                    onClick={this.props.setSubcategoryId}
+                                                >
                                                     {subCategory.name}
                                                 </button>
                                     }
@@ -67,7 +68,7 @@ class EventsTabs extends React.Component {
                                 null
                         }
                         {
-                            this.props.isAuthenticated ?
+                            this.props.isAuthenticated && this.props.isEditable ?
                                 <div className="backoffice__events__tabs__buttons">
                                     <button className="backoffice__add__button" onClick={this.props.startAddNewSubcategory}>
                                         <img className="backoffice__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />

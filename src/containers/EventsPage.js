@@ -250,18 +250,37 @@ class EventsPage extends React.Component {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
             this.getSubcategorytId(subcategoryName, subcategories);
-            this.props.startSetItems(categoryId).then((items)=> {
-                items.sort((a, b) => {
+
+            this.props.startSetItems(categoryId).then((unsortedItems)=> {
+
+                const itemsSet = unsortedItems;
+                itemsSet.sort((a, b) => {
                     return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
                 });
+
+                if (this.state.subcategoryId === '') {
+                    itemsSet.map((event, index) => {
+                        itemsCurrent.push(event);
+                    });
+                } else {
+                    itemsSet.map((event, index) => {
+                        if(event.subcategories[this.state.subcategoryId] === true) {
+                            itemsCurrent.push(event);
+                        }
+                    });
+                    const sortedItemsCurrent = itemsCurrent.sort((a, b) => {
+                        return a.subcategories[this.state.subcategoryId+'order'] > b.subcategories[this.state.subcategoryId+'order'] ? 1 : -1;
+                    });
+                }
+                
                 this.setState({
                     subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                     subCategories: subcategories,
-                    itemsOrigin: JSON.parse(JSON.stringify(items)),
-                    itemsCurrentOrigin: JSON.parse(JSON.stringify(items)),
-                    itemsCurrentCheck: JSON.parse(JSON.stringify(items)),
-                    itemsCurrent: JSON.parse(JSON.stringify(items)),
-                    items: JSON.parse(JSON.stringify(items))
+                    itemsOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsCurrent: JSON.parse(JSON.stringify(itemsCurrent)),
+                    items: JSON.parse(JSON.stringify(itemsCurrent))
                 });
             });
         } else {
@@ -276,19 +295,19 @@ class EventsPage extends React.Component {
             subcategories.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
-            this.getSubcategorytId(subcategoryName, subcategories);
+            const subcategoryId = this.getSubcategorytId(subcategoryName, subcategories);
             const itemsSet = this.props.eventsObject[categoryId+'items'];
             itemsSet.sort((a, b) => {
                 return a.categories[categoryId+'order'] > b.categories[categoryId+'order'] ? 1 : -1;
             });
 
-            if (this.props.eventsObject.subcategoryId === '' || !this.props.eventsObject.subcategoryId) {
+            if (subcategoryId === '' || !subcategoryId) {
                 itemsSet.map((event, index) => {
                     itemsCurrent.push(event);
                 });
             } else {
                 itemsSet.map((event, index) => {
-                    if(event.subcategories[this.props.eventsObject.subcategoryId] === true) {
+                    if(event.subcategories[subcategoryId] === true) {
                         itemsCurrent.push(event);
                     }
                 });
@@ -296,7 +315,6 @@ class EventsPage extends React.Component {
                     return a.subcategories[subcategoryId+'order'] > b.subcategories[subcategoryId+'order'] ? 1 : -1;
                 });
             }
-
             this.setState({
                 subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                 subCategories: subcategories,
@@ -315,9 +333,7 @@ class EventsPage extends React.Component {
         let subcategoryText = '';
         let subcategoryShowLines = 1;
         let seo = {};
-        //console.log(subcategories);
         subcategories.map((subCategory) => {
-            //console.log(subcategory.name);
             if (subcategoryName === subCategory.name) {
                 subcategoryId = subCategory.id;
                 subcategoryText = subCategory.text;
@@ -339,11 +355,10 @@ class EventsPage extends React.Component {
                 });
             }
         });
-        //console.log(subcategoryName);
-        //console.log(subcategoryId);
         this.setState({
             subcategoryId
         });
+        return subcategoryId;
     }
 
     componentWillUnmount = () => {
@@ -648,7 +663,6 @@ class EventsPage extends React.Component {
         }
         if (subcategoryId !== '') {
             this.state.subCategories.map((subcategory) => {
-                //console.log(subcategory.name);
                 if (subcategoryName === subcategory.name) {
                     const subcategoryText = subcategory.text;
                     const subcategoryShowLines = subcategory.showLines;
@@ -1670,6 +1684,7 @@ class EventsPage extends React.Component {
                             subCategoriesOrigin={this.state.subCategoriesOrigin}
                             subCategories={this.state.subCategories}
                             isAuthenticated={this.props.isAuthenticated}
+                            isEditable={true}
                             setSubcategoryId={this.setSubcategoryId}
                             startAddNewSubcategory={this.startAddNewSubcategory}
                             startEditSubcategory={this.startEditSubcategory}

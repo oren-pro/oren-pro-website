@@ -50,7 +50,6 @@ import { stringReplace } from '../reusableFunctions/stringReplace';
 class EventPage extends React.Component {
     constructor(props) {
         super(props);
-        //console.log(props);
         this.animating = false;
         this.state = {
             ratio: 1,
@@ -111,9 +110,7 @@ class EventPage extends React.Component {
         let subcategoryText = '';
         let subcategoryShowLines = 1;
         let seo = {};
-        //console.log(subcategories);
         subcategories.map((subcategory) => {
-            //console.log(subcategory.name);
             if (subcategoryName === subcategory.name) {
                 subcategoryId = subcategory.id;
                 subcategoryText = subcategory.text;
@@ -130,8 +127,6 @@ class EventPage extends React.Component {
                 // });
             }
         });
-        //console.log(subcategoryName);
-        //console.log(subcategoryId);
         this.setState({
             subcategoryId
         });
@@ -378,7 +373,6 @@ class EventPage extends React.Component {
                         });
                     });
                 } else if (this.props.eventsObject[this.props.categoryId] && !this.props.eventsObject[this.props.categoryId+'items']) {
-                    console.log('2');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         if(subCategories.length>1){
                             subCategories.sort((a, b) => {
@@ -397,7 +391,6 @@ class EventPage extends React.Component {
                         });
                     });
                 } else {
-                    console.log('3');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         if(subCategories.length>1){
                             subCategories.sort((a, b) => {
@@ -1104,6 +1097,8 @@ class EventPage extends React.Component {
 
                         <EventsHeader categoryName={this.props.categoryName} />
                         <EventsTabs
+                            isAuthenticated={this.props.isAuthenticated}
+                            isEditable={false}
                             categoryId={this.props.categoryId}
                             subcategoryId={this.state.subcategoryId}
                             subCategories={this.state.subCategories}
