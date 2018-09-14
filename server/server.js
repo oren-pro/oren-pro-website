@@ -51,9 +51,11 @@ app.get('*.css', function (request, response, next) {
     next();
 });
 
+app.use(compression());
+
 app.use(express.static(publicPath));
 
-app.use(compression());
+
 
 app.post("/deleteImage", bodyParser.urlencoded({ extended: true }), function(request, response) {
     if(request.body.publicid){
