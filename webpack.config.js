@@ -52,7 +52,7 @@ module.exports = (env) => {
         },
         plugins: [
             new CompressionPlugin({
-                test: /\.(js|css)$/,
+                test: /\.(js|css|svg)$/,
                 algorithm: 'gzip',
                 //deleteOriginalAssets: true
             }),
