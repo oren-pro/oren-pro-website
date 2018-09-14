@@ -609,10 +609,10 @@ class HomePage extends React.Component {
                                 <div className="about__edit__panel__box">
                                     <div className="about__edit__panel">
                                         <button className="backoffice_button" onClick={this.onUpdateHomePage}>
-                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/save.svg.gz" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg.gz" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.onToggleHomepageSeo}>
                                             seo
