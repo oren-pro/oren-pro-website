@@ -11,6 +11,8 @@ var cloudinary = require('cloudinary');
 
 const app = express();
 
+app.use(require('prerender-node'));
+
 var allowedOrigins = ['http://localhost:8080',
                       'http://oren-pro-website.herokuapp.com',
                       'https://oren-pro-website.herokuapp.com'];
@@ -50,7 +52,7 @@ app.get('*.css', function (request, response, next) {
 });
 
 app.use(compression());
-app.use(require('prerender-node'));
+
 app.use(express.static(publicPath));
 
 
