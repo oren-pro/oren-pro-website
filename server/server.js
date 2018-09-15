@@ -41,8 +41,6 @@ app.get('*.js', function (request, response, next) {
       request.url = request.url + '.gz';
       response.set('Content-Encoding', 'gzip');
     }
-    res.setHeader("Cache-Control", "public, max-age=2592000");
-    res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
     next();
 });
 
