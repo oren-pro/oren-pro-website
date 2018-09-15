@@ -782,4 +782,8 @@ const mapDispatchToProps = (dispatch) => ({
     startDeleteHomePageImage: ( homepage, publicid ) => dispatch(startDeleteHomePageImage( homepage, publicid ))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);            
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
+
+
+//{this.state.seo.title ? (window.prerenderReady = true) : null}
