@@ -930,7 +930,7 @@ class EventPage extends React.Component {
                 />
 
                 <Helmet>
-                    <title>{`אורן הפקות - ${this.props.categoryName} - ${this.state.eventName} - ${this.state.seo.title}`}</title>
+                    <title>{`אורן הפקות - ${this.props.categoryName} - ${this.state.subcategoryName} - ${this.state.eventName} - ${this.state.seo.title}`}</title>
                     <meta name="description" content={this.state.seo.description} />
                 </Helmet>
 

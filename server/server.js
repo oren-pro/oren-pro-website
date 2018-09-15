@@ -11,6 +11,8 @@ var cloudinary = require('cloudinary');
 
 const app = express();
 
+
+
 //app.use(require('prerender-node'));
 
 var allowedOrigins = ['http://localhost:8080',

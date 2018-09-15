@@ -72,6 +72,7 @@ class EventsPage extends React.Component {
             subCategoriesOrigin: [],
             subCategories: [],
             subcategoryId: '',
+            subcategoryName: 'הכל',
             allEvents: this.props.eventsObject.allEvents,
             itemsOrigin: [],
             items: [],
@@ -1502,7 +1503,7 @@ class EventsPage extends React.Component {
                 />
 
                 <Helmet>
-                    <title>{`אורן הפקות - ${this.props.category.name} - ${this.state.seo.title}`}</title>
+                    <title>{`אורן הפקות - ${this.props.category.name} - ${this.state.subcategoryName} - ${this.state.seo.title}`}</title>
                     <meta name="description" content={this.state.seo.description} />
                 </Helmet>
 
