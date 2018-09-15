@@ -591,7 +591,7 @@ class EventPage extends React.Component {
                 window.removeEventListener("beforeunload", this.unloadFunc);
                 if(gotoNewLocation === true) {
                     
-                    this.props.history.push(`/${stringReplace(eventName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+                    this.props.history.push(`/${stringReplace(eventName, ' ', '_')}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
                     this.setData();
                 }
             });
