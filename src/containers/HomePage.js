@@ -546,6 +546,8 @@ class HomePage extends React.Component {
                     <meta name="description" content={this.state.seo.description} />
                 </Helmet>
 
+                {this.state.seo.title ? (window.prerenderReady = true) : null}
+
                 <Modal open={this.state.seoHomepageModalIsOpen} onClose={this.onToggleHomepageSeo} center dir="rtl">
                     <div className="backoffice__seo__modal">
                         <h4 className="Heebo-Regular">seo</h4>
