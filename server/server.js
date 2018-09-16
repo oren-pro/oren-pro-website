@@ -112,10 +112,6 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 
 
 app.get('*', (req, res) => {
-    if (req.url.indexOf("/images/") === 0 || req.url.indexOf("/stylesheets/") === 0) {
-      res.setHeader("Cache-Control", "public, max-age=2592000");
-      res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
-    }
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
