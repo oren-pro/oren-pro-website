@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 var cors = require('cors');
 var cloudinary = require('cloudinary');
+const fs = require('fs');
 
 //var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
@@ -12,6 +13,28 @@ var cloudinary = require('cloudinary');
 const app = express();
 
 //app.use(require('prerender-node'));
+
+
+app.get('/', function(request, response) {
+  console.log('Home page visited!');
+  const filePath = path.resolve(__dirname, '../public', 'index.html');
+
+  // read in the index.html file
+  fs.readFile(filePath, 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    
+    // replace the special strings with server generated strings
+    data = data.replace(/\$OG_TITLE/g, 'אורן ורינת הפקות - הפקת אירועים');
+    data = data.replace(/\$OG_DESCRIPTION/g, "טקסט דסקריפשן לאתר אורן פרו");
+    result = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
+    response.send(result);
+  });
+});
+
+
+
 
 var allowedOrigins = ['http://localhost:8080',
                       'http://oren-pro-website.herokuapp.com',
