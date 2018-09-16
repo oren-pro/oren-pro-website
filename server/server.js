@@ -11,8 +11,6 @@ var cloudinary = require('cloudinary');
 
 const app = express();
 
-
-
 //app.use(require('prerender-node'));
 
 var allowedOrigins = ['http://localhost:8080',
@@ -37,18 +35,19 @@ const port = process.env.PORT || 3000;
 
 
 app.get('*.js', function (request, response, next) {
-    if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-      request.url = request.url + '.gz';
-      response.set('Content-Encoding', 'gzip');
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+  }
     next();
 });
 
 app.get('*.css', function (request, response, next) {
-    if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-      request.url = request.url + '.gz';
-      response.set('Content-Encoding', 'gzip');
-      response.set('Content-Type', 'text/css');
-    }
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+    response.set('Content-Type', 'text/css');
+  }
     next();
 });
 
