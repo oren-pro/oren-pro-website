@@ -915,7 +915,8 @@ class EventPage extends React.Component {
         const seo = this.state.seo;
         const categoryId = this.props.categoryId;
         const eventId = this.state.eventId;
-        this.props.startEditEventSeo(seo, categoryId, eventId);
+        const link = this.props.location.pathname;
+        this.props.startEditEventSeo(seo, categoryId, eventId, link);
         this.onToggleEventSeo();
     }
 
@@ -1207,7 +1208,7 @@ const mapDispatchToProps = (dispatch) => ({
     startDeleteImage: (fbImages, images, eventId, categoryId, publicid) => dispatch(startDeleteImage(fbImages, images, eventId, categoryId, publicid)),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),
     startSetAllEvents: () => dispatch(startSetAllEvents()),
-    startEditEventSeo: (seo, categoryId, eventId) => dispatch(startEditEventSeo(seo, categoryId, eventId))
+    startEditEventSeo: (seo, categoryId, eventId, link) => dispatch(startEditEventSeo(seo, categoryId, eventId, link))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventPage);

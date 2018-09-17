@@ -1484,10 +1484,12 @@ class EventsPage extends React.Component {
         const seo = this.state.seo;
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
+        console.log(this.props.location.pathname);
+        const link = this.props.location.pathname;
         if(this.state.subcategoryId === '') {
-            this.props.startEditSeo(seo, categoryId);
+            this.props.startEditSeo(seo, categoryId, link);
         } else {
-            this.props.startEditSubSeo(seo, categoryId, subcategoryId);
+            this.props.startEditSubSeo(seo, categoryId, subcategoryId, link);
         }
         this.onToggleSeo();
     }
@@ -1848,7 +1850,7 @@ const mapDispatchToProps = (dispatch) => ({
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),
     startSetAllEvents: () => dispatch(startSetAllEvents()),
     startEditSeo: (seo, categoryId) => dispatch(startEditSeo(seo, categoryId)),
-    startEditSubSeo: (seo, categoryId, subcategoryId) => dispatch(startEditSubSeo(seo, categoryId, subcategoryId))
+    startEditSubSeo: (seo, categoryId, subcategoryId, link) => dispatch(startEditSubSeo(seo, categoryId, subcategoryId, link))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);

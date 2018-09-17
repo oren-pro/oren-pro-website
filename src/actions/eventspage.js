@@ -410,6 +410,7 @@ export const editSeo = ( seo, categoryId ) => ({
 
 export const startEditSeo = ( seo, categoryId ) => {
     return (dispatch) => {
+        console.log('in seo update');
         return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
             dispatch(editSeo( seo, categoryId ));
         })
@@ -425,16 +426,19 @@ export const editSubSeo = ( seo, categoryId, subcategoryId ) => ({
     categoryId
 });
 
-export const startEditSubSeo = ( seo, categoryId, subcategoryId ) => {
+export const startEditSubSeo = ( seo, categoryId, subcategoryId, link ) => {
     return (dispatch, getState) => {
-        return firebase.database().ref(`eventsSubcategories/${subcategoryId}/seo`).update(seo).then(() => {
-            const eventspage = getState().eventspage;
-            eventspage[categoryId].map((subcategory, index) => {
-                if (subcategory.id === subcategoryId) {
-                    eventspage[categoryId][index].seo = seo;
-                }
+        console.log('in sub seo update');
+        return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
+            return firebase.database().ref(`eventsSubcategories/${subcategoryId}/seo`).update(seo).then(() => {
+                const eventspage = getState().eventspage;
+                eventspage[categoryId].map((subcategory, index) => {
+                    if (subcategory.id === subcategoryId) {
+                        eventspage[categoryId][index].seo = seo;
+                    }
+                })
+                dispatch(editSubCategories( eventspage[categoryId], categoryId ));
             })
-            dispatch(editSubCategories( eventspage[categoryId], categoryId ));
         })
     };
 };
@@ -450,10 +454,12 @@ export const editEventSeo = ( seo, categoryId, eventId ) => ({
     eventId
 });
 
-export const startEditEventSeo = ( seo, categoryId, eventId ) => {
+export const startEditEventSeo = ( seo, categoryId, eventId, link) => {
     return (dispatch) => {
-        return firebase.database().ref(`eventsItems/${eventId}/seo`).update(seo).then(() => {
-            dispatch(editEventSeo( seo, categoryId, eventId ));
+        return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
+            return firebase.database().ref(`eventsItems/${eventId}/seo`).update(seo).then(() => {
+                dispatch(editEventSeo( seo, categoryId, eventId ));
+            })
         })
     };
 };

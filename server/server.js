@@ -7,31 +7,17 @@ var cors = require('cors');
 var cloudinary = require('cloudinary');
 const fs = require('fs');
 
+
+var admin = require("firebase-admin");
+
+
+
 //var gmail = require('../config/gmail');
 //var cloudinaryVars = require('../config/cloudinary');
 
 const app = express();
 
 //app.use(require('prerender-node'));
-
-
-app.get('/', function(request, response) {
-  console.log(request);
-  const filePath = path.resolve(__dirname, '../public', 'index.html');
-
-  // read in the index.html file
-  fs.readFile(filePath, 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    
-    // replace the special strings with server generated strings
-    data = data.replace(/\$OG_TITLE/g, 'אורן ורינת הפקות - הפקת אירועים');
-    data = data.replace(/\$OG_DESCRIPTION/g, "טקסט דסקריפשן לאתר אורן פרו");
-    result = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
-    response.send(result);
-  });
-});
 
 
 
@@ -57,6 +43,84 @@ const port = process.env.PORT || 3000;
 
 
 
+
+
+
+
+
+
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: 'oren-pro',
+    clientEmail: 'firebase-adminsdk-7eqf7@oren-pro.iam.gserviceaccount.com',
+    privateKey: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwzjU7rxbfmTsh\nUKizADcpuqCP10bmJzeHEcxoUCU+KdYKCds3jFMmrraCkFcEcB9YhcuZAE9YkOCF\nO7in9gjnUlE1LQ0D1DgnbgqkRV9yg6YZYYitP8cSZ+VuM9U+cAmRqBQkR0BeaWEm\nUBU/aNQgvmoMOo8qrMCWysudNNFI8C1xPXQSZpH/jM0ogtsCWO6ypWssdJYnk81A\nCyIvbes3f0JgjfIhaAYFckIOJpCx2ze6cGsAvqVDmvAhzJ3rOSDbLWPQ9F+98x9S\nYVsMt5E4L64ki1PcUqHz7w3DirTFlpjLwqDATWximlOCJdk/arCZVHWi78sV1by3\n3/w3uiRHAgMBAAECggEACOPr9CFWVbRfYpbeTla11ci6Z1RpQaXTk/YgJvEIvmFD\nwv0PfQtdG8/WaFnlSXLXdw/bPS+xZ0zgDUydRczVHvsAdfUOKq6FvrqfMsPOP3R0\nakhOPOMjgAuhxlkGFJd1Oh7Cf7ezE+XZ0OxfKFew4VvRx0wJt0w44hw2Z6RCD2T2\n7bak5JyKzbK+1+D0xPDKlZUKnNMh2PWLSBqL3oZyFO3i6DbhAI7dIj5TKiDryvnn\nALP47tP7x4LJbCWB4/wTu5709JYkIJB/KxZV8EaH2R8QpJ80Sjvzhg51CM5owNBu\npMJ22e5OTyqlv0Jzx8Tx33Op6izbSbL2a4QalAxckQKBgQDY1jFmxGJwA8TXhzuK\n/aimipfU3d6RyE462NO5277Xru/eE4GhYh6y2YRGd8jFdr/X6Knawz9ngo9VgI2j\nD0Sup1PX0BYMxx1fkBQcBSLGvDwBc9YnP7QuYhqn0mqd4rYn/LhRkRoEhrqUgAkF\nLtNpaRi6t4k2G91CVXrPKQoeeQKBgQDQvRsbTJGINmvEw80okBaBHc/z+SdD3S7G\ntkAAYUz97HbbOjf0/94pDvrgsGJGSldVHTlsnUHC8Z2zqjNe/J2iAG54EvYaI0yo\nULBCoh7XaCI1x8K6rWk5wa8+HbpndVPr2GqHJfmq9Ow2nioUAzwut9vq0QV8zftj\nxa5sux6ovwKBgEJ+RH3wIQOalEVHigHQUWRowbCcLQFlfF/dV+f5s+cuFQ5zyt+z\nWBieTUrStrWe+at7BIM6NnpGdi/RER38s6IfW72laO2YLbC9XP1OseBhnsEPRY+Z\noGZM3UGza9Bo0lUm0Vrp9SGIMzUQojN9rYT4noW7fI8kMlCCJ/vY6Op5AoGAIxO0\nK2k5h39FquIQZsGX1oiw+lmjHIddpezYYnf3XTBQZNSqtJQOvC2VQQ7C5Pb3KAlq\nLfNbKqw5iQiP62VeA+w4pBrjmk7WQe6VQA1IS4BnR0xTT9V2Oktu7GxId7xCpv5O\nIHnkM7NGwoLfpU9J3Lvuy83mMyvWE9UTU5g6NbcCgYEAxv/AinqZJsl15AhszNX5\nflh5qHTVdUbUAidmDF4mqQY9fNLr9Ae6N0n9buzLI7RVo34w/hVZQEaNRKUQaxvY\nq4xUkaFa3hdT7lfm1R+Zm1q8CCorqfYnQ3uu8so0EPrZTcqK+gMYHXi6/FBKTyVN\nGoNlbEPE1sdRAInBdLc0FjE=\n-----END PRIVATE KEY-----\n'
+  }),
+  databaseURL: 'https://oren-pro.firebaseio.com'
+});
+
+
+
+
+
+
+
+
+
+app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
+    const filePath = path.resolve(__dirname, '../public', 'index.html');
+    if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category && request.params.category.indexOf('.ico') === -1) || (request.params.subCategory && !request.params.event && request.params.subCategory.indexOf('.js') === -1 && request.params.subCategory.indexOf('.css') === -1) || (request.params.event && request.params.event.indexOf('.svg') === -1 && request.params.event.indexOf('.png') === -1)) {
+        let dbString = 'serverSeo/';
+        if(!request.params.category && !request.params.subCategory && !request.params.event) {
+            dbString = dbString;
+        } else if (request.params.category && !request.params.subCategory && !request.params.event) {
+            dbString = dbString + String(request.params.category);
+        } else if (request.params.category && request.params.subCategory && !request.params.event) {
+            dbString = dbString + String(request.params.category) + String(request.params.subCategory);
+        } else {
+            dbString = dbString + String(request.params.category) + String(request.params.subCategory) + String(request.params.event);
+        }
+
+
+        //Get a database reference to our posts
+        var db = admin.database();
+        var ref = db.ref(dbString);
+        console.log(dbString);
+        //Attach an asynchronous callback to read the data at our posts reference
+        ref.on("value", function(snapshot) {
+          console.log(snapshot.val());
+            let seo = {
+              title: 'אורן ורינת הפקות',
+              description: 'אורן ורינת הפקות',
+              keyWords: 'אורן ורינת הפקות'
+            };
+            if(snapshot.val() !== null) {
+              seo = snapshot.val().seo;
+            }
+
+            fs.readFile(filePath, 'utf8', function (err,data) {
+            if (err) {
+              return console.log(err);
+            }
+            
+            // replace the special strings with server generated strings
+            data = data.replace(/\$OG_TITLE/g, seo.title);
+            data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+            result = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
+            response.send(result);
+
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+        
+        });
+    } else {
+        next();
+    }
+});
+
+
+
+
 app.get('*.js', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
@@ -77,6 +141,7 @@ app.get('*.css', function (request, response, next) {
 app.use(compression());
 
 app.use(express.static(publicPath));
+
 
 
 

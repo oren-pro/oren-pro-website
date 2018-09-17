@@ -30,8 +30,10 @@ export const editHomePageSeo = ( seo ) => ({
 
 export const startEditHomePageSeo = ( seo ) => {
     return (dispatch) => {
-        return firebase.database().ref(`website/homepage/seo`).update(seo).then(() => {
-            dispatch(editHomePage( seo ));
+        return firebase.database().ref(`serverSeo/seo`).update(seo).then(() => {
+            return firebase.database().ref(`website/homepage/seo`).update(seo).then(() => {
+                dispatch(editHomePage( seo ));
+            })
         })
     };
 };

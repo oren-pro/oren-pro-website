@@ -25,8 +25,10 @@ export const editAboutPageSeo = ( seo ) => ({
 
 export const startEditAboutPageSeo = ( seo ) => {
     return (dispatch) => {
-        return database.ref(`website/aboutpage/seo`).update(seo).then(() => {
-            dispatch(editAboutPageSeo( seo ));
+        return database.ref(`serverSeo/about/seo`).update(seo).then(() => {
+            return database.ref(`website/aboutpage/seo`).update(seo).then(() => {
+                dispatch(editAboutPageSeo( seo ));
+            })
         })
     };
 };
