@@ -915,7 +915,8 @@ class EventPage extends React.Component {
         const seo = this.state.seo;
         const categoryId = this.props.categoryId;
         const eventId = this.state.eventId;
-        const link = this.props.location.pathname;
+        //const link = this.props.location.pathname;
+        const link = 'events/' + this.props.match.params.event
         this.props.startEditEventSeo(seo, categoryId, eventId, link);
         this.onToggleEventSeo();
     }

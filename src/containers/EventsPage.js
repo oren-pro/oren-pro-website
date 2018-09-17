@@ -1485,10 +1485,12 @@ class EventsPage extends React.Component {
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         console.log(this.props.location.pathname);
-        const link = this.props.location.pathname;
+        let link = '';
         if(this.state.subcategoryId === '') {
+            link = this.props.location.pathname;
             this.props.startEditSeo(seo, categoryId, link);
         } else {
+            link = 'subcategories/' + this.props.match.params.subcategory;
             this.props.startEditSubSeo(seo, categoryId, subcategoryId, link);
         }
         this.onToggleSeo();

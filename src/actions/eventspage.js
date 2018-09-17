@@ -411,8 +411,10 @@ export const editSeo = ( seo, categoryId ) => ({
 export const startEditSeo = ( seo, categoryId ) => {
     return (dispatch) => {
         console.log('in seo update');
-        return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
-            dispatch(editSeo( seo, categoryId ));
+        return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
+            return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
+                dispatch(editSeo( seo, categoryId ));
+            })
         })
     };
 };
@@ -429,6 +431,7 @@ export const editSubSeo = ( seo, categoryId, subcategoryId ) => ({
 export const startEditSubSeo = ( seo, categoryId, subcategoryId, link ) => {
     return (dispatch, getState) => {
         console.log('in sub seo update');
+        console.log(link);
         return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
             return firebase.database().ref(`eventsSubcategories/${subcategoryId}/seo`).update(seo).then(() => {
                 const eventspage = getState().eventspage;

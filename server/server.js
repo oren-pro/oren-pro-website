@@ -68,16 +68,16 @@ admin.initializeApp({
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
-    if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category && request.params.category.indexOf('.ico') === -1) || (request.params.subCategory && !request.params.event && request.params.subCategory.indexOf('.js') === -1 && request.params.subCategory.indexOf('.css') === -1) || (request.params.event && request.params.event.indexOf('.svg') === -1 && request.params.event.indexOf('.png') === -1)) {
+    if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category && request.params.category.indexOf('.ico') === -1) || (request.params.subCategory && !request.params.event && request.params.subCategory.indexOf('.js') === -1 && request.params.subCategory.indexOf('.css') === -1 && request.params.subCategory.indexOf('.png') === -1) || (request.params.event && request.params.event.indexOf('.svg') === -1 && request.params.event.indexOf('.png') === -1)) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
             dbString = dbString;
         } else if (request.params.category && !request.params.subCategory && !request.params.event) {
             dbString = dbString + String(request.params.category);
         } else if (request.params.category && request.params.subCategory && !request.params.event) {
-            dbString = dbString + String(request.params.category) + String(request.params.subCategory);
+            dbString = dbString + 'subcategories/' + String(request.params.category);
         } else {
-            dbString = dbString + String(request.params.category) + String(request.params.subCategory) + String(request.params.event);
+            dbString = dbString + 'events/' + String(request.params.category);
         }
 
 
@@ -101,7 +101,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
             if (err) {
               return console.log(err);
             }
-            
+
             // replace the special strings with server generated strings
             data = data.replace(/\$OG_TITLE/g, seo.title);
             data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
