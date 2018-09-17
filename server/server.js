@@ -15,8 +15,8 @@ const app = express();
 //app.use(require('prerender-node'));
 
 
-app.get('/', function(request, response) {
-  console.log('Home page visited!');
+app.get('*', function(request, response) {
+  console.log(request);
   const filePath = path.resolve(__dirname, '../public', 'index.html');
 
   // read in the index.html file
