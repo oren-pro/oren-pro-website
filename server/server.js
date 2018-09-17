@@ -51,11 +51,11 @@ const port = process.env.PORT || 3000;
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    projectId: 'oren-pro',
-    clientEmail: 'firebase-adminsdk-7eqf7@oren-pro.iam.gserviceaccount.com',
-    privateKey: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwzjU7rxbfmTsh\nUKizADcpuqCP10bmJzeHEcxoUCU+KdYKCds3jFMmrraCkFcEcB9YhcuZAE9YkOCF\nO7in9gjnUlE1LQ0D1DgnbgqkRV9yg6YZYYitP8cSZ+VuM9U+cAmRqBQkR0BeaWEm\nUBU/aNQgvmoMOo8qrMCWysudNNFI8C1xPXQSZpH/jM0ogtsCWO6ypWssdJYnk81A\nCyIvbes3f0JgjfIhaAYFckIOJpCx2ze6cGsAvqVDmvAhzJ3rOSDbLWPQ9F+98x9S\nYVsMt5E4L64ki1PcUqHz7w3DirTFlpjLwqDATWximlOCJdk/arCZVHWi78sV1by3\n3/w3uiRHAgMBAAECggEACOPr9CFWVbRfYpbeTla11ci6Z1RpQaXTk/YgJvEIvmFD\nwv0PfQtdG8/WaFnlSXLXdw/bPS+xZ0zgDUydRczVHvsAdfUOKq6FvrqfMsPOP3R0\nakhOPOMjgAuhxlkGFJd1Oh7Cf7ezE+XZ0OxfKFew4VvRx0wJt0w44hw2Z6RCD2T2\n7bak5JyKzbK+1+D0xPDKlZUKnNMh2PWLSBqL3oZyFO3i6DbhAI7dIj5TKiDryvnn\nALP47tP7x4LJbCWB4/wTu5709JYkIJB/KxZV8EaH2R8QpJ80Sjvzhg51CM5owNBu\npMJ22e5OTyqlv0Jzx8Tx33Op6izbSbL2a4QalAxckQKBgQDY1jFmxGJwA8TXhzuK\n/aimipfU3d6RyE462NO5277Xru/eE4GhYh6y2YRGd8jFdr/X6Knawz9ngo9VgI2j\nD0Sup1PX0BYMxx1fkBQcBSLGvDwBc9YnP7QuYhqn0mqd4rYn/LhRkRoEhrqUgAkF\nLtNpaRi6t4k2G91CVXrPKQoeeQKBgQDQvRsbTJGINmvEw80okBaBHc/z+SdD3S7G\ntkAAYUz97HbbOjf0/94pDvrgsGJGSldVHTlsnUHC8Z2zqjNe/J2iAG54EvYaI0yo\nULBCoh7XaCI1x8K6rWk5wa8+HbpndVPr2GqHJfmq9Ow2nioUAzwut9vq0QV8zftj\nxa5sux6ovwKBgEJ+RH3wIQOalEVHigHQUWRowbCcLQFlfF/dV+f5s+cuFQ5zyt+z\nWBieTUrStrWe+at7BIM6NnpGdi/RER38s6IfW72laO2YLbC9XP1OseBhnsEPRY+Z\noGZM3UGza9Bo0lUm0Vrp9SGIMzUQojN9rYT4noW7fI8kMlCCJ/vY6Op5AoGAIxO0\nK2k5h39FquIQZsGX1oiw+lmjHIddpezYYnf3XTBQZNSqtJQOvC2VQQ7C5Pb3KAlq\nLfNbKqw5iQiP62VeA+w4pBrjmk7WQe6VQA1IS4BnR0xTT9V2Oktu7GxId7xCpv5O\nIHnkM7NGwoLfpU9J3Lvuy83mMyvWE9UTU5g6NbcCgYEAxv/AinqZJsl15AhszNX5\nflh5qHTVdUbUAidmDF4mqQY9fNLr9Ae6N0n9buzLI7RVo34w/hVZQEaNRKUQaxvY\nq4xUkaFa3hdT7lfm1R+Zm1q8CCorqfYnQ3uu8so0EPrZTcqK+gMYHXi6/FBKTyVN\nGoNlbEPE1sdRAInBdLc0FjE=\n-----END PRIVATE KEY-----\n'
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY
   }),
-  databaseURL: 'https://oren-pro.firebaseio.com'
+  databaseURL: process.env.FIREBASE_DATABASE_URL
 });
 
 
