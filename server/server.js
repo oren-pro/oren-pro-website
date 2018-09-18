@@ -60,7 +60,7 @@ admin.initializeApp({
     projectId: process.env.FIREBASE_PROJECT_ID,
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     //privateKey: a1 + a2 + a3 + a4
-    privateKey: String(process.env.FIREBASE_PRIVATE_KEY_1 + process.env.FIREBASE_PRIVATE_KEY_2 + process.env.FIREBASE_PRIVATE_KEY_3 + process.env.FIREBASE_PRIVATE_KEY_4)
+    privateKey: String(process.env.FIREBASE_PRIVATE_KEY_1 + process.env.FIREBASE_PRIVATE_KEY_2 + process.env.FIREBASE_PRIVATE_KEY_3 + process.env.FIREBASE_PRIVATE_KEY_4).replace(/\\n/g, '\n')
   }),
   databaseURL: process.env.FIREBASE_DATABASE_URL
 });
