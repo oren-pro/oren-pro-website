@@ -408,7 +408,7 @@ export const editSeo = ( seo, categoryId ) => ({
     categoryId
 });
 
-export const startEditSeo = ( seo, categoryId ) => {
+export const startEditSeo = ( seo, categoryId, link ) => {
     return (dispatch) => {
         console.log('in seo update');
         return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
