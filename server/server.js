@@ -81,6 +81,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
         var db = admin.database();
         var ref = db.ref(dbString);
         console.log('db test -');
+        console.log('db test - headers');
         console.log(dbString);
         //Attach an asynchronous callback to read the data at our posts reference
         ref.on("value", function(snapshot) {
