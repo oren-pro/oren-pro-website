@@ -88,7 +88,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
         console.log('db test - headers');
         console.log(dbString);
         //Attach an asynchronous callback to read the data at our posts reference
-        ref.on("value", function(snapshot) {
+        ref.once("value", function(snapshot) {
           console.log(snapshot.val());
             let seo = {
               title: 'אורן ורינת הפקות',
