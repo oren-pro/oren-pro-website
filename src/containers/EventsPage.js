@@ -1485,6 +1485,7 @@ class EventsPage extends React.Component {
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         console.log(this.props.location.pathname);
+        console.log(this.props.match.params.category);
         let link = '';
         if(this.state.subcategoryId === '') {
             link = this.props.location.pathname;
@@ -1851,7 +1852,7 @@ const mapDispatchToProps = (dispatch) => ({
     startEditEvents: ( fbEvents, events, categoryId ) => dispatch(startEditEvents( fbEvents, events, categoryId )),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),
     startSetAllEvents: () => dispatch(startSetAllEvents()),
-    startEditSeo: (seo, categoryId) => dispatch(startEditSeo(seo, categoryId)),
+    startEditSeo: (seo, categoryId, link) => dispatch(startEditSeo(seo, categoryId, link)),
     startEditSubSeo: (seo, categoryId, subcategoryId, link) => dispatch(startEditSubSeo(seo, categoryId, subcategoryId, link))
 });
 

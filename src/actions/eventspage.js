@@ -411,6 +411,7 @@ export const editSeo = ( seo, categoryId ) => ({
 export const startEditSeo = ( seo, categoryId, link ) => {
     return (dispatch) => {
         console.log('in seo update');
+        console.log(link);
         return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
             return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
                 dispatch(editSeo( seo, categoryId ));
