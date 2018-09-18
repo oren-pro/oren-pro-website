@@ -524,6 +524,8 @@ class EventPage extends React.Component {
     }
 
     setSubcategoryId = (e) => {
+        //console.log(this.state.items);
+        //console.log(this.state.currentItems);
         const subcategoryId = e.target.dataset.id;
         const subcategoryName = e.target.dataset.name;
         this.setState({

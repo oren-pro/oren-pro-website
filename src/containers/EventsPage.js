@@ -277,11 +277,11 @@ class EventsPage extends React.Component {
                 this.setState({
                     subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                     subCategories: subcategories,
-                    itemsOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                    itemsOrigin: JSON.parse(JSON.stringify(itemsSet)),
                     itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
                     itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
                     itemsCurrent: JSON.parse(JSON.stringify(itemsCurrent)),
-                    items: JSON.parse(JSON.stringify(itemsCurrent))
+                    items: JSON.parse(JSON.stringify(itemsSet))
                 });
             });
         } else {
@@ -319,11 +319,11 @@ class EventsPage extends React.Component {
             this.setState({
                 subCategoriesOrigin: JSON.parse(JSON.stringify(subcategories)),
                 subCategories: subcategories,
-                itemsOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
+                itemsOrigin: JSON.parse(JSON.stringify(itemsSet)),
                 itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
                 itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
                 itemsCurrent: JSON.parse(JSON.stringify(itemsCurrent)),
-                items: JSON.parse(JSON.stringify(itemsCurrent))
+                items: JSON.parse(JSON.stringify(itemsSet))
             });
         }
         
