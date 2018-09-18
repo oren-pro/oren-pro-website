@@ -1373,8 +1373,17 @@ class EventsPage extends React.Component {
                 return a.subcategories[subcategoryId+'order'] > b.subcategories[subcategoryId+'order'] ? 1 : -1;
             });
         }
+
+        items.map((allItem, index) => {
+            itemsCurrent.map((item) => {
+                if (allItem.id === item.id) {
+                    items[index] = item;
+                }
+            })
+        })
+
         this.setState({
-            items: JSON.parse(JSON.stringify(itemsCurrent)),
+            items: JSON.parse(JSON.stringify(items)),
             itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrent
         });
@@ -1423,6 +1432,7 @@ class EventsPage extends React.Component {
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
         const itemsCurrent = this.state.itemsCurrent;
+        const items = this.state.items;
         let events = this.state.items;
         if ( subcategoryId === '' ) {
             events = this.state.itemsCurrent;
@@ -1433,9 +1443,17 @@ class EventsPage extends React.Component {
             fbEvents[item.id] = item;
         });
 
+        items.map((allItem, index) => {
+            itemsCurrent.map((item) => {
+                if (allItem.id === item.id) {
+                    items[index] = item;
+                }
+            })
+        })
+
         this.setState({
-            items: itemsCurrent,
-            itemsOrigin: itemsCurrent,
+            items: items,
+            itemsOrigin: items,
             itemsCurrentOrigin: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent))
         });
