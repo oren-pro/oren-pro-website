@@ -62,6 +62,10 @@ admin.initializeApp({
 
 
 
+
+
+
+
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
     if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category && request.params.category.indexOf('.ico') === -1) || (request.params.subCategory && !request.params.event && request.params.subCategory.indexOf('.js') === -1 && request.params.subCategory.indexOf('.css') === -1 && request.params.subCategory.indexOf('.png') === -1) || (request.params.event && request.params.event.indexOf('.svg') === -1 && request.params.event.indexOf('.png') === -1 && request.params.event.indexOf('.gif') === -1)) {
@@ -76,7 +80,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
             dbString = dbString + 'events/' + String(request.params.category);
         }
 
-
+        console.log(request.url);
         //Get a database reference to our posts
         var db = admin.database();
         var ref = db.ref(dbString);
