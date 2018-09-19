@@ -99,9 +99,9 @@ const app = express();
 
 app.use(function forceLiveDomain(req, res, next) {
   // Don't allow user to hit Heroku now that we have a domain
-  var host = req.get('Host');
-  if (host === 'oren-pro-website.herokuapp.com') {
-    return res.redirect(301, 'http://www.oren-pro.com/' + req.originalUrl);
+  
+  if (req.originalUrl === '1204/1204/אירוע חברה') {
+    return res.redirect(301, 'https://oren-pro-website.herokuapp.com/' + 'אירועי_חברה');
   }
   return next();
 });
