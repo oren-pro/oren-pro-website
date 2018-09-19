@@ -98,10 +98,37 @@ const app = express();
 
 
 app.use(function forceLiveDomain(req, res, next) {
-  // Don't allow user to hit Heroku now that we have a domain
-  
-  if (req.originalUrl === '1204/1204/אירוע חברה') {
-    return res.redirect(301, 'https://oren-pro-website.herokuapp.com/' + 'אירועי_חברה');
+  // http://www.oren-pro.com/1014/993/יום-כיף-בחורף
+  if (String(req.originalUrl) === '/1014/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%97%D7%95%D7%A8%D7%A3') {
+    return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/999/986/הפקות-אירועים-לחברות-
+  if (String(req.originalUrl) === '/999/986/%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D-%D7%9C%D7%97%D7%91%D7%A8%D7%95%D7%AA-') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/13/הפקות_אירועים
+  if (String(req.originalUrl) === '/13/%D7%94%D7%A4%D7%A7%D7%95%D7%AA_%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/1345/1306/אירוע-פורים-במשרדי-החברה
+  if (String(req.originalUrl) === '/1345/1306/%D7%90%D7%99%D7%A8%D7%95%D7%A2-%D7%A4%D7%95%D7%A8%D7%99%D7%9D-%D7%91%D7%9E%D7%A9%D7%A8%D7%93%D7%99-%D7%94%D7%97%D7%91%D7%A8%D7%94') {
+    return res.redirect(301, '/PURIM_CIRCUS/אירועי_קונספט/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/993/993/יום-כיף
+  if (String(req.originalUrl) === '/993/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/1077/1069/יום-כיף-לעובדים
+  if (String(req.originalUrl) === '/1077/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%9C%D7%A2%D7%95%D7%91%D7%93%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/1348/1348/נופש-חברה
+  if (String(req.originalUrl) === '/1348/1348/%D7%A0%D7%95%D7%A4%D7%A9-%D7%97%D7%91%D7%A8%D7%94') {
+    return res.redirect(301, '/נופש_חברה/אירועי_חברה');
+  }
+  // http://www.oren-pro.com/1204/1204/אירוע חברה
+  if (String(req.originalUrl) === '/1204/1204/%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%97%D7%91%D7%A8%D7%94') {
+    return res.redirect(301, '/אירועי_חברה');
   }
   return next();
 });
