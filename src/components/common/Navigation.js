@@ -152,7 +152,15 @@ class Navigation extends React.Component {
   }
 
   toggleAccessibility = () => {
-    window.StartAccessibility();
+    //window.StartAccessibility();
+    //console.log($('#enable-toolbar-content').css('transform'));
+    if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 213)") {
+      //console.log("1");
+      document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
+    } else {
+      //console.log("2");
+      document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
+    }
   }
 
   render() {
