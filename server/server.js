@@ -217,6 +217,13 @@ app.get('*.css', function (request, response, next) {
     next();
 });
 
+app.get('*.png', function (request, response, next) {
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+    response.set('Cache-Control', 'max-age=86400');
+  }
+    next();
+});
+
 app.use(compression());
 
 app.use(express.static(publicPath));
