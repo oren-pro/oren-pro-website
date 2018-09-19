@@ -77,6 +77,8 @@ class Navigation extends React.Component {
 
   componentDidMount = () => {
     //console.log("in component did mount check for fixed top");
+    document.getElementById('enable-toolbar-trigger').style.display = "none";
+
     const location = window.location.href;
     //console.log(location);
     const page = location.substring(location.lastIndexOf("/"), location.length);
