@@ -95,6 +95,22 @@ const app = express();
 
 
 
+
+
+app.use(function forceLiveDomain(req, res, next) {
+  // Don't allow user to hit Heroku now that we have a domain
+  var host = req.get('Host');
+  if (host === 'oren-pro-website.herokuapp.com') {
+    return res.redirect(301, 'http://www.oren-pro.com/' + req.originalUrl);
+  }
+  return next();
+});
+
+
+
+
+
+
 var allowedOrigins = ['http://localhost:8080',
                       'http://oren-pro-website.herokuapp.com',
                       'https://oren-pro-website.herokuapp.com'];
