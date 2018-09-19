@@ -9,7 +9,6 @@
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server --mode development",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
-    //"start": "babel-node server/server.js --presets es2015,stage-2",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prod"
   },
