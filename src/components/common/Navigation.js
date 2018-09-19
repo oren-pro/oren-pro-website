@@ -78,6 +78,10 @@ class Navigation extends React.Component {
   componentDidMount = () => {
     //console.log("in component did mount check for fixed top");
     document.getElementById('enable-toolbar-trigger').style.display = "none";
+    document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
+    
+    
+    //document.body.style.backgroundColor = "#fff";
 
     const location = window.location.href;
     //console.log(location);
@@ -158,9 +162,11 @@ class Navigation extends React.Component {
     //console.log($('#enable-toolbar-content').css('transform'));
     if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 213)") {
       //console.log("1");
+      //document.getElementById('enable-toolbar-content').style.borderBottom = "1px solid hsla(0,0%,100%,.2)";
       document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
     } else {
       //console.log("2");
+      //document.getElementById('enable-toolbar-content').style.borderBottom = "1px solid hsla(0,0%,100%,.2)";
       document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
     }
   }
