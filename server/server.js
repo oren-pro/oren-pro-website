@@ -8,6 +8,71 @@ var cloudinary = require('cloudinary');
 const fs = require('fs');
 
 
+
+
+
+
+//*** server side rendering ***//
+
+
+// import { createStore } from 'redux';
+// import { Provider } from 'react-redux';
+// import thunk from 'redux-thunk';
+// import aboutpageReducer from '../src/reducers/aboutpage';
+// import authReducer from '../src/reducers/auth';
+// import costumersReducer from '../src/reducers/costumers';
+// import eventspageReducer from '../src/reducers/eventspage';
+// import homepageReducer from '../src/reducers/homepage';
+// import navigationReducer from '../src/reducers/navigation';
+// import newsletterReducer from '../src/reducers/newsletter';
+// import messagesReducer from '../src/reducers/messages';
+// import desktopGalleryReducer from '../src/reducers/desktopGallery';
+// import mobileGalleryReducer from '../src/reducers/mobileGallery';
+// import App from '../src/App';
+
+// import { renderToString } from 'react-dom/server';
+
+
+// function handleRender(req, res) {
+//     // Create a new Redux store instance
+//     const store = createStore(
+//         combineReducers({
+//             aboutpage: aboutpageReducer,
+//             auth: authReducer,
+//             costumers: costumersReducer,
+//             eventspage: eventspageReducer,
+//             homepage: homepageReducer,
+//             messages: messagesReducer,
+//             navigation: navigationReducer,
+//             newsletter: newsletterReducer,
+//             desktopGallery: desktopGalleryReducer,
+//             mobileGallery: mobileGalleryReducer
+//         }),
+//         composeEnhancers(applyMiddleware(thunk))
+//         //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     );
+// ​
+//     // Render the component to a string
+//     const html = renderToString(
+//       <Provider store={store}>
+//         <App />
+//       </Provider>
+//     )
+//   ​
+//     // Grab the initial state from our Redux store
+//     const preloadedState = store.getState()
+//   ​
+//     // Send the rendered page back to the client
+//     res.send(renderFullPage(html, preloadedState))
+// }
+
+
+//******    end ssr      ******//
+
+
+
+
+
 var admin = require("firebase-admin");
 
 
@@ -17,8 +82,16 @@ var admin = require("firebase-admin");
 
 const app = express();
 
-//app.use(require('prerender-node'));
+app.use(require('prerender-node'));
 
+
+
+
+//*** server side rendering ***//
+
+//app.use(handleRender);
+
+//******    end ssr      ******//
 
 
 
