@@ -118,6 +118,13 @@ const port = process.env.PORT || 3000;
 
 
 
+
+
+
+//*** server side rendering -- SEO ***//
+
+
+
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
@@ -126,18 +133,6 @@ admin.initializeApp({
   }),
   databaseURL: process.env.FIREBASE_DATABASE_URL
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
@@ -192,6 +187,15 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
         next();
     }
 });
+
+
+
+
+//******    end ssr --- SEO     ******//
+
+
+
+
 
 
 
