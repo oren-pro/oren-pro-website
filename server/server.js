@@ -82,7 +82,7 @@ var admin = require("firebase-admin");
 
 const app = express();
 
-app.use(require('prerender-node'));
+//app.use(require('prerender-node'));
 
 
 
