@@ -160,14 +160,14 @@ class Navigation extends React.Component {
   toggleAccessibility = () => {
     //window.StartAccessibility();
     console.log($('#enable-toolbar-content').css('transform'));
-    if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 213)" || $('#enable-toolbar-content').css('transform') === "translateY(100%)") {
+    if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)") {
       //console.log("1");
       //document.getElementById('enable-toolbar-content').style.borderBottom = "1px solid hsla(0,0%,100%,.2)";
-      document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
+      document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
     } else {
       //console.log("2");
       //document.getElementById('enable-toolbar-content').style.borderBottom = "1px solid hsla(0,0%,100%,.2)";
-      document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
+      document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
     }
   }
 
