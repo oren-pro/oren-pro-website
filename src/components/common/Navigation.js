@@ -76,6 +76,15 @@ class Navigation extends React.Component {
     }
 
   componentDidMount = () => {
+    console.log($( window ).width());
+ 
+    const windowWidth = $( window ).width();
+    this.setState({ 
+        windowWidth
+    });
+    // Returns width of HTML document
+    console.log($( document ).width());
+
     //console.log("in component did mount check for fixed top");
     document.getElementById('enable-toolbar-trigger').style.display = "none";
     document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
@@ -173,16 +182,23 @@ class Navigation extends React.Component {
 
         <div className="collapse__bg__loader" />
 
-        <div className='mobile' id="hp_carousel_mobile">
-          <button className="carousel__button" onClick={this.pageToTopM}> </button>
-          <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
-          <HomePageCarousel media='mobile' />
-        </div>
-        <div className='desktop' id="hp_carousel_desktop">
-          <button className="carousel__button" onClick={this.pageToTopD}> </button>
-          <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
-          <HomePageCarousel media='desktop' />
-        </div>
+        {
+          this.state.windowWidth < 769 ?
+            <div className='mobile' id="hp_carousel_mobile">
+              <button className="carousel__button" onClick={this.pageToTopM}> </button>
+              <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
+              <HomePageCarousel media='mobile' />
+            </div>
+          :
+            <div className='desktop' id="hp_carousel_desktop">
+              <button className="carousel__button" onClick={this.pageToTopD}> </button>
+              <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
+              <HomePageCarousel media='desktop' />
+            </div>
+
+        }
+        
+        
         <div id="fakeNav" className="fakeNav" />
         <Navbar id="navbarD" light className={`container-fluid desktop`} expand="md" fixed={this.state.fixed}>
           <div className="container-fluid navbar__header__container">
