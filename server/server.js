@@ -326,7 +326,12 @@ var result = minify(path.join(publicPath, 'index.html'), {
   removeScriptTypeAttributes: true,
   removeStyleLinkTypeAttributes: true,
   removeOptionalTags: true,
-  removeRedundantAttributes: true
+  removeRedundantAttributes: true,
+  caseSensitive: true,
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  decodeEntities: true,
+  minifyURLs: true
 });
 
 app.get('*', (req, res) => {
