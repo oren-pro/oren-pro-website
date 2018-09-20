@@ -39,6 +39,7 @@
     "gsap": "^2.0.1",
     "history": "^4.7.2",
     "hoist-non-react-statics": "^2.5.5",
+    "html-minifier": "^3.5.20",
     "jquery": "^3.3.1",
     "lodash.isequal": "^4.5.0",
     "node-sass": "^4.8.3",

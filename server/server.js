@@ -233,9 +233,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
 
 
 
-
-
-app.get('*.html', function (request, response, next) {
+app.get('*.js', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
@@ -243,7 +241,7 @@ app.get('*.html', function (request, response, next) {
     next();
 });
 
-app.get('*.js', function (request, response, next) {
+app.get('*.svg', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
     request.url = request.url + '.gz';
     response.set('Content-Encoding', 'gzip');
@@ -318,10 +316,13 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 
 
 
-
+var minify = require('html-minifier').minify;
+var result = minify(path.join(publicPath, 'index.html'), {
+  removeAttributeQuotes: true
+});
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
+    res.sendFile(result);
 });
 
 app.listen(port, () => {
