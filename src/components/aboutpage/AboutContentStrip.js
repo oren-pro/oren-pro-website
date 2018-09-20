@@ -30,12 +30,10 @@ export default class AboutContentStrip extends React.Component {
         console.log('onHeightChange');
         let height = e.target.value * 17;
         let minHeight = e.target.value * 17;
+        let windowWidth = 1960;
         if (typeof(window) !== "undefined") {
-            const windowWidth = $(window).width();
-        } else {
-            const windowWidth = 1960;
+            windowWidth = $(window).width();
         }
-
         let windowRatio = 100;
         let ratio = 2.2;
         let lineHeight = 22;
@@ -202,10 +200,9 @@ export default class AboutContentStrip extends React.Component {
  
 
     componentDidMount = () => {
+        let windowWidth = 1960;
         if (typeof(window) !== "undefined") {
-            const windowWidth = $(window).width();
-        } else {
-            const windowWidth = 1960;
+            windowWidth = $(window).width();
         }
         let windowRatio = 100;
         let ratio = 2.2;

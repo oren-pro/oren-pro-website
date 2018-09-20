@@ -266,12 +266,11 @@ class EventPage extends React.Component {
                 let imageHeight = image.imageHeight;
                 let ratioWidth = 1;
                 let ratioHeight = 1;
+                let windowWidth = 1960;
+                let windowHeight = 1024;
                 if (typeof(window) !== "undefined") {
-                    const windowWidth = $(window).width();
-                    const windowHeight = $(window).height();
-                } else {
-                    const windowWidth = 1960;
-                    const windowHeight = 1024;
+                    windowWidth = $(window).width();
+                    windowHeight = $(window).height();
                 }
                 const maxWidth = windowWidth/3*2;
                 const maxHeight = maxWidth/3*2;

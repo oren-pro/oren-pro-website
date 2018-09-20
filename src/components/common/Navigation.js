@@ -140,10 +140,9 @@ class Navigation extends React.Component {
   }
 
   componentWillUnmount = () => {
+    let location = '/';
     if (typeof(window) !== "undefined") {
       const location = window.location.href;
-    } else {
-      const location = '/';
     }
     const page = location.substring(location.lastIndexOf("/"), location.length);
     if (page === '/') {

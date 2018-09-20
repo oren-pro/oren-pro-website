@@ -33,10 +33,9 @@ export default class EventsText extends React.Component {
     }
  
     setHeight = (showLines) => {
+        let windowWidth = 1960;
         if (typeof(window) !== "undefined") {
-            const windowWidth = $(window).width();
-        } else {
-            const windowWidth = 1960;
+            windowWidth = $(window).width();
         }
         let windowRatio = 100;
         let ratio = 2.2;
