@@ -1,14 +1,17 @@
 import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import { createMemoryHistory } from 'history';
 import ReactLoading from "react-loading";
 
 let loadImage = "";
-if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
-    console.log("found");
-    loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>;
-} else {
-    loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>;
+if (typeof(window) !== "undefined") {
+    if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
+        console.log("found");
+        loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>;
+    } else {
+        loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>;
+    }
 }
 
 import AboutPage from '../containers/AboutPage';
@@ -24,7 +27,8 @@ import PublicRoute from './PublicRoute';
 import SigninPage from '../components/SigninPage';
 import { connect } from 'react-redux';
 
-export const history = createHistory();
+
+export const history = typeof(window) !== "undefined" ? createHistory() : createMemoryHistory();
 
 class AppRouter extends React.Component {
     render() {

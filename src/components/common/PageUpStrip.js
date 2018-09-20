@@ -1,10 +1,18 @@
 import React from 'react';
-import TweenLite from 'gsap/TweenLite';
 
-import scrollTo from 'gsap/ScrollToPlugin';
+if (typeof(window) !== "undefined") {
+    //import TweenLite from 'gsap/TweenLite';
+    //import scrollTo from 'gsap/ScrollToPlugin';
+    const TweenLite = require('gsap/TweenLite');
+    const scrollTo = require('gsap/ScrollToPlugin');
+}
+
+
 
 const pageToTop = () => {
-    TweenLite.to(window, 0.7, {scrollTo:{y:0}});
+    if (typeof(window) !== "undefined") {
+        TweenLite.to(window, 0.7, {scrollTo:{y:0}});
+    }
 }
 
 const PageUpStrip = (props) => (

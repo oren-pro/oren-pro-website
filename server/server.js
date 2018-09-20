@@ -31,39 +31,35 @@ const fs = require('fs');
 // import App from '../src/App';
 
 // import { renderToString } from 'react-dom/server';
-
+// import React from 'react';
 
 // function handleRender(req, res) {
 //     // Create a new Redux store instance
-//     const store = createStore(
-//         combineReducers({
-//             aboutpage: aboutpageReducer,
-//             auth: authReducer,
-//             costumers: costumersReducer,
-//             eventspage: eventspageReducer,
-//             homepage: homepageReducer,
-//             messages: messagesReducer,
-//             navigation: navigationReducer,
-//             newsletter: newsletterReducer,
-//             desktopGallery: desktopGalleryReducer,
-//             mobileGallery: mobileGalleryReducer
-//         }),
-//         composeEnhancers(applyMiddleware(thunk))
-//         //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-//     );
-// ​
+//     // const store = createStore(
+//     //     combineReducers({
+//     //         aboutpage: aboutpageReducer,
+//     //         auth: authReducer,
+//     //         costumers: costumersReducer,
+//     //         eventspage: eventspageReducer,
+//     //         homepage: homepageReducer,
+//     //         messages: messagesReducer,
+//     //         navigation: navigationReducer,
+//     //         newsletter: newsletterReducer,
+//     //         desktopGallery: desktopGalleryReducer,
+//     //         mobileGallery: mobileGalleryReducer
+//     //     }),
+//     //     composeEnhancers(applyMiddleware(thunk))
+//     // );
 //     // Render the component to a string
 //     const html = renderToString(
-//       <Provider store={store}>
+//       //<Provider store={store}>
 //         <App />
-//       </Provider>
+//       //</Provider>
 //     )
-//   ​
 //     // Grab the initial state from our Redux store
-//     const preloadedState = store.getState()
-//   ​
+//     //const preloadedState = store.getState()
 //     // Send the rendered page back to the client
-//     res.send(renderFullPage(html, preloadedState))
+//     res.send(renderFullPage(html))//, preloadedState))
 // }
 
 
@@ -176,6 +172,8 @@ admin.initializeApp({
   }),
   databaseURL: process.env.FIREBASE_DATABASE_URL
 });
+
+
 
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {

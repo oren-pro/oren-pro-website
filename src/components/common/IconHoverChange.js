@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 let measure = 'rem';
-if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
-    measure = 'em';
+if (typeof(window) !== "undefined") {
+  if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
+      measure = 'em';
+  }
 }
 
 const icons = {

@@ -75,13 +75,14 @@ class AboutPage extends React.Component {
         this.setState({
             aboutpage: aboutpage
         });
-      
-        if(isEqual(this.state.aboutpageOrigin, aboutpage)){ 
-            //console.log("remove listener");
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            //console.log("add listener");
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.aboutpageOrigin, aboutpage)){ 
+                //console.log("remove listener");
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                //console.log("add listener");
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
 	}
 
@@ -106,7 +107,9 @@ class AboutPage extends React.Component {
         });
         this.props.startEditAboutPage(fbAboutpage, aboutpage);
         this.setState(() => ({ aboutpageOrigin: aboutpage }));
-        window.removeEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
 
@@ -117,7 +120,9 @@ class AboutPage extends React.Component {
 
 
     componentDidMount = () => {
-        window.addEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.addEventListener('scroll', this.handleScroll);
+        }
         this.props.startSetAboutPage().then(()=> {
             let aboutpage= [];
             const obj = JSON.parse(JSON.stringify(this.props.aboutpage));
@@ -197,7 +202,9 @@ class AboutPage extends React.Component {
 
 
     componentWillUnmount = () => {
-        window.removeEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
     }
 
 

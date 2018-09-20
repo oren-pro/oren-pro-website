@@ -54,7 +54,9 @@ class Navigation extends React.Component {
     this.setState({
         fixed: 'top'
     });
-    window.scrollTo(0, -20);
+    if (typeof(window) !== "undefined") {
+      window.scrollTo(0, -20);
+    }
   }
 
   setIconChangeOn = (e) => {
@@ -81,14 +83,16 @@ class Navigation extends React.Component {
     }
 
   componentDidMount = () => {
-    console.log($( window ).width());
- 
-    const windowWidth = $( window ).width();
+    //console.log($( window ).width());
+    let windowWidth = 1960;
+    if (typeof(window) !== "undefined") {
+      windowWidth = $( window ).width();
+    }
     this.setState({ 
         windowWidth
     });
     // Returns width of HTML document
-    console.log($( document ).width());
+    //console.log($( document ).width());
 
     //console.log("in component did mount check for fixed top");
     document.getElementById('enable-toolbar-trigger').style.display = "none";
@@ -96,8 +100,10 @@ class Navigation extends React.Component {
     
     
     //document.body.style.backgroundColor = "#fff";
-
-    const location = window.location.href;
+    let location = '/';
+    if (typeof(window) !== "undefined") {
+      location = window.location.href;
+    }
     //console.log(location);
     const page = location.substring(location.lastIndexOf("/"), location.length);
     //console.log(page);
@@ -105,7 +111,9 @@ class Navigation extends React.Component {
       //console.log("go to fixed top");
       this.fixedTop();
     } else {
-      window.addEventListener('scroll', this.handleScroll);
+      if (typeof(window) !== "undefined") {
+        window.addEventListener('scroll', this.handleScroll);
+      }
     }
   }
 
@@ -132,10 +140,16 @@ class Navigation extends React.Component {
   }
 
   componentWillUnmount = () => {
-    const location = window.location.href;
+    if (typeof(window) !== "undefined") {
+      const location = window.location.href;
+    } else {
+      const location = '/';
+    }
     const page = location.substring(location.lastIndexOf("/"), location.length);
     if (page === '/') {
-      window.removeEventListener('scroll', this.handleScroll);
+      if (typeof(window) !== "undefined") {
+        window.removeEventListener('scroll', this.handleScroll);
+      }
     }
   }
 
@@ -151,24 +165,36 @@ class Navigation extends React.Component {
   }
 
   pageToTopD = () => {
-    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarD").offset().top+20}})
+    if (typeof(window) !== "undefined") {
+      TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarD").offset().top+20}})
+    }
   }
 
   pageToTopM = () => {
-    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
+    if (typeof(window) !== "undefined") {
+      TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
+    }
   }
 
   gotoFacebook = () => {
-      window.open('https://www.facebook.com/oren.pro/');
+      if (typeof(window) !== "undefined") {
+        window.open('https://www.facebook.com/oren.pro/');
+      }
   }
   gotoInstagram = () => {
-      window.open('https://www.instagram.com/oren_rinat_pro/');
+      if (typeof(window) !== "undefined") {
+        window.open('https://www.instagram.com/oren_rinat_pro/');
+      }
   }
   gotoMail = () => {
-      window.location = 'mailto:info@oren-pro.com';
+      if (typeof(window) !== "undefined") {
+        window.location = 'mailto:info@oren-pro.com';
+      }
   }
   gotoPhone = () => {
-      window.location = 'tel:0525379515';
+      if (typeof(window) !== "undefined") {
+        window.location = 'tel:0525379515';
+      }
   }
 
   toggleAccessibility = () => {

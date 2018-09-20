@@ -9,19 +9,27 @@ import HomepageSocialmediaRightBorder from '../svg/HomepageSocialmediaRightBorde
 class SocialMedia extends React.Component {
     gotoFacebook = () => {
         console.log('in facebook');
-        window.open('https://www.facebook.com/oren.pro/');
+        if (typeof(window) !== "undefined") {
+            window.open('https://www.facebook.com/oren.pro/');
+        }
     }
     gotoInstagram = () => {
         console.log('in facebook');
-        window.open('https://www.instagram.com/oren_rinat_pro/');
+        if (typeof(window) !== "undefined") {
+            window.open('https://www.instagram.com/oren_rinat_pro/');
+        }
     }
     gotoMail = () => {
         console.log('in facebook');
-        window.location = 'mailto:mosh.kainer@gmail.com';
+        if (typeof(window) !== "undefined") {
+            window.location = 'mailto:mosh.kainer@gmail.com';
+        }
     }
     gotoPhone = () => {
         console.log('in facebook');
-        window.location = 'tel:0525379515';
+        if (typeof(window) !== "undefined") {
+            window.location = 'tel:0525379515';
+        }
     }
     
     render() {

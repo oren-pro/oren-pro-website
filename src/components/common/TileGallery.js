@@ -20,7 +20,7 @@ class TileGallery extends React.Component {
     // this is to fix non-ios browsers where a scrollbar isnt present before
     // images load, then becomes present, and doesn't trigger an update.
     // avoids calling setState in componentDidUpdate causing maximum depth exceeded error
-    if (typeof window !== 'undefined') {
+    if (typeof(window) !== "undefined") {
       window.requestAnimationFrame(function() {
         if (that._gallery.clientWidth !== that.state.containerWidth) {
           that.setState({ containerWidth: Math.floor(that._gallery.clientWidth) });
@@ -30,10 +30,14 @@ class TileGallery extends React.Component {
   }
   componentDidMount() {
     this.setState({ containerWidth: Math.floor(this._gallery.clientWidth) });
-    window.addEventListener('resize', this.handleResize);
+    if (typeof(window) !== "undefined") {
+      window.addEventListener('resize', this.handleResize);
+    }
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize, false);
+    if (typeof(window) !== "undefined") {
+      window.removeEventListener('resize', this.handleResize, false);
+    }
   }
   handleResize(e) {
     if (this._gallery.clientWidth !== this.state.containerWidth) {

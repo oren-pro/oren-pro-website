@@ -19,7 +19,10 @@ import {
     startSetMobileGallery
 } from './actions/mobileGallery';
 import { login, logout } from './actions/auth';
-import 'normalize.css/normalize.css';
+if (typeof(window) !== "undefined") {
+    //import 'normalize.css/normalize.css';
+    require("normalize.css/normalize.css");
+}
 import './styles/styles.scss';
 //import { firebase } from './firebase/firebase';
 var firebase = require("firebase/app");
@@ -37,17 +40,21 @@ const jsx = (
 let hasRendered = false;
 const renderApp = () => {
     if (!hasRendered) {
-        render(jsx, document.getElementById('app'));
+        if (typeof(window) !== "undefined") {
+            render(jsx, document.getElementById('app'));
+        }
         hasRendered = true;
     }
 };
 
 //console.log(navigator.userAgent);
-if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
-    console.log("found");
-    render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
-} else {
-    render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
+if (typeof(window) !== "undefined") {
+    if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
+        console.log("found");
+        render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" /></div>, document.getElementById('app'));
+    } else {
+        render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
+    }
 }
 
 

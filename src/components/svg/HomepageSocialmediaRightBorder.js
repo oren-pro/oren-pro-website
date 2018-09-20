@@ -1,8 +1,10 @@
 import React from 'react';
 
 let measure = 'vw';
-if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
-    measure = 'em';
+if (typeof(window) !== "undefined") {
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ){
+        measure = 'em';
+    }
 }
 
 const HomepageSocialmediaRightBorder = () => {

@@ -266,8 +266,13 @@ class EventPage extends React.Component {
                 let imageHeight = image.imageHeight;
                 let ratioWidth = 1;
                 let ratioHeight = 1;
-                const windowWidth = $(window).width();
-                const windowHeight = $(window).height();
+                if (typeof(window) !== "undefined") {
+                    const windowWidth = $(window).width();
+                    const windowHeight = $(window).height();
+                } else {
+                    const windowWidth = 1960;
+                    const windowHeight = 1024;
+                }
                 const maxWidth = windowWidth/3*2;
                 const maxHeight = maxWidth/3*2;
                 ratioHeight = maxHeight/imageHeight;
@@ -414,7 +419,9 @@ class EventPage extends React.Component {
     }
 
     componentDidMount = () => {
-        window.addEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.addEventListener('scroll', this.handleScroll);
+        }
         this.setData();
     }
 
@@ -426,7 +433,9 @@ class EventPage extends React.Component {
 
 
     componentWillUnmount = () => {
-        window.removeEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
     }
 
 
@@ -590,7 +599,9 @@ class EventPage extends React.Component {
                     eventTextOrigin: eventText,
                     eventShowLinesOrigin: eventShowLines
                 }));
-                window.removeEventListener("beforeunload", this.unloadFunc);
+                if (typeof(window) !== "undefined") {
+                    window.removeEventListener("beforeunload", this.unloadFunc);
+                }
                 if(gotoNewLocation === true) {
                     
                     this.props.history.push(`/${stringReplace(eventName, ' ', '_')}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
@@ -611,10 +622,12 @@ class EventPage extends React.Component {
         this.setState({
             eventName
         });
-        if(isEqual(this.state.eventNameOrigin, eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.eventNameOrigin, eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -623,10 +636,12 @@ class EventPage extends React.Component {
         this.setState({
             eventText
         });
-        if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -635,10 +650,12 @@ class EventPage extends React.Component {
         this.setState({
             eventShowLines
         });
-        if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, eventShowLines)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, eventShowLines)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 

@@ -151,7 +151,9 @@ class EventsPage extends React.Component {
 
     
     componentDidMount = () => {
-        window.addEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.addEventListener('scroll', this.handleScroll);
+        }
         let itemsCurrent = [];
         const nextCategory = this.props.eventsObject.categories[this.props.categoryIndex].id;
         const prevCategory = this.props.eventsObject.categoryId;
@@ -363,7 +365,9 @@ class EventsPage extends React.Component {
     }
 
     componentWillUnmount = () => {
-        window.removeEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
     }
 
     // update database . ---   category data ( name, text, showlines - number of lines to show on load)
@@ -392,11 +396,12 @@ class EventsPage extends React.Component {
             this.props.startEditSubCategories(fbSubCategories, subcategories, categoryId);
 
         }
-        
-        if(isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -412,10 +417,12 @@ class EventsPage extends React.Component {
         this.setState({
             category
         });
-        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -433,11 +440,12 @@ class EventsPage extends React.Component {
                 subcategory
             });
         }
-        
-        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -455,10 +463,12 @@ class EventsPage extends React.Component {
                 subcategory
             });
         }
-        if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -742,10 +752,12 @@ class EventsPage extends React.Component {
         this.setState({
             subCategories
         });
-        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -778,10 +790,12 @@ class EventsPage extends React.Component {
                 }
             })
         } else {
-            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-                window.removeEventListener("beforeunload", this.unloadFunc);
-            } else {
-                window.addEventListener("beforeunload", this.unloadFunc);
+            if (typeof(window) !== "undefined") {
+                if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                    window.removeEventListener("beforeunload", this.unloadFunc);
+                } else {
+                    window.addEventListener("beforeunload", this.unloadFunc);
+                }
             }
         }
     }
@@ -822,10 +836,12 @@ class EventsPage extends React.Component {
         this.setState({
             subCategories
         });
-        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -864,10 +880,12 @@ class EventsPage extends React.Component {
         this.setState({
             subCategoriesOrigin: subcategories
         });
-        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -1387,10 +1405,12 @@ class EventsPage extends React.Component {
             itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent)),
             itemsCurrent
         });
-        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(itemsCurrent, this.state.itemsCurrentOrigin)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories) && isEqual(itemsCurrent, this.state.itemsCurrentOrigin)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 
@@ -1458,10 +1478,12 @@ class EventsPage extends React.Component {
             itemsCurrentCheck: JSON.parse(JSON.stringify(itemsCurrent))
         });
         this.props.startEditEvents(fbEvents, events, categoryId);
-        if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories)){ 
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            window.addEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, this.state.subCategories)){ 
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
     }
 

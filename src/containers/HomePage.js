@@ -100,13 +100,15 @@ class HomePage extends React.Component {
             tell
         });
 
-        this.setLocalTell(JSON.parse(JSON.stringify(homepage)));        
-        if(isEqual(this.state.homepageOrigin, homepage)){ 
-            //console.log("remove listener");
-            window.removeEventListener("beforeunload", this.unloadFunc);
-        } else {
-            //console.log("add listener");
-            window.addEventListener("beforeunload", this.unloadFunc);
+        this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
+        if (typeof(window) !== "undefined") {     
+            if(isEqual(this.state.homepageOrigin, homepage)){ 
+                //console.log("remove listener");
+                window.removeEventListener("beforeunload", this.unloadFunc);
+            } else {
+                //console.log("add listener");
+                window.addEventListener("beforeunload", this.unloadFunc);
+            }
         }
 	}
 
@@ -194,7 +196,9 @@ class HomePage extends React.Component {
         this.setState(() => ({ homepageOrigin: homepage }));
         this.setTell(JSON.parse(JSON.stringify(homepage)));
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-        window.removeEventListener("beforeunload", this.unloadFunc);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener("beforeunload", this.unloadFunc);
+        }
     }
 
 
@@ -206,8 +210,9 @@ class HomePage extends React.Component {
 
 
     componentDidMount = () => {
-
-        window.addEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.addEventListener('scroll', this.handleScroll);
+        }
 
         if (this.props.navigation.homepageCarouselDone === true) {
             //console.log('setting');
@@ -278,7 +283,9 @@ class HomePage extends React.Component {
 
 
     componentWillUnmount = () => {
-        window.removeEventListener('scroll', this.handleScroll);
+        if (typeof(window) !== "undefined") {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
     }
 
 
