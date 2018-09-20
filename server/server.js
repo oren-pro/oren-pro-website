@@ -241,13 +241,6 @@ app.get('*.js', function (request, response, next) {
     next();
 });
 
-// app.get('*.svg', function (request, response, next) {
-//   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-//     request.url = request.url + '.gz';
-//     response.set('Content-Encoding', 'gzip');
-//   }
-//     next();
-// });
 
 app.get('*.css', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
@@ -335,7 +328,7 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 // });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html');
+    res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.listen(port, () => {
