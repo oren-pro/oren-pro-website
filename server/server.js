@@ -235,6 +235,13 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
 
 
 
+app.get('*.html', function (request, response, next) {
+  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+    request.url = request.url + '.gz';
+    response.set('Content-Encoding', 'gzip');
+  }
+    next();
+});
 
 app.get('*.js', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
