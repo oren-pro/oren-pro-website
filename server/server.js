@@ -318,7 +318,15 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 
 var minify = require('html-minifier').minify;
 var result = minify(path.join(publicPath, 'index.html'), {
-  removeAttributeQuotes: true
+  removeAttributeQuotes: true,
+  collapseWhitespace: true,
+  conservativeCollapse: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true
 });
 
 app.get('*', (req, res) => {
