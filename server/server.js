@@ -212,6 +212,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
               // replace the special strings with server generated strings
               data = data.replace(/\$OG_TITLE/g, seo.title);
               data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+              data = data.replace(/\$OG_KEYWORDS/g, seo.keywords);
               data = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
               response.send(data);
 
