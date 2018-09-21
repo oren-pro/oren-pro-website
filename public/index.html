@@ -19,9 +19,7 @@
             <script async src="/dist/bundle.js"></script>
             <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
             <script async src="https://cdn.enable.co.il/licenses/enable-L2511get87h01xn-0918-5807/init.js?ver=1.3.0"></script>
-            <script>function loadCSS(a,b,c){"use strict";function g(){for(var b,e=0;e<f.length;e++)f[e].href&&f[e].href.indexOf(a)>-1&&(b=!0);b?d.media=c||"all":setTimeout(g)}var d=window.document.createElement("link"),e=b||window.document.getElementsByTagName("script")[0],f=window.document.styleSheets;return d.rel="stylesheet",d.href=a,d.media="only x",e.parentNode.insertBefore(d,e),g(),d}
-            loadCSS("/dist/styles.css");
-            loadCSS("https://fonts.googleapis.com/css?family=Heebo:400,500,700&amp;subset=hebrew");
-            </script>
+            <link rel=stylesheet href="https://fonts.googleapis.com/css?family=Heebo:400,500,700&amp;subset=hebrew" media="print" onload="if(media!='all')media='all'" />
+            <link rel=stylesheet type="text/css" href="/dist/styles.css" media="print" onload="if(media!='all')media='all'" />
         </body>
     </html>
