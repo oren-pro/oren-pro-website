@@ -9,7 +9,7 @@ export class HomePagePleasedMobile extends React.Component {
         return (
             <div className="homepage__pleased-box mobile_inline">
                 <div className="homepage__pleased__background__mobile">
-                    <img className="homepage__pleased__background__image" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/pleased_bg_mobile.jpg" />
+                    <img className="homepage__pleased__background__image" src="https://res.cloudinary.com/orenpro/image/upload/v1537511790/pleased_bg_mobile.jpg" />
                     <div className="homepage__pleased__yellow-bg" />
                 </div>
                 <div className="homepage__pleased__content-box">
