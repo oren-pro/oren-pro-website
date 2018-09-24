@@ -218,7 +218,8 @@ function generate_xml_sitemap() {
 }
 
 app.get('/sitemap.xml', function(req, res) {
-    var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
+    //var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
+    var sitemap = '';
     res.header('Content-Type', 'text/xml');
     res.send(sitemap);     
 })
