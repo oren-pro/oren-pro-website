@@ -193,7 +193,11 @@ function generate_xml_sitemap() {
         if(snapshot.val() !== null) {
           const categories = snapshot.val();
           categories.map((category, index) => {
-            urls.push(category);
+            let str = category.name;
+            while (str.indexOf(' ') > -1) {
+                str = str.replace(' ' ,'_');
+            }
+            urls.push(str);
           });
 
           var priority = 0.5;
