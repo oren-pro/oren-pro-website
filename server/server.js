@@ -193,12 +193,15 @@ function generate_xml_sitemap() {
         if(snapshot.val() !== null) {
           const categories = snapshot.val();
           // categories.map((category, index) => {
-          //   let str = category.name;
-          //   console.log(str);
-          //   while (str.indexOf(' ') > -1) {
-          //       str = str.replace(' ' ,'_');
-          //   }
-          //   urls.push(str);
+            for (var i in categories) {
+              let str = categories[i].name;
+              console.log(str);
+              // while (str.indexOf(' ') > -1) {
+              //     str = str.replace(' ' ,'_');
+              // }
+              urls.push(str);
+              i++;
+            }
           // });
 
           var priority = 0.5;
