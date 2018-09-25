@@ -194,9 +194,10 @@ function generate_xml_sitemap() {
           const categories = snapshot.val();
           categories.map((category, index) => {
             let str = category.name;
-            while (str.indexOf(' ') > -1) {
-                str = str.replace(' ' ,'_');
-            }
+            console.log(str);l
+            // while (str.indexOf(' ') > -1) {
+            //     str = str.replace(' ' ,'_');
+            // }
             urls.push(str);
           });
 
@@ -218,8 +219,8 @@ function generate_xml_sitemap() {
 }
 
 app.get('/sitemap.xml', function(req, res) {
-    //var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
-    var sitemap = '';
+    var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
+    //var sitemap = '';
     res.header('Content-Type', 'text/xml');
     res.send(sitemap);     
 })
