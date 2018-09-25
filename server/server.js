@@ -196,9 +196,9 @@ function generate_xml_sitemap() {
             for (var i in categories) {
               let str = categories[i].name;
               console.log(str);
-              // while (str.indexOf(' ') > -1) {
-              //     str = str.replace(' ' ,'_');
-              // }
+              while (str.indexOf(' ') > -1) {
+                  str = str.replace(' ' ,'_');
+              }
               urls.push(str);
               i++;
             }
@@ -227,7 +227,7 @@ app.get('/sitemap.xml', function(req, res) {
     //var sitemap = '';
     console.log(sitemap);
     res.header('Content-Type', 'text/xml');
-    res.send(sitemap);     
+    res.send(String(sitemap));     
 })
 
 
