@@ -227,7 +227,7 @@ app.get('/sitemap.xml', function(req, res) {
     //var sitemap = '';
     console.log(sitemap);
     res.header('Content-Type', 'text/xml');
-    res.send(String(sitemap));     
+    res.send(sitemap);     
 })
 
 
