@@ -189,7 +189,7 @@ function generate_xml_sitemap() {
     var db = admin.database();
     var ref = db.ref('eventsCategories/');
     ref.once("value", function(snapshot) {
-        console.log(snapshot.val());
+        //console.log(snapshot.val());
         if(snapshot.val() !== null) {
           const categories = snapshot.val();
           // categories.map((category, index) => {
@@ -216,6 +216,7 @@ function generate_xml_sitemap() {
               i++;
           }
           xml += '</urlset>';
+          console.log(xml);
           return xml;
         }
     });
@@ -224,6 +225,7 @@ function generate_xml_sitemap() {
 app.get('/sitemap.xml', function(req, res) {
     var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
     //var sitemap = '';
+    console.log(sitemap);
     res.header('Content-Type', 'text/xml');
     res.send(sitemap);     
 })
