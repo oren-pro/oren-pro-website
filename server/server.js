@@ -189,17 +189,17 @@ function generate_xml_sitemap() {
     var db = admin.database();
     var ref = db.ref('eventsCategories/');
     ref.once("value", function(snapshot) {
-      //console.log(snapshot.val());
+        console.log(snapshot.val());
         if(snapshot.val() !== null) {
           const categories = snapshot.val();
-          categories.map((category, index) => {
-            let str = category.name;
-            console.log(str);l
-            // while (str.indexOf(' ') > -1) {
-            //     str = str.replace(' ' ,'_');
-            // }
-            urls.push(str);
-          });
+          // categories.map((category, index) => {
+          //   let str = category.name;
+          //   console.log(str);
+          //   while (str.indexOf(' ') > -1) {
+          //       str = str.replace(' ' ,'_');
+          //   }
+          //   urls.push(str);
+          // });
 
           var priority = 0.5;
           var freq = 'monthly';
