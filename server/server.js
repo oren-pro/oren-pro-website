@@ -239,7 +239,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
 
 //  ".", "#", "$", "[", or "]"
 if (request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1 && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1 && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
-    if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category) || (request.params.subCategory && !request.params.event) || (request.params.event)) {
+    //if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category) || (request.params.subCategory && !request.params.event) || (request.params.event)) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
             dbString = dbString;
@@ -280,9 +280,9 @@ if (request.params.category.indexOf('.') === -1 && request.params.category.index
             });
         
         });
-    } else {
-        next();
-    }
+    //} else {
+       // next();
+    //}
 } else {
     next();
 }
