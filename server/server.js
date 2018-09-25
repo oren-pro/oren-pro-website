@@ -236,9 +236,20 @@ app.get('/sitemap.xml', function(req, res) {
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
-
+    let categoryOk = false;
+if (request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1) {
+  categoryOk = true;
+}
+let subCategoryOk = false;
+if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
+  subCategoryOk = true;
+}
+let eventOk = false;
+if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
+  eventOk = true;
+}
 //  ".", "#", "$", "[", or "]"
-if (request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1 && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1 && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
+if (categoryOk && subCategoryOk && eventOk) {
     //if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category) || (request.params.subCategory && !request.params.event) || (request.params.event)) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
