@@ -245,48 +245,74 @@ app.get('/sitemap.xml', function(req, res) {
           refSubcategories.once("value", function(snapshotSubcategories) {
             if(snapshotSubcategories.val() !== null) {
                 const subcategories = snapshotSubcategories.val();
-              // categories.map((category, index) => {
-                for (var i in categories) {
-                  let categoryId = categories[i].id;
-                  let strCategory = categories[i].name;
-                  console.log(strCategory);
-                  while (strCategory.indexOf(' ') > -1) {
-                      strCategory = strCategory.replace(' ' ,'_');
-                  }
-                  urls.push(strCategory);
 
-                  for (var j in subcategories) {
-                    if(subcategories[j].categories && subcategories[j].categories[categoryId]){
-                      let strSubcategory = subcategories[j].name;
-                      console.log(strSubcategory);
-                      while (strSubcategory.indexOf(' ') > -1) {
-                          strSubcategory = strSubcategory.replace(' ' ,'_');
+                refEvents.once("value", function(snapshotEvents) {
+                if(snapshotEvents.val() !== null) {
+                    const events = snapshotEvents.val();
+
+
+                    for (var i in categories) {
+                      let categoryId = categories[i].id;
+                      let strCategory = categories[i].name;
+                      console.log(strCategory);
+                      while (strCategory.indexOf(' ') > -1) {
+                          strCategory = strCategory.replace(' ' ,'_');
                       }
-                      urls.push(strCategory + '/' + strSubcategory);
-                    }
-                    j++;
-                  }
-                  i++;
-                }
-              // });
+                      urls.push(strCategory);
 
-              var priority = 0.5;
-              var freq = 'monthly';
-              var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-              for (var i in urls) {
-                  xml += '<url>';
-                  xml += '<loc>'+ root_path + urls[i] + '</loc>';
-                  xml += '<changefreq>'+ freq +'</changefreq>';
-                  xml += '<priority>'+ priority +'</priority>';
-                  xml += '</url>';
-                  i++;
-              }
-              xml += '</urlset>';
-              console.log(xml);
-              res.header('Content-Type', 'text/xml');
-              console.log('sending sitemap');
-              res.send(xml);
-              //return xml;
+                      for (var j in subcategories) {
+                        if(subcategories[j].categories && subcategories[j].categories[categoryId]){
+                          let subcategoryId = subcategories[j].id;
+                          let strSubcategory = subcategories[j].name;
+                          console.log(strSubcategory);
+                          while (strSubcategory.indexOf(' ') > -1) {
+                              strSubcategory = strSubcategory.replace(' ' ,'_');
+                          }
+                          urls.push(strCategory + '/' + strSubcategory);
+                        }
+
+
+
+                        for (var k in events) {
+                          if(events[k].subcategories && events[j].categories[categoryId] && events[j].subcategories[subcategoryId]){
+                            let event = event[k].name;
+                            console.log(event);
+                            while (event.indexOf(' ') > -1) {
+                                event = event.replace(' ' ,'_');
+                            }
+                            urls.push(strCategory + '/' + strSubcategory + '/' + event);
+                          }
+                          k++;
+                        }
+
+
+
+
+                        j++;
+                      }
+                      i++;
+                    }
+                  // });
+
+                  var priority = 0.5;
+                  var freq = 'monthly';
+                  var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                  for (var i in urls) {
+                      xml += '<url>';
+                      xml += '<loc>'+ root_path + urls[i] + '</loc>';
+                      xml += '<changefreq>'+ freq +'</changefreq>';
+                      xml += '<priority>'+ priority +'</priority>';
+                      xml += '</url>';
+                      i++;
+                  }
+                  xml += '</urlset>';
+                  console.log(xml);
+                  res.header('Content-Type', 'text/xml');
+                  console.log('sending sitemap');
+                  res.send(xml);
+                  //return xml;
+                }
+              });
             }
           });
         }
