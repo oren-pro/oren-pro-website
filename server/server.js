@@ -274,7 +274,7 @@ app.get('/sitemap.xml', function(req, res) {
 
 
                         for (var k in events) {
-                          if(events[k].subcategories && events[j].categories[categoryId] && events[j].subcategories[subcategoryId]){
+                          if(events[k].subcategories && events[k].categories[categoryId] && events[k].subcategories[subcategoryId]){
                             let event = event[k].name;
                             console.log(event);
                             while (event.indexOf(' ') > -1) {
