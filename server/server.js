@@ -249,7 +249,7 @@ app.get('/sitemap.xml', function(req, res) {
                 for (var i in categories) {
                   let categoryId = categories[i].id;
                   let strCategory = categories[i].name;
-                  console.log(str);
+                  console.log(strCategory);
                   while (strCategory.indexOf(' ') > -1) {
                       strCategory = strCategory.replace(' ' ,'_');
                   }
