@@ -200,7 +200,12 @@ class Navigation extends React.Component {
     //window.StartAccessibility();
     console.log($('#enable-toolbar-content').css('transform'));
     if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)") {
-      document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
+      if (this.state.windowWidth < 768) {
+        document.getElementById('enable-toolbar-content').style.transform = "translateY(90%)";
+      } else {
+        document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
+      }
+      
     } else {
       document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
     }
