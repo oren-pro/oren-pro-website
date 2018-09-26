@@ -175,108 +175,42 @@ admin.initializeApp({
 });
 
 
-
-
-
 // sitemap.xml
 
-function generate_xml_sitemap() {
-    // this is the source of the URLs on your site, in this case we use a simple array, actually it could come from the database
-    let urls = [];
-    // the root of your website - the protocol and the domain name with a trailing slash
-    var root_path = 'https://oren-pro-website.herokuapp.com/';
-
-    var db = admin.database();
-    var ref = db.ref('eventsCategories/');
-    ref.once("value", function(snapshot) {
-        //console.log(snapshot.val());
-        if(snapshot.val() !== null) {
-          const categories = snapshot.val();
-          // categories.map((category, index) => {
-            for (var i in categories) {
-              let str = categories[i].name;
-              console.log(str);
-              while (str.indexOf(' ') > -1) {
-                  str = str.replace(' ' ,'_');
-              }
-              urls.push(str);
-              i++;
-            }
-          // });
-
-          var priority = 0.5;
-          var freq = 'monthly';
-          var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-          for (var i in urls) {
-              xml += '<url>';
-              xml += '<loc>'+ root_path + urls[i] + '</loc>';
-              xml += '<changefreq>'+ freq +'</changefreq>';
-              xml += '<priority>'+ priority +'</priority>';
-              xml += '</url>';
-              i++;
-          }
-          xml += '</urlset>';
-          console.log(xml);
-          return xml;
-        }
-    });
-}
-
 app.get('/sitemap.xml', function(req, res) {
-    // var sitemap = generate_xml_sitemap(); // get the dynamically generated XML sitemap
-    // //var sitemap = '';
-    // console.log(sitemap);
-    // res.header('Content-Type', 'text/xml');
-    // console.log('sending sitemap');
-    // res.send(sitemap);
-
     let urls = [];
-    // the root of your website - the protocol and the domain name with a trailing slash
     var root_path = 'https://oren-pro-website.herokuapp.com/';
-
     var db = admin.database();
     var refCategories = db.ref('eventsCategories/');
     var refSubcategories = db.ref('eventsSubcategories/');
     var refEvents = db.ref('eventsItems/');
     refCategories.once("value", function(snapshotCategories) {
-        //console.log(snapshot.val());
         if(snapshotCategories.val() !== null) {
           const categories = snapshotCategories.val();
           refSubcategories.once("value", function(snapshotSubcategories) {
             if(snapshotSubcategories.val() !== null) {
                 const subcategories = snapshotSubcategories.val();
-
                 refEvents.once("value", function(snapshotEvents) {
                 if(snapshotEvents.val() !== null) {
                     const events = snapshotEvents.val();
-
-
                     for (var i in categories) {
                       let categoryId = categories[i].id;
                       let strCategory = categories[i].name;
-                      console.log(strCategory);
                       while (strCategory.indexOf(' ') > -1) {
                           strCategory = strCategory.replace(' ' ,'_');
                       }
                       urls.push(strCategory);
-
                       for (var j in subcategories) {
                         if(subcategories[j].categories && subcategories[j].categories[categoryId]){
                           let subcategoryId = subcategories[j].id;
                           let strSubcategory = subcategories[j].name;
-                          console.log(strSubcategory);
                           while (strSubcategory.indexOf(' ') > -1) {
                               strSubcategory = strSubcategory.replace(' ' ,'_');
                           }
                           urls.push(strCategory + '/' + strSubcategory);
-                        
-
-
-
                           for (var k in events) {
                             if(events[k].categories && events[k].categories[categoryId] && events[k].subcategories && events[k].subcategories[subcategoryId]){
                               let event = events[k].name;
-                              console.log(event);
                               while (event.indexOf(' ') > -1) {
                                   event = event.replace(' ' ,'_');
                               }
@@ -284,16 +218,11 @@ app.get('/sitemap.xml', function(req, res) {
                             }
                             k++;
                           }
-
                         }
-
-
                         j++;
                       }
                       i++;
                     }
-                  // });
-
                   var priority = 0.5;
                   var freq = 'monthly';
                   var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -306,11 +235,8 @@ app.get('/sitemap.xml', function(req, res) {
                       i++;
                   }
                   xml += '</urlset>';
-                  console.log(xml);
                   res.header('Content-Type', 'text/xml');
-                  console.log('sending sitemap');
                   res.send(xml);
-                  //return xml;
                 }
               });
             }
@@ -321,30 +247,23 @@ app.get('/sitemap.xml', function(req, res) {
 
 
 
-
-
-
 //*** server side rendering -- SEO ***//
-
-
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
     let categoryOk = false;
-if (request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1) {
-  categoryOk = true;
-}
-let subCategoryOk = false;
-if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
-  subCategoryOk = true;
-}
-let eventOk = false;
-if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
-  eventOk = true;
-}
-//  ".", "#", "$", "[", or "]"
-if (categoryOk && subCategoryOk && eventOk) {
-    //if ((!request.params.subCategory && !request.params.event && !request.params.category) || (!request.params.subCategory && !request.params.event && request.params.category) || (request.params.subCategory && !request.params.event) || (request.params.event)) {
+    if (request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1) {
+      categoryOk = true;
+    }
+    let subCategoryOk = false;
+    if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
+      subCategoryOk = true;
+    }
+    let eventOk = false;
+    if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
+      eventOk = true;
+    }
+    if (categoryOk && subCategoryOk && eventOk) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
             dbString = dbString;
@@ -358,7 +277,6 @@ if (categoryOk && subCategoryOk && eventOk) {
         var db = admin.database();
         var ref = db.ref(dbString);
         ref.once("value", function(snapshot) {
-          //console.log(snapshot.val());
             let seo = {
               title: 'אורן ורינת הפקות',
               description: 'אורן ורינת הפקות',
@@ -367,38 +285,25 @@ if (categoryOk && subCategoryOk && eventOk) {
             if(snapshot.val() !== null) {
               seo = snapshot.val().seo;
             }
-
             fs.readFile(filePath, 'utf8', function (err,data) {
               if (err) {
                 return console.log(err);
               }
-
-              // replace the special strings with server generated strings
               data = data.replace(/\$OG_TITLE/g, seo.title);
               data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
               data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
               data = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
               response.send(data);
-
             }, function (errorObject) {
               console.log("The read failed: " + errorObject.code);
             });
-        
         });
-    //} else {
-       // next();
-    //}
-} else {
-    next();
-}
+    } else {
+        next();
+    }
 });
 
-
-
-
 //******    end ssr --- SEO     ******//
-
-
 
 
 
