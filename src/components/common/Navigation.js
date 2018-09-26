@@ -199,7 +199,7 @@ class Navigation extends React.Component {
   toggleAccessibility = () => {
     //window.StartAccessibility();
     console.log($('#enable-toolbar-content').css('transform'));
-    if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)") {
+    if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)" || $('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 50)") {
       if (this.state.windowWidth < 768) {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
       } else {
@@ -207,7 +207,12 @@ class Navigation extends React.Component {
       }
       
     } else {
-      document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
+      if (this.state.windowWidth < 768) {
+        document.getElementById('enable-toolbar-content').style.transform = "translateY(50px)";
+      } else {
+        document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
+      }
+      
     }
   }
 
