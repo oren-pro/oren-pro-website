@@ -242,12 +242,12 @@ app.get('/sitemap.xml', function(req, res) {
         //console.log(snapshot.val());
         if(snapshotCategories.val() !== null) {
           const categories = snapshotCategories.val();
-          let categoryId = categories[i].id;
           refSubcategories.once("value", function(snapshotSubcategories) {
             if(snapshotSubcategories.val() !== null) {
                 const subcategories = snapshotSubcategories.val();
               // categories.map((category, index) => {
                 for (var i in categories) {
+                  let categoryId = categories[i].id;
                   let strCategory = categories[i].name;
                   console.log(str);
                   while (strCategory.indexOf(' ') > -1) {
@@ -256,7 +256,7 @@ app.get('/sitemap.xml', function(req, res) {
                   urls.push(strCategory);
 
                   for (var j in subcategories) {
-                    //console.log(subcategories[j].categories[categoryId]);
+                    console.log(subcategories[j].categories[categoryId]);
                     let strSubcategory = subcategories[j].name;
                     console.log(strSubcategory);
                     while (strSubcategory.indexOf(' ') > -1) {
