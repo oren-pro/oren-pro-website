@@ -201,7 +201,7 @@ class Navigation extends React.Component {
     console.log($('#enable-toolbar-content').css('transform'));
     if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)") {
       if (this.state.windowWidth < 768) {
-        document.getElementById('enable-toolbar-content').style.transform = "translateY(90%)";
+        document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
       } else {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
       }
