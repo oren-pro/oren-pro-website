@@ -235,40 +235,48 @@ app.get('/sitemap.xml', function(req, res) {
     var root_path = 'https://oren-pro-website.herokuapp.com/';
 
     var db = admin.database();
-    var ref = db.ref('eventsCategories/');
-    ref.once("value", function(snapshot) {
+    var refCategories = db.ref('eventsCategories/');
+    var refSubcategories = db.ref('eventsSubcategories/');
+    var refEvents = db.ref('eventsItems/');
+    refCategories.once("value", function(snapshotCategories) {
         //console.log(snapshot.val());
-        if(snapshot.val() !== null) {
-          const categories = snapshot.val();
-          // categories.map((category, index) => {
-            for (var i in categories) {
-              let str = categories[i].name;
-              console.log(str);
-              while (str.indexOf(' ') > -1) {
-                  str = str.replace(' ' ,'_');
-              }
-              urls.push(str);
-              i++;
-            }
-          // });
+        if(snapshotCategories.val() !== null) {
+          const categories = snapshotCategories.val();
 
-          var priority = 0.5;
-          var freq = 'monthly';
-          var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-          for (var i in urls) {
-              xml += '<url>';
-              xml += '<loc>'+ root_path + urls[i] + '</loc>';
-              xml += '<changefreq>'+ freq +'</changefreq>';
-              xml += '<priority>'+ priority +'</priority>';
-              xml += '</url>';
-              i++;
-          }
-          xml += '</urlset>';
-          console.log(xml);
-          res.header('Content-Type', 'text/xml');
-          console.log('sending sitemap');
-          res.send(xml);
-          //return xml;
+          refSubcategories.once("value", function(snapshotSubcategories) {
+            if(snapshotSubcategories.val() !== null) {
+                const subcategories = snapshotSubcategories.val();
+              // categories.map((category, index) => {
+                for (var i in categories) {
+                  let str = categories[i].name;
+                  console.log(str);
+                  while (str.indexOf(' ') > -1) {
+                      str = str.replace(' ' ,'_');
+                  }
+                  urls.push(str);
+                  i++;
+                }
+              // });
+
+              var priority = 0.5;
+              var freq = 'monthly';
+              var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+              for (var i in urls) {
+                  xml += '<url>';
+                  xml += '<loc>'+ root_path + urls[i] + '</loc>';
+                  xml += '<changefreq>'+ freq +'</changefreq>';
+                  xml += '<priority>'+ priority +'</priority>';
+                  xml += '</url>';
+                  i++;
+              }
+              xml += '</urlset>';
+              console.log(xml);
+              res.header('Content-Type', 'text/xml');
+              console.log('sending sitemap');
+              res.send(xml);
+              //return xml;
+            }
+          });
         }
     });   
 })
