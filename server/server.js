@@ -256,21 +256,16 @@ app.get('/sitemap.xml', function(req, res) {
                   urls.push(strCategory);
 
                   for (var j in subcategories) {
-                    if(subcategories[j].categories){
-                      console.log(subcategories[j].categories[categoryId]);
+                    if(subcategories[j].categories && subcategories[j].categories[categoryId]){
+                      let strSubcategory = subcategories[j].name;
+                      console.log(strSubcategory);
+                      while (strSubcategory.indexOf(' ') > -1) {
+                          strSubcategory = strSubcategory.replace(' ' ,'_');
+                      }
+                      urls.push(strCategory + '/' + strSubcategory);
                     }
-                    
-                    let strSubcategory = subcategories[j].name;
-                    console.log(strSubcategory);
-                    while (strSubcategory.indexOf(' ') > -1) {
-                        strSubcategory = strSubcategory.replace(' ' ,'_');
-                    }
-                    urls.push(strCategory + '/' + strSubcategory);
-
                     j++;
                   }
-
-
                   i++;
                 }
               // });
