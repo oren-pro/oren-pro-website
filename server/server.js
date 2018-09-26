@@ -273,10 +273,9 @@ app.get('/sitemap.xml', function(req, res) {
 
 
 
-
                           for (var k in events) {
-                            if(event[k].categories && event[k].categories[categoryId] && event[k].subcategories && event[k].subcategories[subcategoryId]){
-                              let event = event[k].name;
+                            if(events[k].categories && events[k].categories[categoryId] && events[k].subcategories && events[k].subcategories[subcategoryId]){
+                              let event = events[k].name;
                               console.log(event);
                               while (event.indexOf(' ') > -1) {
                                   event = event.replace(' ' ,'_');
