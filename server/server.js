@@ -269,23 +269,23 @@ app.get('/sitemap.xml', function(req, res) {
                               strSubcategory = strSubcategory.replace(' ' ,'_');
                           }
                           urls.push(strCategory + '/' + strSubcategory);
-                        }
+                        
 
 
 
-                        for (var k in events) {
-                          if(events[k].subcategories && events[k].categories[categoryId] && events[k].subcategories[subcategoryId]){
-                            let event = event[k].name;
-                            console.log(event);
-                            while (event.indexOf(' ') > -1) {
-                                event = event.replace(' ' ,'_');
+                          for (var k in events) {
+                            if(events[k].subcategories && events[k].categories[categoryId] && events[k].subcategories[subcategoryId]){
+                              let event = event[k].name;
+                              console.log(event);
+                              while (event.indexOf(' ') > -1) {
+                                  event = event.replace(' ' ,'_');
+                              }
+                              urls.push(strCategory + '/' + strSubcategory + '/' + event);
                             }
-                            urls.push(strCategory + '/' + strSubcategory + '/' + event);
+                            k++;
                           }
-                          k++;
+
                         }
-
-
 
 
                         j++;
