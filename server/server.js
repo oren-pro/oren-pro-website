@@ -242,18 +242,32 @@ app.get('/sitemap.xml', function(req, res) {
         //console.log(snapshot.val());
         if(snapshotCategories.val() !== null) {
           const categories = snapshotCategories.val();
-
+          let categoryId = categories[i].id;
           refSubcategories.once("value", function(snapshotSubcategories) {
             if(snapshotSubcategories.val() !== null) {
                 const subcategories = snapshotSubcategories.val();
               // categories.map((category, index) => {
                 for (var i in categories) {
-                  let str = categories[i].name;
+                  let strCategory = categories[i].name;
                   console.log(str);
-                  while (str.indexOf(' ') > -1) {
-                      str = str.replace(' ' ,'_');
+                  while (strCategory.indexOf(' ') > -1) {
+                      strCategory = strCategory.replace(' ' ,'_');
                   }
-                  urls.push(str);
+                  urls.push(strCategory);
+
+                  for (var j in subcategories) {
+                    console.log(subcategories[j].categories[categoryId]);
+                    let strSubcategory = subcategories[j].name;
+                    console.log(strSubcategory);
+                    while (strSubcategory.indexOf(' ') > -1) {
+                        strSubcategory = strSubcategory.replace(' ' ,'_');
+                    }
+                    urls.push(strCategory + '/' + strSubcategory);
+
+                    j++;
+                  }
+
+
                   i++;
                 }
               // });
