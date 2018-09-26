@@ -95,8 +95,11 @@ class Navigation extends React.Component {
     //console.log($( document ).width());
 
     //console.log("in component did mount check for fixed top");
-    document.getElementById('enable-toolbar-trigger').style.display = "none";
-    document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
+    if(document.getElementById('enable-toolbar-trigger')) {
+      document.getElementById('enable-toolbar-trigger').style.display = "none";
+      document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
+    }
+    
     
     
     //document.body.style.backgroundColor = "#fff";
