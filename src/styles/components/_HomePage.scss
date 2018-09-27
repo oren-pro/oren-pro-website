@@ -612,6 +612,7 @@ input[type="email"]::-webkit-input-placeholder {
     background: none;
     border: none;
     resize: none;
+    overflow-y: scroll !important;
     text-align: right;
     width: 39rem;
     height: 10rem;

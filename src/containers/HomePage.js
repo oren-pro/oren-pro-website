@@ -190,6 +190,7 @@ class HomePage extends React.Component {
 
     onUpdateHomePage = () => {
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        console.log(homepage);
         this.props.startEditHomePage({
             homepage: homepage
         });
@@ -275,6 +276,7 @@ class HomePage extends React.Component {
         const tempTell = homepage.tell;
         const tell = [];
         Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+        console.log(tell);
         this.setState({
             tell,
             tellOrigin: tell
@@ -290,7 +292,8 @@ class HomePage extends React.Component {
 
 
     addNewTell = () => {
-        const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        //const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        const homepage = this.state.homepage;
         const order = Number(this.state.tell.length)+1;
         //console.log(order);
         const tellData = {
@@ -322,7 +325,8 @@ class HomePage extends React.Component {
 
             this.setState({
                 tell,
-                homepage,
+                tellOrigin: tell,
+                //homepage,
                 homepageOrigin: JSON.parse(JSON.stringify(homepage)),
             });
 
@@ -330,7 +334,7 @@ class HomePage extends React.Component {
 
 
 
-//to od =======================   set tell and localTell
+//to do =======================   set tell and localTell
         });
     }
 
@@ -342,6 +346,7 @@ class HomePage extends React.Component {
                 const keyedObj = {id: String(key), ...obj[key]};
                 return [keyedObj];
             });
+            console.log(localTell);
             // localTell.sort((a, b) => {
             //     return a.order > b.order ? 1 : -1;
             // });
@@ -412,8 +417,8 @@ class HomePage extends React.Component {
 
 
     onDeleteTell = (e) => {
-        // console.log(e.target.dataset.publicid);
-        // console.log(e.target.dataset.id);
+         console.log(e.target.dataset.publicid);
+         console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicId = e.target.dataset.publicid;
@@ -430,26 +435,35 @@ class HomePage extends React.Component {
         }
 
         const fbTell = {};
+        const hpTell = {};
         tell.map((tellItem, index) => {
             fbTell[tellItem.id] = tellItem;
+            hpTell[tellItem.id] = tellItem;
         })
+        
         fbTell[id] = null;
 
         // console.log(publicId);
-        // console.log(tell);
-        // console.log(fbTell);
+         console.log(tell);
+         console.log(fbTell);
         
         
         //this.props.startDeleteCostumer( fbTell, tell, publicId );
-        const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        homepage.tell = fbTell;
+        //const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+        const homepage = this.state.homepage;
+        console.log(homepage.tell);
+        homepage.tell = hpTell;
+        console.log(homepage.tell);
         //console.log(fbTell);
         
+        console.log(homepage);
+
         this.setState({
             tell,
-            homepage
+            //homepage: JSON.parse(JSON.stringify(homepage))
         });
-
+        
+        console.log(this.state.homepage);
 
         this.onUpdateHomePage();
     }
