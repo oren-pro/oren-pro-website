@@ -605,6 +605,16 @@ input[type="email"]::-webkit-input-placeholder {
     vertical-align: top;
 }
 
+::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 .homepage__tell__body__text textarea {
     font-family: $font;
     font-weight: 400;
@@ -613,6 +623,7 @@ input[type="email"]::-webkit-input-placeholder {
     border: none;
     resize: none;
     overflow-y: scroll !important;
+    overflow-x: hidden !important;
     text-align: right;
     width: 39rem;
     height: 10rem;
