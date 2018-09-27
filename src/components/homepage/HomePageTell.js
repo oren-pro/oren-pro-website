@@ -212,12 +212,12 @@ class HomePageTell extends React.Component {
                                 <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium" dir="rtl">{name}, </p>
                                 <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium" dir="rtl">{position} </p>
                                 <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium" dir="rtl">{company} | {createdAt} </p>
-                                <Textarea
+                                <textarea
                                     dir="rtl"
                                     readOnly
                                     value={text}
                                 >
-                                </Textarea>
+                                </textarea>
                             </div>
                             <img className="homepage__tell__logo desktop_inline" src={logo} />
                         </div>
