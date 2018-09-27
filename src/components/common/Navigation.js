@@ -246,13 +246,13 @@ class Navigation extends React.Component {
         <Navbar id="navbarD" light className={`container-fluid desktop`} expand="md" fixed={this.state.fixed}>
           <div className="container-fluid navbar__header__container">
             <div className="container-fluid navbar__header">
-              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" /></NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
             </div>
           </div>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="navbar__nav" className="m-auto" navbar>
-              <NavbarBrand className="navbar__brand--desktop" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand--desktop" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" /></NavbarBrand>
               <NavItem>
                 <NavLink to="/contact" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">צור קשר</NavLink>
               </NavItem>
