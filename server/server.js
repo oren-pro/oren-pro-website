@@ -251,7 +251,7 @@ app.get('/sitemap.xml', function(req, res) {
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
-    const categoryOk = request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
+    const categoryOk = request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
     
     let subCategoryOk = false;
     if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
