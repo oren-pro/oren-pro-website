@@ -271,49 +271,104 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
           } else if (request.params.category && !request.params.subCategory && !request.params.event) {
               if (categoryOk) {
                 dbString = dbString + String(request.params.category);
+                var db = admin.database();
+                var ref = db.ref(dbString);
+                ref.once("value", function(snapshot) {
+                    let seo = {
+                      title: 'אורן ורינת הפקות',
+                      description: 'אורן ורינת הפקות',
+                      keyWords: 'אורן ורינת הפקות'
+                    };
+                    if(snapshot.val() !== null) {
+                      seo = snapshot.val().seo;
+                    }
+
+                    console.log(seo);
+
+                    fs.readFile(filePath, 'utf8', function (err,data) {
+                      if (err) {
+                        return console.log(err);
+                      }
+                      data = data.replace(/\$OG_TITLE/g, seo.title);
+                      data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+                      data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
+                      data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
+                      response.send(data);
+                    }, function (errorObject) {
+                      console.log("The read failed: " + errorObject.code);
+                    });
+                });
               } else {
                 next();
               }
           } else if (request.params.category && request.params.subCategory && !request.params.event) {
               if (categoryOk && subCategoryOk) {
                 dbString = dbString + 'subcategories/' + String(request.params.category);
+                var db = admin.database();
+                var ref = db.ref(dbString);
+                ref.once("value", function(snapshot) {
+                    let seo = {
+                      title: 'אורן ורינת הפקות',
+                      description: 'אורן ורינת הפקות',
+                      keyWords: 'אורן ורינת הפקות'
+                    };
+                    if(snapshot.val() !== null) {
+                      seo = snapshot.val().seo;
+                    }
+
+                    console.log(seo);
+
+                    fs.readFile(filePath, 'utf8', function (err,data) {
+                      if (err) {
+                        return console.log(err);
+                      }
+                      data = data.replace(/\$OG_TITLE/g, seo.title);
+                      data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+                      data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
+                      data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
+                      response.send(data);
+                    }, function (errorObject) {
+                      console.log("The read failed: " + errorObject.code);
+                    });
+                });
               } else {
                 next();
               }
           } else {
               if (categoryOk && subCategoryOk && eventOk) {
                 dbString = dbString + 'events/' + String(request.params.category);
+                var db = admin.database();
+                var ref = db.ref(dbString);
+                ref.once("value", function(snapshot) {
+                    let seo = {
+                      title: 'אורן ורינת הפקות',
+                      description: 'אורן ורינת הפקות',
+                      keyWords: 'אורן ורינת הפקות'
+                    };
+                    if(snapshot.val() !== null) {
+                      seo = snapshot.val().seo;
+                    }
+
+                    console.log(seo);
+
+                    fs.readFile(filePath, 'utf8', function (err,data) {
+                      if (err) {
+                        return console.log(err);
+                      }
+                      data = data.replace(/\$OG_TITLE/g, seo.title);
+                      data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+                      data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
+                      data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
+                      response.send(data);
+                    }, function (errorObject) {
+                      console.log("The read failed: " + errorObject.code);
+                    });
+                });
               } else {
                 next();
               }
           }
-          var db = admin.database();
-          var ref = db.ref(dbString);
-          ref.once("value", function(snapshot) {
-              let seo = {
-                title: 'אורן ורינת הפקות',
-                description: 'אורן ורינת הפקות',
-                keyWords: 'אורן ורינת הפקות'
-              };
-              if(snapshot.val() !== null) {
-                seo = snapshot.val().seo;
-              }
-
-              console.log(seo);
-
-              fs.readFile(filePath, 'utf8', function (err,data) {
-                if (err) {
-                  return console.log(err);
-                }
-                data = data.replace(/\$OG_TITLE/g, seo.title);
-                data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
-                data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
-                data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
-                response.send(data);
-              }, function (errorObject) {
-                console.log("The read failed: " + errorObject.code);
-              });
-          });
+          
       //} else {
       //    next();
       //}
