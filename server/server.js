@@ -152,8 +152,12 @@ app.use(cors({
 
 // prerender.io
 
-app.use(require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF'));
-
+//app.use(require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF'));
+var prerender = require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF');
+//prerender.crawlerUserAgents.push('googlebot');
+prerender.crawlerUserAgents.push('bingbot');
+prerender.crawlerUserAgents.push('yandex');
+app.use(prerender);
 
 
 const publicPath = path.join(__dirname, '../', 'public');
