@@ -252,71 +252,72 @@ app.get('/sitemap.xml', function(req, res) {
 app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, response, next) {
     if (request.params.toomuch) {
       next();
-    }
-    const filePath = path.resolve(__dirname, '../public', 'index.html');
-    const categoryOk = request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
-    const subCategoryOk = request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1;
-    const eventOk = request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1;
-    
+    } else {
+      const filePath = path.resolve(__dirname, '../public', 'index.html');
+      const categoryOk = request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
+      const subCategoryOk = request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1;
+      const eventOk = request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1;
+      
 
-    console.log("cat check");
-    console.log(categoryOk);
-    console.log(subCategoryOk);
-    console.log(eventOk);
+      console.log("cat check");
+      console.log(categoryOk);
+      console.log(subCategoryOk);
+      console.log(eventOk);
 
-    //if (categoryOk && subCategoryOk && eventOk) {
-        let dbString = 'serverSeo/';
-        if(!request.params.category && !request.params.subCategory && !request.params.event) {
-            dbString = dbString;
-        } else if (request.params.category && !request.params.subCategory && !request.params.event) {
-            if (categoryOk) {
-              dbString = dbString + String(request.params.category);
-            } else {
-              next();
-            }
-        } else if (request.params.category && request.params.subCategory && !request.params.event) {
-            if (categoryOk && subCategoryOk) {
-              dbString = dbString + 'subcategories/' + String(request.params.category);
-            } else {
-              next();
-            }
-        } else {
-            if (categoryOk && subCategoryOk && eventOk) {
-              dbString = dbString + 'events/' + String(request.params.category);
-            } else {
-              next();
-            }
-        }
-        var db = admin.database();
-        var ref = db.ref(dbString);
-        ref.once("value", function(snapshot) {
-            let seo = {
-              title: 'אורן ורינת הפקות',
-              description: 'אורן ורינת הפקות',
-              keyWords: 'אורן ורינת הפקות'
-            };
-            if(snapshot.val() !== null) {
-              seo = snapshot.val().seo;
-            }
-
-            console.log(seo);
-
-            fs.readFile(filePath, 'utf8', function (err,data) {
-              if (err) {
-                return console.log(err);
+      //if (categoryOk && subCategoryOk && eventOk) {
+          let dbString = 'serverSeo/';
+          if(!request.params.category && !request.params.subCategory && !request.params.event) {
+              dbString = dbString;
+          } else if (request.params.category && !request.params.subCategory && !request.params.event) {
+              if (categoryOk) {
+                dbString = dbString + String(request.params.category);
+              } else {
+                next();
               }
-              data = data.replace(/\$OG_TITLE/g, seo.title);
-              data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
-              data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
-              data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
-              response.send(data);
-            }, function (errorObject) {
-              console.log("The read failed: " + errorObject.code);
-            });
-        });
-    //} else {
-    //    next();
-    //}
+          } else if (request.params.category && request.params.subCategory && !request.params.event) {
+              if (categoryOk && subCategoryOk) {
+                dbString = dbString + 'subcategories/' + String(request.params.category);
+              } else {
+                next();
+              }
+          } else {
+              if (categoryOk && subCategoryOk && eventOk) {
+                dbString = dbString + 'events/' + String(request.params.category);
+              } else {
+                next();
+              }
+          }
+          var db = admin.database();
+          var ref = db.ref(dbString);
+          ref.once("value", function(snapshot) {
+              let seo = {
+                title: 'אורן ורינת הפקות',
+                description: 'אורן ורינת הפקות',
+                keyWords: 'אורן ורינת הפקות'
+              };
+              if(snapshot.val() !== null) {
+                seo = snapshot.val().seo;
+              }
+
+              console.log(seo);
+
+              fs.readFile(filePath, 'utf8', function (err,data) {
+                if (err) {
+                  return console.log(err);
+                }
+                data = data.replace(/\$OG_TITLE/g, seo.title);
+                data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
+                data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
+                data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
+                response.send(data);
+              }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+              });
+          });
+      //} else {
+      //    next();
+      //}
+    }
 });
 
 //******    end ssr --- SEO     ******//
