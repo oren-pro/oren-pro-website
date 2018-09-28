@@ -251,10 +251,8 @@ app.get('/sitemap.xml', function(req, res) {
 
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
-    let categoryOk = false;
-    if (request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1) {
-      categoryOk = true;
-    }
+    const categoryOk = request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
+    
     let subCategoryOk = false;
     if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
       subCategoryOk = true;
@@ -263,17 +261,22 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
       eventOk = true;
     }
+
     console.log("cat check");
     console.log(categoryOk);
     console.log(subCategoryOk);
     console.log(eventOk);
 
-    if (categoryOk && subCategoryOk && eventOk) {
+    //if (categoryOk && subCategoryOk && eventOk) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
             dbString = dbString;
         } else if (request.params.category && !request.params.subCategory && !request.params.event) {
-            dbString = dbString + String(request.params.category);
+            if (categoryOk) {
+              dbString = dbString + String(request.params.category);
+            } else {
+              next();
+            }
         } else if (request.params.category && request.params.subCategory && !request.params.event) {
             dbString = dbString + 'subcategories/' + String(request.params.category);
         } else {
@@ -303,9 +306,9 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
               console.log("The read failed: " + errorObject.code);
             });
         });
-    } else {
-        next();
-    }
+    //} else {
+    //    next();
+    //}
 });
 
 //******    end ssr --- SEO     ******//
