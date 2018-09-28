@@ -297,7 +297,7 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
               data = data.replace(/\$OG_TITLE/g, seo.title);
               data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
               data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
-              data = data.replace(/\$OG_IMAGE/g, '/images/favicon.png');
+              data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
               response.send(data);
             }, function (errorObject) {
               console.log("The read failed: " + errorObject.code);
