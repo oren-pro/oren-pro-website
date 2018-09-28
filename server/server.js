@@ -249,7 +249,10 @@ app.get('/sitemap.xml', function(req, res) {
 
 //*** server side rendering -- SEO ***//
 
-app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
+app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, response, next) {
+    if (request.params.toomuch) {
+      next();
+    }
     const filePath = path.resolve(__dirname, '../public', 'index.html');
     const categoryOk = request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
     const subCategoryOk = request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1;
