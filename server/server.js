@@ -268,10 +268,10 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
       }
       
 
-      console.log("cat check");
-      console.log(categoryOk);
-      console.log(subCategoryOk);
-      console.log(eventOk);
+      // console.log("cat check");
+      // console.log(categoryOk);
+      // console.log(subCategoryOk);
+      // console.log(eventOk);
 
       //if (categoryOk && subCategoryOk && eventOk) {
           let dbString = 'serverSeo/';
@@ -289,7 +289,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       seo = snapshot.val().seo;
                     }
 
-                    console.log(seo);
+                    //console.log(seo);
 
                     fs.readFile(filePath, 'utf8', function (err,data) {
                       if (err) {
@@ -319,7 +319,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       seo = snapshot.val().seo;
                     }
 
-                    console.log(seo);
+                    //console.log(seo);
 
                     fs.readFile(filePath, 'utf8', function (err,data) {
                       if (err) {
@@ -352,7 +352,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       seo = snapshot.val().seo;
                     }
 
-                    console.log(seo);
+                    //console.log(seo);
 
                     fs.readFile(filePath, 'utf8', function (err,data) {
                       if (err) {
@@ -385,7 +385,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       seo = snapshot.val().seo;
                     }
 
-                    console.log(seo);
+                    //console.log(seo);
 
                     fs.readFile(filePath, 'utf8', function (err,data) {
                       if (err) {
