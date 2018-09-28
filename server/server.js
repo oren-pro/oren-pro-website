@@ -149,6 +149,13 @@ app.use(cors({
   }
 }));
 
+
+// prerender.io
+
+app.use(require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF'));
+
+
+
 const publicPath = path.join(__dirname, '../', 'public');
 
 const port = process.env.PORT || 3000;
