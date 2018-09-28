@@ -16,7 +16,7 @@ const HomePageEventsToolbar = () => (
                 </div>
                 <p className="homepage__events__toolbar__text Heebo-Regular" dir="rtl">פסטיבלים</p>
             </NavLink>
-            <NavLink to="/ימי_גיבוש_וכיף" className="homepage__events__toolbar__item">
+            <NavLink to="/ימי_גיבוש_וכיף/אירועי_חברה" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="fun" src="/images/homepage/events/toolbar/events-toolbar-fun.svg" />
                 </div>
@@ -28,13 +28,13 @@ const HomePageEventsToolbar = () => (
                 </div>
                 <p className="homepage__events__toolbar__text Heebo-Regular" dir="rtl">אירועי vip</p>
             </NavLink>
-            <NavLink to="/נופשונים" className="homepage__events__toolbar__item">
+            <NavLink to="/נופש_חברה/אירועי_חברה" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="vacation" src="/images/homepage/events/toolbar/events-toolbar-vacation.svg" />
                 </div>
                 <p className="homepage__events__toolbar__text Heebo-Regular" dir="rtl">נופשונים</p>
             </NavLink>
-            <NavLink to="/כנסים" className="homepage__events__toolbar__item">
+            <NavLink to="/כנסים/אירועי_חברה" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="conference" src="/images/homepage/events/toolbar/events-toolbar-conference.svg" />
                 </div>

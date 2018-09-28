@@ -263,6 +263,11 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
       eventOk = true;
     }
+    console.log("cat check");
+    console.log(categoryOk);
+    console.log(subCategoryOk);
+    console.log(eventOk);
+
     if (categoryOk && subCategoryOk && eventOk) {
         let dbString = 'serverSeo/';
         if(!request.params.category && !request.params.subCategory && !request.params.event) {
