@@ -269,7 +269,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
           if(!request.params.category && !request.params.subCategory && !request.params.event) {
               dbString = dbString;
           } else if (request.params.category && !request.params.subCategory && !request.params.event) {
-              if (categoryOk) {
+              if (categoryOk && !subCategoryOk && !eventOk) {
                 dbString = dbString + String(request.params.category);
                 var db = admin.database();
                 var ref = db.ref(dbString);
@@ -302,7 +302,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                 next();
               }
           } else if (request.params.category && request.params.subCategory && !request.params.event) {
-              if (categoryOk && subCategoryOk) {
+              if (categoryOk && subCategoryOk && !eventOk) {
                 dbString = dbString + 'subcategories/' + String(request.params.category);
                 var db = admin.database();
                 var ref = db.ref(dbString);
