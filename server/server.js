@@ -252,15 +252,9 @@ app.get('/sitemap.xml', function(req, res) {
 app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
     const filePath = path.resolve(__dirname, '../public', 'index.html');
     const categoryOk = request.params.category && request.params.category.indexOf('.') === -1 && request.params.category.indexOf('#') === -1 && request.params.category.indexOf('$') === -1 && request.params.category.indexOf('[') === -1 && request.params.category.indexOf(']') === -1;
+    const subCategoryOk = request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1;
+    const eventOk = request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1;
     
-    let subCategoryOk = false;
-    if (request.params.subCategory && request.params.subCategory.indexOf('.') === -1 && request.params.subCategory.indexOf('#') === -1 && request.params.subCategory.indexOf('$') === -1 && request.params.subCategory.indexOf('[') === -1 && request.params.subCategory.indexOf(']') === -1) {
-      subCategoryOk = true;
-    }
-    let eventOk = false;
-    if (request.params.event && request.params.event.indexOf('.') === -1 && request.params.event.indexOf('#') === -1 && request.params.event.indexOf('$') === -1 && request.params.event.indexOf('[') === -1 && request.params.event.indexOf(']') === -1) {
-      eventOk = true;
-    }
 
     console.log("cat check");
     console.log(categoryOk);
@@ -278,9 +272,17 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
               next();
             }
         } else if (request.params.category && request.params.subCategory && !request.params.event) {
-            dbString = dbString + 'subcategories/' + String(request.params.category);
+            if (categoryOk && subCategoryOk) {
+              dbString = dbString + 'subcategories/' + String(request.params.category);
+            } else {
+              next();
+            }
         } else {
-            dbString = dbString + 'events/' + String(request.params.category);
+            if (categoryOk && subCategoryOk && eventOk) {
+              dbString = dbString + 'events/' + String(request.params.category);
+            } else {
+              next();
+            }
         }
         var db = admin.database();
         var ref = db.ref(dbString);
