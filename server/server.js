@@ -293,6 +293,9 @@ app.get('/:category?/:subCategory?/:event?', function(request, response, next) {
             if(snapshot.val() !== null) {
               seo = snapshot.val().seo;
             }
+
+            console.log(seo);
+
             fs.readFile(filePath, 'utf8', function (err,data) {
               if (err) {
                 return console.log(err);
