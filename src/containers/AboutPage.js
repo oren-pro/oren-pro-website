@@ -558,8 +558,7 @@ class AboutPage extends React.Component {
                 }
 
                 <Helmet>
-                    <title>אורן הפקות - נעים להכיר</title>
-                    <meta name="description" content="תאור הדף עבור מנועי חיפוש" />
+                    <title>{`אורן ורינת הפקות אירועים - נעים להכיר - ${this.state.seo.title}`}</title>
                 </Helmet>
                 
                 { 
