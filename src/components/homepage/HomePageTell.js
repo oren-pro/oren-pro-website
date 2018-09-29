@@ -176,7 +176,7 @@ class HomePageTell extends React.Component {
                                     data-publicid={publicid}
                                     className="homepage__tell__upload-button__image"
                                     src="/images/common/upload-image.svg"
-                                     alt="הוספת תמונה"
+                                    alt="הוספת תמונה"
                                 />
                             </button>
                         </div>
@@ -185,8 +185,8 @@ class HomePageTell extends React.Component {
                                 this.props.tell[this.props.tellIndex] ?
                                 this.props.tell.map((event,index) => {
                                     return  <button disabled={String(index) === String(this.props.tellIndex)} data-index={index} key={index} className="homepage__tell__pagination__button" onClick={this.props.setTellIndex}>
-                                                <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
-                                                <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
+                                                <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} alt="אורן ורינת הפקות - מספרים עלינו" />
+                                                <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} alt="אורן ורינת הפקות - מספרים עלינו" />
                                             </button>
                                 })
                                 :
@@ -227,8 +227,8 @@ class HomePageTell extends React.Component {
                                 this.props.tell[this.props.tellIndex] ?
                                 this.props.tell.map((event,index) => {
                                     return  <button disabled={String(index) === String(this.props.tellIndex)} data-index={index} key={index} className="homepage__tell__pagination__button" onClick={this.props.setTellIndex}>
-                                                <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
-                                                <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} />
+                                                <img data-index={index} className="homepage__tell__pagination__image desktop" src={`/images/homepage/tell/pagination${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} alt="אורן ורינת הפקות - מספרים עלינו" />
+                                                <img data-index={index} className="homepage__tell__pagination__image mobile" src={`/images/homepage/tell/pagination_mobile${ String(index) === String(this.props.tellIndex) ? "_on" : "" }.svg`} alt="אורן ורינת הפקות - מספרים עלינו" />
                                             </button>
                                 })
                                 :
