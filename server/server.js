@@ -78,8 +78,6 @@ var admin = require("firebase-admin");
 
 const app = express();
 
-//app.use(require('prerender-node'));
-
 
 
 
@@ -311,7 +309,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       data = data.replace(/\$OG_TITLE/g, seo.title);
                       data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
                       data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
-                      data = data.replace(/\$OG_IMAGE/g, '/images/og_image.jpg');
+                      data = data.replace(/\$OG_IMAGE/g, 'https://oren-pro-website.herokuapp.com/images/og_image.jpg');
                       response.send(data);
                     }, function (errorObject) {
                       console.log("The read failed: " + errorObject.code);
