@@ -29,9 +29,9 @@ class EventsHeader extends React.Component {
                 }
                 {
                     this.props.isAuthenticated === true ?
-                        <h3 className="events__header Heebo-Medium" dir="rtl">{this.props.categoryName}</h3>
+                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.categoryName}</h1>
                     :
-                        <h3 className="events__header Heebo-Medium" dir="rtl">{this.props.categoryName}</h3>
+                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.categoryName}</h1>
                 }
                 <div className="common__intouch__seperator__box__desktop desktop">
                     <div className="common__intouch__seperator__desktop desktop"></div>

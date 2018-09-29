@@ -31,7 +31,7 @@ const items = [
 const HomePageEvents = (props) => (
     <div className="homepage__events__box align-text-center">
         <div className="homepage__events-header">
-            <h2 className="homepage__events-header__text Heebo-Medium" dir="rtl">מה אנחנו עושים?</h2>
+            <h1 className="homepage__events-header__text Heebo-Medium" dir="rtl">מה אנחנו עושים?</h1>
         </div>
         
         <div className="homepage__events-structure" dir="rtl">
