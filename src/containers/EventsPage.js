@@ -1705,7 +1705,7 @@ class EventsPage extends React.Component {
                                 <div className="about__edit__panel__box">
                                     <div className="about__edit__panel">
                                         <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.onToggleSeo}>
                                             seo
@@ -1764,7 +1764,8 @@ class EventsPage extends React.Component {
                                                                     data-id={subCategory.id}
                                                                     data-visible={subCategory.visible === true ? false : true}
                                                                     className="backoffice__show__icon"
-                                                                    src={`/images/backoffice/${subCategory.visible === true ? 'show' : 'hide'}.svg`} 
+                                                                    src={`/images/backoffice/${subCategory.visible === true ? 'show' : 'hide'}.svg`}
+                                                                    alt={subCategory.visible === true ? 'הצג' : 'הסתר'}
                                                                 />
                                                             </Button>
                                                             <div className="backoffice__events__tabs__order__box">
@@ -1816,7 +1817,7 @@ class EventsPage extends React.Component {
                         <div className="common__intouch__seperator__box__desktop desktop">
                             <div className="common__intouch__seperator__desktop desktop"></div>
                         </div>
-                        <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                        <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                         <EventsEvents 
                             categoryName={this.state.category.name}
                             categoryText={this.state.category.text}

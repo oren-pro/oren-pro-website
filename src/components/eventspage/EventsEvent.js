@@ -58,7 +58,8 @@ class EventsEvent extends React.Component {
                                     data-id={this.props.id}
                                     data-visible={this.props.visible === true ? false : true}
                                     className="backoffice__show__icon"
-                                    src={`/images/backoffice/${this.props.visible === true ? 'show' : 'hide'}.svg`} 
+                                    src={`/images/backoffice/${this.props.visible === true ? 'show' : 'hide'}.svg`}
+                                    alt={this.props.visible === true ? 'הצג' : 'הסתר'} 
                                 />
                             </Button>
                             <div className="backoffice__item__order__box">
@@ -112,7 +113,7 @@ class EventsEvent extends React.Component {
                     :
                         null
                 }
-                <img data-id={this.props.id} className="events__event__image" src={this.props.image} />
+                <img data-id={this.props.id} className="events__event__image" src={this.props.image} alt={this.props.title} />
                 <h2 hidden={this.state.hover} className="events__event__title Heebo-Regular" dir="rtl">{this.props.title}</h2>
                 
                 <Route render={({ history }) => (
@@ -129,7 +130,7 @@ class EventsEvent extends React.Component {
                         </button>
                         <div className="events__event__button__text__div">
                             <p className="events__event__button__text  Heebo-Regula">{this.props.title}</p>
-                            <img className="events__event__button__image" src="/images/contact/arrowWhite.svg" />
+                            <img className="events__event__button__image" src="/images/contact/arrowWhite.svg" alt={this.props.title} />
                         </div>
                     </div>
                 )} />

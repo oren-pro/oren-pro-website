@@ -222,7 +222,7 @@ export default class EventsText extends React.Component {
                 <div className="common__intouch__seperator__box__desktop desktop">
                     <div className="common__intouch__seperator__desktop desktop"></div>
                 </div>
-                <img className="events__seperator events__seperator__w100 mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                <img className="events__seperator events__seperator__w100 mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                 <div className="events__text__flexbox" dir="rtl">
                     <AnimateHeight
                     duration={ 500 }
@@ -260,7 +260,7 @@ export default class EventsText extends React.Component {
                         onMouseLeave={this.props.setIconRatioOut}
                         onClick={this.toggle}
                     >
-                        <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
+                        <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" alt="קראו עוד" />
                         <p className="events__text__more__button__text Heebo-Regular">קראו עוד</p>
                     </button>
                 </div>

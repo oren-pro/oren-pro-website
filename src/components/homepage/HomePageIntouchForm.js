@@ -63,14 +63,14 @@ export default class HomePageIntouchForm extends React.Component {
                             data-name="greenArrow"
                             onClick={this.onToggleMailSentModal}
                         >
-                            <img className="contact__modal__button__image__x" src="/images/eventspage/close.svg" />
+                            <img className="contact__modal__button__image__x" src="/images/eventspage/close.svg" alt="סגירה" />
                         </button> 
                     </div>
-                    <img className="contact__confirm__image desktop" src="/images/contact/contact-confirm.svg" />
-                    <img className="contact__confirm__seperator" src="/images/contact/contact-confirm-seperator.png" />
+                    <img className="contact__confirm__image desktop" src="/images/contact/contact-confirm.svg" alt="אישור" />
+                    <img className="contact__confirm__seperator" src="/images/contact/contact-confirm-seperator.png" alt="קו הפרדה" />
                     <h2 className="contact__confirm__header Heebo-Medium" dir="rtl">איזה כיף,</h2>
                     <h4 className="contact__confirm__text Heebo-Medium" dir="rtl">עשיתם צעד ראשון לאירוע מוצלח!<br />ההרשמה לניוזלטר עברה בהצלחה!</h4>
-                    <img className="contact__confirm__seperator" src="/images/contact/contact-confirm-seperator.png" />
+                    <img className="contact__confirm__seperator" src="/images/contact/contact-confirm-seperator.png" alt="קו הפרדה" />
                     <h3 className="contact__confirm__footer Heebo-Medium">אורן ורינת</h3>
                 </Modal>
 

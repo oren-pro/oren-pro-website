@@ -1022,7 +1022,7 @@ class EventPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.onToggleSlideGallery}
                                 >
-                                    <img className="events__event__carousel__button__image__x" src="/images/eventspage/carousel-x.svg" />
+                                    <img className="events__event__carousel__button__image__x" src="/images/eventspage/carousel-x.svg" alt="יציאה" />
                                 </button> 
                             </div>
                             
@@ -1035,7 +1035,7 @@ class EventPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.previous}
                                 >
-                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-right.svg" />
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-right.svg" alt="הקודם" />
                                 </button> 
                             </div>
 
@@ -1048,7 +1048,7 @@ class EventPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.onNext}
                                 >
-                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-left.svg" alt="הבא" />
                                     
                                 </button> 
                             </div>
@@ -1057,7 +1057,7 @@ class EventPage extends React.Component {
                                 <div 
                                     className="events__event__carousel__button"
                                 >
-                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-right.svg" />
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-right.svg" alt="הקודם" />
                                 </div> 
                             </div>
 
@@ -1065,7 +1065,7 @@ class EventPage extends React.Component {
                                 <div 
                                     className="events__event__carousel__button"
                                 >
-                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" alt="הבא" />
                                     
                                 </div> 
                             </div>
@@ -1104,7 +1104,7 @@ class EventPage extends React.Component {
                                 <div className="about__edit__panel__box">
                                     <div className="about__edit__panel">
                                         <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.onToggleEventSeo}>
                                             seo

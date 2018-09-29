@@ -16,6 +16,7 @@ const UploadImageButton = (props) => (
             onClick={props.uploadWidget}
             className="common__image__upload-button__image"
             src="/images/common/upload-image.svg"
+             alt="הוספת תמונה"
         />
     </button>
 );

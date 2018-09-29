@@ -116,12 +116,13 @@ class TileGallery extends React.Component {
                             data-order={photo.order}
                             onClick={this.props.onOpenSlideGallery}
                         />
-                        <img className="events__event__select__image__icon" src="/images/eventspage/event-select-image.svg" />
+                        <img className="events__event__select__image__icon" src="/images/eventspage/event-select-image.svg" alt="בחר" />
                     </div>
                     
                     <img
                         src={src}
                         style={imgStyle}
+                        alt={photo.altText}
                     />
                     
                 </div>

@@ -218,10 +218,10 @@ class CustomersStrip extends React.Component {
             this.props.isAuthenticated === true ? 
                 <div className="backoffice__customers__strip__buttons">
                     <button data-id={this.props.eventId} className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
-                        <img data-id={this.props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                        <img data-id={this.props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                     </button>
                     <button className="backoffice__customers__strip__edit__button" onClick={this.startEditCostumers}>
-                        <img className="backoffice__edit__icon" src="/images/backoffice/edit.svg" />
+                        <img className="backoffice__edit__icon" src="/images/backoffice/edit.svg" alt="עריכה" />
                     </button>
                 </div>
             :
@@ -232,7 +232,7 @@ class CustomersStrip extends React.Component {
           {
             this.state.costumers.map((costumer, index) => {
               return  <div key={"view"+costumer.order}>
-                        <img src={costumer.image} />
+                        <img src={costumer.image} alt="אורן ורינת הפקות אירןעים - לקוחות - לוגו"/>
                       </div>
             })
           }
@@ -272,7 +272,7 @@ class CustomersStrip extends React.Component {
                                               />
                                           </div>
                                           <div>
-                                            <img width="50%" height="50%" src={costumer.image} />
+                                            <img width="50%" height="50%" src={costumer.image} alt="אורן ורינת הפקות אירועים - לקוחות - לוגו" />
                                           </div>
                                       </div>
                           })

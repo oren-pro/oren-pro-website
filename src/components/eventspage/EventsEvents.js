@@ -19,13 +19,13 @@ const EventsEvents = (props) => (
                     {
                         props.subcategoryId !== '' ?
                             <button className="backoffice__events__events__add__button" onClick={props.startAddNewItem}>
-                                <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת אירוע" />
                             </button>
                         :
                             null
                     }
                     <button className="backoffice__events__events__save__button" onClick={props.updateItems}>
-                        <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                        <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                     </button>
                 </div>
             :
@@ -34,12 +34,12 @@ const EventsEvents = (props) => (
         
         { props.oneLine === true ? 
                 <div className="events__events__oneline__header__box">
-                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                     <p className="events__events__oneline__more Heebo-Medium">לאירועים נוספים</p>
                     <div className="common__intouch__seperator__box__desktop desktop">
                         <div className="common__intouch__seperator__desktop desktop"></div>
                     </div>
-                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                     <h3 className="events__events__oneline__header Heebo-Regular">{props.subcategoryName}</h3>
                 </div>
             :
@@ -86,14 +86,14 @@ const EventsEvents = (props) => (
                         onMouseLeave={props.setIconRatioOut}
                         onClick={props.navtoCategoryPage}
                     >
-                        <img className="events__eventshare__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
+                        <img className="events__eventshare__more__button__image" src="/images/aboutpage/arrowBlack.svg" alt="גלו עוד" />
                         <p className="events__eventshare__more__button__text Heebo-Regular">גלו עוד</p>
                         
                     </button> 
                     <div className="common__intouch__seperator__box__desktop desktop">
                         <div className="common__intouch__seperator__desktop desktop"></div>
                     </div>
-                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                    <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                 </div>
             :
                 null

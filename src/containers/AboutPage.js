@@ -628,7 +628,7 @@ class AboutPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.onToggleSlideGallery}
                                 >
-                                    <img className="events__event__carousel__button__image__x" src="/images/eventspage/carousel-x.svg" />
+                                    <img className="events__event__carousel__button__image__x" src="/images/eventspage/carousel-x.svg" alt="סגירה" />
                                 </button> 
                             </div>
                             
@@ -641,7 +641,7 @@ class AboutPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.previous}
                                 >
-                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-right.svg" />
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-right.svg" alt="הקודם" />
                                 </button> 
                             </div>
 
@@ -654,7 +654,7 @@ class AboutPage extends React.Component {
                                     onMouseLeave={this.setIconRatioOut}
                                     onClick={this.onNext}
                                 >
-                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    <img className="events__event__carousel__button__image" src="/images/eventspage/carousel-arrow-left.svg" alt="הבא" />
                                     
                                 </button> 
                             </div>
@@ -663,7 +663,7 @@ class AboutPage extends React.Component {
                                 <div 
                                     className="events__event__carousel__button"
                                 >
-                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-right.svg" />
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-right.svg" alt="הקודם" />
                                 </div> 
                             </div>
 
@@ -671,7 +671,7 @@ class AboutPage extends React.Component {
                                 <div 
                                     className="events__event__carousel__button"
                                 >
-                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" />
+                                    <img className="events__event__carousel__button__image events__event__carousel__button__image__fake" src="/images/eventspage/carousel-arrow-left.svg" alt="הבא" />
                                 </div> 
                             </div>
                         </div>
@@ -700,10 +700,10 @@ class AboutPage extends React.Component {
                                 <div className="about__edit__panel__box">
                                     <div className="about__edit__panel">
                                         <button className="backoffice_button" onClick={this.onUpdateAboutPage}>
-                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" />
+                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
                                         </button>
                                         <button className="backoffice_button" onClick={this.onToggleAboutpageSeo}>
                                             seo
@@ -745,10 +745,10 @@ class AboutPage extends React.Component {
                                 this.props.isAuthenticated === true ? 
                                     <div className="backoffice__events__events__buttons">
                                         <button className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
-                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תת קטגוריה" />
                                         </button>
                                         <button className="backoffice__events__events__save__button" onClick={this.updateImages}>
-                                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                                         </button>
                                         
                                     </div>
@@ -780,10 +780,10 @@ class AboutPage extends React.Component {
                                 this.props.isAuthenticated === true ? 
                                     <div className="backoffice__events__events__buttons">
                                         <button className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
-                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תת קטגוריה" />
                                         </button>
                                         <button className="backoffice__events__events__save__button" onClick={this.updateImages}>
-                                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                                         </button>
                                         
                                     </div>

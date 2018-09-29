@@ -9,12 +9,12 @@ export class HomePagePleasedMobile extends React.Component {
         return (
             <div className="homepage__pleased-box mobile_inline">
                 <div className="homepage__pleased__background__mobile">
-                    <img className="homepage__pleased__background__image" src="https://res.cloudinary.com/orenpro/image/upload/v1537511790/pleased_bg_mobile.jpg" />
+                    <img className="homepage__pleased__background__image" src="https://res.cloudinary.com/orenpro/image/upload/v1537511790/pleased_bg_mobile.jpg" alt="אורן ורינת הפקות - נעים להכיר - רקע" />
                     <div className="homepage__pleased__yellow-bg" />
                 </div>
                 <div className="homepage__pleased__content-box">
                     <div className="homepage__pleased__body">
-                        <img className="homepage__pleased__header__mobile" src="/images/homepage/pleased/pleased_header_mobile.png" />
+                        <img className="homepage__pleased__header__mobile" src="/images/homepage/pleased/pleased_header_mobile.png" alt="אורן ורינת הפקות - נעים להכיר" />
                         {
                             this.props.isAuthenticated === true ?
                             <div className="homepage__pleased__content" dir="rtl">
@@ -46,7 +46,7 @@ export class HomePagePleasedMobile extends React.Component {
                                     onMouseLeave={this.props.setIconRatioOut}
                                     onClick={() => { history.push('/about') }}
                                 >
-                                    <img className="homepage__pleased__button__image" src="/images/homepage/pleased/pleased_more.svg" />
+                                    <img className="homepage__pleased__button__image" src="/images/homepage/pleased/pleased_more.svg" alt="קרא עוד" />
                                     <p className="homepage__pleased__button__text Heebo-Regular">קרא עוד</p>
                                     
                                 </button> 

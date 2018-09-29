@@ -46,11 +46,11 @@ class HomePageTell extends React.Component {
         {
                 this.props.isAuthenticated === true ?
                     <div className="homepage__tell__box__auth">
-                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell.jpg" />
-                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell-mobile.jpg" />
+                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell.jpg" alt="אורן ורינת הפקות - מספרים עלינו" />
+                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1534248940/tell-mobile.jpg" alt="אורן ורינת הפקות - מספרים עלינו" />
                         <h2 className="homepage__tell__header Heebo-Medium">{header}</h2>
                         <div className="homepage__tell__logo__box mobile">
-                            <img className="homepage__tell__logo mobile_inline" src={logo} />
+                            <img className="homepage__tell__logo mobile_inline" src={logo} alt="לוגו" />
                         </div>
                         <div className="homepage__tell__body">
                             <div className="homepage__tell__body__text" dir="rtl">
@@ -158,7 +158,7 @@ class HomePageTell extends React.Component {
                                         null
                                 }
                             </div>
-                            <img className="homepage__tell__logo desktop_inline" src={logo} />
+                            <img className="homepage__tell__logo desktop_inline" src={logo} alt="לוגו" />
                             <button
                                 data-name="tell"
                                 data-index={id}
@@ -176,6 +176,7 @@ class HomePageTell extends React.Component {
                                     data-publicid={publicid}
                                     className="homepage__tell__upload-button__image"
                                     src="/images/common/upload-image.svg"
+                                     alt="הוספת תמונה"
                                 />
                             </button>
                         </div>
@@ -192,20 +193,20 @@ class HomePageTell extends React.Component {
                                 null
                             }
                             <button className="homepage__tell__edit__button" onClick={this.props.startEditTell}>
-                                <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
+                                <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" alt="עריכה" />
                             </button>
                             <button className="homepage__tell__add__button" onClick={this.props.addNewTell}>
-                                <img className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
+                                <img className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" alt="הוספה" />
                             </button>
                         </div>
                     </div>
                 :
                     <div>
-                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1536952256/tell.jpg" />
-                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1536952408/tell-mobile.jpg" />
+                        <img className="homepage__tell__image desktop" src="https://res.cloudinary.com/orenpro/image/upload/v1536952256/tell.jpg" alt="אורן ורינת הפקות אירועים - מספרים עלינו" />
+                        <img className="homepage__tell__image mobile" src="https://res.cloudinary.com/orenpro/image/upload/v1536952408/tell-mobile.jpg" alt="אורן ורינת הפקות אירועים - מספרים עלינו" />
                         <h2 className="homepage__tell__header Heebo-Medium">{header}</h2>
                         <div className="homepage__tell__logo__box mobile_inline">
-                            <img className="homepage__tell__logo mobile_inline" src={logo} />
+                            <img className="homepage__tell__logo mobile_inline" src={logo} alt="לוגו" />
                         </div>
                         <div className="homepage__tell__body">
                             <div className="homepage__tell__body__text" dir="rtl">
@@ -219,7 +220,7 @@ class HomePageTell extends React.Component {
                                 >
                                 </textarea>
                             </div>
-                            <img className="homepage__tell__logo desktop_inline" src={logo} />
+                            <img className="homepage__tell__logo desktop_inline" src={logo} alt="לוגו" />
                         </div>
                         <div className="homepage__tell__pagination__box" dir="rtl">
                             {

@@ -392,12 +392,12 @@ export default class AboutContentStrip extends React.Component {
                                 defaultValue={this.props.aboutpage[this.props.index].header}
                                 onChange={ this.props.setData }
                             />
-                            <img className="about__content__header__border" src="/images/aboutpage/about-content-header-border.svg" />
+                            <img className="about__content__header__border" src="/images/aboutpage/about-content-header-border.svg" alt="קו הפרדה" />
                         </div>
                     :
                         <div className="about__content__header__in__box">
                             <h2 className="about__content__header Heebo-Medium" dir="rtl">{this.props.aboutpage[this.props.index].header}</h2>
-                            <img className="about__content__header__border" src="/images/aboutpage/about-content-header-border.svg" />
+                            <img className="about__content__header__border" src="/images/aboutpage/about-content-header-border.svg" alt="קו הפרדה" />
                         </div>
                 }
                 
@@ -442,7 +442,7 @@ export default class AboutContentStrip extends React.Component {
                         onMouseLeave={this.props.setIconRatioOut}
                         onClick={ this.toggle }
                     >
-                        <img className="about__content__button__image" src="/images/aboutpage/arrowBlack.svg" />
+                        <img className="about__content__button__image" src="/images/aboutpage/arrowBlack.svg" alt="קראו עוד" />
                     </button>
                 }
                 </div>

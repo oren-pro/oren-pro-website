@@ -58,9 +58,10 @@ const HomePageEventsItem = (props) => (
                             onClick={props.uploadWidget}
                             className="homepage__event-item__upload-button__image"
                             src="/images/common/upload-image.svg"
+                            alt="הוספת תמונה"
                         />
                     </button>
-                    <img className="homepage__event-item__image" src={props.event.eventImage} />
+                    <img className="homepage__event-item__image" src={props.event.eventImage} alt={props.event.eventHeader} />
                     <div className="homepage__event-item__more">
                         <Route render={({ history}) => (
                             <button 
@@ -72,7 +73,7 @@ const HomePageEventsItem = (props) => (
                                 onClick={() => { history.push(props.homepage.events[props.index].eventLink) }}
                             >
                                 <p className="homepage__event-item__button__text Heebo-Regular">גלו עוד</p>
-                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" />
+                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="גלו עוד" />
                             </button> 
                         )} />
                     </div>
@@ -100,7 +101,7 @@ const HomePageEventsItem = (props) => (
                             value={props.homepage.events[props.index].eventText}
                         />
                     </div>
-                    <img className="homepage__event-item__image" src={props.event.eventImage} />
+                    <img className="homepage__event-item__image" src={props.event.eventImage} alt={props.event.eventHeader} />
                     <div className="homepage__event-item__more">
                         
                             <button 
@@ -112,7 +113,7 @@ const HomePageEventsItem = (props) => (
                                 
                             >
                                 <p className="homepage__event-item__button__text Heebo-Regular">גלו עוד</p>
-                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" />
+                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="גלו עוד" />
                             </button> 
                         
                     </div>

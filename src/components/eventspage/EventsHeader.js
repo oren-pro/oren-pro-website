@@ -21,7 +21,7 @@ class EventsHeader extends React.Component {
                     this.props.isAuthenticated === true ? 
                         <div className="backoffice__events__header__buttons">
                             <button className="backoffice__events__header__save__button" onClick={this.props.onUpdateCategory}>
-                                <img className="backoffice__events__header__save__icon" src="/images/backoffice/save.svg" />
+                                <img className="backoffice__events__header__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                             </button>
                         </div>
                     :
@@ -36,7 +36,7 @@ class EventsHeader extends React.Component {
                 <div className="common__intouch__seperator__box__desktop desktop">
                     <div className="common__intouch__seperator__desktop desktop"></div>
                 </div>
-                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
             </div>
         );
     }

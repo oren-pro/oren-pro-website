@@ -229,13 +229,13 @@ class Navigation extends React.Component {
           this.state.windowWidth < 769 ?
             <div className='mobile' id="hp_carousel_mobile">
               <button className="carousel__button" onClick={this.pageToTopM}> </button>
-              <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
+              <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
               <HomePageCarousel media='mobile' />
             </div>
           :
             <div className='desktop' id="hp_carousel_desktop">
               <button className="carousel__button" onClick={this.pageToTopD}> </button>
-              <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" />
+              <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
               <HomePageCarousel media='desktop' />
             </div>
 
@@ -246,13 +246,13 @@ class Navigation extends React.Component {
         <Navbar id="navbarD" light className={`container-fluid desktop`} expand="md" fixed={this.state.fixed}>
           <div className="container-fluid navbar__header__container">
             <div className="container-fluid navbar__header">
-              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" alt="אורן ורינת הפקות אירועים - לוגו" /></NavbarBrand>
               <NavbarToggler onClick={this.toggle} />
             </div>
           </div>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="navbar__nav" className="m-auto" navbar>
-              <NavbarBrand className="navbar__brand--desktop" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand--desktop" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" alt="אורן ורינת הפקות אירועים - לוגו" /></NavbarBrand>
               <NavItem>
                 <NavLink to="/contact" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">צור קשר</NavLink>
               </NavItem>
@@ -312,44 +312,44 @@ class Navigation extends React.Component {
                   onMouseOut={this.setIconChangeOut}
                   onClick={this.toggleAccessibility}
                 >
-                  <img className="nav__link__accessibility__mobile" src="/images/navigation/accessibility_mobile.svg" />
+                  <img className="nav__link__accessibility__mobile" src="/images/navigation/accessibility_mobile.svg" alt="נגישות" />
                 </NavLink>
               </NavItem>
-              <img className="nav__mobile__seperator" src="/images/navigation/nav_icons_seperator.svg" />
+              <img className="nav__mobile__seperator" src="/images/navigation/nav_icons_seperator.svg" alt="קו הפרדה" />
               <button
                   className="nav__phone__mobile"
                   data-name="phone"
                   onClick={this.gotoPhone}
               >
-                  <img className="nav__link__phone__mobile" src="/images/navigation/phone_mobile.svg" />
+                  <img className="nav__link__phone__mobile" src="/images/navigation/phone_mobile.svg" alt="טלפון" />
               </button>
-              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" alt="אורן ורינת הפקות - לוגו" /></NavbarBrand>
               <NavbarToggler className="navbar__toggler ml-auto" onClick={this.toggle} />
             </div>
           </div>
           <Collapse className="navbar__collapse" isOpen={this.state.isOpen} navbar>
             <Nav className="navbar__nav" className="m-auto" navbar>
               <div className="nav__social__box">
-                <img className="nav__social__seperator" src="/images/navigation/nav-social-seperator.png" />
+                <img className="nav__social__seperator" src="/images/navigation/nav-social-seperator.png" alt="קו הפרדה" />
                 <button
                     className="homepage__socialmedia-button mobile_inline"
                     onClick={this.gotoFacebook}
                 >
-                    <img className="nav__link__facebook__mobile" src="/images/navigation/facebook_mobile.svg" />
+                    <img className="nav__link__facebook__mobile" src="/images/navigation/facebook_mobile.svg" alt="פייסבוק" />
                 </button>
                 <button
                     className="homepage__socialmedia-button mobile_inline"
                     onClick={this.gotoInstagram}
                 >
-                    <img className="nav__link__instagram__mobile" src="/images/navigation/instagram_mobile.svg" />
+                    <img className="nav__link__instagram__mobile" src="/images/navigation/instagram_mobile.svg" alt="אינסטגרם" />
                 </button>
                 <button
                     className="homepage__socialmedia-button mobile_inline"
                     onClick={this.gotoMail}
                 >
-                    <img className="nav__link__mail__mobile" src="/images/navigation/mail_mobile.svg" />
+                    <img className="nav__link__mail__mobile" src="/images/navigation/mail_mobile.svg" alt="אימייל" />
                 </button>
-                <img className="nav__social__seperator" src="/images/navigation/nav-social-seperator.png" />
+                <img className="nav__social__seperator" src="/images/navigation/nav-social-seperator.png" alt="קו הפרדה" />
               </div>
               <NavItem>
                 <NavLink to="/contact" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">צור קשר</NavLink>

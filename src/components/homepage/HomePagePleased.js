@@ -43,7 +43,7 @@ export class HomePagePleased extends React.Component {
                                     onMouseLeave={this.props.setIconRatioOut}
                                     onClick={() => { history.push('/about') }}
                                 >
-                                    <img className="homepage__pleased__button__image" src="/images/homepage/pleased/pleased_more.svg" />
+                                    <img className="homepage__pleased__button__image" src="/images/homepage/pleased/pleased_more.svg" alt="קרא עוד" />
                                     <p className="homepage__pleased__button__text Heebo-Regular">קרא עוד</p>
                                     
                                 </button> 

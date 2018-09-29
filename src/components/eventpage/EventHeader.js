@@ -231,7 +231,7 @@ export default class EventHeader extends React.Component {
                     this.props.isAuthenticated === true ? 
                         <div className="backoffice__events__header__buttons">
                             <button className="backoffice__events__header__save__button" onClick={this.props.onUpdateEvent}>
-                                <img className="backoffice__events__header__save__icon" src="/images/backoffice/save.svg" />
+                                <img className="backoffice__events__header__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                             </button>
                         </div>
                     :
@@ -240,7 +240,7 @@ export default class EventHeader extends React.Component {
                 <div className="common__intouch__seperator__box__desktop desktop">
                     <div className="common__intouch__seperator__desktop desktop"></div>
                 </div>
-                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
                 <div className="event__header__in__box">
                     <div className="event__header__in__in__box">
                         {
@@ -310,7 +310,7 @@ export default class EventHeader extends React.Component {
                             onMouseLeave={this.props.setIconRatioOut}
                             onClick={this.toggle}
                         >
-                            <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" />
+                            <img className="events__text__more__button__image" src="/images/aboutpage/arrowBlack.svg" alt="קראו עוד" />
                             <p className="events__text__more__button__text Heebo-Regular">קראו עוד</p>
                             
                         </button> 
@@ -340,7 +340,7 @@ export default class EventHeader extends React.Component {
                 <div className="common__intouch__seperator__box__desktop desktop">
                     <div className="common__intouch__seperator__desktop desktop"></div>
                 </div>
-                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" />
+                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
             </div>
         );
     }

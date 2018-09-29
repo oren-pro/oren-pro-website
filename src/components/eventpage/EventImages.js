@@ -9,10 +9,10 @@ const EventImages = (props) => (
                 props.isAuthenticated === true ? 
                     <div className="backoffice__events__images__buttons">
                         <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
-                            <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                            <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                         </button>
                         <button className="backoffice__events__events__save__button" onClick={props.updateImages}>
-                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                            <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                         </button>
                         
                     </div>
@@ -45,10 +45,10 @@ const EventImages = (props) => (
                     props.isAuthenticated === true ? 
                         <div className="backoffice__events__images__buttons">
                             <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
-                                <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                             </button>
                             <button className="backoffice__events__events__save__button" onClick={props.updateImages}>
-                                <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" />
+                                <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />
                             </button>
                             
                         </div>

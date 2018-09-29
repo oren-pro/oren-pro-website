@@ -377,7 +377,7 @@ class HomePageCarousel extends React.Component {
                                                 />
                                             </div>
                                             <div className="backoffice__gallery__image__container">
-                                              <img width="100%" height="100%" src={image.src} />
+                                              <img width="100%" height="100%" src={image.src} alt="אורן ורינת הפקות - דף הבית" />
                                             </div>
                                         </div>
                             })
@@ -429,7 +429,7 @@ class HomePageCarousel extends React.Component {
                                                 />
                                             </div>
                                             <div className="backoffice__gallery__image__container">
-                                              <img width="100%" height="100%" src={image.src} />
+                                              <img width="100%" height="100%" src={image.src} alt="אורן ורינת הפקות - דף הבית" />
                                             </div>
                                         </div>
                             })
@@ -452,10 +452,10 @@ class HomePageCarousel extends React.Component {
                     <div className="backoffice__desktop__gallery__buttons">
                       <p className="homepage__tell__details">desktop gallery</p>
                       <button className="homepage__tell__edit__button" onClick={this.onToggleDesktopGallery}>
-                          <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
+                          <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" alt="עריכה" />
                       </button>
                       <button className="homepage__tell__add__button" onClick={this.uploadWidget}>
-                          <img data-screen="desktop" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
+                          <img data-screen="desktop" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" alt="הוספה" />
                       </button>
                     </div>
                 :
@@ -469,10 +469,10 @@ class HomePageCarousel extends React.Component {
                     <div className="backoffice__mobile__gallery__buttons">
                       <p className="homepage__tell__details">mobile gallery</p>
                       <button className="homepage__tell__edit__button" onClick={this.onToggleMobileGallery}>
-                          <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" />
+                          <img className="homepage__tell__add" src="/images/backoffice/edit_white.svg" alt="עריכה" />
                       </button>
                       <button className="homepage__tell__add__button" onClick={this.uploadWidget}>
-                          <img data-screen="mobile" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" />
+                          <img data-screen="mobile" className="homepage__tell__add" src="/images/homepage/tell/add-circle-twotone-white-icon.svg" alt="הוספה" />
                       </button>
                     </div>
                 :

@@ -71,10 +71,10 @@ class EventsTabs extends React.Component {
                             this.props.isAuthenticated && this.props.isEditable ?
                                 <div className="backoffice__events__tabs__buttons">
                                     <button className="backoffice__add__button" onClick={this.props.startAddNewSubcategory}>
-                                        <img className="backoffice__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" />
+                                        <img className="backoffice__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תת קטגוריה" />
                                     </button>
                                     <button className="backoffice__edit__button" onClick={this.props.startEditSubcategory}>
-                                        <img className="backoffice__edit__icon" src="/images/backoffice/edit.svg" />
+                                        <img className="backoffice__edit__icon" src="/images/backoffice/edit.svg" alt="עריכה" />
                                     </button>
                                 </div>
                             :
