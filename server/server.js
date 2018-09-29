@@ -152,8 +152,7 @@ app.use(cors({
 
 // prerender.io
 
-//app.use(require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF'));
-var prerender = require('prerender-node').set('prerenderToken', 'i4iWsbcWGOhN8O2BnxwF');
+var prerender = require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN);
 prerender.crawlerUserAgents = [];
 prerender.crawlerUserAgents.push('bingbot');
 prerender.crawlerUserAgents.push('yandex');
