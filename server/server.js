@@ -152,7 +152,7 @@ app.use(cors({
 
 var prerender = require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN);
 prerender.crawlerUserAgents = [];
-//prerender.crawlerUserAgents.push('googlebot');
+prerender.crawlerUserAgents.push('googlebot');
 prerender.crawlerUserAgents.push('bingbot');
 prerender.crawlerUserAgents.push('yandex');
 app.use(prerender);
