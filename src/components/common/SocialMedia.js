@@ -22,13 +22,13 @@ class SocialMedia extends React.Component {
     gotoMail = () => {
         console.log('in facebook');
         if (typeof(window) !== "undefined") {
-            window.location = 'mailto:mosh.kainer@gmail.com';
+            window.location = 'mailto:info@oren-pro.com';
         }
     }
     gotoPhone = () => {
         console.log('in facebook');
         if (typeof(window) !== "undefined") {
-            window.location = 'tel:0525379515';
+            window.location = 'tel:04-9544588';
         }
     }
     
