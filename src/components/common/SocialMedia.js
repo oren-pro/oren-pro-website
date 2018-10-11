@@ -28,7 +28,7 @@ class SocialMedia extends React.Component {
     gotoPhone = () => {
         console.log('in facebook');
         if (typeof(window) !== "undefined") {
-            window.location = 'tel:04-9544588';
+            window.location = 'tel:049544588';
         }
     }
     

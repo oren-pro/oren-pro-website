@@ -198,7 +198,7 @@ class Navigation extends React.Component {
   }
   gotoPhone = () => {
       if (typeof(window) !== "undefined") {
-        window.location = 'tel:0525379515';
+        window.location = 'tel:049544588';
       }
   }
 
