@@ -106,19 +106,230 @@ app.use(function forceLiveDomain(req, res, next) {
   }
   // http://www.oren-pro.com/1345/1306/אירוע-פורים-במשרדי-החברה
   if (String(req.originalUrl) === '/1345/1306/%D7%90%D7%99%D7%A8%D7%95%D7%A2-%D7%A4%D7%95%D7%A8%D7%99%D7%9D-%D7%91%D7%9E%D7%A9%D7%A8%D7%93%D7%99-%D7%94%D7%97%D7%91%D7%A8%D7%94') {
-    return res.redirect(301, '/PURIM_CIRCUS/אירועי_קונספט/אירועי_חברה');
+    return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
   }
-  // http://www.oren-pro.com/993/993/יום-כיף
+  //http://www.oren-pro.com/1346/1306/פורים-בסגנון-שנות-ה60
+  //http://www.oren-pro.com/1312/1306/הפנינג-פורים-למשפחות-
+  //http://www.oren-pro.com/1308/1306/ערב-קזינו
+  //http://www.oren-pro.com/1334/1069/סגווי-בתל-אביב-יפו-
+  //http://www.oren-pro.com/1309/1306/So-80
+  //http://www.oren-pro.com/1307/1306/המערב-הפרוע
+  //http://www.oren-pro.com/1310/1306/פורים-קרנבל-ברזילאי
+  //http://www.oren-pro.com/1339/1069/סיור-חנוכיות-בירושלים
+  //http://www.oren-pro.com/1198/993/סיור-סליחות-בצפת
+  //http://www.oren-pro.com/1311/1306/אירוע-פורים-למשפחות-עם-הפרופסור-המשוגע
+  //http://www.oren-pro.com/1347/1306/הפנינג-משפחות-פורים-בסגנון-הוואי
+  //http://www.oren-pro.com/1218/993/ירושלים-בזוית-נוספת
+  //http://www.oren-pro.com/1213/993/סיור-חנוכיות-בצפת
+  //http://www.oren-pro.com/1324/1320/סיור-ליקוט-בגלבוע--
+  //http://www.oren-pro.com/1313/1306/מסיבת-פורים
+  //http://www.oren-pro.com/event/572/132/הפקת_אירוע_בכותל
+  //http://www.oren-pro.com/1341/1069/מרוץ-ירושלים
+  //http://www.oren-pro.com/1321/1320/הכרמל-במיטבוטיול-פריחות-בכרמל
+  //http://www.oren-pro.com/1328/1008/ספארי-לילה
+  //
+
+
+
+
+
+  //http://www.oren-pro.com/1085/1069/יום-גיבוש-תחת-אש
+  if (String(req.originalUrl) === '/1085/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%AA%D7%97%D7%AA-%D7%90%D7%A9') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1203/993/יום-כיף-מדברי
+  if (String(req.originalUrl) === '/1203/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%9E%D7%93%D7%91%D7%A8%D7%99') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1343/1069/יום-גיבוש-בצפון-מתגלגלים-בגולן
+  if (String(req.originalUrl) === '/1343/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%A6%D7%A4%D7%95%D7%9F-%D7%9E%D7%AA%D7%92%D7%9C%D7%92%D7%9C%D7%99%D7%9D-%D7%91%D7%92%D7%95%D7%9C%D7%9F') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1199/1008/יום-גיבוש-בים
+  if (String(req.originalUrl) === '/1199/1008/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1295/1205/יום-כיף-למשפחות-בחוף-דור
+  if (String(req.originalUrl) === '/1295/1205/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%9C%D7%9E%D7%A9%D7%A4%D7%97%D7%95%D7%AA-%D7%91%D7%97%D7%95%D7%A3-%D7%93%D7%95%D7%A8') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1330/1069/יום-כיף-בטוסקנה-הישראלית
+  if (String(req.originalUrl) === '/1330/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%98%D7%95%D7%A1%D7%A7%D7%A0%D7%94-%D7%94%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%AA') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1051/993/יום-כיף-בבריכה
+  if (String(req.originalUrl) === '/1051/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%91%D7%A8%D7%99%D7%9B%D7%94') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1020/1008/יום-גיבוש-בכרמל--איזור-חוף-הכרמל
+  if (String(req.originalUrl) === '/1020/1008/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%9B%D7%A8%D7%9E%D7%9C--%D7%90%D7%99%D7%96%D7%95%D7%A8-%D7%97%D7%95%D7%A3-%D7%94%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1208/993/יום-כיף-יום-האישה
+  if (String(req.originalUrl) === '/1208/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%99%D7%95%D7%9D-%D7%94%D7%90%D7%99%D7%A9%D7%94') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1217/993/יום-חוויתי-בכרמל
+  if (String(req.originalUrl) === '/1217/993/%D7%99%D7%95%D7%9D-%D7%97%D7%95%D7%95%D7%99%D7%AA%D7%99-%D7%91%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1074/1069/יום-גיבוש-בצפון
+  if (String(req.originalUrl) === '/1074/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%A6%D7%A4%D7%95%D7%9F') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1332/1069/יום-כיף-קולינרי
+  if (String(req.originalUrl) === '/1332/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%A7%D7%95%D7%9C%D7%99%D7%A0%D7%A8%D7%99') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1088/1069/יום-גיבוש-חברה-יום-ספורט
+  if (String(req.originalUrl) === '/1088/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%97%D7%91%D7%A8%D7%94-%D7%99%D7%95%D7%9D-%D7%A1%D7%A4%D7%95%D7%A8%D7%98') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1337/1069/יום-גיבוש-קרב-סכינים
+  if (String(req.originalUrl) === '/1337/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%A7%D7%A8%D7%91-%D7%A1%D7%9B%D7%99%D7%A0%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1072/1069/יום-כיף-בים-בסגנון-הוואי
+  if (String(req.originalUrl) === '/1072/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%99%D7%9D-%D7%91%D7%A1%D7%92%D7%A0%D7%95%D7%9F-%D7%94%D7%95%D7%95%D7%90%D7%99') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1224/993/יום-כיף-בתל-אביב-חוויה-לכל-החושים
+  if (String(req.originalUrl) === '/1224/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-%D7%97%D7%95%D7%95%D7%99%D7%94-%D7%9C%D7%9B%D7%9C-%D7%94%D7%97%D7%95%D7%A9%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1089/1069/יום-כיף-חוויות-בכרמל
+  if (String(req.originalUrl) === '/1089/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%97%D7%95%D7%95%D7%99%D7%95%D7%AA-%D7%91%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1009/993/יום-כיף-בספא
+  if (String(req.originalUrl) === '/1009/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%A1%D7%A4%D7%90') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1016/1008/ערב-גיבוש
+  if (String(req.originalUrl) === '/1016/1008/%D7%A2%D7%A8%D7%91-%D7%92%D7%99%D7%91%D7%95%D7%A9') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1216/993/יום-כיף-בדרום-ארץ-מדבר
+  if (String(req.originalUrl) === '/1216/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%93%D7%A8%D7%95%D7%9D-%D7%90%D7%A8%D7%A5-%D7%9E%D7%93%D7%91%D7%A8') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1333/1069/יום-כיף-במרכז
+  if (String(req.originalUrl) === '/1333/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%9E%D7%A8%D7%9B%D7%96') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1225/1008/יום-גיבוש-בירושלים-קרב-סכינים
+  if (String(req.originalUrl) === '/1225/1008/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-%D7%A7%D7%A8%D7%91-%D7%A1%D7%9B%D7%99%D7%A0%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/993/993/יום-כיף
   if (String(req.originalUrl) === '/993/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1002/993/יום-כיף-סובב-בכנרת
+  if (String(req.originalUrl) === '/1002/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%A1%D7%95%D7%91%D7%91-%D7%91%D7%9B%D7%A0%D7%A8%D7%AA') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1070/1069/יום-כיף-בצפון---בוקרים
+  if (String(req.originalUrl) === '/1070/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%A6%D7%A4%D7%95%D7%9F---%D7%91%D7%95%D7%A7%D7%A8%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1331/1069/יום-כיף-בכרמל
+  if (String(req.originalUrl) === '/1331/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1344/1069/יום-כיף-בדרום-קסם-המדבר
+  if (String(req.originalUrl) === '/1344/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%93%D7%A8%D7%95%D7%9D-%D7%A7%D7%A1%D7%9D-%D7%94%D7%9E%D7%93%D7%91%D7%A8') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1090/1069/יום-גיבוש-טיול-מיוחד-למצדה
+  if (String(req.originalUrl) === '/1090/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%98%D7%99%D7%95%D7%9C-%D7%9E%D7%99%D7%95%D7%97%D7%93-%D7%9C%D7%9E%D7%A6%D7%93%D7%94') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1003/993/יום-כיף-בים-המלח
+  if (String(req.originalUrl) === '/1003/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%99%D7%9D-%D7%94%D7%9E%D7%9C%D7%97') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1014/993/יום-כיף-בחורף
+  if (String(req.originalUrl) === '/1014/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%97%D7%95%D7%A8%D7%A3') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1049/993/יום-כיף-בקיסריה-
+  if (String(req.originalUrl) === '/1049/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%A7%D7%99%D7%A1%D7%A8%D7%99%D7%94-') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1087/1069/יום-כיף-משפחות-בים
+  if (String(req.originalUrl) === '/1087/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%9E%D7%A9%D7%A4%D7%97%D7%95%D7%AA-%D7%91%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1278/993/יום-כייף-בחרמון
+  if (String(req.originalUrl) === '/1278/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%99%D7%A3-%D7%91%D7%97%D7%A8%D7%9E%D7%95%D7%9F') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1326/1069/יום-גיבוש-בים
+  if (String(req.originalUrl) === '/1326/1069/%D7%99%D7%95%D7%9D-%D7%92%D7%99%D7%91%D7%95%D7%A9-%D7%91%D7%99%D7%9D') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1188/1069/יום-כיף-בחוף-דור
+  if (String(req.originalUrl) === '/1188/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%97%D7%95%D7%A3-%D7%93%D7%95%D7%A8') {
     return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
   }
   // http://www.oren-pro.com/1077/1069/יום-כיף-לעובדים
   if (String(req.originalUrl) === '/1077/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%9C%D7%A2%D7%95%D7%91%D7%93%D7%99%D7%9D') {
     return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
   }
+  //http://www.oren-pro.com/1078/1069/יום-כיף-טיול-בירושלים
+  //http://www.oren-pro.com/1356/1356/יום-כיף-בים-ב-210-ש
+  //http://www.oren-pro.com/1296/1296/יום-משפחות-בים
+
+
+
+
+
+
+  //http://www.oren-pro.com/1204/1204/אירוע חברה
+  if (String(req.originalUrl) === '/1204/1204/%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%97%D7%91%D7%A8%D7%94') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/event/210/130/אירוע_ערב_חברה
+  if (String(req.originalUrl) === '/event/210/130/%D7%90%D7%99%D7%A8%D7%95%D7%A2_%D7%A2%D7%A8%D7%91_%D7%97%D7%91%D7%A8%D7%94') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/gallery.asp?id=210&type=130&title=ערבי חברה
+
+
+
+
+
+
+  //http://www.oren-pro.com/1006/986/הפקות-פסטיבלים-הפקות-אירועי-חוצות
+  if (String(req.originalUrl) === '/1006/986/%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%A4%D7%A1%D7%98%D7%99%D7%91%D7%9C%D7%99%D7%9D-%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99-%D7%97%D7%95%D7%A6%D7%95%D7%AA') {
+    return res.redirect(301, '/פסטיבלים_ואירועי_חוצות');
+  }
+
+
+
+
+  //http://www.oren-pro.com/1349/1348/נופש-חברה---זמן-המדבר
+  if (String(req.originalUrl) === '/1349/1348/%D7%A0%D7%95%D7%A4%D7%A9-%D7%97%D7%91%D7%A8%D7%94---%D7%96%D7%9E%D7%9F-%D7%94%D7%9E%D7%93%D7%91%D7%A8') {
+    return res.redirect(301, '/נופש_מנהלים_במדבר/נופש_חברה/אירועי_חברה');
+  }
+
+
   // http://www.oren-pro.com/1348/1348/נופש-חברה
   if (String(req.originalUrl) === '/1348/1348/%D7%A0%D7%95%D7%A4%D7%A9-%D7%97%D7%91%D7%A8%D7%94') {
     return res.redirect(301, '/נופש_חברה/אירועי_חברה');
+  }
+  //http://www.oren-pro.com/1350/1348/נופש-חברה-מתחממים-בצפון
+  if (String(req.originalUrl) === '/1350/1348/%D7%A0%D7%95%D7%A4%D7%A9-%D7%97%D7%91%D7%A8%D7%94-%D7%9E%D7%AA%D7%97%D7%9E%D7%9E%D7%99%D7%9D-%D7%91%D7%A6%D7%A4%D7%95%D7%9F') {
+    return res.redirect(301, '/נופש_חברה/אירועי_חברה');
+  }
+
+
+
+
+  //http://www.oren-pro.com/1005/993/יום-כיף--טיול-בירושלים
+  if (String(req.originalUrl) === 'http://www.oren-pro.com/1005/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3--%D7%98%D7%99%D7%95%D7%9C-%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D') {
+    return res.redirect(301, 'יום_כיף_בירושלים/ימי_גיבוש_וכיף/אירועי_חברה');
   }
   // http://www.oren-pro.com/1204/1204/אירוע חברה
   if (String(req.originalUrl) === '/1204/1204/%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%97%D7%91%D7%A8%D7%94') {

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const HomePageEventsToolbar = () => (
     <div className="homepage__events__toolbar">
         <div className="homepage__events__toolbar__container">
-            <NavLink to="/עיצוב_אירועים" className="homepage__events__toolbar__item">
+            <NavLink to="/קצת_אחרת" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="design" src="/images/homepage/events/toolbar/events-toolbar-design.svg" alt="עיצוב אירועים" />
                 </div>
