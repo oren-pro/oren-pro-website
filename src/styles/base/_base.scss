@@ -107,6 +107,12 @@ button {
 
 button:focus {
     outline: 0;
+    outline: none;
+}
+
+*:focus {
+    outline: 0;
+    outline: none;
 }
 
 textarea {

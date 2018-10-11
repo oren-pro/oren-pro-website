@@ -23,10 +23,16 @@ $iconMarginBottom: 0.6rem;
     margin-bottom: $iconMarginBottom;
     margin-right: 0.5rem;
     cursor: pointer;
+    outline: 0;
+}
+
+.events__eventshare__phone:focus {
+    outline: 0;
 }
 
 .events__eventshare__phone:hover {
     background-image: url('/images/eventspage/events-sharestrip-phone-hover.svg');
+    outline: 0;
 }
 
 .events__eventshare__mail {
@@ -382,6 +388,11 @@ $eventsEventImageHeight: 14.2rem;
     padding-right: 1rem;
 }
 
+.events__events__findmore__box {
+    text-align: right;
+    padding-right: 1rem;
+}
+
 .events__events__oneline__more {
     margin: 0;
     padding: 0;
@@ -542,6 +553,18 @@ $eventsEventImageHeightMobile: 60vw;
 
 @media (max-width: $mobileMaxWidth) {
 
+    .events__eventshare__more__button__image {
+        width: 3rem;
+        padding-top: 1.8rem;
+    }
+
+    .events__eventshare__more__button__text {
+        font-size: 3rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 1.2rem;
+    }
+
     .events__eventshare__share{
         display: block;
         width: 100%;
@@ -572,6 +595,11 @@ $eventsEventImageHeightMobile: 60vw;
         width: 2.5rem;
         padding-top: 1.1rem;
         margin-left: 1rem;
+    }
+
+    .events__eventshare__button__findmore {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .event__sharestrip__box {
@@ -735,6 +763,12 @@ $eventsEventImageHeightMobile: 60vw;
     }
 
     .events__events__oneline__header__box {
+        text-align: center;
+        width: 100%;
+        padding-right: 0rem;
+    }
+
+    .events__events__findmore__box {
         text-align: center;
         width: 100%;
         padding-right: 0rem;

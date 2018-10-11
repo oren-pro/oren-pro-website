@@ -77,10 +77,10 @@ const EventsEvents = (props) => (
             })
         }
         { props.oneLine === true ? 
-                <div className="events__events__oneline__header__box">
+                <div className="events__events__findmore__box">
                     <button 
                         type='button'
-                        className="events__eventshare__button"
+                        className="events__eventshare__button events__eventshare__button__findmore"
                         data-name="greenArrow"
                         onMouseEnter={props.setIconRatioOn}
                         onMouseLeave={props.setIconRatioOut}
