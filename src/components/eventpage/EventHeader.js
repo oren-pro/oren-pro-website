@@ -106,8 +106,8 @@ export default class EventHeader extends React.Component {
                                 <h2 className="event__header Heebo-Regular">{this.props.eventName}</h2>
                         }
                         
-                        <div className="common__event__header__seperator__box__desktop desktop">
-                            <div className="common__event__header__seperator__desktop desktop"></div>
+                        <div className="common__event__header__seperator__box__desktop">
+                            <div className="common__event__header__seperator__desktop"></div>
                         </div>
                     </div>
                 </div>

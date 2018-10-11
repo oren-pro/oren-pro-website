@@ -45,6 +45,8 @@ import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import isEqual from 'lodash.isequal';
 import { stringReplace } from '../reusableFunctions/stringReplace';
+import ShareLink from 'react-facebook-share-link';
+import { WhatsappShareButton } from 'react-share';
 
 
 class EventPage extends React.Component {
@@ -1153,9 +1155,13 @@ class EventPage extends React.Component {
                         />
                         <div className="events__eventshare__share mobile">
                             <p className="events__eventshare__text Heebo-Regular" dir="rtl">אני חייב לשתף את זה!</p>
-                            <div className="events__eventshare__phone__mobile" />
-                            <div className="events__eventshare__mail__mobile" />
-                            <div className="events__eventshare__facebook__mobile" />
+                            <WhatsappShareButton className="events__eventshare__phone__mobile" title='אורן ורינת' separator=' ' url={this.state.currentURL} />
+                            <a href={`mailto:?subject="אורן ורינת הפקות"&body=${this.state.currentURL}`} target='_blank' className="events__eventshare__mail__mobile"> </a>
+                            <ShareLink link={this.state.currentURL}>
+                            {link => (
+                                <a href={link} target='_blank' className="events__eventshare__facebook__mobile"> </a>
+                            )}
+                            </ShareLink>
                         </div>
                         {this.state.currentItems.length>1 ?
                                 <EventsEvents
