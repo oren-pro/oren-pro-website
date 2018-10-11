@@ -22,7 +22,7 @@ const HomePageEventsToolbar = () => (
                 </div>
                 <p className="homepage__events__toolbar__text Heebo-Regular" dir="rtl">ימי גיבוש וכיף</p>
             </NavLink>
-            <NavLink to="/אירועי_vip" className="homepage__events__toolbar__item">
+            <NavLink to="/אירועי_חברה" className="homepage__events__toolbar__item">
                 <div className="homepage__events__toolbar__icon__box">
                     <img className="vip" src="/images/homepage/events/toolbar/events-toolbar-vip.svg" alt="אירועי vip" />
                 </div>

@@ -8,9 +8,6 @@
     width: 90rem;
 }
 
-//
-
-
 
 .homepage__pleased-box {
     display: inline-block;
@@ -702,10 +699,6 @@ input[type="email"]::-webkit-input-placeholder {
 .homepage__tell__add:active {
     background: green;
 }
-
-//
-
-
 
 
 .homepage__events__toolbar {
@@ -1416,10 +1409,10 @@ input[type="email"]::-webkit-input-placeholder {
         overflow: hidden;
         text-align: center;
         width: 75vw;
-        height: auto;
+        height: 7rem;
         color: $gray;
         font-size: 6.5vw;
-        line-height: 7vw;
+        line-height: 27vw;
         margin: 0;
         padding: 0;
         margin-top: 4vw;
@@ -1588,18 +1581,21 @@ $buttonPagination: 2.3rem;
 @media (max-width: 400px) {
     .homepage__tell__body__text textarea {
         line-height: 7.5vw;
+        height: 27rem;
     }
 }
 
 @media (max-width: 360px) {
     .homepage__tell__body__text textarea {
-        line-height: 7.6vw;
+        line-height: 7.5vw;
+        height: 27rem;
     }
 }
 
 @media (max-width: 320px) {
     .homepage__tell__body__text textarea {
         line-height: 8.3vw;
+        height: 27rem;
     }
     .homepage__event-item-box textarea { 
         position: relative;

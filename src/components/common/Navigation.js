@@ -25,7 +25,8 @@ class Navigation extends React.Component {
       fixed: 'none',
       isOpen: false,
       accessibilityIcon: 'accessibility',
-      eventsCategoriesReverse: []
+      eventsCategoriesReverse: [],
+      windowWidth: 0
     };
   }
 
@@ -84,10 +85,10 @@ class Navigation extends React.Component {
 
   componentDidMount = () => {
     //console.log($( window ).width());
-    let windowWidth = 1960;
-    if (typeof(window) !== "undefined") {
-      windowWidth = $( window ).width();
-    }
+    //let windowWidth = 0;
+    //if (typeof(window) !== "undefined") {
+      let windowWidth = $( window ).width();
+    //}
     this.setState({ 
         windowWidth
     });
@@ -111,7 +112,9 @@ class Navigation extends React.Component {
     const page = location.substring(location.lastIndexOf("/"), location.length);
     //console.log(page);
     if (page.length > 1 || this.props.carouselDone === true) {
-      //console.log("go to fixed top");
+      console.log("go to fixed top");
+      document.getElementById('hp_carousel_mobile').style.display = "none";
+      document.getElementById('hp_carousel_desktop').style.display = "none";
       this.fixedTop();
     } else {
       if (typeof(window) !== "undefined") {
@@ -220,26 +223,25 @@ class Navigation extends React.Component {
   }
 
   render() {
+    console.log(this.state.windowWidth);
     return (
       <div className="container-fluid">
 
         <div className="collapse__bg__loader" />
 
-        {
-          this.state.windowWidth < 769 ?
-            <div className='mobile' id="hp_carousel_mobile">
-              <button className="carousel__button" onClick={this.pageToTopM}> </button>
-              <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
-              <HomePageCarousel media='mobile' />
-            </div>
-          :
-            <div className='desktop' id="hp_carousel_desktop">
-              <button className="carousel__button" onClick={this.pageToTopD}> </button>
-              <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
-              <HomePageCarousel media='desktop' />
-            </div>
 
-        }
+              <div className='mobile' id="hp_carousel_mobile">
+                <button className="carousel__button" onClick={this.pageToTopM}> </button>
+                <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
+                <HomePageCarousel media='mobile' />
+              </div>
+
+              <div className='desktop' id="hp_carousel_desktop">
+                <button className="carousel__button" onClick={this.pageToTopD}> </button>
+                <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
+                <HomePageCarousel media='desktop' />
+              </div>
+
         
         
         <div id="fakeNav" className="fakeNav" />

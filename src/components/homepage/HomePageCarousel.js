@@ -45,7 +45,8 @@ class HomePageCarousel extends React.Component {
             desktopGalleryModalIsOpen: false,
             mobileGalleryModalIsOpen: false,
             desktopImages: this.props.desktopGallery,
-            mobileImages: this.props.mobileGallery
+            mobileImages: this.props.mobileGallery,
+            media: this.props.media
         }
     }
 
@@ -339,6 +340,13 @@ class HomePageCarousel extends React.Component {
     }
 
     render() {
+        console.log(this.props.media);
+        console.log(this.state.mobileImages);
+        console.log(this.state.desktopImages);
+        let currentItems = this.state.desktopImages;
+        if( this.state.media === 'mobile') {
+            currentItems = this.state.mobileImages;
+        }
         return (
           <div>
             
@@ -491,7 +499,7 @@ class HomePageCarousel extends React.Component {
                   keyboard={false}
                   ride='carousel'
                   interval='5000'
-                  items={this.props.media === 'mobile' ? this.state.mobileImages : this.state.desktopImages}
+                  items={currentItems}
                 />
               :
               null
