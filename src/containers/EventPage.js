@@ -122,9 +122,6 @@ class EventPage extends React.Component {
                         keyWords: ''
                     }
                 }
-                // this.setState({
-                //     seo: subcategory.seo
-                // });
             }
         });
         this.setState({
@@ -156,7 +153,6 @@ class EventPage extends React.Component {
         });
 
         const currentItems = [];
-        //console.log(this.state.subcategoryId);
         if ( this.state.subcategoryId === undefined || this.state.subcategoryId === '' ) {
             items.map((item, index) => {
                 currentItems.push(item);
@@ -348,9 +344,6 @@ class EventPage extends React.Component {
                     subcategoryName
                 });
 
-                //console.log(subcategoryName);
-                
-
                 const eventName = stringReplace(this.props.match.params.event, '_', ' ');
                 this.setState({
                     eventName,
@@ -358,7 +351,6 @@ class EventPage extends React.Component {
                 });
                 const categoryId = this.props.categoryId;
                 if (!this.props.eventsObject[this.props.categoryId]) {
-                    console.log('1');
                     this.props.startSetSubcategories(categoryId).then((subCategories)=> {
                         if(subCategories.length>1){
                             subCategories.sort((a, b) => {
@@ -418,6 +410,9 @@ class EventPage extends React.Component {
     }
 
     componentDidMount = () => {
+        this.setState({
+            currentURL: decodeURIComponent((window.location.href).replace(/\+/g,  " "))
+        });
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
         }

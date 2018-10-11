@@ -1,22 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import ShareLink from 'react-facebook-share-link';
-import {
-  FacebookShareButton,
-  GooglePlusShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  TelegramShareButton,
-  WhatsappShareButton,
-  PinterestShareButton,
-  VKShareButton,
-  OKShareButton,
-  RedditShareButton,
-  TumblrShareButton,
-  LivejournalShareButton,
-  ViberShareButton,
-  EmailShareButton,
-} from 'react-share';
+import { WhatsappShareButton } from 'react-share';
  
 
 
@@ -25,14 +10,14 @@ const EventShareStrip = (props) => (
     
     <div className="event__sharestrip__box">
         {
-        //console.log(props)
-    }
+        console.log(String(props.currentURL))
+        }
         <div className="common__intouch__seperator__box__desktop desktop">
             <div className="common__intouch__seperator__desktop desktop"></div>
         </div>
         <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
         <div className="events__eventshare__share desktop">
-            <WhatsappShareButton className="events__eventshare__phone" title='אורן ורינת' url={props.currentURL} />
+            <WhatsappShareButton className="events__eventshare__phone" title='אורן ורינת' separator=' ' url={props.currentURL} />
             <a href={`mailto:?subject="אורן ורינת הפקות"&body=${props.currentURL}`} target='_blank' className="events__eventshare__mail"> </a>
             <ShareLink link={props.currentURL}>
             {link => (
