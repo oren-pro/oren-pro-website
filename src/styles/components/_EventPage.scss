@@ -22,6 +22,7 @@ $iconMarginBottom: 0.6rem;
     margin-top: $iconMarginTop;
     margin-bottom: $iconMarginBottom;
     margin-right: 0.5rem;
+    cursor: pointer;
 }
 
 .events__eventshare__phone:hover {
@@ -80,7 +81,7 @@ $iconMarginBottom: 0.6rem;
     font-size: 1.45rem;
     margin-left: 0.4rem;
     margin-right: 0.4rem;
-    padding-top: 0.6rem;
+    padding-top: 0.9rem;
     padding-bottom: 0rem;
     color: $gray;
 }
