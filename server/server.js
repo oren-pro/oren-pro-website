@@ -401,69 +401,71 @@ admin.initializeApp({
 
 app.get('/sitemap.xml', function(req, res) {
     let urls = [];
-    var root_path = 'https://oren-pro-website.herokuapp.com/';
-    var db = admin.database();
-    var refCategories = db.ref('eventsCategories/');
-    var refSubcategories = db.ref('eventsSubcategories/');
-    var refEvents = db.ref('eventsItems/');
+    const root_path = 'https://oren-pro-website.herokuapp.com/';
+    const db = admin.database();
+    const refCategories = db.ref('eventsCategories/');
+    const refSubcategories = db.ref('eventsSubcategories/');
+    const refEvents = db.ref('eventsItems/');
+
     refCategories.once("value", function(snapshotCategories) {
-        if(snapshotCategories.val() !== null) {
-          const categories = snapshotCategories.val();
-          refSubcategories.once("value", function(snapshotSubcategories) {
-            if(snapshotSubcategories.val() !== null) {
-                const subcategories = snapshotSubcategories.val();
-                refEvents.once("value", function(snapshotEvents) {
-                if(snapshotEvents.val() !== null) {
-                    const events = snapshotEvents.val();
-                    for (var i in categories) {
-                      let categoryId = categories[i].id;
-                      let strCategory = categories[i].name;
-                      while (strCategory.indexOf(' ') > -1) {
-                          strCategory = strCategory.replace(' ' ,'_');
-                      }
-                      urls.push(strCategory);
-                      for (var j in subcategories) {
-                        if(subcategories[j].categories && subcategories[j].categories[categoryId]){
-                          let subcategoryId = subcategories[j].id;
-                          let strSubcategory = subcategories[j].name;
-                          while (strSubcategory.indexOf(' ') > -1) {
-                              strSubcategory = strSubcategory.replace(' ' ,'_');
-                          }
-                          urls.push(strCategory + '/' + strSubcategory);
-                          for (var k in events) {
-                            if(events[k].categories && events[k].categories[categoryId] && events[k].subcategories && events[k].subcategories[subcategoryId]){
-                              let event = events[k].name;
-                              while (event.indexOf(' ') > -1) {
-                                  event = event.replace(' ' ,'_');
-                              }
-                              urls.push(strCategory + '/' + strSubcategory + '/' + event);
-                            }
-                            k++;
-                          }
-                        }
-                        j++;
-                      }
-                      i++;
+
+        if (snapshotCategories.val() === null) return;
+          
+        const categories = snapshotCategories.val();
+        refSubcategories.once("value", function(snapshotSubcategories) {
+          if(snapshotSubcategories.val() !== null) {
+              const subcategories = snapshotSubcategories.val();
+              refEvents.once("value", function(snapshotEvents) {
+              if(snapshotEvents.val() !== null) {
+                  const events = snapshotEvents.val();
+                  for (var i in categories) {
+                    let categoryId = categories[i].id;
+                    let strCategory = categories[i].name;
+                    while (strCategory.indexOf(' ') > -1) {
+                        strCategory = strCategory.replace(' ' ,'_');
                     }
-                  var priority = 0.5;
-                  var freq = 'monthly';
-                  var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-                  for (var i in urls) {
-                      xml += '<url>';
-                      xml += '<loc>'+ root_path + urls[i] + '</loc>';
-                      xml += '<changefreq>'+ freq +'</changefreq>';
-                      xml += '<priority>'+ priority +'</priority>';
-                      xml += '</url>';
-                      i++;
+                    urls.push(strCategory);
+                    for (var j in subcategories) {
+                      if(subcategories[j].categories && subcategories[j].categories[categoryId]){
+                        let subcategoryId = subcategories[j].id;
+                        let strSubcategory = subcategories[j].name;
+                        while (strSubcategory.indexOf(' ') > -1) {
+                            strSubcategory = strSubcategory.replace(' ' ,'_');
+                        }
+                        urls.push(strCategory + '/' + strSubcategory);
+                        for (var k in events) {
+                          if(events[k].categories && events[k].categories[categoryId] && events[k].subcategories && events[k].subcategories[subcategoryId]){
+                            let event = events[k].name;
+                            while (event.indexOf(' ') > -1) {
+                                event = event.replace(' ' ,'_');
+                            }
+                            urls.push(strCategory + '/' + strSubcategory + '/' + event);
+                          }
+                          k++;
+                        }
+                      }
+                      j++;
+                    }
+                    i++;
                   }
-                  xml += '</urlset>';
-                  res.header('Content-Type', 'text/xml');
-                  res.send(xml);
+                var priority = 0.5;
+                var freq = 'monthly';
+                var xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                for (var i in urls) {
+                    xml += '<url>';
+                    xml += '<loc>'+ root_path + urls[i] + '</loc>';
+                    xml += '<changefreq>'+ freq +'</changefreq>';
+                    xml += '<priority>'+ priority +'</priority>';
+                    xml += '</url>';
+                    i++;
                 }
-              });
-            }
-          });
-        }
+                xml += '</urlset>';
+                res.header('Content-Type', 'text/xml');
+                res.send(xml);
+              }
+            });
+          }
+        });
     });   
 })
 
