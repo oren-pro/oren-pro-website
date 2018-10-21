@@ -11,9 +11,9 @@ export const getMobileRatio = (windowWidth) => {
     } else if (windowWidth >= 375 && windowWidth < 400) {
         ratio = 4.8;
         lineHeight = 14;
-    } else if (windowWidth >= 350 && windowWidth < 475) {
-        ratio = 4.7;
-        lineHeight = 13.4;
+    } else if (windowWidth >= 350 && windowWidth < 375) {
+        ratio = 4.5;
+        lineHeight = 13.5;
     } else if (windowWidth < 350) {
         ratio = 4.8;
         lineHeight = 13.8;
