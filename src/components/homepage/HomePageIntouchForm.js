@@ -66,7 +66,7 @@ export default class HomePageIntouchForm extends React.Component {
                             <img className="contact__modal__button__image__x" src="/images/eventspage/close.svg" alt="סגירה" />
                         </button> 
                     </div>
-                    <img className="contact__confirm__image desktop" src="/images/contact/contact-confirm.svg" alt="אישור" />
+                    <img className="contact__confirm__image" src="/images/contact/contact-confirm.svg" alt="אישור" />
                     <img className="contact__confirm__seperator" src="/images/contact/contact-confirm-seperator.png" alt="קו הפרדה" />
                     <h2 className="contact__confirm__header Heebo-Medium" dir="rtl">איזה כיף,</h2>
                     <h4 className="contact__confirm__text Heebo-Medium" dir="rtl">עשיתם צעד ראשון לאירוע מוצלח!<br />ההרשמה לניוזלטר עברה בהצלחה!</h4>

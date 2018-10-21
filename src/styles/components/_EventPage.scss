@@ -553,6 +553,10 @@ $eventsEventImageHeightMobile: 60vw;
 
 @media (max-width: $mobileMaxWidth) {
 
+    .event__header {
+        font-size: 3rem;
+    }
+
     .events__eventshare__more__button__image {
         width: 3rem;
         padding-top: 1.8rem;
@@ -705,9 +709,13 @@ $eventsEventImageHeightMobile: 60vw;
     }
 
     .event__text__box textarea {
-        font-size: 3rem;
+        font-size: 2.5rem;
         line-height: 2.7rem;
-        width: 92%;
+        width: 100%;
+    }
+
+    .rah-static {
+        width: 100% !important;
     }
 
     .events__eventshare__text {

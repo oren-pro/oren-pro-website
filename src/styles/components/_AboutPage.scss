@@ -251,6 +251,12 @@
 
 @media (max-width: $mobileMaxWidth) {
 
+    .about__content__header__border {
+        margin: 0;
+        padding: 0;
+        margin-top: -1rem;
+    }
+
     .about__gallery {
         width: 100%;
         margin: 0;

@@ -372,6 +372,15 @@
 
 
 @media (max-width: $mobileMaxWidth) {
+    .contact__confirm__image {
+        width: 45vw;
+        display: block;
+    }
+
+    .contact__modal__container {
+        width: 80vw;
+    }
+
     .contactpage__structure {
         padding-top: 3.4rem;
         margin-top: 0rem;
