@@ -84,10 +84,10 @@ const EventsEvents = (props) => (
                         data-name="greenArrow"
                         onMouseEnter={props.setIconRatioOn}
                         onMouseLeave={props.setIconRatioOut}
-                        onClick={props.navtoCategoryPage}
+                        onClick={props.navtoCategoryPageEvent}
                     >
-                        <img className="events__eventshare__more__button__image" src="/images/aboutpage/arrowBlack.svg" alt="גלו עוד" />
-                        <p className="events__eventshare__more__button__text Heebo-Regular">גלו עוד</p>
+                        <img data-subcategoryname={props.subcategoryName} className="events__eventshare__more__button__image" src="/images/aboutpage/arrowBlack.svg" alt="גלו עוד" />
+                        <p data-subcategoryname={props.subcategoryName} className="events__eventshare__more__button__text Heebo-Regular">גלו עוד</p>
                         
                     </button> 
                     <div className="common__intouch__seperator__box__desktop desktop">

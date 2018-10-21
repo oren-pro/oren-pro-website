@@ -371,7 +371,7 @@ $eventsEventImageHeight: 14.2rem;
 }
 
 .events__event__button__box:hover div {
-    top: 4.5rem;
+    _top: 4.5rem;
 }
 
 .events__event__button__image {
@@ -449,7 +449,7 @@ $eventsEventImageHeight: 14.2rem;
     font-family: $font;
     font-weight: $fontRegular;
     display: inline-block;
-    text-align: center;
+    text-align: right;
     color: $gray;
     font-size: 1.3rem;
     line-height: 1.6rem;

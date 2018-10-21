@@ -272,15 +272,32 @@ class EventPage extends React.Component {
                 }
                 const maxWidth = windowWidth/3*2;
                 const maxHeight = maxWidth/3*2;
-                ratioHeight = maxHeight/imageHeight;
-                ratioWidth = maxWidth/imageWidth;
-                if (imageWidth > imageHeight) {
+
+
+                // ratioHeight = maxHeight/imageHeight;
+                // ratioWidth = maxWidth/imageWidth;
+                // if (imageWidth > imageHeight) {
+                //     imageHeight = ratioWidth*imageHeight;
+                //     imageWidth = maxWidth;
+                // } else {
+                //     imageHeight = maxHeight;
+                //     imageWidth = ratioHeight*imageWidth;
+                // }
+
+                
+                if (imageWidth > 945) {
+                    ratioWidth = 945/imageWidth;
                     imageHeight = ratioWidth*imageHeight;
-                    imageWidth = maxWidth;
-                } else {
-                    imageHeight = maxHeight;
+                    imageWidth = ratioWidth*imageWidth;
+                }
+
+
+                if (imageHeight > 631) {
+                    ratioHeight = 631/imageHeight;
+                    imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 }
+
                 return slideGalleryImages.push({
                     publicId: image.publicId,
                     image: image,
@@ -546,7 +563,18 @@ class EventPage extends React.Component {
         } else {
             this.props.history.push(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
         }
-        
+    }
+
+    navtoCategoryPageEvent = (e) => {
+        const thetarget = e.target;
+        console.log(thetarget);
+        const subcategoryName = e.target.dataset.subcategoryname;
+        console.log(subcategoryName);
+        if (subcategoryName !== '' && subcategoryName !== undefined) {
+            this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        } else {
+            this.props.history.push(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        }
     }
 
     gotoNextEvent = () => {
@@ -789,17 +817,20 @@ class EventPage extends React.Component {
             let ratioWidth = 1;
             let ratioHeight = 1;
             
-            if (imageHeight < 800 && imageWidth < 1000) {
-                ratioHeight = 800/imageHeight;
-                ratioWidth = 1000/imageWidth;
-                if (ratioHeight > ratioWidth) {
-                    imageHeight = ratioHeight*imageHeight;
-                    imageWidth = ratioHeight*imageWidth;
-                } else {
-                    imageHeight = ratioWidth*imageHeight;
-                    imageWidth = ratioWidth*imageWidth;
-                }
+            if (imageHeight > 668) {
+                ratioHeight = 668/imageHeight;
+                imageHeight = ratioHeight*imageHeight;
+                imageWidth = ratioHeight*imageWidth;
             }
+            if (imageWidth > 1000) {
+                ratioWidth = 1000/imageWidth;
+                imageHeight = ratioWidth*imageHeight;
+                imageWidth = ratioWidth*imageWidth;
+            }
+            
+            console.log(image.id);
+            console.log(imageHeight);
+            console.log(imageWidth);
 
             return slideGalleryImages.push({
                 publicId: image.public_id,
@@ -1175,7 +1206,7 @@ class EventPage extends React.Component {
                                     setIconRatioOut={this.setIconRatioOut}
                                     onRollOver={this.onEventRollOver}
                                     uploadWidget={this.uploadWidget}
-                                    navtoCategoryPage={this.navtoCategoryPage}
+                                    navtoCategoryPageEvent={this.navtoCategoryPageEvent}
                                     oneLine={true}
                                 />
                             :

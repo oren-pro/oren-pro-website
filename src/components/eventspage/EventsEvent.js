@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import Button from 'react-bootstrap/lib/Button';
 import UploadImageButton from '../common/UploadImageButton';
 import { stringReplace } from '../../reusableFunctions/stringReplace';
-
+import $ from 'jquery';
 
 class EventsEvent extends React.Component {
     constructor(props) {
@@ -12,17 +12,37 @@ class EventsEvent extends React.Component {
 
         this.state = {
             hover: false,
-            order: 0
+            order: 0,
+            eventTop: 17.5
         }
     }
     onMouseEnter = () => {
         const hover = true;
-        this.setState(() => ({ hover }));
+        const textHeight = $(document.getElementById(this.props.id)).height();
+        let eventTop = 4.5;
+
+        console.log(this.props.id);
+        console.log(textHeight);
+        
+        if (textHeight === 90) {
+            eventTop = 3.3;
+        } else if (textHeight === 30) {
+            eventTop = 6.2;
+        }
+        console.log(eventTop);
+        this.setState(() => ({ 
+            hover,
+            eventTop
+        }));
     };
 
     onMouseLeave = () => {
         const hover = false;
-        this.setState(() => ({ hover }));
+        let eventTop = 17.5;
+        this.setState(() => ({ 
+            hover,
+            eventTop
+        }));
     };
 
     render() {
@@ -32,7 +52,13 @@ class EventsEvent extends React.Component {
         }
         //console.log(this.props);
         return (
-            <div data-id={this.props.id} hidden={(this.props.subcategories[this.props.subcategoryId] !== true && this.props.subcategoryId !== '') || (this.props.isAuthenticated !== true && this.props.visible !== true)} className={`events__event__box${ this.props.oneLine === true ? ' events__event__box--event' : ''}`} onMouseEnter={this.props.onRollOver} dir="rtl">
+            <div
+                data-id={this.props.id} 
+                hidden={(this.props.subcategories[this.props.subcategoryId] !== true && this.props.subcategoryId !== '') || (this.props.isAuthenticated !== true && this.props.visible !== true)} 
+                className={`events__event__box${ this.props.oneLine === true ? ' events__event__box--event' : ''}`} 
+                onMouseEnter={this.props.onRollOver} 
+                dir="rtl"
+            >
                 {   
                     this.props.isAuthenticated && this.props.subcategoryId !== '' ?
 
@@ -125,11 +151,12 @@ class EventsEvent extends React.Component {
                         
                     >
                         <button
+                            id="itemBox"
                             className="events__event__button"
                         >
                         </button>
-                        <div className="events__event__button__text__div">
-                            <p className="events__event__button__text  Heebo-Regula">{this.props.title}</p>
+                        <div style={{top: this.state.eventTop + 'rem'}} className="events__event__button__text__div">
+                            <p id={this.props.id} className="events__event__button__text  Heebo-Regula">{this.props.title}</p>
                             <img className="events__event__button__image" src="/images/contact/arrowWhite.svg" alt={this.props.title} />
                         </div>
                     </div>
