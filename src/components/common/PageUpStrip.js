@@ -4,6 +4,7 @@ if (typeof(window) !== "undefined") {
     //import TweenLite from 'gsap/TweenLite';
     //import scrollTo from 'gsap/ScrollToPlugin';
     const TweenLite = require('gsap/TweenLite');
+    const TweenMax = require('gsap/TweenMax');
     const scrollTo = require('gsap/ScrollToPlugin');
 }
 

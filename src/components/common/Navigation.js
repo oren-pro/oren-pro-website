@@ -17,7 +17,7 @@ import IconHoverGrow from './IconHoverGrow';
 import { stringReplace } from '../../reusableFunctions/stringReplace';
 
 
-//const TweenLite = require('gsap/TweenLite');
+
 //const scrollTo = require('gsap/ScrollToPlugin');
 
 const pageToTopD = () => {
@@ -28,7 +28,7 @@ const pageToTopD = () => {
 
 const pageToTopM = () => {
   if (typeof(window) !== "undefined") {
-    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
+    TweenMax.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
   }
 }
 
