@@ -40,8 +40,10 @@ class Navigation extends React.Component {
     document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
     document.getElementsByClassName("navbar-light")[1].style.top = 0;
     //if ( this.state.windowWidth < 769 ) {
+      document.getElementById('hp_carousel_mobile').style.opacity = 0;
       document.getElementById('hp_carousel_mobile').style.display = "none";
     //} else {
+      document.getElementById('hp_carousel_desktop').style.opacity = 0;
       document.getElementById('hp_carousel_desktop').style.display = "none";
     //}
     
