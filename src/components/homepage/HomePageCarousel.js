@@ -497,7 +497,7 @@ class HomePageCarousel extends React.Component {
                   pause={false}
                   controls={false}
                   keyboard={false}
-                  ride='carousel'
+                  ride={false}
                   interval='5000'
                   items={currentItems}
                 />
