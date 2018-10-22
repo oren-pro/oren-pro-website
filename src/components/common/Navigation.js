@@ -17,6 +17,21 @@ import IconHoverGrow from './IconHoverGrow';
 import { stringReplace } from '../../reusableFunctions/stringReplace';
 
 
+//const TweenLite = require('gsap/TweenLite');
+//const scrollTo = require('gsap/ScrollToPlugin');
+
+const pageToTopD = () => {
+  if (typeof(window) !== "undefined") {
+    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarD").offset().top+20}})
+  }
+}
+
+const pageToTopM = () => {
+  if (typeof(window) !== "undefined") {
+    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
+  }
+}
+
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
@@ -171,17 +186,7 @@ class Navigation extends React.Component {
     }
   }
 
-  pageToTopD = () => {
-    if (typeof(window) !== "undefined") {
-      TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarD").offset().top+20}})
-    }
-  }
-
-  pageToTopM = () => {
-    if (typeof(window) !== "undefined") {
-      TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
-    }
-  }
+  
 
   gotoFacebook = () => {
       if (typeof(window) !== "undefined") {
@@ -239,13 +244,13 @@ class Navigation extends React.Component {
               this.state.windowWidth < 769 ?
             
               <div className='mobile' id="hp_carousel_mobile">
-                <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
+                <button className="carousel__button mobile" onClick={pageToTopM}> </button>
                 <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
                 <HomePageCarousel className='mobile' media='mobile' />
               </div>
             :
               <div className='desktop' id="hp_carousel_desktop">
-                <button className="carousel__button desktop" onClick={this.pageToTopD}> </button>
+                <button className="carousel__button desktop" onClick={pageToTopD}> </button>
                 <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
                 <HomePageCarousel className='desktop' media='desktop' />
               </div>
