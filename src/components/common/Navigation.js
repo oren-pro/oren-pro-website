@@ -233,15 +233,15 @@ class Navigation extends React.Component {
 
 
               <div className='mobile' id="hp_carousel_mobile">
-                <button className="carousel__button" onClick={this.pageToTopM}> </button>
-                <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
-                <HomePageCarousel media='mobile' />
+                <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
+                <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
+                <HomePageCarousel className='mobile' media='mobile' />
               </div>
 
               <div className='desktop' id="hp_carousel_desktop">
-                <button className="carousel__button" onClick={this.pageToTopD}> </button>
-                <img className="carousel_logo" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
-                <HomePageCarousel media='desktop' />
+                <button className="carousel__button desktop" onClick={this.pageToTopD}> </button>
+                <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
+                <HomePageCarousel className='desktop' media='desktop' />
               </div>
 
         
