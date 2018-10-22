@@ -39,11 +39,11 @@ class Navigation extends React.Component {
   fixedTop = () => {
     document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
     document.getElementsByClassName("navbar-light")[1].style.top = 0;
-    if ( this.state.windowWidth < 769 ) {
+    //if ( this.state.windowWidth < 769 ) {
       document.getElementById('hp_carousel_mobile').style.display = "none";
-    } else {
+    //} else {
       document.getElementById('hp_carousel_desktop').style.display = "none";
-    }
+    //}
     
     
     document.getElementById('fakeNav').style.display = "block";
@@ -112,7 +112,7 @@ class Navigation extends React.Component {
     const page = location.substring(location.lastIndexOf("/"), location.length);
     //console.log(page);
     if (page.length > 1 || this.props.carouselDone === true) {
-      console.log("go to fixed top");
+      //console.log("go to fixed top");
       document.getElementById('hp_carousel_mobile').style.display = "none";
       document.getElementById('hp_carousel_desktop').style.display = "none";
       this.fixedTop();
@@ -204,7 +204,7 @@ class Navigation extends React.Component {
 
   toggleAccessibility = () => {
     //window.StartAccessibility();
-    console.log($('#enable-toolbar-content').css('transform'));
+    //console.log($('#enable-toolbar-content').css('transform'));
     if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)" || $('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 50)") {
       if (this.state.windowWidth < 768) {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
