@@ -206,11 +206,13 @@ class HomePage extends React.Component {
 
 
     handleScroll = () => {
-        this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
+        console.log('in handle scroll');
+        //this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
     }
 
 
     componentDidMount = () => {
+        console.log('home page did mount');
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
         }
