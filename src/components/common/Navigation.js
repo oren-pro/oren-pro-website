@@ -232,7 +232,7 @@ class Navigation extends React.Component {
 
               <div className='mobile' id="hp_carousel_mobile">
                 <button className="carousel__button" onClick={this.pageToTopM}> </button>
-                <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" />
+                <img className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
                 <HomePageCarousel media='mobile' />
               </div>
 
