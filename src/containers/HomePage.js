@@ -214,7 +214,7 @@ class HomePage extends React.Component {
     componentDidMount = () => {
         console.log('home page did mount');
         if (typeof(window) !== "undefined") {
-            window.addEventListener('scroll', this.handleScroll);
+            //window.addEventListener('scroll', this.handleScroll);
         }
 
         if (this.props.navigation.homepageCarouselDone === true) {
@@ -288,7 +288,7 @@ class HomePage extends React.Component {
 
     componentWillUnmount = () => {
         if (typeof(window) !== "undefined") {
-            window.removeEventListener('scroll', this.handleScroll);
+            //window.removeEventListener('scroll', this.handleScroll);
         }
     }
 
