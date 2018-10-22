@@ -28,7 +28,7 @@ const pageToTopD = () => {
 
 const pageToTopM = () => {
   if (typeof(window) !== "undefined") {
-    TweenMax.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
+    TweenMax.to(window, 1, {scrollTo:{y:$("#navbarM").offset().top+20}})
   }
 }
 
