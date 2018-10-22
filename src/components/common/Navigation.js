@@ -39,13 +39,13 @@ class Navigation extends React.Component {
   fixedTop = () => {
     document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
     document.getElementsByClassName("navbar-light")[1].style.top = 0;
-    //if ( this.state.windowWidth < 769 ) {
+    if ( this.state.windowWidth < 769 ) {
       document.getElementById('hp_carousel_mobile').style.opacity = 0;
       document.getElementById('hp_carousel_mobile').style.display = "none";
-    //} else {
+    } else {
       document.getElementById('hp_carousel_desktop').style.opacity = 0;
       document.getElementById('hp_carousel_desktop').style.display = "none";
-    //}
+    }
     
     
     document.getElementById('fakeNav').style.display = "block";
@@ -226,24 +226,30 @@ class Navigation extends React.Component {
 
   render() {
     console.log(this.state.windowWidth);
+    if(this.state.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
+      return null; // render null when app is not ready
+    }
     return (
+      
       <div className="container-fluid">
 
         <div className="collapse__bg__loader" />
 
-
+            {
+              this.state.windowWidth < 769 ?
+            
               <div className='mobile' id="hp_carousel_mobile">
                 <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
                 <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
                 <HomePageCarousel className='mobile' media='mobile' />
               </div>
-
+            :
               <div className='desktop' id="hp_carousel_desktop">
                 <button className="carousel__button desktop" onClick={this.pageToTopD}> </button>
                 <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
                 <HomePageCarousel className='desktop' media='desktop' />
               </div>
-
+            }
         
         
         <div id="fakeNav" className="fakeNav" />
