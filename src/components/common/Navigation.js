@@ -28,7 +28,7 @@ const pageToTopD = () => {
 
 const pageToTopM = () => {
   if (typeof(window) !== "undefined") {
-    TweenMax.to(window, 1, {scrollTo:{y:$("#navbarM").offset().top+20}})
+    TweenMax.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
   }
 }
 
@@ -55,7 +55,8 @@ class Navigation extends React.Component {
     document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
     document.getElementsByClassName("navbar-light")[1].style.top = 0;
     if ( this.state.windowWidth < 769 ) {
-      document.getElementById('hp_carousel_mobile').style.display = "none";
+      document.getElementById('hp_carousel_mobile').style.visibility = "hidden";
+      //document.getElementById('hp_carousel_mobile').style.display = "none";
     } else {
       document.getElementById('hp_carousel_desktop').style.display = "none";
     }
