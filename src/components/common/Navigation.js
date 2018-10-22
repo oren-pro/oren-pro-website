@@ -55,10 +55,8 @@ class Navigation extends React.Component {
     document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
     document.getElementsByClassName("navbar-light")[1].style.top = 0;
     if ( this.state.windowWidth < 769 ) {
-      document.getElementById('hp_carousel_mobile').style.opacity = 0;
       document.getElementById('hp_carousel_mobile').style.display = "none";
     } else {
-      document.getElementById('hp_carousel_desktop').style.opacity = 0;
       document.getElementById('hp_carousel_desktop').style.display = "none";
     }
     
@@ -72,9 +70,7 @@ class Navigation extends React.Component {
     this.setState({
         fixed: 'top'
     });
-    if (typeof(window) !== "undefined") {
-      window.scrollTo(0, -20);
-    }
+    
   }
 
   setIconChangeOn = (e) => {
@@ -130,8 +126,13 @@ class Navigation extends React.Component {
     //console.log(page);
     if (page.length > 1 || this.props.carouselDone === true) {
       //console.log("go to fixed top");
-      document.getElementById('hp_carousel_mobile').style.display = "none";
-      document.getElementById('hp_carousel_desktop').style.display = "none";
+      if ( this.state.windowWidth < 769 ) {
+        document.getElementById('hp_carousel_mobile').style.display = "none";
+      } else {
+        document.getElementById('hp_carousel_desktop').style.display = "none";
+      }
+      
+      
       this.fixedTop();
     } else {
       if (typeof(window) !== "undefined") {
