@@ -17,20 +17,30 @@ import IconHoverGrow from './IconHoverGrow';
 import { stringReplace } from '../../reusableFunctions/stringReplace';
 
 
-
-//const scrollTo = require('gsap/ScrollToPlugin');
-
 const pageToTopD = () => {
   if (typeof(window) !== "undefined") {
     TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarD").offset().top+20}})
   }
 }
 
+const myAutoKillFunction = () => {
+  console.log('myfunction');
+}
+
 const pageToTopM = () => {
   if (typeof(window) !== "undefined") {
-    TweenMax.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+80}})
+    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20, onAutoKill:myAutoKillFunction}})
+    // TweenLite.to($box, 2, {
+    //   x: 100,
+    //   ease: Power1.easeInOut,
+    //   delay: 2,
+    //   onComplete: myFunction,
+    //   onCompleteParams: [element, 'param2']
+    // });
   }
 }
+
+
 
 class Navigation extends React.Component {
   constructor(props) {
