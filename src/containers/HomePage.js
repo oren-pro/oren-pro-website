@@ -207,14 +207,14 @@ class HomePage extends React.Component {
 
     handleScroll = () => {
         console.log('in handle scroll');
-        //this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
+        this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
     }
 
 
     componentDidMount = () => {
         console.log('home page did mount');
         if (typeof(window) !== "undefined") {
-            //window.addEventListener('scroll', this.handleScroll);
+            window.addEventListener('scroll', this.handleScroll);
         }
 
         if (this.props.navigation.homepageCarouselDone === true) {
@@ -288,7 +288,7 @@ class HomePage extends React.Component {
 
     componentWillUnmount = () => {
         if (typeof(window) !== "undefined") {
-            //window.removeEventListener('scroll', this.handleScroll);
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 
