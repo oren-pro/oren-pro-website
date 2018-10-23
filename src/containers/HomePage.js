@@ -619,7 +619,7 @@ class HomePage extends React.Component {
                 </Modal>
 
 
-                <Navigation showPage={this.showPage} {...this.props} categories={this.props.eventsCategories}/>
+                <Navigation showPage={this.showPage} page='homepage' {...this.props} categories={this.props.eventsCategories}/>
 
                 <div hidden={this.state.pageHidden}>
                     <div className="homepage__structure">

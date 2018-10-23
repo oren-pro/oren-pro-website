@@ -52,18 +52,18 @@ class Navigation extends React.Component {
   }
 
   fixedTop = () => {
-    if ( this.state.windowWidth ) {
+    if ( this.props.windowWidth ) {
       document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
       document.getElementsByClassName("navbar-light")[1].style.top = 0;
       document.getElementById('fakeNav').style.display = "block";
     }
-    if ( this.state.windowWidth < 769 ) {
+    if ( this.props.windowWidth < 769 ) {
       document.getElementById('hp_carousel_mobile').style.position = "absolute";
       document.getElementById('hp_carousel_mobile').style.opacity = 0;
       document.getElementById('hp_carousel_mobile').style.zIndex = -1;
       window.scrollTo(0, 0);
     }
-    if ( this.state.windowWidth > 768 ) {
+    if ( this.props.windowWidth > 768 ) {
       document.getElementById('hp_carousel_desktop').style.display = "none";
       window.scrollTo(0, 0);
     }
@@ -105,47 +105,21 @@ class Navigation extends React.Component {
     }
 
   handleLoad = () => {
-    if (this.state.page === '/') {
+    if (this.props.page === 'homepage') {
       this.props.showPage();
     }
   }
 
   componentDidMount = () => {
     window.addEventListener('load', this.handleLoad);
-    //console.log($( window ).width());
-    //let windowWidth = 0;
-    //if (typeof(window) !== "undefined") {
-    let windowWidth = $( window ).width();
-    //let windowWidth = this.props.windowWidth;
-    //}
-    this.setState({ 
-        windowWidth
-    });
-    // Returns width of HTML document
-    //console.log($( document ).width());
 
-    //console.log("in component did mount check for fixed top");
     if(document.getElementById('enable-toolbar-trigger')) {
       document.getElementById('enable-toolbar-trigger').style.display = "none";
       document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
     }
     
-    
-    
-    //document.body.style.backgroundColor = "#fff";
-    let location = '/';
-    if (typeof(window) !== "undefined") {
-      location = window.location.href;
-    }
-    //console.log(location);
-    const page = location.substring(location.lastIndexOf("/"), location.length);
-    this.setState({
-      page
-    });
-    console.log(page);
-    if (page.length > 1 || this.props.carouselDone === true) {
-      console.log("go to fixed top");
-      console.log(this.state.windowWidth);
+    if (this.props.page !== 'homepage' || this.props.carouselDone === true) {
+      document.getElementById('fakeNav').style.display = "block";
       if ( this.props.windowWidth < 769 ) {
         document.getElementById('hp_carousel_mobile').style.display = "none";
       }
@@ -188,7 +162,7 @@ class Navigation extends React.Component {
       const location = window.location.href;
     }
     const page = location.substring(location.lastIndexOf("/"), location.length);
-    if (page === '/') {
+    if (this.props.page === 'homepage') {
       if (typeof(window) !== "undefined") {
         window.removeEventListener('scroll', this.handleScroll);
       }
@@ -246,10 +220,6 @@ class Navigation extends React.Component {
   }
 
   render() {
-    console.log(this.props.windowWidth);
-    if(this.props.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
-        return null; // render null when app is not ready
-    }
     return (
       
       <div className="container-fluid">
@@ -257,19 +227,21 @@ class Navigation extends React.Component {
         <div className="collapse__bg__loader" />
 
             {
-              this.props.windowWidth < 769 ?
-            
-              <div className='mobile' id="hp_carousel_mobile">
-                <button className="carousel__button mobile" onClick={pageToTopM}> </button>
-                <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
-                <HomePageCarousel className='mobile' media='mobile' />
-              </div>
-            :
-              <div className='desktop' id="hp_carousel_desktop">
-                <button className="carousel__button desktop" onClick={pageToTopD}> </button>
-                <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
-                <HomePageCarousel className='desktop' media='desktop' />
-              </div>
+              this.props.page === 'homepage' ?
+                this.props.windowWidth < 769 ?
+                  <div className='mobile' id="hp_carousel_mobile">
+                    <button className="carousel__button mobile" onClick={pageToTopM}> </button>
+                    <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
+                    <HomePageCarousel className='mobile' media='mobile' />
+                  </div>
+                :
+                  <div className='desktop' id="hp_carousel_desktop">
+                    <button className="carousel__button desktop" onClick={pageToTopD}> </button>
+                    <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
+                    <HomePageCarousel className='desktop' media='desktop' />
+                  </div>
+              :
+                null
             }
         
         
