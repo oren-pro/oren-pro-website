@@ -554,7 +554,7 @@ $eventsEventImageHeightMobile: 60vw;
 @media (max-width: $mobileMaxWidth) {
 
     .event__header {
-        font-size: 3rem;
+        font-size: $textHeaderEventMobileSize;
     }
 
     .events__eventshare__more__button__image {
@@ -709,8 +709,8 @@ $eventsEventImageHeightMobile: 60vw;
     }
 
     .event__text__box textarea {
-        font-size: $textSize;
-        line-height: $textLineHeight;
+        font-size: $textMobileSize;
+        line-height: $textMobileLineHeight;
         width: 100%;
         text-align: center;
     }

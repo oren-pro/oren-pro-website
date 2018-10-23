@@ -140,7 +140,7 @@ export default class AboutContentStrip extends React.Component {
                     
                 <div className="about__content__button__box">
                 {
-                    this.props.aboutpage[this.props.index].grow === true && <button
+                    this.props.item.footer === '' && this.props.aboutpage[this.props.index].grow === true && <button
                         className="about__content__button"
                         data-name="greenArrow"
                         onMouseEnter={this.props.setIconRatioOn}
