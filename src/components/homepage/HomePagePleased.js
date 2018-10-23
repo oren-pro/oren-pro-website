@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 export class HomePagePleased extends React.Component {
 
     render () {
-        console.log('pleased rendering');
         const { homepage, homepageOrigin, action, onChange, field } = this.props;
         const changedBorder = homepage.pleasedText !== homepageOrigin.pleasedText ? "edit__changed__bg" : "edit__bg";
         return (

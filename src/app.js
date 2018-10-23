@@ -28,22 +28,29 @@ import './styles/styles.scss';
 var firebase = require("firebase/app");
 require("firebase/auth");
 
+import $ from 'jquery';
+
 
 const store = configureStore();
 
-const jsx = (
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>
-);
+
 
 let hasRendered = false;
+let windowWidth = undefined;
 const renderApp = () => {
     if (!hasRendered) {
         if (typeof(window) !== "undefined") {
-            render(jsx, document.getElementById('app'));
+            windowWidth = $( window ).width();
+            if(windowWidth !== undefined) {
+                const jsx = (
+                    <Provider store={store}>
+                        <AppRouter windowWidth={windowWidth} />
+                    </Provider>
+                );
+                render(jsx, document.getElementById('app'));
+                hasRendered = true;
+            }
         }
-        hasRendered = true;
     }
 };
 

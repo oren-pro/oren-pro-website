@@ -37,7 +37,7 @@ export class HomePagePleasedMobile extends React.Component {
                             </div>
                         }
                         <div className="homepage__pleased__footer">
-                            <Route render={({ history}) => (
+                            <Route render={({ history }) => (
                                 <button 
                                     type='button'
                                     className="homepage__pleased__button"

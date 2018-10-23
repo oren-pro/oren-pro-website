@@ -23,20 +23,10 @@ const pageToTopD = () => {
   }
 }
 
-const myAutoKillFunction = () => {
-  console.log('myfunction');
-}
 
 const pageToTopM = () => {
   if (typeof(window) !== "undefined") {
-    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20, onAutoKill:myAutoKillFunction}})
-    // TweenLite.to($box, 2, {
-    //   x: 100,
-    //   ease: Power1.easeInOut,
-    //   delay: 2,
-    //   onComplete: myFunction,
-    //   onCompleteParams: [element, 'param2']
-    // });
+    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
   }
 }
 
@@ -51,7 +41,7 @@ class Navigation extends React.Component {
       isOpen: false,
       accessibilityIcon: 'accessibility',
       eventsCategoriesReverse: [],
-      windowWidth: 0
+      windowWidth: undefined
     };
   }
 
@@ -62,17 +52,24 @@ class Navigation extends React.Component {
   }
 
   fixedTop = () => {
-    document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
-    document.getElementsByClassName("navbar-light")[1].style.top = 0;
+    if ( this.state.windowWidth ) {
+      document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
+      document.getElementsByClassName("navbar-light")[1].style.top = 0;
+      document.getElementById('fakeNav').style.display = "block";
+    }
     if ( this.state.windowWidth < 769 ) {
       document.getElementById('hp_carousel_mobile').style.position = "absolute";
-      document.getElementById('hp_carousel_mobile').style.zIndex = '-1';
-    } else {
+      document.getElementById('hp_carousel_mobile').style.opacity = 0;
+      document.getElementById('hp_carousel_mobile').style.zIndex = -1;
+      window.scrollTo(0, 0);
+    }
+    if ( this.state.windowWidth > 768 ) {
       document.getElementById('hp_carousel_desktop').style.display = "none";
+      window.scrollTo(0, 0);
     }
     
     
-    document.getElementById('fakeNav').style.display = "block";
+    
     const homepageCarouselDone = true;
     this.props.setHomePageCarouselDone({
         homepageCarouselDone: homepageCarouselDone
@@ -107,11 +104,19 @@ class Navigation extends React.Component {
         }
     }
 
+  handleLoad = () => {
+    if (this.state.page === '/') {
+      this.props.showPage();
+    }
+  }
+
   componentDidMount = () => {
+    window.addEventListener('load', this.handleLoad);
     //console.log($( window ).width());
     //let windowWidth = 0;
     //if (typeof(window) !== "undefined") {
-      let windowWidth = $( window ).width();
+    let windowWidth = $( window ).width();
+    //let windowWidth = this.props.windowWidth;
     //}
     this.setState({ 
         windowWidth
@@ -134,16 +139,19 @@ class Navigation extends React.Component {
     }
     //console.log(location);
     const page = location.substring(location.lastIndexOf("/"), location.length);
-    //console.log(page);
+    this.setState({
+      page
+    });
+    console.log(page);
     if (page.length > 1 || this.props.carouselDone === true) {
-      //console.log("go to fixed top");
-      if ( this.state.windowWidth < 769 ) {
+      console.log("go to fixed top");
+      console.log(this.state.windowWidth);
+      if ( this.props.windowWidth < 769 ) {
         document.getElementById('hp_carousel_mobile').style.display = "none";
-      } else {
+      }
+      if ( this.props.windowWidth > 768 ) {
         document.getElementById('hp_carousel_desktop').style.display = "none";
       }
-      
-      
       this.fixedTop();
     } else {
       if (typeof(window) !== "undefined") {
@@ -222,29 +230,25 @@ class Navigation extends React.Component {
   }
 
   toggleAccessibility = () => {
-    //window.StartAccessibility();
-    //console.log($('#enable-toolbar-content').css('transform'));
     if ($('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 0)" || $('#enable-toolbar-content').css('transform') === "matrix(1, 0, 0, 1, 0, 50)") {
-      if (this.state.windowWidth < 768) {
+      if (this.props.windowWidth < 768) {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
       } else {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(100%)";
       }
-      
     } else {
-      if (this.state.windowWidth < 768) {
+      if (this.props.windowWidth < 768) {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(50px)";
       } else {
         document.getElementById('enable-toolbar-content').style.transform = "translateY(0)";
       }
-      
     }
   }
 
   render() {
-    console.log(this.state.windowWidth);
-    if(this.state.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
-      return null; // render null when app is not ready
+    console.log(this.props.windowWidth);
+    if(this.props.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
+        return null; // render null when app is not ready
     }
     return (
       
@@ -253,17 +257,17 @@ class Navigation extends React.Component {
         <div className="collapse__bg__loader" />
 
             {
-              this.state.windowWidth < 769 ?
+              this.props.windowWidth < 769 ?
             
               <div className='mobile' id="hp_carousel_mobile">
                 <button className="carousel__button mobile" onClick={pageToTopM}> </button>
-                <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
+                <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                 <HomePageCarousel className='mobile' media='mobile' />
               </div>
             :
               <div className='desktop' id="hp_carousel_desktop">
                 <button className="carousel__button desktop" onClick={pageToTopD}> </button>
-                <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" />
+                <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                 <HomePageCarousel className='desktop' media='desktop' />
               </div>
             }

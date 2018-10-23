@@ -32,13 +32,14 @@ export const history = typeof(window) !== "undefined" ? createHistory() : create
 
 class AppRouter extends React.Component {
     render() {
+        console.log(this.props.windowWidth);
         return (
             <Router history={history}>
                 <div>
                     {
                         this.props.events.categories ?
                         <Switch>
-                            <Route path="/" render={(props) => ( <HomePage {...props} />)} exact={true} />
+                            <Route path="/" render={(props) => ( <HomePage windowWidth={this.props.windowWidth} {...props} />)} exact={true} />
                             <Route path="/about" component={AboutPage} exact={true} />
                             <Route path="/contact" component={ContactPage} exact={true} />
                             {

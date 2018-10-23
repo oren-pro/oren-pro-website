@@ -30,6 +30,7 @@ import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import isEqual from 'lodash.isequal';
+import $ from 'jquery';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -57,7 +58,9 @@ class HomePage extends React.Component {
             tellOrigin: [],
             tell: [],
             localTell: [],
-            localTellOrigin: []
+            localTellOrigin: [],
+            windowWidth: undefined,
+            pageHidden: true
         }
     }
 
@@ -206,12 +209,18 @@ class HomePage extends React.Component {
 
 
     handleScroll = () => {
-        console.log('in handle scroll');
+        //console.log('in handle scroll');
         this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
     }
 
 
     componentDidMount = () => {
+        
+
+        let windowWidth = $( window ).width();
+        this.setState({ 
+            windowWidth
+        });
         console.log('home page did mount');
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
@@ -221,7 +230,8 @@ class HomePage extends React.Component {
             //console.log('setting');
             this.setState({
                 pageupImageClassName: 'pageup__image__absolute',
-                navigation: this.props.navigation
+                navigation: this.props.navigation,
+                pageHidden: false
             });
         } else {
             this.setState({
@@ -278,7 +288,6 @@ class HomePage extends React.Component {
         const tempTell = homepage.tell;
         const tell = [];
         Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
-        console.log(tell);
         this.setState({
             tell,
             tellOrigin: tell
@@ -341,17 +350,13 @@ class HomePage extends React.Component {
     }
 
     setLocalTell = (homepage) => {
-        //console.log(homepage.tell);
         const obj = homepage.tell;
         if ( obj ){
             var localTell = Object.keys(obj).map((key) => {
                 const keyedObj = {id: String(key), ...obj[key]};
                 return [keyedObj];
             });
-            console.log(localTell);
-            // localTell.sort((a, b) => {
-            //     return a.order > b.order ? 1 : -1;
-            // });
+
             this.setState({
                 localTell: localTell,
                 localTellOrigin: JSON.parse(JSON.stringify(localTell))
@@ -361,7 +366,6 @@ class HomePage extends React.Component {
 
     setTellIndex = (e) => {
         const tellIndex = e.target.dataset.index;
-        //console.log(tellIndex);
         this.setState(() => ({ tellIndex: tellIndex }));
     }
 
@@ -419,8 +423,6 @@ class HomePage extends React.Component {
 
 
     onDeleteTell = (e) => {
-         console.log(e.target.dataset.publicid);
-         console.log(e.target.dataset.id);
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicId = e.target.dataset.publicid;
@@ -444,28 +446,14 @@ class HomePage extends React.Component {
         })
         
         fbTell[id] = null;
-
-        // console.log(publicId);
-         console.log(tell);
-         console.log(fbTell);
         
-        
-        //this.props.startDeleteCostumer( fbTell, tell, publicId );
-        //const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         const homepage = this.state.homepage;
-        console.log(homepage.tell);
+
         homepage.tell = hpTell;
-        console.log(homepage.tell);
-        //console.log(fbTell);
-        
-        console.log(homepage);
 
         this.setState({
-            tell,
-            //homepage: JSON.parse(JSON.stringify(homepage))
+            tell
         });
-        
-        console.log(this.state.homepage);
 
         this.onUpdateHomePage();
     }
@@ -552,9 +540,20 @@ class HomePage extends React.Component {
         });
     }
 
+    showPage = () => {
+        this.setState({
+            pageHidden: false
+        });
+    }
+
                    
 
     render() {
+        console.log( this.props.windowWidth );
+        console.log(this.state.windowWidth);
+        if(this.state.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
+            return null; // render null when app is not ready
+        }
         return (
             <div className="container-fluid">
                 
@@ -620,168 +619,167 @@ class HomePage extends React.Component {
                 </Modal>
 
 
+                <Navigation showPage={this.showPage} {...this.props} categories={this.props.eventsCategories}/>
 
+                <div hidden={this.state.pageHidden}>
+                    <div className="homepage__structure">
+                        <div className="homepage__left">
 
-
-                
-                <Navigation {...this.props} categories={this.props.eventsCategories}/>
-                <div className="homepage__structure">
-                    <div className="homepage__left">
-
-                        { 
-                            this.props.isAuthenticated === true ? 
-                                <div className="about__edit__panel__box">
-                                    <div className="about__edit__panel">
-                                        <button className="backoffice_button" onClick={this.onUpdateHomePage}>
-                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.onToggleHomepageSeo}>
-                                            seo
-                                        </button>
+                            { 
+                                this.props.isAuthenticated === true ? 
+                                    <div className="about__edit__panel__box">
+                                        <div className="about__edit__panel">
+                                            <button className="backoffice_button" onClick={this.onUpdateHomePage}>
+                                                <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
+                                            </button>
+                                            <button className="backoffice_button" onClick={this.props.startLogout}>
+                                                <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
+                                            </button>
+                                            <button className="backoffice_button" onClick={this.onToggleHomepageSeo}>
+                                                seo
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            :
-                                null
-                        }
+                                :
+                                    null
+                            }
 
-                        <HomePagePleased
-                            {...this.props}
-                            field='pleasedText'
-                            action='setString'
-                            homepage={this.state.homepage}
-                            homepageOrigin={this.state.homepageOrigin}
-                            onChange={this.setData}
-                        />
-                        <HomePagePleasedMobile
-                            {...this.props}
-                            field='pleasedText'
-                            action='setString'
-                            homepage={this.state.homepage}
-                            homepageOrigin={this.state.homepageOrigin}
-                            onChange={this.setData}
-                        />
-                        <HomePageEvents 
-                            {...this.props}
-                            action='setString'
-                            name='events'
-                            homepage={this.state.homepage}
-                            homepageOrigin={this.state.homepageOrigin}
-                            onChange={this.setData}
-                            uploadWidget={this.uploadWidget}
-                            ratioGreenArrow={this.state.ratioGreenArrow}
+                            <HomePagePleased
+                                {...this.props}
+                                field='pleasedText'
+                                action='setString'
+                                homepage={this.state.homepage}
+                                homepageOrigin={this.state.homepageOrigin}
+                                onChange={this.setData}
+                            />
+                            <HomePagePleasedMobile
+                                {...this.props}
+                                field='pleasedText'
+                                action='setString'
+                                homepage={this.state.homepage}
+                                homepageOrigin={this.state.homepageOrigin}
+                                onChange={this.setData}
+                            />
+                            <HomePageEvents 
+                                {...this.props}
+                                action='setString'
+                                name='events'
+                                homepage={this.state.homepage}
+                                homepageOrigin={this.state.homepageOrigin}
+                                onChange={this.setData}
+                                uploadWidget={this.uploadWidget}
+                                ratioGreenArrow={this.state.ratioGreenArrow}
+                                setIconRatioOn={this.setIconRatioOn}
+                                setIconRatioOut={this.setIconRatioOut} 
+                            />
+                            <HomePageIntouch />
+                            <HomePageTell 
+                                {...this.props}
+                                action='setString'
+                                name='tell'
+                                homepage={this.state.homepage}
+                                homepageOrigin={this.state.homepageOrigin}
+                                tellIndex={this.state.tellIndex}
+                                tellOrigin={this.state.tellOrigin}
+                                tell={this.state.tell}
+                                localTellOrigin={this.state.localTellOrigin}
+                                localTell={this.state.localTell}
+                                uploadWidget={this.uploadWidget}
+                                setTellIndex={this.setTellIndex}
+                                onChange={this.setData}
+                                addNewTell={this.addNewTell}
+                                startEditTell={this.startEditTell}
+                            />
+
+
+                            { 
+                                this.props.isAuthenticated === true ? 
+                                    <div className="backoffice__edit__events__tabs__box" hidden={this.state.hideTellEditPanel}>
+                                        {
+                                            this.state.tell ?
+                                            this.state.tell.length > 0 ?
+                                                
+                                                this.state.tell.map((tell, index) => {
+                                                    return  <div className="backoffice__edit__events__tabs__in__box" key={"in"+tell.id} dir="rtl">
+                                                                <Button
+                                                                    id="btn-x"
+                                                                    data-id={tell.id}
+                                                                    data-order={tell.order}
+                                                                    data-publicid={tell.publicId}
+                                                                    data-index={tell.order}
+                                                                    data-showstatus={false}
+                                                                    className="backoffice__events__tabs__remove btn-danger"
+                                                                    onClick={this.onDeleteTell}
+                                                                >
+                                                                    X
+                                                                </Button>
+                                                                
+                                                                <div className="backoffice__events__tabs__order__box">
+                                                                    <input
+                                                                        id="number"
+                                                                        data-id={tell.id}
+                                                                        type="number"
+                                                                        value={tell.order}
+                                                                        data-index={index}
+                                                                        onChange={this.onTellOrderChange}
+                                                                        onKeyPress={this.onTellOrderKeyPress}
+                                                                        onBlur={this.onTellOrderBlur}
+                                                                    />
+                                                                </div>
+                                                                <div>
+                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.name}, </p>
+                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.position} </p>
+                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.company} | {tell.createdAt} </p>
+                                                                </div>
+                                                            </div>
+                                                })
+                                                
+                                            :
+                                                null
+                                            :
+                                                null
+                                        }
+                                        <div className="backoffice__events__tabs__update__box">
+                                            <Button className="backoffice__events__tabs__update btn-success" onClick={this.onUpdateHomePage}>עדכון</Button>
+                                        </div>
+                                    </div>
+                                :
+                                    null
+                            }
+
+
+
+
+
+
+
+
+
+
+
+                            <HomePageEventsToolbar />
+                        </div>
+                        <SocialMedia
+                            ratioFacebook={this.state.ratioFacebook}
+                            ratioInstagram={this.state.ratioInstagram}
+                            ratioMail={this.state.ratioMail}
+                            ratioPhone={this.state.ratioPhone}
                             setIconRatioOn={this.setIconRatioOn}
                             setIconRatioOut={this.setIconRatioOut} 
                         />
-                        <HomePageIntouch />
-                        <HomePageTell 
-                            {...this.props}
-                            action='setString'
-                            name='tell'
-                            homepage={this.state.homepage}
-                            homepageOrigin={this.state.homepageOrigin}
-                            tellIndex={this.state.tellIndex}
-                            tellOrigin={this.state.tellOrigin}
-                            tell={this.state.tell}
-                            localTellOrigin={this.state.localTellOrigin}
-                            localTell={this.state.localTell}
-                            uploadWidget={this.uploadWidget}
-                            setTellIndex={this.setTellIndex}
-                            onChange={this.setData}
-                            addNewTell={this.addNewTell}
-                            startEditTell={this.startEditTell}
-                        />
-
-
-                        { 
-                            this.props.isAuthenticated === true ? 
-                                <div className="backoffice__edit__events__tabs__box" hidden={this.state.hideTellEditPanel}>
-                                    {
-                                        this.state.tell ?
-                                        this.state.tell.length > 0 ?
-                                            
-                                            this.state.tell.map((tell, index) => {
-                                                return  <div className="backoffice__edit__events__tabs__in__box" key={"in"+tell.id} dir="rtl">
-                                                            <Button
-                                                                id="btn-x"
-                                                                data-id={tell.id}
-                                                                data-order={tell.order}
-                                                                data-publicid={tell.publicId}
-                                                                data-index={tell.order}
-                                                                data-showstatus={false}
-                                                                className="backoffice__events__tabs__remove btn-danger"
-                                                                onClick={this.onDeleteTell}
-                                                            >
-                                                                X
-                                                            </Button>
-                                                            
-                                                            <div className="backoffice__events__tabs__order__box">
-                                                                <input
-                                                                    id="number"
-                                                                    data-id={tell.id}
-                                                                    type="number"
-                                                                    value={tell.order}
-                                                                    data-index={index}
-                                                                    onChange={this.onTellOrderChange}
-                                                                    onKeyPress={this.onTellOrderKeyPress}
-                                                                    onBlur={this.onTellOrderBlur}
-                                                                />
-                                                            </div>
-                                                            <div>
-                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.name}, </p>
-                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.position} </p>
-                                                                <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.company} | {tell.createdAt} </p>
-                                                            </div>
-                                                        </div>
-                                            })
-                                            
-                                        :
-                                            null
-                                        :
-                                            null
-                                    }
-                                    <div className="backoffice__events__tabs__update__box">
-                                        <Button className="backoffice__events__tabs__update btn-success" onClick={this.onUpdateHomePage}>עדכון</Button>
-                                    </div>
-                                </div>
-                            :
-                                null
-                        }
-
-
-
-
-
-
-
-
-
-
-
-                        <HomePageEventsToolbar />
+                        
                     </div>
-                    <SocialMedia
-                        ratioFacebook={this.state.ratioFacebook}
-                        ratioInstagram={this.state.ratioInstagram}
-                        ratioMail={this.state.ratioMail}
-                        ratioPhone={this.state.ratioPhone}
-                        setIconRatioOn={this.setIconRatioOn}
-                        setIconRatioOut={this.setIconRatioOut} 
-                    />
                     
-                </div>
-                
-                <div hidden={this.state.pageupImageClassName === 'pageup__image'} className="pageup__image__fake desktop"> </div>
-                <PageUpStrip
-                    pageupImageClassName={this.state.pageupImageClassName}
-                />
-                <div id='fake_pageupstrip'> </div>
+                    <div hidden={this.state.pageupImageClassName === 'pageup__image'} className="pageup__image__fake desktop"> </div>
+                    <PageUpStrip
+                        pageupImageClassName={this.state.pageupImageClassName}
+                    />
+                    <div id='fake_pageupstrip'> </div>
 
-                <ContactStrip />
-                <CustomersStrip />
-                <Footer />
+                    <ContactStrip />
+                    <CustomersStrip />
+                    <Footer />
+                </div>
             </div>
         );
     }
