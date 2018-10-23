@@ -709,8 +709,8 @@ $eventsEventImageHeightMobile: 60vw;
     }
 
     .event__text__box textarea {
-        font-size: 2.5rem;
-        line-height: 2.7rem;
+        font-size: $textSize;
+        line-height: $textLineHeight;
         width: 100%;
         text-align: center;
     }

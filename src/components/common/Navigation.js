@@ -119,6 +119,8 @@ class Navigation extends React.Component {
     }
     
     if (this.props.page !== 'homepage' || this.props.carouselDone === true) {
+      document.getElementsByClassName("navbar-light")[1].style.position = "fixed";
+      document.getElementsByClassName("navbar-light")[1].style.top = 0;
       document.getElementById('fakeNav').style.display = "block";
       if ( this.props.windowWidth < 769 ) {
         document.getElementById('hp_carousel_mobile').style.display = "none";
