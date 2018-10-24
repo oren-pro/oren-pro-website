@@ -123,7 +123,9 @@ class Navigation extends React.Component {
       document.getElementsByClassName("navbar-light")[1].style.top = 0;
       document.getElementById('fakeNav').style.display = "block";
       if ( this.props.windowWidth < 769 ) {
-        document.getElementById('hp_carousel_mobile').style.display = "none";
+        document.getElementById('hp_carousel_mobile').style.position = "absolute";
+        document.getElementById('hp_carousel_mobile').style.opacity = 0;
+        document.getElementById('hp_carousel_mobile').style.zIndex = -1;
       }
       if ( this.props.windowWidth > 768 ) {
         document.getElementById('hp_carousel_desktop').style.display = "none";
@@ -249,7 +251,8 @@ class Navigation extends React.Component {
     document.getElementsByClassName("navbar-light")[1].style.top = '100vh';
     document.getElementById('fakeNav').style.display = "none";
     if ( this.props.windowWidth < 769 ) {
-      document.getElementById('hp_carousel_mobile').style.display = "block";
+      document.getElementById('hp_carousel_mobile').style.position = "relative";
+      document.getElementById('hp_carousel_mobile').style.opacity = 1;
     }
     if ( this.props.windowWidth > 768 ) {
       document.getElementById('hp_carousel_desktop').style.display = "block";
