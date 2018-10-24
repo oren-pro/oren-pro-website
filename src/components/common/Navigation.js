@@ -282,7 +282,7 @@ class Navigation extends React.Component {
                 <NavLink to="/about" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">נעים להכיר</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</NavLink>
+                <a href="https://oren-pro-website.herokuapp.com" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</a>
               </NavItem>
               <NavItem className="nav-item--accessibility">
                 <div
