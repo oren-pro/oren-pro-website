@@ -120,6 +120,7 @@ class AboutPage extends React.Component {
 
 
     componentDidMount = () => {
+        window.scrollTo(0, 0);
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
         }

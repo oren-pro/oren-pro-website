@@ -215,7 +215,7 @@ class HomePage extends React.Component {
 
 
     componentDidMount = () => {
-        
+        window.scrollTo(0, 0);
 
         let windowWidth = $( window ).width();
         this.setState({ 

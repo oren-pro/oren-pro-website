@@ -130,19 +130,32 @@ class Navigation extends React.Component {
       }
       this.fixedTop();
     } else {
+      console.log('in nav did mount');
       if (typeof(window) !== "undefined") {
         window.addEventListener('scroll', this.handleScroll);
       }
+      
     }
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps) => {
+    console.log('in nav did update');
+
+    console.log(this.props.carouselDone);
+    console.log(prevProps.carouselDone);
+
     if(this.state.eventsCategoriesReverse.length === 0 && this.props.eventsCategories.length > 0){
       this.setReverseCategories();
     }
+    // if(this.props.carouselDone !== prevProps.carouselDone){
+    //   this.showGallery();
+    // }
   }
 
+  
+
   componentWillMount = () => {
+    console.log('in nav will mount');
     if(this.state.eventsCategoriesReverse.length === 0 && this.props.eventsCategories.length > 0){
       this.setReverseCategories();
     }
@@ -221,6 +234,32 @@ class Navigation extends React.Component {
     }
   }
 
+  homepageClicked = () => {
+    console.log('in clicked');
+    const homepageCarouselDone = false;
+    this.props.setHomePageCarouselDone({
+        homepageCarouselDone: homepageCarouselDone
+    });
+    this.showGallery();
+  }
+
+  showGallery = () => {
+    console.log('in showGallery');
+    document.getElementsByClassName("navbar-light")[1].style.position = "absolute";
+    document.getElementsByClassName("navbar-light")[1].style.top = '100vh';
+    document.getElementById('fakeNav').style.display = "none";
+    if ( this.props.windowWidth < 769 ) {
+      document.getElementById('hp_carousel_mobile').style.display = "block";
+    }
+    if ( this.props.windowWidth > 768 ) {
+      document.getElementById('hp_carousel_desktop').style.display = "block";
+    }
+    this.setState({
+        fixed: 'none'
+    });
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       
@@ -282,7 +321,7 @@ class Navigation extends React.Component {
                 <NavLink to="/about" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">נעים להכיר</NavLink>
               </NavItem>
               <NavItem>
-                <a href="https://oren-pro-website.herokuapp.com" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</a>
+                <NavLink onClick={this.homepageClicked} exact to="/" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</NavLink>
               </NavItem>
               <NavItem className="nav-item--accessibility">
                 <div
@@ -380,7 +419,7 @@ class Navigation extends React.Component {
                 <NavLink to="/about" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">נעים להכיר</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink exact to="/" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</NavLink>
+                <NavLink onClick={this.homepageClicked} exact to="/" className="nav__link nav__link--padding-top" activeClassName="is-active nav__link--active">דף הבית</NavLink>
               </NavItem>
               
             </Nav>
