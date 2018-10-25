@@ -271,12 +271,12 @@
     }
 
     .fakeNav {
-        height: 17vw;
+        height: 20vw;
         display: block;
     }
 
     .nav-item--accessibility {
-        padding-top: 1.8rem;
+        padding-top: 2.8rem;
     }
 
     .nav__link--accessibility {
@@ -296,7 +296,7 @@
         background-image: url('/images/navigation/nav_bg_mobile.png');
         //////////////////////////////////////////////////////////////////////
         background-size: cover;
-        height: 7.5rem;
+        height: 9rem;
     }
 
     .navbar__header__mobile {
@@ -315,7 +315,7 @@
 
     .nav__logo {
         margin-top: 0.5rem;
-        width: 10.2rem;
+        width: 12rem;
     }
 
     .nav-item {
@@ -405,8 +405,8 @@
 
     .navbar-light .navbar-toggler-icon {  
         background-image: url('/images/navigation/nav_collapse.png');
-        width: 5rem;
-        height: 5rem;
+        width: 6rem;
+        height: 6rem;
     }
 
     .navbar-light .navbar-toggler {
