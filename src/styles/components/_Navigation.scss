@@ -241,20 +241,18 @@
 @media (max-width: $mobileMaxWidth) {
 
     .carousel__text {
-        position: absolute;
-        background: none;
-        border: none;
-        color: $white;
-        font-family: $font;
-        font-weight: $fontRegular;
         font-size: 2.8rem;
-        letter-spacing: -0.1px;
-        text-align: center;
-        z-index: 10003;
-        width: 30%;
-        height: 3rem;
-        top: 90%;
+        top: 91%;
         left: 34%;
+    }
+
+    @media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 667px) { 
+    /* STYLES GO HERE */
+        .carousel__text {
+            top: 90%;
+        }
     }
 
     .carousel_logo {
