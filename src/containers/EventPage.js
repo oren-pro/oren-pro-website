@@ -442,6 +442,8 @@ class EventPage extends React.Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (this.props !== prevProps) {
+            console.log('scrolling to 0');
+            window.scrollTo(0, 0);
             this.setData();
         }
     }

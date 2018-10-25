@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "mosh",
   "license": "MIT",
+  "engines": {
+    "node": "8.11.4"
+  },
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
