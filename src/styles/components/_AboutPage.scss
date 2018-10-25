@@ -254,7 +254,7 @@
     .about__content__header__border {
         margin: 0;
         padding: 0;
-        margin-top: -1rem;
+        margin-top: 0;
     }
 
     .about__gallery {
@@ -287,11 +287,11 @@
 
     .about__topstrip__text {
         color: $gray;
-        font-size: 4.5rem;
+        font-size: 3.5rem;
         position: relative;
         display: block;
-        margin-top: -0.5rem;
-        margin-left: -2rem;
+        margin-top: 1rem;
+        margin-left: -4rem;
     }
 
     .about__topstrip__bg {

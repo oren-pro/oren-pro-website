@@ -553,6 +553,11 @@ $eventsEventImageHeightMobile: 60vw;
 
 @media (max-width: $mobileMaxWidth) {
 
+
+    .event__header__input {
+        font-size: 3.3rem;
+    }
+
     .event__header {
         font-size: $textHeaderEventMobileSize;
     }
