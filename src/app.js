@@ -38,6 +38,7 @@ const store = configureStore();
 let hasRendered = false;
 let windowWidth = undefined;
 const renderApp = () => {
+    console.log('in startSetCostumers');
     if (!hasRendered) {
         if (typeof(window) !== "undefined") {
             windowWidth = $( window ).width();
@@ -66,9 +67,13 @@ if (typeof(window) !== "undefined") {
 
 
 store.dispatch(startSetCategories()).then(() => {
+    console.log('in startSetCategories');
     store.dispatch(startSetDesktopGallery()).then(() => {
+        console.log('in startSetDesktopGallery');
         store.dispatch(startSetMobileGallery()).then(() => {
+            console.log('in startSetMobileGallery');
             store.dispatch(startSetCostumers()).then(() => {
+                console.log('in startSetCostumers');
                 renderApp();
             });
         });

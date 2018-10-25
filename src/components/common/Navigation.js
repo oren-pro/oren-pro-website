@@ -24,11 +24,7 @@ const pageToTopD = () => {
 }
 
 
-const pageToTopM = () => {
-  if (typeof(window) !== "undefined") {
-    TweenLite.to(window, 0.7, {scrollTo:{y:$("#navbarM").offset().top+20}})
-  }
-}
+
 
 
 
@@ -49,6 +45,15 @@ class Navigation extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  pageToTopM = () => {
+    console.log('in pageToTopM');
+    console.log(Number($("#navbarM").offset().top)+Number(20));
+    //if (typeof(window) !== "undefined") {
+      //TweenLite.to(window, 0.7, {scrollTo:{y:Number($("#navbarM").offset().top)+Number(20)}})
+      window.scrollTo(0, Number($("#navbarM").offset().top)+Number(20));
+    //}
   }
 
   fixedTop = () => {
@@ -274,7 +279,7 @@ class Navigation extends React.Component {
               this.props.page === 'homepage' ?
                 this.props.windowWidth < 769 ?
                   <div className='mobile' id="hp_carousel_mobile">
-                    <button className="carousel__button mobile" onClick={pageToTopM}> </button>
+                    <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
                     <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='mobile' media='mobile' />
                   </div>
