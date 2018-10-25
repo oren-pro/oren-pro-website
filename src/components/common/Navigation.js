@@ -280,12 +280,14 @@ class Navigation extends React.Component {
                 this.props.windowWidth < 769 ?
                   <div className='mobile' id="hp_carousel_mobile">
                     <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
+                    <div className="carousel__text mobile">גלול מטה</div>
                     <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='mobile' media='mobile' />
                   </div>
                 :
                   <div className='desktop' id="hp_carousel_desktop">
                     <button className="carousel__button desktop" onClick={pageToTopD}> </button>
+                    <div className="carousel__text desktop">גלול מטה</div>
                     <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='desktop' media='desktop' />
                   </div>

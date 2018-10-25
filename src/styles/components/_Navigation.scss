@@ -83,6 +83,23 @@
     left: 40%;
 }
 
+.carousel__text {
+    position: absolute;
+    background: none;
+    border: none;
+    color: $white;
+    font-family: $font;
+    font-weight: $fontRegular;
+    font-size: 2.6rem;
+    letter-spacing: -0.1px;
+    text-align: center;
+    z-index: 10003;
+    width: 30%;
+    height: 3rem;
+    top: 91.5%;
+    left: 34.6%;
+}
+
 
 
 .enable-button-close{
@@ -222,6 +239,23 @@
 
 
 @media (max-width: $mobileMaxWidth) {
+
+    .carousel__text {
+        position: absolute;
+        background: none;
+        border: none;
+        color: $white;
+        font-family: $font;
+        font-weight: $fontRegular;
+        font-size: 2.8rem;
+        letter-spacing: -0.1px;
+        text-align: center;
+        z-index: 10003;
+        width: 30%;
+        height: 3rem;
+        top: 91.5%;
+        left: 34%;
+    }
 
     .carousel_logo {
         width: 36%;
