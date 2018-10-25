@@ -429,6 +429,7 @@ class EventPage extends React.Component {
     }
 
     componentDidMount = () => {
+        console.log('scrolling to 0');
         window.scrollTo(0, 0);
         this.setState({
             currentURL: decodeURIComponent((window.location.href).replace(/\+/g,  " "))
