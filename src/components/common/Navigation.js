@@ -377,7 +377,7 @@ class Navigation extends React.Component {
               >
                   <img className="nav__link__phone__mobile" src="/images/navigation/phone_mobile.svg" alt="טלפון" />
               </button>
-              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" alt="אורן ורינת הפקות - לוגו" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" alt="אורן ורינת הפקות - לוגו" /></NavbarBrand>
               <NavbarToggler className="navbar__toggler ml-auto" onClick={this.toggle} />
             </div>
           </div>
