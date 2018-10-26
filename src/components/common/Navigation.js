@@ -281,7 +281,7 @@ class Navigation extends React.Component {
                   <div className='mobile' id="hp_carousel_mobile">
                     <button className="carousel__button mobile" onClick={this.pageToTopM}> </button>
                     
-                    <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.png" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
+                    <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='mobile' media='mobile' />
                   </div>
                 :
@@ -377,7 +377,7 @@ class Navigation extends React.Component {
               >
                   <img className="nav__link__phone__mobile" src="/images/navigation/phone_mobile.svg" alt="טלפון" />
               </button>
-              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.png" alt="אורן ורינת הפקות - לוגו" /></NavbarBrand>
+              <NavbarBrand className="navbar__brand" href="/"><img className="nav__logo" src="/images/navigation/nav_logo.svg" alt="אורן ורינת הפקות - לוגו" /></NavbarBrand>
               <NavbarToggler className="navbar__toggler ml-auto" onClick={this.toggle} />
             </div>
           </div>
