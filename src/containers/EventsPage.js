@@ -988,9 +988,13 @@ class EventsPage extends React.Component {
                             this.state.allSubCategories.map((allSubcategory, index) => {
                                 if(subcategory.id === allSubcategory.id) {
                                     if(allSubcategory.id !== subcategoryId) {
-                                        if (allSubcategory.categories[categoryId] === true) {
-                                            eventExists = true;
+                                        console.log(allSubcategory);
+                                        if (allSubcategory.categories) {
+                                            if (allSubcategory.categories[categoryId] === true) {
+                                                eventExists = true;
+                                            }
                                         }
+                                            
                                     }
                                 }
                             })
