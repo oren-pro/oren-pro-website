@@ -23,13 +23,23 @@ if (typeof(window) !== "undefined") {
     //import 'normalize.css/normalize.css';
     require("normalize.css/normalize.css");
 }
-import './styles/styles.scss';
+
 //import { firebase } from './firebase/firebase';
 var firebase = require("firebase/app");
 require("firebase/auth");
 
 import $ from 'jquery';
 
+
+var WebFont = require('webfontloader');
+ 
+WebFont.load({
+google: {
+    families: ['Heebo:400,500,700&amp;subset=hebrew']
+}
+});
+
+import './styles/styles.scss';
 
 const store = configureStore();
 
