@@ -1156,7 +1156,7 @@ input[type="email"]::-webkit-input-placeholder {
 
     .homepage__event-item-box textarea { 
         position: relative;
-        height: 24vw;
+        height: 25vw;
         width: 32rem;
         font-size: $textMobileSize;
         line-height: $textMobileLineHeight;
@@ -1168,7 +1168,7 @@ input[type="email"]::-webkit-input-placeholder {
     .homepage__event-item__text {
         position: relative;
         top: -0.8rem;
-        height: 17.2vh;
+        height: 17vh;
         padding-top: 0;
         padding-left: 0.9rem;
         padding-right: 0.9rem;
@@ -1606,20 +1606,23 @@ $buttonPagination: 2.3rem;
 @media only screen 
 and (min-device-width : 375px) 
 and (max-device-width : 667px) {
-    .homepage__pleased__button__image {
-        padding-top: 0rem;
-    }
-    .homepage__event-item__text {
-        height: 17vh;
+    .homepage__event-item-box textarea { 
+        height: 24vw;
     }
     .homepage__event-item__button__image {
         padding-top: 2vw;
+    }
+    .homepage__event-item__text {
+        height: 17vh;
     }
 }
 
 @media only screen 
 and (min-device-width : 414px) 
-and (max-device-width : 736px) { 
+and (max-device-width : 736px) {
+    .homepage__event-item-box textarea { 
+        height: 24vw;
+    }
     .homepage__event-item__button__image {
         padding-top: 2vw;
     }
@@ -1632,6 +1635,9 @@ and (max-device-width : 736px) {
 and (min-device-width : 375px) 
 and (max-device-width : 812px)
 and (-webkit-device-pixel-ratio : 3) {
+    .homepage__event-item-box textarea { 
+        height: 24vw;
+    }
     .homepage__event-item__button__image {
         padding-top: 2vw;
     }
