@@ -630,3 +630,29 @@ $slideCrouselControlsTransitionStyle: ease-out;
         right: 3rem;
     }
 }
+
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+    .events__text__more__button__image {
+        padding-top: 1.4rem;
+    }
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) { 
+    .events__text__more__button__image {
+        padding-top: 1.4rem;
+    }
+}
+
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3) {
+    .events__text__more__button__image {
+        padding-top: 1.4rem;
+    }
+}
