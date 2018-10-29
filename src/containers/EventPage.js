@@ -285,8 +285,8 @@ class EventPage extends React.Component {
                 // }
 
                 
-                if (imageWidth > 945) {
-                    ratioWidth = 945/imageWidth;
+                if (imageWidth > 900) {
+                    ratioWidth = 900/imageWidth;
                     imageHeight = ratioWidth*imageHeight;
                     imageWidth = ratioWidth*imageWidth;
                 }
@@ -519,9 +519,20 @@ class EventPage extends React.Component {
                         images.map((image) => {
                             let imageWidth = image.imageWidth;
                             let imageHeight = image.imageHeight;
-                            const ratio = 600/imageHeight;
-                            imageWidth = ratio*imageWidth;
-                            imageHeight = ratio*imageHeight;
+                            let ratioWidth = 1;
+                            let ratioHeight = 1;
+                            if (imageWidth > 900) {
+                                ratioWidth = 900/imageWidth;
+                                imageHeight = ratioWidth*imageHeight;
+                                imageWidth = ratioWidth*imageWidth;
+                            }
+
+
+                            if (imageHeight > 631) {
+                                ratioHeight = 631/imageHeight;
+                                imageHeight = ratioHeight*imageHeight;
+                                imageWidth = ratioHeight*imageWidth;
+                            }
                             return slideGalleryImages.push({
                                 publicId: image.public_id,
                                 image: image,
@@ -820,16 +831,17 @@ class EventPage extends React.Component {
             let imageHeight = image.imageHeight;
             let ratioWidth = 1;
             let ratioHeight = 1;
-            
-            if (imageHeight > 668) {
-                ratioHeight = 668/imageHeight;
-                imageHeight = ratioHeight*imageHeight;
-                imageWidth = ratioHeight*imageWidth;
-            }
-            if (imageWidth > 1000) {
-                ratioWidth = 1000/imageWidth;
+            if (imageWidth > 900) {
+                ratioWidth = 900/imageWidth;
                 imageHeight = ratioWidth*imageHeight;
                 imageWidth = ratioWidth*imageWidth;
+            }
+
+
+            if (imageHeight > 631) {
+                ratioHeight = 631/imageHeight;
+                imageHeight = ratioHeight*imageHeight;
+                imageWidth = ratioHeight*imageWidth;
             }
             
             console.log(image.id);
