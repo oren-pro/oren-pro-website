@@ -303,6 +303,9 @@
     border: none;
     background: none;
     width: auto;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
     height: auto;
 }
 
@@ -577,9 +580,9 @@ $slideCrouselControlsTransitionStyle: ease-out;
 //  bootstrap overide
 @media (min-width: 300px) {
     .modal-dialog {
-        max-width: 67vw;
-        height: 44vw;
-        margin: 2.5rem auto;
+        max-width: 100vw;
+        height: 100vh;
+        margin: 15vh auto;
         border: none;
         background: none;
         text-align: center;
