@@ -845,13 +845,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
 //******    end ssr --- SEO     ******//
 
 
-app.get('*.html', function (request, response, next) {
-  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-  }
-    next();
-});
+
 
 app.get('*.js', function (request, response, next) {
   if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
@@ -929,26 +923,26 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
 
 
 
-// var minify = require('html-minifier').minify;
-// var result = minify(path.join(publicPath, 'index.html'), {
-//   removeAttributeQuotes: true,
-//   collapseWhitespace: true,
-//   conservativeCollapse: true,
-//   minifyCSS: true,
-//   minifyJS: true,
-//   removeScriptTypeAttributes: true,
-//   removeStyleLinkTypeAttributes: true,
-//   removeOptionalTags: true,
-//   removeRedundantAttributes: true,
-//   caseSensitive: true,
-//   collapseBooleanAttributes: true,
-//   collapseInlineTagWhitespace: true,
-//   decodeEntities: true,
-//   minifyURLs: true
-// });
+var minify = require('html-minifier').minify;
+var result = minify(path.join(publicPath, 'index.html'), {
+  removeAttributeQuotes: true,
+  collapseWhitespace: true,
+  conservativeCollapse: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true,
+  caseSensitive: true,
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  decodeEntities: true,
+  minifyURLs: true
+});
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
+    res.sendFile(path.join(publicPath, result));
 });
 
 app.listen(port, () => {
