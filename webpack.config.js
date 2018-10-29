@@ -35,7 +35,7 @@ module.exports = (env) => {
         loaders:[ 
             {
             test: /\.(gif|eot|woff|woff2|ttf|svg)$/,
-            loaders: [
+            loader: [
                 'url-loader'
             ]
             }
