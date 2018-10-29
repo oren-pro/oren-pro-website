@@ -30,13 +30,23 @@ module.exports = (env) => {
                 loader: 'babel-loader',
                 test: /\.js$/,
                 exclude: /node_modules/
-            },
+            }
+        },
+        Loaders:[ 
+            {
+            test: /\.(gif|eot|woff|woff2|ttf|svg)$/,
+            loaders: [
+                'url-loader'
+            ]
+            }
+        ],
         plugins: [
             new CompressionPlugin({
                 test: /\.(js|css)$/,
                 algorithm: 'gzip',
                 //deleteOriginalAssets: true
             }),
+
             new webpack.DefinePlugin({
                 'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
                 'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
