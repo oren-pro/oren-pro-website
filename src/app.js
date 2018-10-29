@@ -31,13 +31,13 @@ require("firebase/auth");
 import $ from 'jquery';
 
 
-var WebFont = require('webfontloader');
+// var WebFont = require('webfontloader');
  
-WebFont.load({
-google: {
-    families: ['Heebo:400,500,700&amp;subset=hebrew']
-}
-});
+// WebFont.load({
+// google: {
+//     families: ['Heebo:400,500,700&amp;subset=hebrew']
+// }
+// });
 
 import './styles/styles.scss';
 
