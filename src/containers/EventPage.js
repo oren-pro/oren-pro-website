@@ -292,8 +292,8 @@ class EventPage extends React.Component {
                 }
 
 
-                if (imageHeight > 631) {
-                    ratioHeight = 631/imageHeight;
+                if (imageHeight > 600) {
+                    ratioHeight = 600/imageHeight;
                     imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 }
@@ -528,8 +528,8 @@ class EventPage extends React.Component {
                             }
 
 
-                            if (imageHeight > 631) {
-                                ratioHeight = 631/imageHeight;
+                            if (imageHeight > 600) {
+                                ratioHeight = 600/imageHeight;
                                 imageHeight = ratioHeight*imageHeight;
                                 imageWidth = ratioHeight*imageWidth;
                             }
@@ -838,8 +838,8 @@ class EventPage extends React.Component {
             }
 
 
-            if (imageHeight > 631) {
-                ratioHeight = 631/imageHeight;
+            if (imageHeight > 600) {
+                ratioHeight = 600/imageHeight;
                 imageHeight = ratioHeight*imageHeight;
                 imageWidth = ratioHeight*imageWidth;
             }
