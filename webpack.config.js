@@ -30,6 +30,24 @@ module.exports = (env) => {
                 loader: 'babel-loader',
                 test: /\.js$/,
                 exclude: /node_modules/
+            }, {
+                test: /\.s?css$/,
+                use: CSSExtract.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
             }]
         },
         plugins: [
@@ -38,6 +56,7 @@ module.exports = (env) => {
                 algorithm: 'gzip',
                 //deleteOriginalAssets: true
             }),
+            CSSExtract,
             new webpack.DefinePlugin({
                 'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
                 'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
