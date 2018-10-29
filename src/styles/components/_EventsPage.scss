@@ -579,13 +579,17 @@ $slideCrouselControlsTransitionStyle: ease-out;
 
 //  bootstrap overide
 @media (min-width: 300px) {
+    .modal {
+        display: flex;
+    }
     .modal-dialog {
-        max-width: 100vw;
+        max-width: 90vw;
         height: 100vh;
         margin: 15vh auto;
         border: none;
         background: none;
         text-align: center;
+        align-self: baseline;
     }
 
     .modal-content {

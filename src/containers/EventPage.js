@@ -270,30 +270,15 @@ class EventPage extends React.Component {
                     windowWidth = $(window).width();
                     windowHeight = $(window).height();
                 }
-                const maxWidth = windowWidth/3*2;
+                const maxWidth = windowWidth*0.8;
                 const maxHeight = maxWidth/3*2;
-
-
-                // ratioHeight = maxHeight/imageHeight;
-                // ratioWidth = maxWidth/imageWidth;
-                // if (imageWidth > imageHeight) {
-                //     imageHeight = ratioWidth*imageHeight;
-                //     imageWidth = maxWidth;
-                // } else {
-                //     imageHeight = maxHeight;
-                //     imageWidth = ratioHeight*imageWidth;
-                // }
-
-                
-                if (imageWidth > 900) {
-                    ratioWidth = 900/imageWidth;
+                if (imageWidth > maxWidth) {
+                    ratioWidth = maxWidth/imageWidth;
                     imageHeight = ratioWidth*imageHeight;
                     imageWidth = ratioWidth*imageWidth;
                 }
-
-
-                if (imageHeight > 600) {
-                    ratioHeight = 600/imageHeight;
+                if (imageHeight > maxHeight) {
+                    ratioHeight = maxHeight/imageHeight;
                     imageHeight = ratioHeight*imageHeight;
                     imageWidth = ratioHeight*imageWidth;
                 }
@@ -521,15 +506,21 @@ class EventPage extends React.Component {
                             let imageHeight = image.imageHeight;
                             let ratioWidth = 1;
                             let ratioHeight = 1;
-                            if (imageWidth > 900) {
-                                ratioWidth = 900/imageWidth;
+                            let windowWidth = 1960;
+                            let windowHeight = 1024;
+                            if (typeof(window) !== "undefined") {
+                                windowWidth = $(window).width();
+                                windowHeight = $(window).height();
+                            }
+                            const maxWidth = windowWidth*0.8;
+                            const maxHeight = maxWidth/3*2;
+                            if (imageWidth > maxWidth) {
+                                ratioWidth = maxWidth/imageWidth;
                                 imageHeight = ratioWidth*imageHeight;
                                 imageWidth = ratioWidth*imageWidth;
                             }
-
-
-                            if (imageHeight > 600) {
-                                ratioHeight = 600/imageHeight;
+                            if (imageHeight > maxHeight) {
+                                ratioHeight = maxHeight/imageHeight;
                                 imageHeight = ratioHeight*imageHeight;
                                 imageWidth = ratioHeight*imageWidth;
                             }
@@ -831,22 +822,24 @@ class EventPage extends React.Component {
             let imageHeight = image.imageHeight;
             let ratioWidth = 1;
             let ratioHeight = 1;
-            if (imageWidth > 900) {
-                ratioWidth = 900/imageWidth;
+            let windowWidth = 1960;
+            let windowHeight = 1024;
+            if (typeof(window) !== "undefined") {
+                windowWidth = $(window).width();
+                windowHeight = $(window).height();
+            }
+            const maxWidth = windowWidth*0.8;
+            const maxHeight = maxWidth/3*2;
+            if (imageWidth > maxWidth) {
+                ratioWidth = maxWidth/imageWidth;
                 imageHeight = ratioWidth*imageHeight;
                 imageWidth = ratioWidth*imageWidth;
             }
-
-
-            if (imageHeight > 600) {
-                ratioHeight = 600/imageHeight;
+            if (imageHeight > maxHeight) {
+                ratioHeight = maxHeight/imageHeight;
                 imageHeight = ratioHeight*imageHeight;
                 imageWidth = ratioHeight*imageWidth;
             }
-            
-            console.log(image.id);
-            console.log(imageHeight);
-            console.log(imageWidth);
 
             return slideGalleryImages.push({
                 publicId: image.public_id,
