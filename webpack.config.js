@@ -32,7 +32,7 @@ module.exports = (env) => {
                 exclude: /node_modules/
             }]
         },
-        loaders:[ 
+        loader:[ 
             {
             test: /\.(gif|eot|woff|woff2|ttf|svg)$/,
             loader: [
