@@ -30,7 +30,15 @@ require("firebase/auth");
 
 import $ from 'jquery';
 
-
+import WebfontLoader from '@dr-kobros/react-webfont-loader';
+const config = {
+  google: {
+    families: ['Source Sans Pro:300,600'],
+  }
+};
+const callback = status => {
+  // I could hook the webfont status to for example Redux here.
+};
 // var WebFont = require('webfontloader');
  
 // WebFont.load({
@@ -54,9 +62,11 @@ const renderApp = () => {
             windowWidth = $( window ).width();
             if(windowWidth !== undefined) {
                 const jsx = (
-                    <Provider store={store}>
-                        <AppRouter windowWidth={windowWidth} />
-                    </Provider>
+                    <WebfontLoader config={config} onStatus={callback}>
+                        <Provider store={store}>
+                            <AppRouter windowWidth={windowWidth} />
+                        </Provider>
+                    </WebfontLoader>
                 );
                 render(jsx, document.getElementById('app'));
                 hasRendered = true;

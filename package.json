@@ -16,6 +16,7 @@
     "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
+    "@dr-kobros/react-webfont-loader": "^8.0.0",
     "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
     "babel-loader": "^7.1.4",
