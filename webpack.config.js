@@ -30,9 +30,9 @@ module.exports = (env) => {
                 loader: 'babel-loader',
                 test: /\.js$/,
                 exclude: /node_modules/
-            }
+            }]
         },
-        Loaders:[ 
+        loaders:[ 
             {
             test: /\.(gif|eot|woff|woff2|ttf|svg)$/,
             loaders: [
