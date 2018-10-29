@@ -33,7 +33,7 @@ import $ from 'jquery';
 import WebfontLoader from '@dr-kobros/react-webfont-loader';
 const config = {
   google: {
-    families: ['Source Sans Pro:300,600'],
+    families: ['Heebo:400,500,700&amp;subset=hebrew'],
   }
 };
 const callback = status => {
