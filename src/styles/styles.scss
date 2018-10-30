@@ -9,22 +9,22 @@
 
 @font-face {
   font-family: 'Heebo-Regular';
-  src: local('Heebo-Regular'), url('/assets/fonts/Heebo-Regular.ttf') format('truetype');
+  src: local('Heebo-Regular'), url('../fonts/Heebo-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Heebo-Medium';
-  src: local('Heebo-Medium'), url('/assets/fonts/Heebo-Medium.ttf') format('truetype');
+  src: local('Heebo-Medium'), url('../fonts/Heebo-Medium.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Heebo-Bold';
-  src: local('Heebo-Bold'), url('/assets/fonts/Heebo-Bold.ttf') format('truetype');
+  src: local('Heebo-Bold'), url('../fonts/Heebo-Bold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'almoni-tzar-aaa-regular';
-  src: local('almoni-tzar-aaa-regular'), url('/assets/fonts/almoni-tzar-aaa-regular.otf') format('opentype');
+  src: local('almoni-tzar-aaa-regular'), url('../fonts/almoni-tzar-aaa-regular.otf') format('opentype');
 }
 
 @import './base/settings';
