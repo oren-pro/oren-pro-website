@@ -30,6 +30,18 @@ require("firebase/auth");
 
 import $ from 'jquery';
 
+
+
+var FontFaceObserver = require('fontfaceobserver');
+
+var font = new FontFaceObserver('Heebo');
+
+font.load().then(function () {
+  console.log('Heebo has loaded.');
+}).catch(function () {
+  console.log('Heebo failed to load.');
+});
+
 //require('typeface-heebo');
 
 
