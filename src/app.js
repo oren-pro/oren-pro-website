@@ -36,6 +36,7 @@ var FontFaceObserver = require('fontfaceobserver');
 
 var fontHeeboRegular = new FontFaceObserver('Heebo-Regular');
 fontHeeboRegular.load().then(function () {
+    document.documentElement.className += " Heebo-Regular";
   console.log('Heebo-Regular has loaded.');
 }).catch(function () {
   console.log('Heebo-Regular failed to load.');
