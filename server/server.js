@@ -553,6 +553,8 @@ app.use(function forceLiveDomain(req, res, next) {
 
 
 var allowedOrigins = ['http://localhost:8080',
+                      'http://www.oren-pro.com',
+                      'https://www.oren-pro.com',
                       'http://oren-pro-website.herokuapp.com',
                       'https://oren-pro-website.herokuapp.com'];
 app.use(cors({

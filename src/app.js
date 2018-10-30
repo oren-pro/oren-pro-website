@@ -34,12 +34,23 @@ import $ from 'jquery';
 
 var FontFaceObserver = require('fontfaceobserver');
 
-var font = new FontFaceObserver('Heebo');
-
-font.load().then(function () {
-  console.log('Heebo has loaded.');
+var fontHeeboRegular = new FontFaceObserver('Heebo-Regular');
+fontHeeboRegular.load().then(function () {
+  console.log('Heebo-Regular has loaded.');
 }).catch(function () {
-  console.log('Heebo failed to load.');
+  console.log('Heebo-Regular failed to load.');
+});
+var fontHeeboMedium = new FontFaceObserver('Heebo-Medium');
+fontHeeboMedium.load().then(function () {
+  console.log('Heebo-Medium has loaded.');
+}).catch(function () {
+  console.log('Heebo-Medium failed to load.');
+});
+var fontHeeboBold = new FontFaceObserver('Heebo-Bold');
+fontHeeboBold.load().then(function () {
+  console.log('Heebo-Bold has loaded.');
+}).catch(function () {
+  console.log('Heebo-Bold failed to load.');
 });
 
 //require('typeface-heebo');
