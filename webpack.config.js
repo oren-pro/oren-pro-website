@@ -26,29 +26,34 @@ module.exports = (env) => {
             path: path.join(__dirname, 'public', 'dist')
         },
         module: {
-            rules: [{
-                loader: 'babel-loader',
-                test: /\.js$/,
-                exclude: /node_modules/
-            }, {
-                test: /\.s?css$/,
-                use: CSSExtract.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        }
-                    ]
-                })
-            }]
+            rules: [
+                    {
+                        loader: 'babel-loader',
+                        test: /\.js$/,
+                        exclude: /node_modules/
+                    }, {
+                        test: /\.s?css$/,
+                        use: CSSExtract.extract({
+                            use: [
+                                {
+                                    loader: 'css-loader',
+                                    options: {
+                                        sourceMap: true
+                                    }
+                                },
+                                {
+                                    loader: 'sass-loader',
+                                    options: {
+                                        sourceMap: true
+                                    }
+                                }
+                            ]
+                        })
+                    }, {
+                        test: /\.(eot|svg|ttf|woff|woff2)$/,
+                        loader: 'file?name=public/fonts/[name].[ext]'
+                    }
+                   ]
         },
         plugins: [
             new CompressionPlugin({
