@@ -35,19 +35,19 @@ import $ from 'jquery';
 var FontFaceObserver = require('fontfaceobserver');
 
 var fontHeeboRegular = new FontFaceObserver('Heebo-Regular');
-fontHeeboRegular.load('אבגדה').then(function () {
+fontHeeboRegular.load().then(function () {
   console.log('Heebo-Regular has loaded.');
 }).catch(function () {
   console.log('Heebo-Regular failed to load.');
 });
 var fontHeeboMedium = new FontFaceObserver('Heebo-Medium');
-fontHeeboMedium.load('אבגדה').then(function () {
+fontHeeboMedium.load().then(function () {
   console.log('Heebo-Medium has loaded.');
 }).catch(function () {
   console.log('Heebo-Medium failed to load.');
 });
 var fontHeeboBold = new FontFaceObserver('Heebo-Bold');
-fontHeeboBold.load('אבגדה').then(function () {
+fontHeeboBold.load().then(function () {
   console.log('Heebo-Bold has loaded.');
 }).catch(function () {
   console.log('Heebo-Bold failed to load.');
