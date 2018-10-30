@@ -429,14 +429,14 @@ class EventPage extends React.Component {
     doOnOrientationChange = () => {
         
         
-        switch(window.orientation) {  
-        case -90 || 90:
-            alert('landscape');
-            break; 
-        default:
-            alert('portrait');
-            break; 
-        }
+        // switch(window.orientation) {  
+        // case -90 || 90:
+        //     alert('landscape');
+        //     break; 
+        // default:
+        //     alert('portrait');
+        //     break; 
+        // }
 
 
         
