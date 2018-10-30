@@ -61,7 +61,7 @@ class UncontrolledCarousel extends Component {
     const { autoPlay, indicators, controls, items, goToIndex, ...props } = this.props;
     const { activeIndex } = this.state;
 
-    const slides = this.state.items.map((item) => {
+    const slides = this.props.items.map((item) => {
       return (
         <CarouselItem
           onExiting={this.onExiting}

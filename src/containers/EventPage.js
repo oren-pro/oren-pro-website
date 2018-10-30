@@ -423,7 +423,83 @@ class EventPage extends React.Component {
             window.addEventListener('scroll', this.handleScroll);
         }
         this.setData();
+        window.addEventListener('orientationchange', this.doOnOrientationChange);
     }
+
+    doOnOrientationChange = () => {
+        
+        
+        switch(window.orientation) {  
+        case -90 || 90:
+            alert('landscape');
+            break; 
+        default:
+            alert('portrait');
+            break; 
+        }
+
+
+        
+        const categoryId = this.props.categoryId;
+        const eventId = this.state.eventId;
+        const galleryImages = this.state.galleryImages;
+        const images = [];
+
+        galleryImages.map((image, index) => {
+            image.image.eventsIds[eventId+'order'] = Number(index)+1;
+            images.push(image.image);
+        });
+
+
+        const slideGalleryImages = [];
+        images.map((image) => {
+            let imageWidth = image.imageWidth;
+            let imageHeight = image.imageHeight;
+            let ratioWidth = 1;
+            let ratioHeight = 1;
+            let windowWidth = 1960;
+            let windowHeight = 1024;
+            if (typeof(window) !== "undefined") {
+                windowWidth = $(window).width();
+                windowHeight = $(window).height();
+                console.log('windowWidth '+windowWidth);
+                console.log('windowHeight '+windowHeight);
+            }
+            const maxWidth = windowWidth*0.8;
+            const maxHeight = maxWidth/3*2;
+            if (imageWidth > maxWidth) {
+                ratioWidth = maxWidth/imageWidth;
+                imageHeight = ratioWidth*imageHeight;
+                imageWidth = ratioWidth*imageWidth;
+            }
+            if (imageHeight > maxHeight) {
+                ratioHeight = maxHeight/imageHeight;
+                imageHeight = ratioHeight*imageHeight;
+                imageWidth = ratioHeight*imageWidth;
+            }
+
+            return slideGalleryImages.push({
+                publicId: image.public_id,
+                image: image,
+                id: image.id,
+                order: image.eventsIds[eventId+'order'],
+                src: image.imageUrl,
+                altText: image.imageText,
+                width: imageWidth,
+                height: imageHeight,
+                caption: '',
+                header: ''
+            });
+        });
+        this.setState({
+            slideGalleryImages
+        });
+    }
+    
+    
+    
+    // Initial execution if needed
+    //doOnOrientationChange();
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (this.props !== prevProps) {
