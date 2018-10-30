@@ -30,6 +30,8 @@ require("firebase/auth");
 
 import $ from 'jquery';
 
+require('typeface-heebo');
+
 
 // var WebFont = require('webfontloader');
  
