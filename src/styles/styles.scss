@@ -1,24 +1,30 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import "../../node_modules/slick-carousel/slick/slick.css";
 
+
+@font-face {
+  font-family: 'Heebo';
+  src: local('Heebo'), url('/assets/fonts/Heebo-Regular.ttf') format('truetype');
+}
+
 @font-face {
   font-family: 'Heebo-Regular';
-  src: url('/assets/fonts/Heebo-Regular.ttf') format('truetype');
+  src: local('Heebo-Regular'), url('/assets/fonts/Heebo-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Heebo-Medium';
-  src: url('/assets/fonts/Heebo-Medium.ttf') format('truetype');
+  src: local('Heebo-Medium'), url('/assets/fonts/Heebo-Medium.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Heebo-Bold';
-  src: url('/assets/fonts/Heebo-Bold.ttf') format('truetype');
+  src: local('Heebo-Bold'), url('/assets/fonts/Heebo-Bold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'almoni-tzar-aaa-regular';
-  src: url('/assets/fonts/almoni-tzar-aaa-regular.otf') format('opentype');
+  src: local('almoni-tzar-aaa-regular'), url('/assets/fonts/almoni-tzar-aaa-regular.otf') format('opentype');
 }
 
 @import './base/settings';
