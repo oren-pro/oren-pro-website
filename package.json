@@ -78,6 +78,7 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.1",
     "slick-carousel": "^1.8.1",
+    "style-loader": "^0.23.1",
     "typeface-heebo": "^0.0.54",
     "url-loader": "^1.1.2",
     "webfontloader": "^1.6.28",

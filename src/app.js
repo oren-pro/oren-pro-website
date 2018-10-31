@@ -67,6 +67,8 @@ fontHeeboBold.load().then(function () {
 
 import './styles/styles.scss';
 
+
+
 const store = configureStore();
 
 

@@ -35,6 +35,10 @@ module.exports = (env) => {
                         test: /\.s?css$/,
                         use: CSSExtract.extract({
                             use: [
+                                { 
+                                    loader: 'style-loader', 
+                                    options: { base: 1000 } 
+                                },
                                 {
                                     loader: 'css-loader',
                                     options: {
@@ -50,7 +54,7 @@ module.exports = (env) => {
                             ]
                         })
                     }, {
-                        test: /\.(eot|svg|ttf|woff|woff2)$/,
+                        test: /\.(eot|ttf|woff|woff2)$/,
                         loader: 'file?name=public/fonts/[name].[ext]'
                     }
                    ]
