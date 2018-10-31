@@ -35,10 +35,6 @@ module.exports = (env) => {
                         test: /\.s?css$/,
                         use: CSSExtract.extract({
                             use: [
-                                { 
-                                    loader: 'style-loader', 
-                                    options: { base: 1000 } 
-                                },
                                 {
                                     loader: 'css-loader',
                                     options: {
