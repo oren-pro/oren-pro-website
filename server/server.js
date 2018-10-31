@@ -912,7 +912,7 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
     if(request.body.name){
         var mailOptions = {
           from: 'message@frixell.net',
-          to: 'halivao@gmail.com',
+          to: 'info@oren-pro.com',
           subject: request.body.email,
           text: request.body.name + '\r\n' + request.body.email + '\r\n' + request.body.message
         };
