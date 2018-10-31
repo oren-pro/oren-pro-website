@@ -17,7 +17,7 @@
             <meta name=robots content='index, follow' />
             <link rel=icon href='/images/favicon.png' />
             <meta name="fragment" content="!">
-            <link rel="preload" href="/assets/fonts/Heebo-Regular.ttf" as="font" type="font/truetype" crossorigin>
+            <link rel="preload" href="/assets/fonts/Heebo-Regular.ttf" as="font" type="font/ttf" crossorigin>
             <!--style>
             @import url('https://fonts.googleapis.com/css?family=Heebo:400,500,700&subset=hebrew');
             </style-->
@@ -25,6 +25,11 @@
                 @font-face {
                 font-family: Heebo-Regular;
                 src: local("Heebo-Regular"), url('/assets/fonts/Heebo-Regular.ttf') format('truetype');
+                }
+                body {
+                    font-family: Heebo-Regular, sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
                 }
             </style>
         </head>
