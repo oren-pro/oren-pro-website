@@ -552,6 +552,10 @@ app.use(function forceLiveDomain(req, res, next) {
 
 
 
+
+
+
+
 var allowedOrigins = ['http://localhost:8080',
                       'http://www.oren-pro.com',
                       'https://www.oren-pro.com',
@@ -612,7 +616,7 @@ admin.initializeApp({
 
 app.get('/sitemap.xml', function(req, res) {
     let urls = [];
-    var root_path = 'https://oren-pro-website.herokuapp.com/';
+    var root_path = 'https://www.oren-pro.com/';
     var db = admin.database();
     var refCategories = db.ref('eventsCategories/');
     var refSubcategories = db.ref('eventsSubcategories/');
@@ -731,7 +735,7 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
                       data = data.replace(/\$OG_TITLE/g, seo.title);
                       data = data.replace(/\$OG_DESCRIPTION/g, seo.description);
                       data = data.replace(/\$OG_KEYWORDS/g, seo.keyWords);
-                      data = data.replace(/\$OG_IMAGE/g, 'https://oren-pro-website.herokuapp.com/images/og_image.jpg');
+                      data = data.replace(/\$OG_IMAGE/g, 'https://www.oren-pro.com/images/og_image.jpg');
                       response.send(data);
                     }, function (errorObject) {
                       console.log("The read failed: " + errorObject.code);
@@ -906,7 +910,7 @@ let transporter = nodemailer.createTransport({
 
 app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(request, response) {
     if(request.body.name){
-        mailOptions = {
+        var mailOptions = {
           from: 'message@frixell.net',
           to: 'halivao@gmail.com',
           subject: request.body.email,
