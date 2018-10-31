@@ -44,8 +44,8 @@
 }
 
 .homepage__pleased__content {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     padding: 1rem;
     text-align: right;
     color: $white;
@@ -56,8 +56,8 @@
 }
 
 .homepage__pleased__content textarea { 
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     padding: 0.5rem;
     text-align: right;
     color: $white;
@@ -246,8 +246,8 @@
     width: 23rem;
     height: 2.8rem;
     text-align: center;
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     border: none;
     background: none;
     margin: 0;
@@ -259,8 +259,8 @@
     color: $white;
     height: 2.8rem;
     text-align: center;
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     border: none;
     background: none;
     margin: 0;
@@ -287,8 +287,8 @@
 
 
 .homepage__event-item-box textarea { 
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 6.7rem;
     width: 28rem;
@@ -460,8 +460,8 @@
     height: 3.4rem;
     padding-right: 1rem;
     padding-left: 1rem;
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     border: 1px solid $gray;
     margin-left: 0.5rem;
 }
@@ -579,8 +579,8 @@ input[type="email"]::-webkit-input-placeholder {
     background: none;
     border: none;
     text-align: right;
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     min-width: 2rem;
     color: $white;
     font-size: 1.5rem;
@@ -606,8 +606,8 @@ input[type="email"]::-webkit-input-placeholder {
 }
 
 .homepage__tell__body__text textarea {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     display: inline-block;
     background: none;
     border: none;
@@ -947,8 +947,8 @@ input[type="email"]::-webkit-input-placeholder {
     }
 
     .homepage__pleased__content {
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         padding: 1rem;
         text-align: center;
         color: $white;
@@ -960,8 +960,8 @@ input[type="email"]::-webkit-input-placeholder {
 
     .homepage__pleased__content textarea { 
         margin-top: 0rem;
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         padding: 0.5rem;
         text-align: center;
         color: $white;
@@ -1110,8 +1110,8 @@ input[type="email"]::-webkit-input-placeholder {
         width: 23rem;
         height: 2.8rem;
         text-align: center;
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         border: none;
         background: none;
         margin: 0;
@@ -1124,8 +1124,8 @@ input[type="email"]::-webkit-input-placeholder {
         color: $white;
         height: 3.5rem;
         text-align: center;
-        font-family: $font;
-        font-weight: $fontMedium;
+        font-family: $fontMedium;
+        font-weight: $fontSizeMedium;
         border: none;
         background: none;
         margin: 0;
@@ -1279,8 +1279,8 @@ input[type="email"]::-webkit-input-placeholder {
         padding-right: 1rem;
         padding-left: 1rem;
         margin-bottom: 1rem;
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         border: 1px solid $gray;
         margin-left: 0rem;
     }
@@ -1370,8 +1370,8 @@ input[type="email"]::-webkit-input-placeholder {
         background: none;
         border: none;
         text-align: center;
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         min-width: 2rem;
         color: $gray;
         font-size: 2.4rem;
@@ -1392,8 +1392,8 @@ input[type="email"]::-webkit-input-placeholder {
     }
 
     .homepage__tell__body__text textarea {
-        font-family: $font;
-        font-weight: 400;
+        font-family: $fontRegular;
+        font-weight: $fontSizeRegular;
         display: inline-block;
         background: none;
         border: none;

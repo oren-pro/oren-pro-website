@@ -172,8 +172,8 @@
 }
 
 .backoffice__edit__events__tabs__box input {
-    font-family: $font;
-    font-weight: $fontRegular;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     font-size: 1.5rem;
     line-height: 0.5rem;
     background: none;
@@ -185,8 +185,8 @@
 }
 
 .backoffice__events__tabs__order__box input {
-    font-family: $font;
-    font-weight: $fontRegular;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     background: $white;
     color: $gray;
     border: 1px solid $gray;
@@ -398,8 +398,8 @@
 }
 
 .backoffice__seo__modal textarea {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 6.7rem;
     width: 650px;
@@ -415,8 +415,8 @@
 }
 
 .backoffice__seo__modal input {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 3rem;
     width: 650px;
@@ -443,8 +443,8 @@
 }
 
 .backoffice__seo__modal__right textarea {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 6.7rem;
     width: 80px;
@@ -460,8 +460,8 @@
 }
 
 .backoffice__seo__modal__right input {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 3rem;
     width: 80px;
@@ -514,8 +514,8 @@
 
 
 .backoffice__gallery__modal input {
-    font-family: $font;
-    font-weight: 400;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     position: relative;
     height: 3rem;
     width: 4rem;

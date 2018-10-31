@@ -88,8 +88,8 @@
     background: none;
     border: none;
     color: $white;
-    font-family: $font;
-    font-weight: $fontRegular;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     font-size: 2.6rem;
     letter-spacing: -0.1px;
     text-align: center;
@@ -118,8 +118,8 @@
     margin-right: 0.4rem;
     vertical-align: middle;
     color: $gray;
-    font-family: $font;
-    font-weight: $fontRegular;
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
     font-size: 1.7rem;
     letter-spacing: -0.1px;
     min-height: 2rem;
@@ -228,7 +228,7 @@
     }
 
     .nav__link {
-        font-size: 1.65rem;
+        font-size: 1.3rem;
     }
 }
 

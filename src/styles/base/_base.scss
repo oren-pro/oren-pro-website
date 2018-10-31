@@ -89,7 +89,7 @@ html {
 }
 
 body {
-    font-family: $font;
+    font-family: $fontRegular;
     font-size: $m-size;
     background-color: $white;
 }
@@ -211,25 +211,25 @@ button:disabled {
 
 
 .Heebo-Regular {
-  font-family: $font;
-  font-weight: $fontRegular;
+  font-family: $fontRegular;
+  font-weight: $fontSizeRegular;
 }
 
 .Heebo-Medium {
-  font-family: $font;
-  font-weight: $fontMedium;
+  font-family: $fontMedium;
+  font-weight: $fontSizeMedium;
 }
 
 @media (max-width: $mobileMaxWidth) {
     .Heebo-Medium-Mobile {
-        font-family: $font;
-        font-weight: $fontMedium;
+        font-family: $fontMedium;
+        font-weight: $fontSizeMedium;
     }
 }
 
 .Heebo-Bold {
-  font-family: $font;
-  font-weight: $fontBold;
+  font-family: $fontBold;
+  font-weight: $fontSizeBold;
 }
 
 .almoni-tzar-aaa-regular {
