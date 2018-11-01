@@ -24,6 +24,9 @@ if (typeof(window) !== "undefined") {
     require("normalize.css/normalize.css");
 }
 
+//import './styles/styles.scss';
+require("./styles/styles.scss");
+
 //import { firebase } from './firebase/firebase';
 var firebase = require("firebase/app");
 require("firebase/auth");
@@ -65,7 +68,7 @@ fontHeeboBold.load().then(function () {
 // }
 // });
 
-import './styles/styles.scss';
+
 
 
 
