@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /Users/moshkainer/.yarn/bin/yarn.js run build:prod
+  /usr/local/bin/node /Users/moshkainer/.yarn/bin/yarn.js run dev-server
 
 PATH: 
   /Users/moshkainer/.yarn/bin:/Users/moshkainer/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -20,6 +20,9 @@ npm manifest:
     "main": "index.js",
     "author": "mosh",
     "license": "MIT",
+    "engines": {
+      "node": "8.11.4"
+    },
     "scripts": {
       "build:dev": "webpack",
       "build:prod": "webpack -p --env production",
@@ -29,6 +32,7 @@ npm manifest:
       "heroku-postbuild": "yarn run build:prod"
     },
     "dependencies": {
+      "@dr-kobros/react-webfont-loader": "^8.0.0",
       "babel-cli": "6.24.1",
       "babel-core": "6.25.0",
       "babel-loader": "^7.1.4",
@@ -51,6 +55,7 @@ npm manifest:
       "extract-text-webpack-plugin": "^4.0.0-beta.0",
       "firebase": "^5.0.4",
       "firebase-admin": "^6.0.0",
+      "fontfaceobserver": "^2.0.13",
       "googleapis": "^33.0.0",
       "gsap": "^2.0.1",
       "history": "^4.7.2",
@@ -89,6 +94,10 @@ npm manifest:
       "redux-thunk": "^2.3.0",
       "sass-loader": "^7.0.1",
       "slick-carousel": "^1.8.1",
+      "style-loader": "^0.23.1",
+      "typeface-heebo": "^0.0.54",
+      "url-loader": "^1.1.2",
+      "webfontloader": "^1.6.28",
       "webpack": "^4.6.0",
       "webpack-cli": "^2.0.15"
     },
@@ -125,6 +134,13 @@ Lockfile:
       chalk "^2.0.0"
       esutils "^2.0.2"
       js-tokens "^3.0.0"
+  
+  "@dr-kobros/react-webfont-loader@^8.0.0":
+    version "8.0.0"
+    resolved "https://registry.yarnpkg.com/@dr-kobros/react-webfont-loader/-/react-webfont-loader-8.0.0.tgz#1e000be944d846cc9101e656cdcf2521e859e066"
+    dependencies:
+      prop-types "^15.5.8"
+      webfontloader "^1.6.27"
   
   "@firebase/app-types@0.3.2":
     version "0.3.2"
@@ -3698,6 +3714,10 @@ Lockfile:
     dependencies:
       debug "^3.1.0"
   
+  fontfaceobserver@^2.0.13:
+    version "2.0.13"
+    resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.13.tgz#47adbb343261eda98cb44db2152196ff124d3221"
+  
   for-in@^0.1.3:
     version "0.1.8"
     resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -6073,7 +6093,7 @@ Lockfile:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   
-  mime@^2.1.0, mime@^2.2.0:
+  mime@^2.0.3, mime@^2.1.0, mime@^2.2.0:
     version "2.3.1"
     resolved "https://registry.yarnpkg.com/mime/-/mime-2.3.1.tgz#b1621c54d63b97c47d3cfe7f7215f7d64517c369"
   
@@ -9084,6 +9104,13 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/stubs/-/stubs-3.0.0.tgz#e8d2ba1fa9c90570303c030b6900f7d5f89abe5b"
   
+  style-loader@^0.23.1:
+    version "0.23.1"
+    resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.23.1.tgz#cb9154606f3e771ab6c4ab637026a1049174d925"
+    dependencies:
+      loader-utils "^1.1.0"
+      schema-utils "^1.0.0"
+  
   styled-jsx@^2.2.6:
     version "2.2.7"
     resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.7.tgz#0ada82e2e4b8b59e38508a8e57258fd1f70e204a"
@@ -9347,6 +9374,10 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   
+  typeface-heebo@^0.0.54:
+    version "0.0.54"
+    resolved "https://registry.yarnpkg.com/typeface-heebo/-/typeface-heebo-0.0.54.tgz#56c9ca61b45d9d9ed575dec25647031a00025a51"
+  
   ua-parser-js@^0.7.9:
     version "0.7.17"
     resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
@@ -9494,6 +9525,14 @@ Lockfile:
   url-join@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
+  
+  url-loader@^1.1.2:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-1.1.2.tgz#b971d191b83af693c5e3fea4064be9e1f2d7f8d8"
+    dependencies:
+      loader-utils "^1.1.0"
+      mime "^2.0.3"
+      schema-utils "^1.0.0"
   
   url-parse-lax@^1.0.0:
     version "1.0.0"
@@ -9686,6 +9725,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.3.tgz#c1d8d149316d3ea852848895cb6a0bfe887b87df"
     dependencies:
       minimalistic-assert "^1.0.0"
+  
+  webfontloader@^1.6.27, webfontloader@^1.6.28:
+    version "1.6.28"
+    resolved "https://registry.yarnpkg.com/webfontloader/-/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
   
   webidl-conversions@^4.0.2:
     version "4.0.2"
@@ -10109,9 +10152,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
+  Exit signal: SIGSEGV
   Command: sh
-  Arguments: -c webpack -p --env production
+  Arguments: -c webpack-dev-server --mode development
   Directory: /Users/moshkainer/projects/oren-pro-website
   Output:
   
