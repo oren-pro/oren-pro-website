@@ -644,14 +644,14 @@ app.get('/sitemap.xml', function(req, res) {
                           while (strSubcategory.indexOf(' ') > -1) {
                               strSubcategory = strSubcategory.replace(' ' ,'_');
                           }
-                          urls.push(strCategory + '/' + strSubcategory);
+                          urls.push(strSubcategory + '/' + strCategory);
                           for (var k in events) {
                             if(events[k].categories && events[k].categories[categoryId] && events[k].subcategories && events[k].subcategories[subcategoryId]){
                               let event = events[k].name;
                               while (event.indexOf(' ') > -1) {
                                   event = event.replace(' ' ,'_');
                               }
-                              urls.push(strCategory + '/' + strSubcategory + '/' + event);
+                              urls.push(event + '/' + strSubcategory + '/' + strCategory);
                             }
                             k++;
                           }
