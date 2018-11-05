@@ -564,7 +564,7 @@ class HomePage extends React.Component {
                 /> 
 
                 <Helmet>
-                    <title>{`אורן הפקות - מפיקי אירועים | מפיקת אירועים - ${this.state.seo.title}`}</title>
+                    <title>{this.state.seo.title}</title>
                 </Helmet>
 
                 

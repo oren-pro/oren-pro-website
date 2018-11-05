@@ -1553,7 +1553,7 @@ class EventsPage extends React.Component {
                 />
 
                 <Helmet>
-                    <title>{`אורן הפקות - ${this.props.category.name} - ${this.state.subcategoryName} - ${this.state.seo.title}`}</title>
+                    <title>{this.state.seo.title}</title>
                 </Helmet>
 
 

@@ -1063,7 +1063,7 @@ class EventPage extends React.Component {
                 />
 
                 <Helmet>
-                    <title>{`אורן ורינת הפקות אירועים - ${this.props.categoryName} - ${this.state.subcategoryName} - ${this.state.eventName} - ${this.state.seo.title}`}</title>
+                    <title>{this.state.seo.title}</title>
                 </Helmet>
 
                 <Modal open={this.state.seoEventModalIsOpen} onClose={this.onToggleEventSeo} center dir="rtl">
