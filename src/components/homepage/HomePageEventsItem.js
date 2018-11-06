@@ -29,19 +29,7 @@ const HomePageEventsItem = (props) => (
                             onChange={props.onChange}
                         />
                     </div>
-                    <div className="homepage__event-item__text Heebo-Regular" dir="rtl">
-                        <div className={shouldHighLight(props.homepageOrigin.events[props.index].eventText, props.homepage.events[props.index].eventText)}>
-                            <textarea
-                                data-name={props.name}
-                                data-index={props.index}
-                                data-field='eventText'
-                                data-action={props.action}
-                                placeholder="טקסט אירוע"
-                                value={props.homepage.events[props.index].eventText}
-                                onChange={props.onChange}
-                            />
-                        </div>
-                    </div>
+                    
                     <button
                         data-name={props.name}
                         data-index={props.index}
@@ -72,8 +60,8 @@ const HomePageEventsItem = (props) => (
                                 onMouseLeave={props.setIconRatioOut}
                                 onClick={() => { history.push(props.homepage.events[props.index].eventLink) }}
                             >
-                                <p className="homepage__event-item__button__text Heebo-Regular">גלו עוד</p>
-                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="גלו עוד" />
+                                <p className="homepage__event-item__button__text Heebo-Regular">לפרוייקטים נבחרים</p>
+                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="לפרוייקטים נבחרים" />
                             </button> 
                         )} />
                     </div>
@@ -94,13 +82,7 @@ const HomePageEventsItem = (props) => (
                     <div className="homepage__event-item__header">
                         <h3 className="Heebo-Medium homepage__event-item__header-text">{props.event.eventHeader}</h3>
                     </div>
-                    <div className="homepage__event-item__text Heebo-Regular cursor__hand" dir="rtl">
-                        <textarea
-                            readOnly
-                            className="cursor__hand"
-                            value={props.homepage.events[props.index].eventText}
-                        />
-                    </div>
+                    
                     <img className="homepage__event-item__image" src={props.event.eventImage} alt={props.event.eventHeader} />
                     <div className="homepage__event-item__more">
                         
@@ -112,8 +94,8 @@ const HomePageEventsItem = (props) => (
                                 onMouseLeave={props.setIconRatioOut}
                                 
                             >
-                                <p className="homepage__event-item__button__text Heebo-Regular">גלו עוד</p>
-                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="גלו עוד" />
+                                <p className="homepage__event-item__button__text Heebo-Regular">לפרוייקטים נבחרים</p>
+                                <img className="homepage__event-item__button__image" src="/images/homepage/events/arrowGreen.svg" alt="לפרוייקטים נבחרים" />
                             </button> 
                         
                     </div>
@@ -125,3 +107,35 @@ const HomePageEventsItem = (props) => (
 );
 
 export default HomePageEventsItem;
+
+
+
+
+
+
+//backoffice text
+
+// <div className="homepage__event-item__text Heebo-Regular" dir="rtl">
+//                         <div className={shouldHighLight(props.homepageOrigin.events[props.index].eventText, props.homepage.events[props.index].eventText)}>
+//                             <textarea
+//                                 data-name={props.name}
+//                                 data-index={props.index}
+//                                 data-field='eventText'
+//                                 data-action={props.action}
+//                                 placeholder="טקסט אירוע"
+//                                 value={props.homepage.events[props.index].eventText}
+//                                 onChange={props.onChange}
+//                             />
+//                         </div>
+//                     </div>
+
+
+//web text
+
+// <div className="homepage__event-item__text Heebo-Regular cursor__hand" dir="rtl">
+//                         <textarea
+//                             readOnly
+//                             className="cursor__hand"
+//                             value={props.homepage.events[props.index].eventText}
+//                         />
+//                     </div>
