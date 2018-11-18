@@ -1097,7 +1097,7 @@ input[type="email"]::-webkit-input-placeholder {
         margin: 1.2rem;
         margin-bottom: 4.5rem;
         width: 92vw;
-        height: 80vw;
+        height: 32rem;
         border: 2px solid $gray;
     }
 
@@ -1624,6 +1624,10 @@ and (max-device-width : 667px) {
 @media only screen 
 and (min-device-width : 414px) 
 and (max-device-width : 736px) {
+    .homepage__event-item-box {
+        height: 78vw;
+    }
+
     .homepage__event-item-box textarea { 
         height: 24vw;
     }
