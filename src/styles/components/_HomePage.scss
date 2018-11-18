@@ -1611,14 +1611,14 @@ $buttonPagination: 2.3rem;
 and (min-device-width : 375px) 
 and (max-device-width : 667px) {
     .homepage__event-item-box {
-        height: 76vw;
+        height: 80vw;
     }
-    
+
     .homepage__event-item-box textarea { 
         height: 24vw;
     }
     .homepage__event-item__button__image {
-        padding-top: 2.2vw;
+        padding-top: 2.4vw;
     }
     .homepage__event-item__text {
         height: 17vh;
@@ -1636,7 +1636,7 @@ and (max-device-width : 736px) {
         height: 24vw;
     }
     .homepage__event-item__button__image {
-        padding-top: 2.1vw;
+        padding-top: 2.3vw;
     }
     .homepage__event-item__text {
         height: 17vh;
