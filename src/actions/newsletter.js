@@ -14,7 +14,7 @@ export const subscribeToNewsletter = (newsletterData = {}) => {
         axios.post('https://ssl-vp.com/rest/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true&api_key=3d0dae7b-3b92-4f99-aabe-18c7d34c0229', {
             "firstName": name,
             "email": email,
-            "lists_ToSubscribe[]": "77046"
+            "lists_ToSubscribe": ["77046", "476828"]
         })
         .then(function (response) {
             console.log("response");
