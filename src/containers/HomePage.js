@@ -32,6 +32,16 @@ import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import isEqual from 'lodash.isequal';
 import $ from 'jquery';
 
+
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
+
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -60,7 +70,8 @@ class HomePage extends React.Component {
             localTell: [],
             localTellOrigin: [],
             windowWidth: undefined,
-            pageHidden: true
+            pageHidden: true,
+            currentLocation: ''
         }
     }
 
@@ -215,13 +226,18 @@ class HomePage extends React.Component {
 
 
     componentDidMount = () => {
+
+        initializeReactGA('/');
+        this.setState({
+            currentLocation: '/'
+        });
+
         window.scrollTo(0, 0);
 
         let windowWidth = $( window ).width();
         this.setState({ 
             windowWidth
         });
-        console.log('home page did mount');
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
         }
@@ -549,8 +565,6 @@ class HomePage extends React.Component {
                    
 
     render() {
-        console.log( this.props.windowWidth );
-        console.log(this.state.windowWidth);
         if(this.state.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
             return null; // render null when app is not ready
         }
@@ -776,7 +790,7 @@ class HomePage extends React.Component {
                     />
                     <div id='fake_pageupstrip'> </div>
 
-                    <ContactStrip />
+                    <ContactStrip location={this.state.currentLocation} />
                     <CustomersStrip />
                     <Footer />
                 </div>

@@ -14,6 +14,7 @@ export class ContactStrip extends React.Component {
             <div className="container-fluid contactstrip__box">
                 <ContactForm
                     style='strip'
+                    location={this.props.location}
                     onSubmit={this.onSubmit}
                 />
                 <ContactFollow

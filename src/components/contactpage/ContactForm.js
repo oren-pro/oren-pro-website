@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
-//import moment from 'moment';
 import { startSendMessage } from '../../actions/messages';
 
+
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
+
 const currentDate = new Date();
-//const currentTime = Date.now();
-//console.log(currentDate);
 
 export class ContactForm extends React.Component {
     constructor(props) {
@@ -56,11 +62,16 @@ export class ContactForm extends React.Component {
         }
     };
     onToggleMailSentModal = () => {
-        //console.log('toggle');
+        console.log(this.props.location);
+        if (this.state.mailSentModalIsOpen) {
+            initializeReactGA(this.props.location);
+        } else {
+            initializeReactGA(`${this.props.location}-contact-thank-you-page`);
+        }
+
         this.setState({
             mailSentModalIsOpen: !this.state.mailSentModalIsOpen
         });
-        //console.log(this.state.mailSentModalIsOpen);
     }
     onSendMail = (userMessage) => {
         this.props.startSendMessage(userMessage).then((res) => {

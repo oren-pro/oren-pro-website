@@ -2,6 +2,14 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 
 
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
+
 export default class HomePageIntouchForm extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +30,14 @@ export default class HomePageIntouchForm extends React.Component {
         this.setState(() => ({ email }));
     };
     onToggleMailSentModal = () => {
+        
+        if (this.state.mailSentModalIsOpen) {
+            initializeReactGA('/');
+        } else {
+            initializeReactGA('/-newsletter-thank-you-page');
+        }
+
+        
         this.setState({
             mailSentModalIsOpen: !this.state.mailSentModalIsOpen
         });
@@ -40,8 +56,9 @@ export default class HomePageIntouchForm extends React.Component {
                 name: this.state.name,
                 email: this.state.email
             });
+            this.onToggleMailSentModal();
         }
-        this.onToggleMailSentModal();
+        
     };
     render() {
         return (

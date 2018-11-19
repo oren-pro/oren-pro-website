@@ -20,16 +20,13 @@ class EventsEvent extends React.Component {
         const hover = true;
         const textHeight = $(document.getElementById(this.props.id)).height();
         let eventTop = 4.5;
-
-        console.log(this.props.id);
-        console.log(textHeight);
         
         if (textHeight === 90) {
             eventTop = 3.3;
         } else if (textHeight === 30) {
             eventTop = 6.2;
         }
-        console.log(eventTop);
+
         this.setState(() => ({ 
             hover,
             eventTop
@@ -50,7 +47,7 @@ class EventsEvent extends React.Component {
         if (this.props.subcategoryName !== '' && this.props.subcategoryName !== undefined) {
             categoryLink = this.props.subcategoryName;
         }
-        //console.log(this.props);
+
         return (
             <div
                 data-id={this.props.id} 

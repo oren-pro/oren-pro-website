@@ -1,13 +1,11 @@
 import React from 'react';
 
 const gotoMail = () => {
-    console.log('in facebook');
     if (typeof(window) !== "undefined") {
         window.location = 'mailto:info@oren-pro.com';
     }
 }
 const gotoPhone = () => {
-    console.log('in facebook');
     if (typeof(window) !== "undefined") {
         window.location = 'tel:049544588';
     }

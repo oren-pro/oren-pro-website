@@ -48,12 +48,7 @@ class Navigation extends React.Component {
   }
 
   pageToTopM = () => {
-    console.log('in pageToTopM');
-    console.log(Number($("#navbarM").offset().top)+Number(20));
-    //if (typeof(window) !== "undefined") {
-      //TweenLite.to(window, 0.7, {scrollTo:{y:Number($("#navbarM").offset().top)+Number(20)}})
       window.scrollTo(0, Number($("#navbarM").offset().top)+Number(20));
-    //}
   }
 
   fixedTop = () => {
@@ -79,7 +74,7 @@ class Navigation extends React.Component {
     this.props.setHomePageCarouselDone({
         homepageCarouselDone: homepageCarouselDone
     });
-    //console.log('setting carousel done');
+
     this.setState({
         fixed: 'top'
     });
@@ -137,7 +132,6 @@ class Navigation extends React.Component {
       }
       this.fixedTop();
     } else {
-      console.log('in nav did mount');
       if (typeof(window) !== "undefined") {
         window.addEventListener('scroll', this.handleScroll);
       }
@@ -146,23 +140,14 @@ class Navigation extends React.Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    console.log('in nav did update');
-
-    console.log(this.props.carouselDone);
-    console.log(prevProps.carouselDone);
-
     if(this.state.eventsCategoriesReverse.length === 0 && this.props.eventsCategories.length > 0){
       this.setReverseCategories();
     }
-    // if(this.props.carouselDone !== prevProps.carouselDone){
-    //   this.showGallery();
-    // }
   }
 
   
 
   componentWillMount = () => {
-    console.log('in nav will mount');
     if(this.state.eventsCategoriesReverse.length === 0 && this.props.eventsCategories.length > 0){
       this.setReverseCategories();
     }
@@ -242,7 +227,6 @@ class Navigation extends React.Component {
   }
 
   homepageClicked = () => {
-    console.log('in clicked');
     const homepageCarouselDone = false;
     this.props.setHomePageCarouselDone({
         homepageCarouselDone: homepageCarouselDone
@@ -251,7 +235,6 @@ class Navigation extends React.Component {
   }
 
   showGallery = () => {
-    console.log('in showGallery');
     document.getElementsByClassName("navbar-light")[1].style.position = "absolute";
     document.getElementsByClassName("navbar-light")[1].style.top = '100vh';
     document.getElementById('fakeNav').style.display = "none";

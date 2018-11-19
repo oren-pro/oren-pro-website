@@ -49,6 +49,15 @@ import ShareLink from 'react-facebook-share-link';
 import { WhatsappShareButton } from 'react-share';
 
 
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
+
+
 class EventPage extends React.Component {
     constructor(props) {
         super(props);
@@ -95,7 +104,8 @@ class EventPage extends React.Component {
                 description: '',
                 keyWords: '',
             },
-            currentURL: ''
+            currentURL: '',
+            currentLocation: ''
         }
     }
 
@@ -414,11 +424,18 @@ class EventPage extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log('scrolling to 0');
-        window.scrollTo(0, 0);
+        
+        initializeReactGA(this.props.location.pathname);
+        this.setState({
+            currentLocation: this.props.location.pathname
+        });
+        
         this.setState({
             currentURL: decodeURIComponent((window.location.href).replace(/\+/g,  " "))
         });
+
+        window.scrollTo(0, 0);
+
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
         }
@@ -427,19 +444,7 @@ class EventPage extends React.Component {
     }
 
     doOnOrientationChange = () => {
-        
-        
-        // switch(window.orientation) {  
-        // case -90 || 90:
-        //     alert('landscape');
-        //     break; 
-        // default:
-        //     alert('portrait');
-        //     break; 
-        // }
 
-
-        
         const categoryId = this.props.categoryId;
         const eventId = this.state.eventId;
         const galleryImages = this.state.galleryImages;
@@ -462,8 +467,6 @@ class EventPage extends React.Component {
             if (typeof(window) !== "undefined") {
                 windowWidth = $(window).width();
                 windowHeight = $(window).height();
-                console.log('windowWidth '+windowWidth);
-                console.log('windowHeight '+windowHeight);
             }
             const maxWidth = windowWidth*0.8;
             const maxHeight = maxWidth/3*2;
@@ -503,7 +506,6 @@ class EventPage extends React.Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (this.props !== prevProps) {
-            console.log('scrolling to 0');
             window.scrollTo(0, 0);
             this.setData();
         }
@@ -628,8 +630,6 @@ class EventPage extends React.Component {
     }
 
     setSubcategoryId = (e) => {
-        //console.log(this.state.items);
-        //console.log(this.state.currentItems);
         const subcategoryId = e.target.dataset.id;
         const subcategoryName = e.target.dataset.name;
         this.setState({
@@ -642,29 +642,40 @@ class EventPage extends React.Component {
     navtoCategoryPage = (subcategoryName) => {
         if (subcategoryName !== '' && subcategoryName !== undefined) {
             this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
         } else {
             this.props.history.push(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
         }
     }
 
-    navtoCategoryPageEvent = (e) => {
-        const thetarget = e.target;
-        console.log(thetarget);
+    navtoCategoryPageEvent = (e) => {<x>x</x>
+
         const subcategoryName = e.target.dataset.subcategoryname;
-        console.log(subcategoryName);
         if (subcategoryName !== '' && subcategoryName !== undefined) {
             this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
         } else {
             this.props.history.push(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(this.props.categoryName, ' ', '_')}`);
         }
     }
 
     gotoNextEvent = () => {
         this.props.history.push(`/${this.state.nextItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        initializeReactGA(`/${this.state.nextItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        this.setState({
+            currentLocation: `/${this.state.nextItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`
+        });
+
     }
     
     gotoPrevEvent = () => {
         this.props.history.push(`/${this.state.prevItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        initializeReactGA(`/${this.state.prevItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`);
+        this.setState({
+            currentLocation: `/${this.state.prevItem}/${stringReplace(this.state.subcategoryName, ' ', '_')}/${stringReplace(this.props.categoryName, ' ', '_')}`
+        });
     }
 
     // update database . ---   event data ( name, text, showlines - number of lines to show on load)
@@ -1239,6 +1250,7 @@ class EventPage extends React.Component {
                         />
                         <EventShareStrip 
                             currentURL={this.state.currentURL}
+                            location={this.state.currentLocation}
                             navtoCategoryPage={this.navtoCategoryPage}
                             gotoNextEvent={this.gotoNextEvent}
                             gotoPrevEvent={this.gotoPrevEvent}
@@ -1314,7 +1326,7 @@ class EventPage extends React.Component {
                 />
                 <div id='fake_pageupstrip'> </div>
 
-                <ContactStrip />
+                <ContactStrip location={this.state.currentLocation} />
                 <CustomersStrip />
                 <Footer />
             </div>

@@ -65,7 +65,6 @@ class HomePageCarousel extends React.Component {
 
     uploadWidget = (e) => {
         const screen = e.target.dataset.screen;
-        console.log(screen);
         var myUploadWidget;
         myUploadWidget = cloudinary.openUploadWidget({ 
             cloud_name: 'orenpro', 
@@ -116,7 +115,6 @@ class HomePageCarousel extends React.Component {
                     if(screen === "desktop") {
                         this.props.startAddDesktopGallery( newImage ).then(() => {
                           this.props.startSetDesktopGallery().then((desktopImages) => {
-                            console.log(desktopImages);
                             this.setState({
                                 desktopImages
                             });
@@ -126,7 +124,6 @@ class HomePageCarousel extends React.Component {
                     } else {
                         this.props.startAddMobileGallery( newImage ).then(() => {
                           this.props.startSetMobileGallery().then((mobileImages) => {
-                            console.log(mobileImages);
                             this.setState({
                                 mobileImages
                             });
@@ -340,9 +337,6 @@ class HomePageCarousel extends React.Component {
     }
 
     render() {
-        console.log(this.props.media);
-        console.log(this.state.mobileImages);
-        console.log(this.state.desktopImages);
         let currentItems = this.state.desktopImages;
         if( this.state.media === 'mobile') {
             currentItems = this.state.mobileImages;

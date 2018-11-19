@@ -24,6 +24,15 @@ import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
 import isEqual from 'lodash.isequal';
 
 
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
+
+
 class AboutPage extends React.Component {
     constructor(props) {
         super(props);
@@ -46,7 +55,8 @@ class AboutPage extends React.Component {
             },
             images: [],
             galleryImages: [],
-            slideGalleryImages: []
+            slideGalleryImages: [],
+            currentLocation: ''
         }
     }
 
@@ -120,6 +130,12 @@ class AboutPage extends React.Component {
 
 
     componentDidMount = () => {
+
+        initializeReactGA('/about');
+        this.setState({
+            currentLocation: '/about'
+        });
+
         window.scrollTo(0, 0);
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
@@ -827,7 +843,7 @@ class AboutPage extends React.Component {
                 />
                 <div id='fake_pageupstrip'> </div>
 
-                <ContactStrip />
+                <ContactStrip location={this.state.currentLocation} />
                 <CustomersStrip />
                 <Footer />
             </div>

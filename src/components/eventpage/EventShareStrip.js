@@ -9,17 +9,15 @@ import { WhatsappShareButton } from 'react-share';
 const EventShareStrip = (props) => (
     
     <div className="event__sharestrip__box">
-        {
-        console.log(String(props.currentURL))
-        }
+
         <div className="common__intouch__seperator__box__desktop desktop">
             <div className="common__intouch__seperator__desktop desktop"></div>
         </div>
         <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
         <div className="events__eventshare__share desktop">
-            <WhatsappShareButton className="events__eventshare__phone" title='אורן ורינת' separator=' ' url={props.currentURL} />
-            <a href={`mailto:?subject="אורן ורינת הפקות"&body=${props.currentURL}`} target='_blank' className="events__eventshare__mail"> </a>
-            <ShareLink link={props.currentURL}>
+            <WhatsappShareButton className="events__eventshare__phone" title='אורן ורינת' separator=' ' url={`https://www.oren-pro.com/${props.location}`} />
+            <a href={`mailto:?subject="אורן ורינת הפקות"&body=${props.location}`} target='_blank' className="events__eventshare__mail"> </a>
+            <ShareLink link={`https://www.oren-pro.com/${props.location}`}>
             {link => (
                 <a href={link} target='_blank' className="events__eventshare__facebook"> </a>
             )}

@@ -45,6 +45,13 @@ import isEqual from 'lodash.isequal';
 import { stringReplace } from '../reusableFunctions/stringReplace';
 
 
+import ReactGA from 'react-ga';
+
+function initializeReactGA(url) {
+    ReactGA.initialize('UA-2975885-3');
+    ReactGA.pageview(url);
+}
+
 
 class EventsPage extends React.Component {
     constructor(props) {
@@ -93,7 +100,8 @@ class EventsPage extends React.Component {
                 title: '',
                 description: '',
                 keyWords: '',
-            }
+            },
+            currentLocation: ''
         }
     }
 
@@ -151,6 +159,12 @@ class EventsPage extends React.Component {
 
     
     componentDidMount = () => {
+
+        initializeReactGA(this.props.location.pathname);
+        this.setState({
+            currentLocation: this.props.location.pathname
+        });
+
         window.scrollTo(0, 0);
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
@@ -670,9 +684,18 @@ class EventsPage extends React.Component {
         });
         if(subcategoryId === '') {
             this.props.history.push(`/${stringReplace(this.state.category.name, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(this.state.category.name, ' ', '_')}`);
+            this.setState({
+                currentLocation: `/${stringReplace(this.state.category.name, ' ', '_')}`
+            });
         } else {
             this.props.history.push(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.state.category.name, ' ', '_')}`);
+            initializeReactGA(`/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.state.category.name, ' ', '_')}`);
+            this.setState({
+                currentLocation: `/${stringReplace(subcategoryName, ' ', '_')}/${stringReplace(this.state.category.name, ' ', '_')}`
+            });
         }
+        
         if (subcategoryId !== '') {
             this.state.subCategories.map((subcategory) => {
                 if (subcategoryName === subcategory.name) {
@@ -988,7 +1011,6 @@ class EventsPage extends React.Component {
                             this.state.allSubCategories.map((allSubcategory, index) => {
                                 if(subcategory.id === allSubcategory.id) {
                                     if(allSubcategory.id !== subcategoryId) {
-                                        console.log(allSubcategory);
                                         if (allSubcategory.categories) {
                                             if (allSubcategory.categories[categoryId] === true) {
                                                 eventExists = true;
@@ -1529,8 +1551,7 @@ class EventsPage extends React.Component {
         const seo = this.state.seo;
         const categoryId = this.state.category.id;
         const subcategoryId = this.state.subcategoryId;
-        console.log(this.props.location.pathname);
-        console.log(this.props.match.params.category);
+        
         let link = '';
         if(this.state.subcategoryId === '') {
             link = this.props.location.pathname;
@@ -1865,7 +1886,7 @@ class EventsPage extends React.Component {
                 />
                 <div id='fake_pageupstrip'> </div>
 
-                <ContactStrip />
+                <ContactStrip location={this.state.currentLocation} />
                 <CustomersStrip />
                 <Footer />
             </div>

@@ -40,21 +40,21 @@ var FontFaceObserver = require('fontfaceobserver');
 var fontHeeboRegular = new FontFaceObserver('Heebo-Regular');
 fontHeeboRegular.load().then(function () {
     //document.documentElement.className += " Heebo-Regular";
-  console.log('Heebo-Regular has loaded.');
+  //console.log('Heebo-Regular has loaded.');
 }).catch(function () {
-  console.log('Heebo-Regular failed to load.');
+  //console.log('Heebo-Regular failed to load.');
 });
 var fontHeeboMedium = new FontFaceObserver('Heebo-Medium');
 fontHeeboMedium.load().then(function () {
-  console.log('Heebo-Medium has loaded.');
+  //console.log('Heebo-Medium has loaded.');
 }).catch(function () {
-  console.log('Heebo-Medium failed to load.');
+  //console.log('Heebo-Medium failed to load.');
 });
 var fontHeeboBold = new FontFaceObserver('Heebo-Bold');
 fontHeeboBold.load().then(function () {
-  console.log('Heebo-Bold has loaded.');
+  //console.log('Heebo-Bold has loaded.');
 }).catch(function () {
-  console.log('Heebo-Bold failed to load.');
+  //console.log('Heebo-Bold failed to load.');
 });
 
 //require('typeface-heebo');
@@ -79,7 +79,7 @@ const store = configureStore();
 let hasRendered = false;
 let windowWidth = undefined;
 const renderApp = () => {
-    console.log('in startSetCostumers');
+    //console.log('in startSetCostumers');
     if (!hasRendered) {
         if (typeof(window) !== "undefined") {
             windowWidth = $( window ).width();
@@ -99,7 +99,7 @@ const renderApp = () => {
 //console.log(navigator.userAgent);
 if (typeof(window) !== "undefined") {
     if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
-        console.log("found");
+        //console.log("found");
         render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" alt="אורן ורינת הפקות אירועים"/></div>, document.getElementById('app'));
     } else {
         render(<div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>, document.getElementById('app'));
@@ -108,13 +108,13 @@ if (typeof(window) !== "undefined") {
 
 
 store.dispatch(startSetCategories()).then(() => {
-    console.log('in startSetCategories');
+    //console.log('in startSetCategories');
     store.dispatch(startSetDesktopGallery()).then(() => {
-        console.log('in startSetDesktopGallery');
+        //console.log('in startSetDesktopGallery');
         store.dispatch(startSetMobileGallery()).then(() => {
-            console.log('in startSetMobileGallery');
+            //console.log('in startSetMobileGallery');
             store.dispatch(startSetCostumers()).then(() => {
-                console.log('in startSetCostumers');
+            //console.log('in startSetCostumers');
                 renderApp();
             });
         });

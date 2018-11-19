@@ -7,7 +7,7 @@ import ReactLoading from "react-loading";
 let loadImage = "";
 if (typeof(window) !== "undefined") {
     if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
-        console.log("found");
+        //console.log("found");
         loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" alt="אורן ורינת הפקות אירועים" /></div>;
     } else {
         loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>;
@@ -32,7 +32,7 @@ export const history = typeof(window) !== "undefined" ? createHistory() : create
 
 class AppRouter extends React.Component {
     render() {
-        console.log(this.props.windowWidth);
+
         return (
             <Router history={history}>
                 <div>
@@ -61,14 +61,12 @@ class AppRouter extends React.Component {
                             }
                             {
                                 this.props.events.categories.map((category) => {
-                                    //this.props.events.allSubCategories.map((subcategory, index) => {
-                                        return <Route
-                                                    path={`/:event/:subcategory/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`}
-                                                    key={category.id}
-                                                    render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)}
-                                                    exact={true}
-                                                />;
-                                    //})
+                                    return <Route
+                                                path={`/:event/:subcategory/${category.name.replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_").replace(" ", "_")}`}
+                                                key={category.id}
+                                                render={(props) => ( <EventPage {...props} categoryName={category.name} categoryId={category.id} />)}
+                                                exact={true}
+                                            />;
                                 })
                             }
                             

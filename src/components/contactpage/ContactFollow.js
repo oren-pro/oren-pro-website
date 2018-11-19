@@ -1,13 +1,11 @@
 import React from 'react';
 
 const gotoFacebook = () => {
-    console.log('in facebook');
     if (typeof(window) !== "undefined") {
         window.open('https://www.facebook.com/oren.pro/');
     }
 }
 const gotoInstagram = () => {
-    console.log('in facebook');
     if (typeof(window) !== "undefined") {
         window.open('https://www.instagram.com/oren_rinat_pro/');
     }
