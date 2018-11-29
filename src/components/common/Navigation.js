@@ -113,7 +113,7 @@ class Navigation extends React.Component {
   componentDidMount = () => {
     window.addEventListener('load', this.handleLoad);
 
-    if(document.getElementById('enable-toolbar-trigger')) {
+    if (document.getElementById('enable-toolbar-trigger') && document.getElementById('enable-toolbar-buttons')) {
       document.getElementById('enable-toolbar-trigger').style.display = "none";
       document.getElementById('enable-toolbar-buttons').style.textAlign = "right";
     }
