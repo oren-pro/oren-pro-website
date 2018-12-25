@@ -95,14 +95,12 @@ app.use(function forceLiveDomain(req, res, next) {
 
   // http://www.oren-pro.com/13/אודות_אורן_הפקות
   if (String(req.originalUrl) === '/13/%D7%90%D7%95%D7%93%D7%95%D7%AA_%D7%90%D7%95%D7%A8%D7%9F_%D7%94%D7%A4%D7%A7%D7%95%D7%AA') {
-    return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
-    // נופש מנהלים במדבר
+    return res.redirect(301, '/about');
   }
 
   // http://www.oren-pro.com/1014/993/יום-כיף-בחורף
   if (String(req.originalUrl) === '/1014/993/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%91%D7%97%D7%95%D7%A8%D7%A3') {
     return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
-    // נופש מנהלים במדבר
   }
   // http://www.oren-pro.com/999/986/הפקות-אירועים-לחברות-
   if (String(req.originalUrl) === '/999/986/%D7%94%D7%A4%D7%A7%D7%95%D7%AA-%D7%90%D7%99%D7%A8%D7%95%D7%A2%D7%99%D7%9D-%D7%9C%D7%97%D7%91%D7%A8%D7%95%D7%AA-') {
