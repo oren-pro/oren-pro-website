@@ -30,8 +30,8 @@ export default class AboutContentStrip extends React.Component {
     onHeightChange = (e) => {
         const line = $('#eventsText').css('line-height').replace('px', '');
         this.setState({
-            height: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line),
-            minHeight: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line)
+            height: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line)-3,
+            minHeight: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line)-3
         });
         this.props.setData(e);
     }
@@ -40,8 +40,8 @@ export default class AboutContentStrip extends React.Component {
     componentDidMount = () => {
         const line = $('#eventsText').css('line-height').replace('px', '');
         this.setState({
-            height: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line),
-            minHeight: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line)
+            height: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line)-3,
+            minHeight: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line)-3
         });
     }
 

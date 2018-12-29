@@ -35,8 +35,8 @@ export default class EventHeader extends React.Component {
     setHeight = (showLines) => {
         const line = $('#eventsText').css('line-height').replace('px', '');
         this.setState({
-            height: Math.round(showLines * line),
-            minHeight: Math.round(showLines* line)
+            height: Math.round(showLines * line)-3,
+            minHeight: Math.round(showLines* line)-3
         });
     }
 
