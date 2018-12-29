@@ -33,27 +33,11 @@ export default class EventHeader extends React.Component {
     }
 
     setHeight = (showLines) => {
-        let windowWidth = 1960;
-        if (typeof(window) !== "undefined") {
-            windowWidth = $(window).width();
-        }
-        let ratio = 2.2;
-        let lineHeight = 22;
-        if (windowWidth < 768) {
-            ratio = getMobileRatio(windowWidth).ratio;
-            lineHeight = getMobileRatio(windowWidth).lineHeight;
-            this.setState({
-                height: Math.round(showLines * ratio) * lineHeight,
-                minHeight: Math.round(showLines* ratio) * lineHeight
-            });
-        } else {
-            ratio = getDesktopRatio(windowWidth);
-            this.setState({
-                height: showLines * ratio * (windowWidth/100),
-                minHeight: showLines * ratio * (windowWidth/100),
-                showLines: showLines
-            });
-        }
+        const line = $('#eventsText').css('line-height').replace('px', '');
+        this.setState({
+            height: Math.round(showLines * line),
+            minHeight: Math.round(showLines* line)
+        });
     }
 
     componentDidMount = () => {
@@ -122,6 +106,7 @@ export default class EventHeader extends React.Component {
                                 this.props.isAuthenticated === true ? 
                                     <div className={shouldHighLight(this.props.eventTextOrigin, this.props.eventText)}>
                                         <Textarea
+                                            id="eventsText"
                                             className="events__text Heebo-Regular"
                                             value={this.props.eventText}
                                             data-field="text"
@@ -135,6 +120,7 @@ export default class EventHeader extends React.Component {
 
                                 :
                                     <Textarea
+                                        id="eventsText"
                                         className="events__text Heebo-Regular"
                                         value={this.props.eventText}
                                         readOnly

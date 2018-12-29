@@ -95,7 +95,7 @@
     border: 1px solid $gray;
     height: 1.9rem;
     font-size: 1.5rem;
-    line-height: 0.5rem;
+    line-height: 1.7rem;
     padding: 0;
     margin: 0;
     padding-left: 0.4rem;
@@ -484,6 +484,7 @@ $slideCrouselControlsTransitionStyle: ease-out;
         font-size: $textMobileSize;
         line-height: $textMobileLineHeight;
         width: 86vw;
+        padding-right: 2vw;
     }
 
     .events__text__flexbox {
@@ -500,7 +501,7 @@ $slideCrouselControlsTransitionStyle: ease-out;
     .events__text {
         text-align: center;
         font-size: 3rem;
-        line-height: 1.5rem;
+        line-height: 3rem;
         width: 92%;
     }
 
@@ -571,6 +572,7 @@ $slideCrouselControlsTransitionStyle: ease-out;
     .events__text__box textarea {
         text-align: center;
         max-width: 92vw;
+        padding-right: 1vw;
         font-size: 6.5vw;
         line-height: 6.5vw;
     }

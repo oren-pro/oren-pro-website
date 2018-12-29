@@ -28,56 +28,21 @@ export default class AboutContentStrip extends React.Component {
     };
 
     onHeightChange = (e) => {
-        console.log('onHeightChange');
-        let height = e.target.value * 17;
-        let minHeight = e.target.value * 17;
-        let windowWidth = 1960;
-        if (typeof(window) !== "undefined") {
-            windowWidth = $(window).width();
-        }
-        let ratio = 2.2;
-        let lineHeight = 22;
-        if (windowWidth < 768) {
-            ratio = getMobileRatio(windowWidth).ratio;
-            lineHeight = getMobileRatio(windowWidth).lineHeight;
-            height = Math.round(e.target.value * ratio) * lineHeight;
-            minHeight = Math.round(e.target.value * ratio) * lineHeight;
-        } else {
-            ratio = getDesktopRatio(windowWidth);
-            height = e.target.value * ratio * (windowWidth/100);
-            minHeight = e.target.value * ratio * (windowWidth/100);
-        }
+        const line = $('#eventsText').css('line-height').replace('px', '');
         this.setState({
-            height,
-            minHeight
+            height: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line),
+            minHeight: e.target.value === '9999' ? 'auto' : Math.round(e.target.value * line)
         });
         this.props.setData(e);
     }
  
 
     componentDidMount = () => {
-        let windowWidth = 1960;
-        if (typeof(window) !== "undefined") {
-            windowWidth = $(window).width();
-        }
-        let ratio = 2.2;
-        let lineHeight = 22;
-        if (windowWidth < 768) {
-            ratio = getMobileRatio(windowWidth).ratio;
-            lineHeight = getMobileRatio(windowWidth).lineHeight;
-            console.log(ratio);
-            console.log(lineHeight);
-            this.setState({
-                height: Math.round(this.props.aboutpage[this.props.index].linesShow * ratio) * lineHeight,
-                minHeight: Math.round(this.props.aboutpage[this.props.index].linesShow * ratio) * lineHeight
-            });
-        } else {
-            ratio = getDesktopRatio(windowWidth);
-            this.setState({
-                height: this.props.aboutpage[this.props.index].linesShow * ratio * (windowWidth/100),
-                minHeight: this.props.aboutpage[this.props.index].linesShow * ratio * (windowWidth/100)
-            });
-        }
+        const line = $('#eventsText').css('line-height').replace('px', '');
+        this.setState({
+            height: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line),
+            minHeight: this.props.aboutpage[this.props.index].linesShow === '9999' ? 'auto' : Math.round(this.props.aboutpage[this.props.index].linesShow * line)
+        });
     }
 
     render() {
@@ -120,6 +85,7 @@ export default class AboutContentStrip extends React.Component {
                     { 
                         this.props.isAuthenticated === true ? 
                             <Textarea
+                                id="eventsText"
                                 className={shouldHighLight(this.props.aboutpageOrigin[this.props.index].text, this.props.aboutpage[this.props.index].text)}
                                 defaultValue={this.props.aboutpage[this.props.index].text}
                                 data-field="text"
@@ -131,6 +97,7 @@ export default class AboutContentStrip extends React.Component {
                             />
                         :
                              <Textarea
+                                id="eventsText"
                                 className="about__content__text Heebo-Regular"
                                 defaultValue={this.props.aboutpage[this.props.index].text}
                                 readOnly
