@@ -919,7 +919,7 @@ app.post("/sendEmail", bodyParser.urlencoded({ extended: true }), function(reque
           from: 'message@frixell.net',
           to: 'info@oren-pro.com',
           subject: request.body.email,
-          text: request.body.name + '\r\n' + request.body.email + '\r\n' + request.body.message
+          text: request.body.name + '\r\n' + request.body.email + '\r\n' + request.body.phone + '\r\n' + request.body.message
         };
         transporter.sendMail (mailOptions, function(error, info){
           if(error){

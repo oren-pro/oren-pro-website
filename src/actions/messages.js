@@ -22,7 +22,7 @@ export const startSendMessage = (messageData = {}) => {
     };
 };
 
-export const sendMessage = ({ name, email, message }) => {
+export const sendMessage = ({ name, email, phone, message }) => {
     return (dispatch) => {
         var method = 'POST';
         //var action = 'http://localhost:3000/sendEmail';
@@ -31,6 +31,7 @@ export const sendMessage = ({ name, email, message }) => {
         var data = '';
         data += 'name=' + name;
         data += '&email=' + email;
+        data += '&phone=' + phone;
         data += '&message=' + message;
         xhr.open(method, action);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
