@@ -332,6 +332,10 @@ $slideCrouselControlsTransitionStyle: ease-out;
 }
 
 
+.carousel-item {
+    margin-right: 0;
+}
+
 .carousel__fade .carousel-inner {
   .carousel-item {
     opacity: 0;

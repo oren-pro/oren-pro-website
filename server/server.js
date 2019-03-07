@@ -11,81 +11,9 @@ const fs = require('fs');
 
 
 
-
-//*** server side rendering ***//
-
-
-// import { createStore } from 'redux';
-// import { Provider } from 'react-redux';
-// import thunk from 'redux-thunk';
-// import aboutpageReducer from '../src/reducers/aboutpage';
-// import authReducer from '../src/reducers/auth';
-// import costumersReducer from '../src/reducers/costumers';
-// import eventspageReducer from '../src/reducers/eventspage';
-// import homepageReducer from '../src/reducers/homepage';
-// import navigationReducer from '../src/reducers/navigation';
-// import newsletterReducer from '../src/reducers/newsletter';
-// import messagesReducer from '../src/reducers/messages';
-// import desktopGalleryReducer from '../src/reducers/desktopGallery';
-// import mobileGalleryReducer from '../src/reducers/mobileGallery';
-// import App from '../src/App';
-
-// import { renderToString } from 'react-dom/server';
-// import React from 'react';
-
-// function handleRender(req, res) {
-//     // Create a new Redux store instance
-//     // const store = createStore(
-//     //     combineReducers({
-//     //         aboutpage: aboutpageReducer,
-//     //         auth: authReducer,
-//     //         costumers: costumersReducer,
-//     //         eventspage: eventspageReducer,
-//     //         homepage: homepageReducer,
-//     //         messages: messagesReducer,
-//     //         navigation: navigationReducer,
-//     //         newsletter: newsletterReducer,
-//     //         desktopGallery: desktopGalleryReducer,
-//     //         mobileGallery: mobileGalleryReducer
-//     //     }),
-//     //     composeEnhancers(applyMiddleware(thunk))
-//     // );
-//     // Render the component to a string
-//     const html = renderToString(
-//       //<Provider store={store}>
-//         <App />
-//       //</Provider>
-//     )
-//     // Grab the initial state from our Redux store
-//     //const preloadedState = store.getState()
-//     // Send the rendered page back to the client
-//     res.send(renderFullPage(html))//, preloadedState))
-// }
-
-
-//******    end ssr      ******//
-
-
-
-
-
 var admin = require("firebase-admin");
 
-
-
-//var gmail = require('../config/gmail');
-//var cloudinaryVars = require('../config/cloudinary');
-
 const app = express();
-
-
-
-
-//*** server side rendering ***//
-
-//app.use(handleRender);
-
-//******    end ssr      ******//
 
 
 
@@ -580,8 +508,18 @@ app.use(cors({
 
 
 // prerender.io
-
-var prerender = require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN);
+//app.use(require('prerender-node').whitelisted(['/search', '/users/.*/profile']));
+var prerender = require('prerender-node')
+                .whitelisted([
+                              '/',
+                              '/about', 
+                              '/מאמרים/.*',
+                              '/אירועי_חברה/.*',
+                              '/אירועי_שיווק_וקד״מ/.*',
+                              '/פסטיבלים_ואירועי_חוצות/.*',
+                              '/קצת_אחרת/.*',
+                              ])
+                .set('prerenderToken', process.env.PRERENDER_TOKEN);
 prerender.crawlerUserAgents = [];
 prerender.crawlerUserAgents.push('googlebot');
 prerender.crawlerUserAgents.push('bingbot');
