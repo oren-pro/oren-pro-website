@@ -45,9 +45,18 @@ class EventsTabs extends React.Component {
                     <h3 className="events__tabs__header Heebo-Medium" dir="rtl">מה מעניין אתכם?</h3>
                     <div className={this.props.subCategoriesOrigin ? shouldHighLight(this.props.subCategoriesOrigin, this.state.subCategories) : ""}>
                     <div className="events__tabs__tabs__box" dir="rtl">
-                        <button data-id='' className={this.state.subcategoryId === '' ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
-                            הכל
-                        </button>
+                        
+
+                        
+                        {
+                            this.props.categoryName !== "מאמרים" || (this.props.categoryName === "מאמרים" && this.props.isAuthenticated === true) ?
+                                <button data-id='' className={this.state.subcategoryId === '' ? "events__tabs__button events__tabs__button--selected" : "events__tabs__button"} onClick={this.props.setSubcategoryId}>
+                                    הכל
+                                </button>
+                            :
+                                null
+                        }
+
                         {
                             this.state.subCategories.length > 0 ?
                                 this.state.subCategories.map((subCategory) => {

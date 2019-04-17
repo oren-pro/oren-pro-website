@@ -63,6 +63,7 @@ class EventsPage extends React.Component {
             ratioInstagram: 1,
             ratioMail: 1,
             ratioPhone: 1,
+            ratioWhatsapp: 1,
             ratioGreenArrow: 1,
             categoryOrigin: {},
             category: {
@@ -1749,7 +1750,9 @@ class EventsPage extends React.Component {
                             onChange={this.onCategoryNameChange}
                             onUpdateCategory={this.onUpdateCategory}
                         />
+
                         <EventsTabs
+                            categoryName={this.state.category.name}
                             categoryId={this.state.category.id}
                             subcategoryId={this.state.subcategoryId}
                             subCategoriesOrigin={this.state.subCategoriesOrigin}
@@ -1760,6 +1763,7 @@ class EventsPage extends React.Component {
                             startAddNewSubcategory={this.startAddNewSubcategory}
                             startEditSubcategory={this.startEditSubcategory}
                         />
+                        
                         { 
                             this.props.isAuthenticated === true ? 
                                 <div className="backoffice__edit__events__tabs__box" hidden={this.state.hideSubcategoriesEditPanel}>
@@ -1875,6 +1879,7 @@ class EventsPage extends React.Component {
                         ratioInstagram={this.state.ratioInstagram}
                         ratioMail={this.state.ratioMail}
                         ratioPhone={this.state.ratioPhone}
+                        ratioWhatsapp={this.state.ratioWhatsapp}
                         setIconRatioOn={this.setIconRatioOn}
                         setIconRatioOut={this.setIconRatioOut} 
                     />

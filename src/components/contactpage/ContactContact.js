@@ -11,6 +11,12 @@ const gotoPhone = () => {
     }
 }
 
+const gotoWhatsapp = () => {
+    if (typeof(window) !== "undefined") {
+        window.location = 'https://api.whatsapp.com/send?phone=972502793636&text=אורן ורינת הפקות שלום';
+    }
+}
+
 const ContactContact = (props) => (
     <div className={`contact__contact__box--${props.style}`}>
         <h3 className={`contact__contact__header--${props.style} Heebo-Medium`}>צרו קשר</h3>
@@ -25,6 +31,12 @@ const ContactContact = (props) => (
         <div className={`h-over contact__contact__text__line--${props.style}`} onClick={gotoMail} dir="rtl">
             <p className={`contact__contact__text--${props.style} Heebo-Regular Heebo-Medium-Mobile`} dir="rtl">דוא״ל</p>
             <p className={`contact__contact__text--${props.style} Heebo-Regular`} dir="rtl">info@oren-pro.com</p>
+        </div>
+        <div className={`h-over contact__contact__text__line--${props.style}`} onClick={gotoWhatsapp} dir="rtl">
+            <p className={`contact__contact__text--${props.style} Heebo-Regular Heebo-Medium-Mobile`} dir="rtl">ווטסאפ</p>
+            <p className={`contact__contact__text--${props.style} Heebo-Regular`} dir="rtl">
+                <img className="social__icon" src="/images/contact/whatsapp_white.svg" alt="אורן ורינת הפקות אירועים - לוגו" />
+            </p>
         </div>
         {
             props.style === 'page' ?

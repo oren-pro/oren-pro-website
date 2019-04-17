@@ -41,6 +41,18 @@ const icons = {
     vbwidth: 23.03,
     vbheight: 22.97
   }
+  ,
+  whatsapp: {
+    paths: [
+      'M18.71,0A17.72,17.72,0,0,0,1,17.68a17.37,17.37,0,0,0,1.66,7.41l.12-.77s0-.05,0-.08A17.32,17.32,0,1,1,8,31.05a.8.8,0,0,1-.24.14,1.8,1.8,0,0,1-.32.06A17.68,17.68,0,1,0,18.71,0Z',
+      'M28.6,24.75l-.87.86,0,0a5.12,5.12,0,0,1-1.25.71,5.34,5.34,0,0,1-1.28.32c-.2,0-4.83.45-10.59-5.28-4.16-4.16-5.69-7.21-5.28-10.56a5,5,0,0,1,.31-1.27,4.78,4.78,0,0,1,.71-1.25l0,0,.86-.86a1.61,1.61,0,0,1,2.26,0l3.06,3.06a1.59,1.59,0,0,1,0,2.25l-.51.51-1,1,.16.3a15.46,15.46,0,0,0,2.69,3.71,15.48,15.48,0,0,0,3.72,2.68l.3.17,1.55-1.54a1.59,1.59,0,0,1,2.25,0l3.06,3.05A1.59,1.59,0,0,1,28.6,24.75Z',
+      'M8.12,31,.69,33.19l2.1-8.79-.49-.12L0,33.91l8.52-2.47A2.59,2.59,0,0,1,8.12,31Z'
+    ],
+    width: 2.3,
+    height: 2.3,
+    vbwidth: 32,
+    vbheight: 32
+  }
 };
 
 const ratioFixer = 0.73;
@@ -54,6 +66,7 @@ class IconHoverGrow extends React.Component {
           measure = 'em';
       }
     }
+    //console.log(this.props.icon);
     const width = (icons[this.props.icon].width * this.props.ratio * ratioFixer) + measure;
     const height = (icons[this.props.icon].height * this.props.ratio * ratioFixer) + measure;
     const vbwidth = icons[this.props.icon].vbwidth;

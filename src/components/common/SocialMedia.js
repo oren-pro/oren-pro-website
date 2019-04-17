@@ -31,6 +31,12 @@ class SocialMedia extends React.Component {
             window.location = 'tel:049544588';
         }
     }
+
+    gotoWhatsapp = () => {
+      if (typeof(window) !== "undefined") {
+        window.location = 'https://api.whatsapp.com/send?phone=972502793636&text=אורן ורינת הפקות שלום';
+      }
+    }
     
     render() {
         return (
@@ -73,6 +79,16 @@ class SocialMedia extends React.Component {
                         >
                             <IconHoverGrow icon="phone" ratio={this.props.ratioPhone} />
                         </button>
+                        <button
+                            className="homepage__socialmedia-button"
+                            data-name="whatsapp"
+                            onMouseEnter={this.props.setIconRatioOn}
+                            onMouseLeave={this.props.setIconRatioOut}
+                            onClick={this.gotoWhatsapp}
+                        >
+                            <img className="social__icon" src="/images/contact/whatsapp.svg" alt="אורן ורינת הפקות אירועים - לוגו" />
+                        </button>
+                        
                     </div>
                     <HomepageSocialmediaRightBorder />
                 </div>

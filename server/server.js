@@ -513,6 +513,7 @@ var prerender = require('prerender-node')
                 .whitelisted([
                               '/',
                               '/about', 
+                              '/contact', 
                               '/מאמרים/.*',
                               '/אירועי_חברה/.*',
                               '/אירועי_שיווק_וקד״מ/.*',

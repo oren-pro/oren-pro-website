@@ -599,6 +599,16 @@ input[type="email"]::-webkit-input-placeholder {
     vertical-align: top;
 }
 
+.social__icon {
+    width: 1.6vw;
+    height: 1.6vw;
+}
+
+.social__icon:hover {
+    width: 1.8vw;
+    height: 1.8vw;
+}
+
 ::-webkit-scrollbar {
         -webkit-appearance: none;
         width: 7px;

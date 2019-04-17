@@ -512,10 +512,12 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
     category
 });
 
-export const startEditEvent = ( eventName, eventText, eventShowLines, eventId ) => {
+export const startEditEvent = ( eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId ) => {
     const event = {
         name: eventName,
         text: eventText,
+        linkText: eventLinkText,
+        linkLink: eventLinkLink,
         showLines: eventShowLines
     }
     return (dispatch) => {

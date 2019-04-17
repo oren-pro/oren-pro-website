@@ -51,6 +51,7 @@ export default class EventHeader extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         const { height } = this.state;
         return (
             <div className="event__header__box">
@@ -95,6 +96,49 @@ export default class EventHeader extends React.Component {
                         </div>
                     </div>
                 </div>
+
+
+                {
+                    this.props.categoryName === "מאמרים" ?
+                        this.props.isAuthenticated === true ?
+                            <div className={shouldHighLight(this.props.linkNameOrigin, this.props.linkName)}>
+                                <AutosizeInput
+                                    className="event__link__text__input Heebo-Regular"
+                                    name="linkText"
+                                    data-name="linkText"
+                                    data-index={this.props.categoryId}
+                                    data-field='linkText'
+                                    data-action={this.props.action}
+                                    placeholder="טקסט לקישור"
+                                    value={this.props.eventLinkText}
+                                    onChange={this.props.onEventLinkTextChange}
+                                    dir="rtl"
+                                />
+                                <AutosizeInput
+                                    className="event__link__link__input Heebo-Regular"
+                                    name="linkLink"
+                                    data-name="linkLink"
+                                    data-index={this.props.categoryId}
+                                    data-field='linkLink'
+                                    data-action={this.props.action}
+                                    placeholder="לינק לקישור"
+                                    value={this.props.eventLinkLink}
+                                    onChange={this.props.onEventLinkLinkChange}
+                                    dir="rtl"
+                                />
+                            </div>
+                        :
+                            
+                            this.props.eventLinkText ?
+                                <a className="event__link" href={this.props.eventLinkLink} target="_BLANK">{this.props.eventLinkText} - לחצו כאן</a>
+                            :
+                                null
+                    :
+                        null
+                }
+
+
+
                 <div className="event__text__box">
                     
                     <div className="events__text__flexbox" dir="rtl">

@@ -5,28 +5,41 @@ export const iconRatioOn = (e) => {
                 ratioFacebook: 1.15,
                 ratioInstagram: 1,
                 ratioMail: 1,
-                ratioPhone: 1
+                ratioPhone: 1,
+                ratioWhatsapp: 1
             };
         case 'instagram':
             return {
                 ratioFacebook: 1,
                 ratioInstagram: 1.15,
                 ratioMail: 1,
-                ratioPhone: 1
+                ratioPhone: 1,
+                ratioWhatsapp: 1
             };
         case 'mail':
             return {
                 ratioFacebook: 1,
                 ratioInstagram: 1,
                 ratioMail: 1.15,
-                ratioPhone: 1
+                ratioPhone: 1,
+                ratioWhatsapp: 1
             };
         case 'phone':
             return {
                 ratioFacebook: 1,
                 ratioInstagram: 1,
                 ratioMail: 1,
-                ratioPhone: 1.15
+                ratioPhone: 1.15,
+                ratioWhatsapp: 1
+            };
+        case 'whatsapp':
+        console.log('whatsapp');
+            return {
+                ratioFacebook: 1,
+                ratioInstagram: 1,
+                ratioMail: 1,
+                ratioPhone: 1,
+                ratioWhatsapp: 1.15
             };
         case 'greenArrow':
             return {

@@ -68,6 +68,7 @@ class EventPage extends React.Component {
             ratioInstagram: 1,
             ratioMail: 1,
             ratioPhone: 1,
+            ratioWhatsapp: 1,
             ratioGreenArrow: 1,
             categoryId: '',
             subCategories: [],
@@ -75,6 +76,8 @@ class EventPage extends React.Component {
             currentItems: [],
             stripItems: [],
             eventName: '',
+            eventLinkText: '',
+            eventLinkLink: '',
             eventText: '',
             eventShowLines: 1,
             eventNameOrigin: '',
@@ -144,12 +147,17 @@ class EventPage extends React.Component {
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
+        let eventLinkText = '';
+        let eventLinkLink = '';
         let eventShowLines = 1;
         let seo = {};
         items.map((item) => {
             if (eventName === item.name) {
+                console.log("item: ", item);
                 eventId = item.id;
                 eventText = item.text;
+                eventLinkText = item.linkText;
+                eventLinkLink = item.linkLink;
                 eventShowLines = item.showLines;
                 if (!item.seo) {
                     item.seo = {
@@ -238,9 +246,18 @@ class EventPage extends React.Component {
         if( eventText === undefined){
             eventText = "";
         }
+        if( eventLinkText === undefined){
+            eventLinkText = "";
+        }
+        if( eventLinkLink === undefined){
+            eventLinkLink = "";
+        }
+        
         this.setState({
             eventId,
             eventText,
+            eventLinkText,
+            eventLinkLink,
             eventTextOrigin: eventText,
             eventShowLines,
             eventShowLinesOrigin: eventShowLines,
@@ -701,9 +718,11 @@ class EventPage extends React.Component {
         } else {
             const eventName = JSON.parse(JSON.stringify(this.state.eventName));
             const eventText = JSON.parse(JSON.stringify(this.state.eventText));
+            const eventLinkText = JSON.parse(JSON.stringify(this.state.eventLinkText));
+            const eventLinkLink = JSON.parse(JSON.stringify(this.state.eventLinkLink));
             const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
             const eventId = JSON.parse(JSON.stringify(this.state.eventId));
-            this.props.startEditEvent(eventName, eventText, eventShowLines, eventId).then(() => {
+            this.props.startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId).then(() => {
                 let gotoNewLocation = false;
                 if(eventName !== this.state.eventNameOrigin) {
                     gotoNewLocation = true;
@@ -711,6 +730,8 @@ class EventPage extends React.Component {
                 this.setState(() => ({
                     eventName,
                     eventText,
+                    eventLinkText,
+                    eventLinkLink,
                     eventShowLines,
                     eventNameOrigin: eventName,
                     eventTextOrigin: eventText,
@@ -746,6 +767,35 @@ class EventPage extends React.Component {
                 window.addEventListener("beforeunload", this.unloadFunc);
             }
         }
+    }
+
+    onEventLinkTextChange = (e) => {
+        const eventLinkText = e.target.value;
+        console.log("in link text");
+        this.setState({
+            eventLinkText
+        });
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.eventLinkTextOrigin, eventLinkText) && isEqual(this.state.eventLinkTextOrigin, this.state.eventLinkText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
+    }
+
+    onEventLinkLinkChange = (e) => {
+        const eventLinkLink = e.target.value;
+        this.setState({
+            eventLinkLink
+        });
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.eventNameOrigin, eventName) && isEqual(this.state.eventTextOrigin, this.state.eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
     }
 
     onEventTextChange = (e) => {
@@ -1239,7 +1289,9 @@ class EventPage extends React.Component {
                         }
 
                         <EventsHeader categoryName={this.props.categoryName} />
+
                         <EventsTabs
+                            categoryName={this.props.categoryName}
                             isAuthenticated={this.props.isAuthenticated}
                             isEditable={false}
                             categoryId={this.props.categoryId}
@@ -1248,6 +1300,7 @@ class EventPage extends React.Component {
                             setSubcategoryId={this.setSubcategoryId}
                             startAddNewSubcategory={this.startAddNewSubcategory}
                         />
+                        
                         <EventShareStrip 
                             currentURL={this.state.currentURL}
                             location={this.state.currentLocation}
@@ -1257,14 +1310,19 @@ class EventPage extends React.Component {
                             currentItems={this.state.currentItems}
                         />
                         <EventHeader
+                            categoryName={this.props.categoryName}
                             eventName={this.state.eventName}
                             eventText={this.state.eventText}
+                            eventLinkText={this.state.eventLinkText}
+                            eventLinkLink={this.state.eventLinkLink}
                             showLines={this.state.eventShowLines}
                             eventNameOrigin={this.state.eventNameOrigin}
                             eventTextOrigin={this.state.eventTextOrigin}
                             showLinesOrigin={this.state.eventShowLinesOrigin}
                             isAuthenticated={this.props.isAuthenticated}
                             onEventNameChange={this.onEventNameChange}
+                            onEventLinkTextChange={this.onEventLinkTextChange}
+                            onEventLinkLinkChange={this.onEventLinkLinkChange}
                             onEventTextChange={this.onEventTextChange}
                             onEventShowLinesChange={this.onEventShowLinesChange}
                             onUpdateEvent={this.onUpdateEvent}
@@ -1315,6 +1373,7 @@ class EventPage extends React.Component {
                         ratioInstagram={this.state.ratioInstagram}
                         ratioMail={this.state.ratioMail}
                         ratioPhone={this.state.ratioPhone}
+                        ratioWhatsapp={this.state.ratioWhatsapp}
                         setIconRatioOn={this.setIconRatioOn}
                         setIconRatioOut={this.setIconRatioOut} 
                     />
@@ -1350,7 +1409,7 @@ const mapDispatchToProps = (dispatch) => ({
     startAddImage: (image, categoryId, order) => dispatch(startAddImage(image, categoryId, order)),
     startSetImages: (eventId, categoryId, itemLocation) => dispatch(startSetImages(eventId, categoryId, itemLocation)),
     setSubcategoryId: (id) => dispatch(setSubcategoryId(id)),
-    startEditEvent: (eventName, eventText, eventShowLines, eventId) => dispatch(startEditEvent(eventName, eventText, eventShowLines, eventId)),
+    startEditEvent: (eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId) => dispatch(startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId)),
     startEditImages: (fbImages, images, eventId, categoryId) => dispatch(startEditImages(fbImages, images, eventId, categoryId)),
     startDeleteImage: (fbImages, images, eventId, categoryId, publicid) => dispatch(startDeleteImage(fbImages, images, eventId, categoryId, publicid)),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),

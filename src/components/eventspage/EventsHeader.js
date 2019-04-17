@@ -33,10 +33,21 @@ class EventsHeader extends React.Component {
                     :
                         <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.categoryName}</h1>
                 }
-                <div className="common__intouch__seperator__box__desktop desktop">
-                    <div className="common__intouch__seperator__desktop desktop"></div>
-                </div>
-                <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
+                {
+                    this.props.categoryName !== "מאמרים" || (this.props.categoryName === "מאמרים" && this.props.isAuthenticated === true) ?
+                        <div className="common__intouch__seperator__box__desktop desktop">
+                            <div className="common__intouch__seperator__desktop desktop"></div>
+                        </div>
+                    :
+                        null
+                }
+                {
+                    this.props.categoryName !== "מאמרים" || (this.props.categoryName === "מאמרים" && this.props.isAuthenticated === true) ?
+                        <img className="events__seperator mobile" src="/images/eventspage/events-seperator-mobile.png" alt="קו הפרדה" />
+                    :
+                        null
+                }
+                
             </div>
         );
     }

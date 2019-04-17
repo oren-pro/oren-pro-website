@@ -16,6 +16,10 @@ export const iconRatioOut = (e) => {
                 return { 
                     ratioPhone: 1
                 };
+            case 'whatsapp':
+                return { 
+                    ratioWhatsapp: 1
+                };
             case 'greenArrow':
                 return {
                     ratioGreenArrow: 1

@@ -52,6 +52,7 @@ class HomePage extends React.Component {
             ratioInstagram: 1,
             ratioMail: 1,
             ratioPhone: 1,
+            ratioWhatsapp: 1,
             ratioGreenArrow: 1,
             homepageOrigin: {},
             homepage: {},
@@ -778,6 +779,7 @@ class HomePage extends React.Component {
                             ratioInstagram={this.state.ratioInstagram}
                             ratioMail={this.state.ratioMail}
                             ratioPhone={this.state.ratioPhone}
+                            ratioWhatsapp={this.state.ratioWhatsapp}
                             setIconRatioOn={this.setIconRatioOn}
                             setIconRatioOut={this.setIconRatioOut} 
                         />

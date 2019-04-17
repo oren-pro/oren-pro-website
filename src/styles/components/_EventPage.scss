@@ -258,6 +258,42 @@ $iconMarginBottom: 0.6rem;
     padding-top: 1rem;
 }
 
+.event__link__text__input {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 1.5rem;
+}
+
+.event__link {
+    display: block;
+    color: $gray;
+    font-size: 2rem;
+    text-decoration: underline;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.event__link:hover {
+    color: $gray;
+}
+
+.event__link__link__input {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 0rem;
+}
+
 .event__header__seperator {
     display: inline-block;
     margin-left: auto;
@@ -556,6 +592,14 @@ $eventsEventImageHeightMobile: 60vw;
 
     .event__header__input {
         font-size: 3.3rem;
+    }
+
+    .event__link__text__input {
+        font-size: 2.8rem;
+    }
+
+    .event__link__link__input {
+        font-size: 2.8rem;
     }
 
     .event__header {
