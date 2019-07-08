@@ -266,6 +266,7 @@ class Navigation extends React.Component {
                     
                     <img className="carousel_logo mobile" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='mobile' media='mobile' />
+                    
                   </div>
                 :
                   <div className='desktop' id="hp_carousel_desktop">
@@ -273,6 +274,7 @@ class Navigation extends React.Component {
                     
                     <img className="carousel_logo desktop" className="carousel_logo" src="/images/homepage/carousel/carousel_logo.svg" alt="אורן ורינת הפקות אירועים" onLoad={this.handleLoad} />
                     <HomePageCarousel className='desktop' media='desktop' />
+                    {/*<HomePageVideo windowWidth={this.props.windowWidth} windowHeight={this.props.windowHeight} />*/}
                   </div>
               :
                 null

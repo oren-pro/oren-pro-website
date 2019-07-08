@@ -73,6 +73,7 @@
     "react-router-dom": "^4.2.2",
     "react-share": "^2.3.1",
     "react-slick": "^0.23.1",
+    "react-youtube": "^7.9.0",
     "reactstrap": "^6.1.0",
     "redux": "^4.0.0",
     "redux-mock-store": "^1.5.1",

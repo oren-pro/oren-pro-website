@@ -51,7 +51,7 @@ export default class EventHeader extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        //console.log(this.props)
         const { height } = this.state;
         return (
             <div className="event__header__box">

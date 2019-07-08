@@ -11,6 +11,7 @@ import CustomersStrip from '../components/common/CustomersStrip';
 import Footer from '../components/common/Footer';
 import EventsHeader from '../components/eventspage/EventsHeader';
 import EventHeader from '../components/eventpage/EventHeader';
+import EventVideo from '../components/eventpage/EventVideo';
 import EventImages from '../components/eventpage/EventImages';
 import EventShareStrip from '../components/eventpage/EventShareStrip';
 import EventsTabs from '../components/eventspage/EventsTabs';
@@ -80,6 +81,7 @@ class EventPage extends React.Component {
             eventLinkLink: '',
             eventText: '',
             eventShowLines: 1,
+            eventVideoId: '',
             eventNameOrigin: '',
             eventTextOrigin: '',
             eventShowLinesOrigin: 1,
@@ -150,6 +152,7 @@ class EventPage extends React.Component {
         let eventLinkText = '';
         let eventLinkLink = '';
         let eventShowLines = 1;
+        let eventVideoId = '';
         let seo = {};
         items.map((item) => {
             if (eventName === item.name) {
@@ -159,6 +162,7 @@ class EventPage extends React.Component {
                 eventLinkText = item.linkText;
                 eventLinkLink = item.linkLink;
                 eventShowLines = item.showLines;
+                eventVideoId = item.videoId;
                 if (!item.seo) {
                     item.seo = {
                         title: '',
@@ -243,6 +247,9 @@ class EventPage extends React.Component {
         if( eventShowLines === undefined){
             eventShowLines = 1;
         }
+        if( eventVideoId === undefined){
+            eventVideoId = '';
+        }
         if( eventText === undefined){
             eventText = "";
         }
@@ -260,6 +267,7 @@ class EventPage extends React.Component {
             eventLinkLink,
             eventTextOrigin: eventText,
             eventShowLines,
+            eventVideoId,
             eventShowLinesOrigin: eventShowLines,
             itemLocation,
             nextItem,
@@ -721,8 +729,9 @@ class EventPage extends React.Component {
             const eventLinkText = JSON.parse(JSON.stringify(this.state.eventLinkText));
             const eventLinkLink = JSON.parse(JSON.stringify(this.state.eventLinkLink));
             const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
+            const eventVideoId = JSON.parse(JSON.stringify(this.state.eventVideoId));
             const eventId = JSON.parse(JSON.stringify(this.state.eventId));
-            this.props.startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId).then(() => {
+            this.props.startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId).then(() => {
                 let gotoNewLocation = false;
                 if(eventName !== this.state.eventNameOrigin) {
                     gotoNewLocation = true;
@@ -810,6 +819,15 @@ class EventPage extends React.Component {
                 window.addEventListener("beforeunload", this.unloadFunc);
             }
         }
+    }
+
+    onVideoIdChange = (e) => {
+        console.log('in eventpage onVideoIdChange');
+        console.log(e.target.value);
+        const eventVideoId = e.target.value;
+        this.setState({
+            eventVideoId
+        });
     }
 
     onEventShowLinesChange = (e) => {
@@ -1327,6 +1345,10 @@ class EventPage extends React.Component {
                             onEventShowLinesChange={this.onEventShowLinesChange}
                             onUpdateEvent={this.onUpdateEvent}
                         />
+                        <EventVideo 
+                            videoId={this.state.eventVideoId}
+                            onVideoIdChange={this.onVideoIdChange}
+                        />
                         <EventImages 
                             images={this.state.galleryImages}
                             eventId={this.state.eventId}
@@ -1409,7 +1431,7 @@ const mapDispatchToProps = (dispatch) => ({
     startAddImage: (image, categoryId, order) => dispatch(startAddImage(image, categoryId, order)),
     startSetImages: (eventId, categoryId, itemLocation) => dispatch(startSetImages(eventId, categoryId, itemLocation)),
     setSubcategoryId: (id) => dispatch(setSubcategoryId(id)),
-    startEditEvent: (eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId) => dispatch(startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId)),
+    startEditEvent: (eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId) => dispatch(startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId)),
     startEditImages: (fbImages, images, eventId, categoryId) => dispatch(startEditImages(fbImages, images, eventId, categoryId)),
     startDeleteImage: (fbImages, images, eventId, categoryId, publicid) => dispatch(startDeleteImage(fbImages, images, eventId, categoryId, publicid)),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),

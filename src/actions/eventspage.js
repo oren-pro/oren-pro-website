@@ -512,13 +512,14 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
     category
 });
 
-export const startEditEvent = ( eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventId ) => {
+export const startEditEvent = ( eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId ) => {
     const event = {
         name: eventName,
         text: eventText,
         linkText: eventLinkText,
         linkLink: eventLinkLink,
-        showLines: eventShowLines
+        showLines: eventShowLines,
+        videoId: eventVideoId
     }
     return (dispatch) => {
         return firebase.database().ref(`eventsItems/${eventId}`).update(event).then(() => {

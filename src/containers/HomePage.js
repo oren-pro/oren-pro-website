@@ -71,6 +71,7 @@ class HomePage extends React.Component {
             localTell: [],
             localTellOrigin: [],
             windowWidth: undefined,
+            windowHeight: undefined,
             pageHidden: true,
             currentLocation: ''
         }
@@ -236,8 +237,10 @@ class HomePage extends React.Component {
         window.scrollTo(0, 0);
 
         let windowWidth = $( window ).width();
+        let windowHeight = $( window ).height();
         this.setState({ 
-            windowWidth
+            windowWidth,
+            windowHeight
         });
         if (typeof(window) !== "undefined") {
             window.addEventListener('scroll', this.handleScroll);
@@ -634,7 +637,7 @@ class HomePage extends React.Component {
                 </Modal>
 
 
-                <Navigation showPage={this.showPage} page='homepage' {...this.props} categories={this.props.eventsCategories}/>
+                <Navigation showPage={this.showPage} page='homepage' {...this.props} windowWidth={this.state.windowWidth} windowHeight={this.state.windowHeight} categories={this.props.eventsCategories}/>
 
                 <div hidden={this.state.pageHidden}>
                     <div className="homepage__structure">
