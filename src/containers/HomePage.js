@@ -29,7 +29,7 @@ import {
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 import $ from 'jquery';
 
 
@@ -136,7 +136,7 @@ class HomePage extends React.Component {
         return confirmationMessage;
     }
 
-    uploadWidget = (e) => {
+    uploadWidget = (e) => { 
         //console.log('myUploadWidget called');
         const { dataset } = e.target;
         const { name, index, field, action, publicid } = dataset;

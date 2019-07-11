@@ -21,7 +21,7 @@ import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
 import TileGallery from '../components/common/TileGallery';
 import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 
 
 import ReactGA from 'react-ga';

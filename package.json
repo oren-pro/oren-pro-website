@@ -46,7 +46,7 @@
     "hoist-non-react-statics": "^2.5.5",
     "html-minifier": "^3.5.20",
     "jquery": "^3.3.1",
-    "lodash.isequal": "^4.5.0",
+    "lodash": "^4.17.14",
     "node-sass": "^4.8.3",
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",

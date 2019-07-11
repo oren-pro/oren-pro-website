@@ -40,7 +40,7 @@ import {
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 
 
 

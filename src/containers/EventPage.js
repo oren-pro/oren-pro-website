@@ -44,7 +44,7 @@ import UncontrolledCarousel from '../components/UncontrolledCarouselSlide';
 import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
 import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
 import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 import { stringReplace } from '../reusableFunctions/stringReplace';
 import ShareLink from 'react-facebook-share-link';
 import { WhatsappShareButton } from 'react-share';
