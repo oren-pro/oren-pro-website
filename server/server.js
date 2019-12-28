@@ -74,6 +74,10 @@ app.use(function forceLiveDomain(req, res, next) {
   }
 
   //http://www.oren-pro.com/1309/1306/So-80
+  if (String(req.originalUrl) === '1309/1306/So-80') {
+    return res.redirect(301, '/');
+  }
+  
 
   //http://www.oren-pro.com/1307/1306/המערב-הפרוע
   if (String(req.originalUrl) === '/1307/1306/%D7%94%D7%9E%D7%A2%D7%A8%D7%91-%D7%94%D7%A4%D7%A8%D7%95%D7%A2') {
@@ -166,12 +170,6 @@ app.use(function forceLiveDomain(req, res, next) {
   //http://www.oren-pro.com/1328/1008/ספארי-לילה
   if (String(req.originalUrl) === '/1328/1008/%D7%A1%D7%A4%D7%90%D7%A8%D7%99-%D7%9C%D7%99%D7%9C%D7%94') {
     return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
-  }
-
-
-  //http://www.oren-pro.com/event/724/132/מסיבת_סוף_שנה
-  if (String(req.originalUrl) === '/724/132/%D7%9E%D7%A1%D7%99%D7%91%D7%AA_%D7%A1%D7%95%D7%A3_%D7%A9%D7%A0%D7%94') {
-    return res.redirect(301, '/אירועי_חברה');
   }
 
   //http://www.oren-pro.com/event/1124/130/טיול_חברה
@@ -477,6 +475,104 @@ app.use(function forceLiveDomain(req, res, next) {
   if (String(req.originalUrl) === '/1204/1204/%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%97%D7%91%D7%A8%D7%94') {
     return res.redirect(301, '/אירועי_חברה');
   }
+  
+  
+  
+  // new - done
+  
+  
+  // http://www.oren-pro.com/1207/993/זיכרון-יעקב-וסביב-לה.
+  if (String(req.originalUrl) === '/1207/993/%D7%96%D7%99%D7%9B%D7%A8%D7%95%D7%9F-%D7%99%D7%A2%D7%A7%D7%91-%D7%95%D7%A1%D7%91%D7%99%D7%91-%D7%9C%D7%94.') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/event/724/132/מסיבת_סוף_שנה
+  if (String(req.originalUrl) === '/event/724/132/%D7%9E%D7%A1%D7%99%D7%91%D7%AA_%D7%A1%D7%95%D7%A3_%D7%A9%D7%A0%D7%94') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/letters_in.asp?id=861
+  if (String(req.originalUrl) === '/letters_in.asp?id=861') {
+    return res.redirect(301, '/');
+  }
+  
+  // http://www.oren-pro.com/1303/1303
+  if (String(req.originalUrl) === '/1303/1303') {
+    return res.redirect(301, '/');
+  }
+  
+  // http://www.oren-pro.com/event/204/130
+  if (String(req.originalUrl) === '/event/204/130') {
+    return res.redirect(301, '/');
+  }
+  
+  // http://www.oren-pro.com/1220/993/עדן-בכרמל
+  if (String(req.originalUrl) === '/1220/993/%D7%A2%D7%93%D7%9F-%D7%91%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1304/1303/לעינייך-בלבד-אירוע-יום-האשה-
+  if (String(req.originalUrl) === '/1304/1303/%D7%9C%D7%A2%D7%99%D7%A0%D7%99%D7%99%D7%9A-%D7%91%D7%9C%D7%91%D7%93-%D7%90%D7%99%D7%A8%D7%95%D7%A2-%D7%99%D7%95%D7%9D-%D7%94%D7%90%D7%A9%D7%94-') {
+    return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1323/1320/טיול-פריחה-בגולן-חוויה-מרגשת-וגועשת
+  if (String(req.originalUrl) === '/1323/1320/%D7%98%D7%99%D7%95%D7%9C-%D7%A4%D7%A8%D7%99%D7%97%D7%94-%D7%91%D7%92%D7%95%D7%9C%D7%9F-%D7%97%D7%95%D7%95%D7%99%D7%94-%D7%9E%D7%A8%D7%92%D7%A9%D7%AA-%D7%95%D7%92%D7%95%D7%A2%D7%A9%D7%AA') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/event/916/132/הפקת_אירוע_יום_האישה
+  if (String(req.originalUrl) === '/event/916/132/%D7%94%D7%A4%D7%A7%D7%AA_%D7%90%D7%99%D7%A8%D7%95%D7%A2_%D7%99%D7%95%D7%9D_%D7%94%D7%90%D7%99%D7%A9%D7%94') {
+    return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1206/1008/סודה-המופלא-של-בינמינה-כתב-חידה
+  if (String(req.originalUrl) === '/1206/1008/%D7%A1%D7%95%D7%93%D7%94-%D7%94%D7%9E%D7%95%D7%A4%D7%9C%D7%90-%D7%A9%D7%9C-%D7%91%D7%99%D7%A0%D7%9E%D7%99%D7%A0%D7%94-%D7%9B%D7%AA%D7%91-%D7%97%D7%99%D7%93%D7%94') {
+    return res.redirect(301, '/ימי_גיבוש_וכיף/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1287/993/מרכז-מבקרים-בננל'ה
+  if (String(req.originalUrl) === '/1287/993/%D7%9E%D7%A8%D7%9B%D7%96-%D7%9E%D7%91%D7%A7%D7%A8%D7%99%D7%9D-%D7%91%D7%A0%D7%A0%D7%9C%27%D7%94') {
+    return res.redirect(301, '/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/13/map.asp
+  if (String(req.originalUrl) === '/13/map.asp') {
+    return res.redirect(301, '/');
+  }
+  
+  // http://www.oren-pro.com/1319/1306/שחקו-אותהאירוע-פורים-למשפחות
+  if (String(req.originalUrl) === '/1319/1306/%D7%A9%D7%97%D7%A7%D7%95-%D7%90%D7%95%D7%AA%D7%94%D7%90%D7%99%D7%A8%D7%95%D7%A2-%D7%A4%D7%95%D7%A8%D7%99%D7%9D-%D7%9C%D7%9E%D7%A9%D7%A4%D7%97%D7%95%D7%AA') {
+    return res.redirect(301, '/מסיבת_פורים/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1305/1303/%D7%97%D7%95%D7%A4%D7%A9%D7%99,-%D7%A0%D7%A9%D7%99
+  if (String(req.originalUrl) === '/1305/1303/%D7%97%D7%95%D7%A4%D7%A9%D7%99,-%D7%A0%D7%A9%D7%99') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1200/1008/tips.asp
+  if (String(req.originalUrl) === '/1200/1008/tips.asp') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1217/993/%D7%99
+  if (String(req.originalUrl) === '/1217/993/%D7%99') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/1297/1205/%D7%9B%D7%A8%D7%9E%D7%9C
+  if (String(req.originalUrl) === '/1297/1205/%D7%9B%D7%A8%D7%9E%D7%9C') {
+    return res.redirect(301, '/נופש_ביערות_הכרמל/נופש_חברה/אירועי_חברה');
+  }
+  
+  // http://www.oren-pro.com/event/724/132/%D7%9E%D7%A1%D7%99%D7%91%D7%AA_%D7%A1%D7%95%D7%A3_%D7%A9%D7%A0%D7%94
+  if (String(req.originalUrl) === '/event/724/132/%D7%9E%D7%A1%D7%99%D7%91%D7%AA_%D7%A1%D7%95%D7%A3_%D7%A9%D7%A0%D7%94') {
+    return res.redirect(301, '/');
+  }
+  
+
+  
   return next();
 });
 

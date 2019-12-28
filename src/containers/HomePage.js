@@ -1,46 +1,43 @@
-import React from 'react';
+import React from "react";
 import { Prompt } from "react-router-dom";
-import {Helmet} from 'react-helmet';
+import { Helmet } from "react-helmet";
 //import { Button } from "react-bootstrap";
-import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-responsive-modal';
-import ContactStrip from '../components/contactpage/ContactStrip';
-import CustomersStrip from '../components/common/CustomersStrip';
-import Footer from '../components/common/Footer';
-import HomePagePleased from '../components/homepage/HomePagePleased';
-import HomePagePleasedMobile from '../components/homepage/HomePagePleasedMobile';
-import HomePageEvents from '../components/homepage/HomePageEvents';
-import HomePageEventsToolbar from '../components/homepage/HomePageEventsToolbar';
-import HomePageIntouch from '../components/homepage/HomePageIntouch';
-import HomePageTell from '../components/homepage/HomePageTell';
-import Navigation from '../components/common/Navigation';
-import PageUpStrip from '../components/common/PageUpStrip';
-import SocialMedia from '../components/common/SocialMedia';
-import { connect } from 'react-redux';
-import { startLogout } from '../actions/auth';
+import Button from "react-bootstrap/lib/Button";
+import Modal from "react-responsive-modal";
+import ContactStrip from "../components/contactpage/ContactStrip";
+import CustomersStrip from "../components/common/CustomersStrip";
+import Footer from "../components/common/Footer";
+import HomePagePleased from "../components/homepage/HomePagePleased";
+import HomePagePleasedMobile from "../components/homepage/HomePagePleasedMobile";
+import HomePageEvents from "../components/homepage/HomePageEvents";
+import HomePageEventsToolbar from "../components/homepage/HomePageEventsToolbar";
+import HomePageIntouch from "../components/homepage/HomePageIntouch";
+import HomePageTell from "../components/homepage/HomePageTell";
+import Navigation from "../components/common/Navigation";
+import PageUpStrip from "../components/common/PageUpStrip";
+import SocialMedia from "../components/common/SocialMedia";
+import { connect } from "react-redux";
+import { startLogout } from "../actions/auth";
 import {
     startEditHomePage,
     startSetHomePage,
     startAddHomePageTell,
     startEditHomePageSeo,
     startDeleteHomePageImage
-} from '../actions/homepage';
+} from "../actions/homepage";
 
-import { iconRatioOn } from '../reusableFunctions/iconRatioOn';
-import { iconRatioOut } from '../reusableFunctions/iconRatioOut';
-import { handlePageScroll } from '../reusableFunctions/handlePageScroll';
-import isEqual from 'lodash/isEqual';
-import $ from 'jquery';
+import { iconRatioOn } from "../reusableFunctions/iconRatioOn";
+import { iconRatioOut } from "../reusableFunctions/iconRatioOut";
+import { handlePageScroll } from "../reusableFunctions/handlePageScroll";
+import isEqual from "lodash/isEqual";
+import $ from "jquery";
 
-
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
 function initializeReactGA(url) {
-    ReactGA.initialize('UA-2975885-3');
+    ReactGA.initialize("UA-2975885-3");
     ReactGA.pageview(url);
 }
-
-
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -57,13 +54,13 @@ class HomePage extends React.Component {
             homepageOrigin: {},
             homepage: {},
             tellIndex: 0,
-            pageupImageClassName: 'pageup__image__absolute__homepage',
+            pageupImageClassName: "pageup__image__absolute__homepage",
             navigation: {},
             seoHomepageModalIsOpen: false,
             seo: {
-                title: '',
-                description: '',
-                keyWords: '',
+                title: "",
+                description: "",
+                keyWords: ""
             },
             hideTellEditPanel: true,
             tellOrigin: [],
@@ -73,28 +70,20 @@ class HomePage extends React.Component {
             windowWidth: undefined,
             windowHeight: undefined,
             pageHidden: true,
-            currentLocation: ''
-        }
+            currentLocation: ""
+        };
     }
 
-
-    setData = (e) => {
-		const { value, dataset } = e.target;
-		const { name, index, field, action, order } = dataset;
-		const homepage = JSON.parse(JSON.stringify(this.state.homepage));
+    setData = e => {
+        const { value, dataset } = e.target;
+        const { name, index, field, action, order } = dataset;
+        const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         const tell = JSON.parse(JSON.stringify(this.state.tell));
 
         switch (action) {
-			case "setString":
-                //console.log(value);
+            case "setString":
                 if (field) {
-                    if( name === "tell" ) {
-                        //  console.log(homepage);
-                        //  console.log(tell);
-                        //  console.log(order);
-                        //  console.log(name);
-                        //  console.log(index);
-                        //  console.log(field);
+                    if (name === "tell") {
                         homepage[name][index][field] = value;
                         tell[order][field] = value;
                     } else {
@@ -103,13 +92,10 @@ class HomePage extends React.Component {
                 } else {
                     homepage[name] = value;
                 }
-                
-                // console.log(homepage);
-                // console.log(tell);
                 break;
-			default:
-				break;
-        };
+            default:
+                break;
+        }
 
         this.setState({
             homepage,
@@ -117,8 +103,8 @@ class HomePage extends React.Component {
         });
 
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-        if (typeof(window) !== "undefined") {     
-            if(isEqual(this.state.homepageOrigin, homepage)){ 
+        if (typeof window !== "undefined") {
+            if (isEqual(this.state.homepageOrigin, homepage)) {
                 //console.log("remove listener");
                 window.removeEventListener("beforeunload", this.unloadFunc);
             } else {
@@ -126,54 +112,57 @@ class HomePage extends React.Component {
                 window.addEventListener("beforeunload", this.unloadFunc);
             }
         }
-	}
+    };
 
-    
-
-    unloadFunc = (e) => {
+    unloadFunc = e => {
         var confirmationMessage = "o/";
         e.returnValue = confirmationMessage;
         return confirmationMessage;
-    }
+    };
 
-    uploadWidget = (e) => { 
+    uploadWidget = e => {
         //console.log('myUploadWidget called');
         const { dataset } = e.target;
         const { name, index, field, action, publicid } = dataset;
         // console.log(field);
         // console.log(publicid);
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        var myUploadWidget = cloudinary.openUploadWidget({ 
-            cloud_name: 'orenpro', 
-            upload_preset: 'fbznsdxt', 
-            sources: [
-                "local",
-                "url",
-                "image_search",
-                "facebook",
-                "dropbox",
-                "instagram",
-                "camera"
-            ],
-            
-            fonts: {
-                default: null,
-                "'Cute Font', cursive": "https://fonts.googleapis.com/css?family=Cute+Font",
-                "'Gamja Flower', cursive": "https://fonts.googleapis.com/css?family=Gamja+Flower|PT+Serif"
-            }
-        },
+        var myUploadWidget = cloudinary.openUploadWidget(
+            {
+                cloud_name: "orenpro",
+                upload_preset: "fbznsdxt",
+                sources: [
+                    "local",
+                    "url",
+                    "image_search",
+                    "facebook",
+                    "dropbox",
+                    "instagram",
+                    "camera"
+                ],
+
+                fonts: {
+                    default: null,
+                    "'Cute Font', cursive":
+                        "https://fonts.googleapis.com/css?family=Cute+Font",
+                    "'Gamja Flower', cursive":
+                        "https://fonts.googleapis.com/css?family=Gamja+Flower|PT+Serif"
+                }
+            },
             (error, result) => {
                 if (error) {
                     console.log(error);
                 }
-                
+
                 if (result.event === "success") {
                     homepage[name][index][field] = result.info.secure_url;
                     homepage[name][index].publicId = result.info.public_id;
 
                     const tempTell = homepage.tell;
                     const tell = [];
-                    Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+                    Object.keys(tempTell).forEach(function eachKey(key) {
+                        tell.push({ id: key, ...tempTell[key] });
+                    });
 
                     const sortedTell = tell.sort((a, b) => {
                         return a.order > b.order ? 1 : -1;
@@ -182,16 +171,16 @@ class HomePage extends React.Component {
                     const fbTell = {};
                     sortedTell.map((tellItem, index) => {
                         fbTell[tellItem.id] = tellItem;
-                    })
+                    });
 
                     homepage.tell = fbTell;
                     this.setState({
                         tell,
                         homepage
-                    })
+                    });
                     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
                     //console.log(publicid);
-                    this.props.startDeleteHomePageImage( homepage, publicid );
+                    this.props.startDeleteHomePageImage(homepage, publicid);
                     //Step 2.4:  Call the .close() method in order to close the widget
                     //console.log('myUploadWidget.close()');
                     myUploadWidget.close();
@@ -200,7 +189,7 @@ class HomePage extends React.Component {
                 }
             }
         );
-    }
+    };
 
     // update database
 
@@ -213,43 +202,44 @@ class HomePage extends React.Component {
         this.setState(() => ({ homepageOrigin: homepage }));
         this.setTell(JSON.parse(JSON.stringify(homepage)));
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-        if (typeof(window) !== "undefined") {
+        if (typeof window !== "undefined") {
             window.removeEventListener("beforeunload", this.unloadFunc);
         }
-    }
-
-
-
+    };
 
     handleScroll = () => {
         //console.log('in handle scroll');
-        this.setState( handlePageScroll( this.state.pageupImageClassName, this.props.navigation, this.state.navigation.homepageCarouselDone ));
-    }
-
+        this.setState(
+            handlePageScroll(
+                this.state.pageupImageClassName,
+                this.props.navigation,
+                this.state.navigation.homepageCarouselDone
+            )
+        );
+    };
 
     componentDidMount = () => {
-
-        initializeReactGA('/');
+        initializeReactGA("/");
         this.setState({
-            currentLocation: '/'
+            currentLocation: "/"
         });
 
         window.scrollTo(0, 0);
 
-        let windowWidth = $( window ).width();
-        let windowHeight = $( window ).height();
-        this.setState({ 
+        let windowWidth = $(window).width();
+        let windowHeight = $(window).height();
+        this.setState({
             windowWidth,
             windowHeight
         });
-        if (typeof(window) !== "undefined") {
-            window.addEventListener('scroll', this.handleScroll);
+        if (typeof window !== "undefined") {
+            window.addEventListener("scroll", this.handleScroll);
         }
 
         if (this.props.navigation.homepageCarouselDone === true) {
             //console.log('setting');
             this.setState({
-                pageupImageClassName: 'pageup__image__absolute',
+                pageupImageClassName: "pageup__image__absolute",
                 navigation: this.props.navigation,
                 pageHidden: false
             });
@@ -258,25 +248,29 @@ class HomePage extends React.Component {
                 navigation: this.props.navigation
             });
         }
-        
-        
 
         this.props.startSetHomePage((err, startSetHomePageResponse) => {
-            if (err) { throw err; }
+            if (err) {
+                throw err;
+            }
             //console.log(startSetHomePageResponse);
-            const homepage = JSON.parse(JSON.stringify(startSetHomePageResponse));
+            const homepage = JSON.parse(
+                JSON.stringify(startSetHomePageResponse)
+            );
 
             if (!homepage.seo) {
                 homepage.seo = {
-                    title: '',
-                    description: '',
-                    keyWords: ''
-                }
+                    title: "",
+                    description: "",
+                    keyWords: ""
+                };
             }
-            
+
             const tempTell = startSetHomePageResponse.tell;
             const tell = [];
-            Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+            Object.keys(tempTell).forEach(function eachKey(key) {
+                tell.push({ id: key, ...tempTell[key] });
+            });
 
             const sortedTell = tell.sort((a, b) => {
                 return a.order > b.order ? 1 : -1;
@@ -285,7 +279,7 @@ class HomePage extends React.Component {
             const fbTell = {};
             sortedTell.map((tellItem, index) => {
                 fbTell[tellItem.id] = tellItem;
-            })
+            });
 
             homepage.tell = fbTell;
 
@@ -296,52 +290,52 @@ class HomePage extends React.Component {
                 homepage,
                 homepageOrigin: JSON.parse(JSON.stringify(homepage))
             });
-            
 
-            
             this.setTell(JSON.parse(JSON.stringify(homepage)));
             this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
         });
-    }
+    };
 
-    setTell = (homepage) => {
+    setTell = homepage => {
         const tempTell = homepage.tell;
         const tell = [];
-        Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+        Object.keys(tempTell).forEach(function eachKey(key) {
+            tell.push({ id: key, ...tempTell[key] });
+        });
         this.setState({
             tell,
             tellOrigin: tell
         });
-    }
-
+    };
 
     componentWillUnmount = () => {
-        if (typeof(window) !== "undefined") {
-            window.removeEventListener('scroll', this.handleScroll);
+        if (typeof window !== "undefined") {
+            window.removeEventListener("scroll", this.handleScroll);
         }
-    }
-
+    };
 
     addNewTell = () => {
         //const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         const homepage = this.state.homepage;
-        const order = Number(this.state.tell.length)+1;
+        const order = Number(this.state.tell.length) + 1;
         //console.log(order);
         const tellData = {
-            name: '',
-            position:'',
+            name: "",
+            position: "",
             company: 0,
             createdAt: 0,
-            text: '',
+            text: "",
             order: order,
             visible: false
-        }
-        this.props.startAddHomePageTell(homepage, tellData).then((res) => {
+        };
+        this.props.startAddHomePageTell(homepage, tellData).then(res => {
             //console.log(res);
 
             const tempTell = res.tell;
             const tell = [];
-            Object.keys(tempTell).forEach(function eachKey(key) { tell.push({"id": key, ...tempTell[key]}) });
+            Object.keys(tempTell).forEach(function eachKey(key) {
+                tell.push({ id: key, ...tempTell[key] });
+            });
 
             const sortedTell = tell.sort((a, b) => {
                 return a.order > b.order ? 1 : -1;
@@ -350,7 +344,7 @@ class HomePage extends React.Component {
             const fbTell = {};
             sortedTell.map((tellItem, index) => {
                 fbTell[tellItem.id] = tellItem;
-            })
+            });
 
             homepage.tell = fbTell;
 
@@ -358,22 +352,18 @@ class HomePage extends React.Component {
                 tell,
                 tellOrigin: tell,
                 //homepage,
-                homepageOrigin: JSON.parse(JSON.stringify(homepage)),
+                homepageOrigin: JSON.parse(JSON.stringify(homepage))
             });
 
-
-
-
-
-//to do =======================   set tell and localTell
+            //to do =======================   set tell and localTell
         });
-    }
+    };
 
-    setLocalTell = (homepage) => {
+    setLocalTell = homepage => {
         const obj = homepage.tell;
-        if ( obj ){
-            var localTell = Object.keys(obj).map((key) => {
-                const keyedObj = {id: String(key), ...obj[key]};
+        if (obj) {
+            var localTell = Object.keys(obj).map(key => {
+                const keyedObj = { id: String(key), ...obj[key] };
                 return [keyedObj];
             });
 
@@ -382,67 +372,61 @@ class HomePage extends React.Component {
                 localTellOrigin: JSON.parse(JSON.stringify(localTell))
             });
         }
-    }
+    };
 
-    setTellIndex = (e) => {
+    setTellIndex = e => {
         const tellIndex = e.target.dataset.index;
         this.setState(() => ({ tellIndex: tellIndex }));
-    }
+    };
 
-
-    setIconRatioOn = (e) => {
+    setIconRatioOn = e => {
         this.setState(iconRatioOn(e));
-    }
+    };
 
-    setIconRatioOut = (e) => {
+    setIconRatioOut = e => {
         this.setState(iconRatioOut(e));
-    }
-
+    };
 
     onToggleHomepageSeo = () => {
         this.setState({
             seoHomepageModalIsOpen: !this.state.seoHomepageModalIsOpen
         });
-    }
+    };
 
-    onSeoTitleChange = (e) => {
+    onSeoTitleChange = e => {
         const title = e.target.value;
         const seo = this.state.seo;
         seo.title = title;
         this.setState({
             seo
         });
-    }
+    };
 
-    onSeoDescriptionChange = (e) => {
+    onSeoDescriptionChange = e => {
         const description = e.target.value;
         const seo = this.state.seo;
         seo.description = description;
         this.setState({
             seo
         });
-    }
+    };
 
-    onSeoKeyWordsChange = (e) => {
+    onSeoKeyWordsChange = e => {
         const keyWords = e.target.value;
         const seo = this.state.seo;
         seo.keyWords = keyWords;
         this.setState({
             seo
         });
-    }
+    };
 
     updateHomepageSeo = () => {
         const seo = this.state.seo;
         this.props.startEditHomePageSeo(seo);
         this.onToggleHomepageSeo();
-    }
+    };
 
-
-
-
-
-    onDeleteTell = (e) => {
+    onDeleteTell = e => {
         const id = e.target.dataset.id;
         const order = e.target.dataset.order;
         const publicId = e.target.dataset.publicid;
@@ -452,7 +436,7 @@ class HomePage extends React.Component {
         for (let i = 0; i < tellOld.length; i++) {
             if (id !== tellOld[i].id) {
                 if (tellOld[i].order > order) {
-                    tellOld[i].order = tellOld[i].order-1;
+                    tellOld[i].order = tellOld[i].order - 1;
                 }
                 tell.push(tellOld[i]);
             }
@@ -463,10 +447,10 @@ class HomePage extends React.Component {
         tell.map((tellItem, index) => {
             fbTell[tellItem.id] = tellItem;
             hpTell[tellItem.id] = tellItem;
-        })
-        
+        });
+
         fbTell[id] = null;
-        
+
         const homepage = this.state.homepage;
 
         homepage.tell = hpTell;
@@ -476,11 +460,9 @@ class HomePage extends React.Component {
         });
 
         this.onUpdateHomePage();
-    }
+    };
 
-
-
-    onTellOrderBlur = (e) => {
+    onTellOrderBlur = e => {
         const tell = this.state.tell;
         let newOrder = e.target.value;
         if (newOrder > tell.length) {
@@ -489,25 +471,24 @@ class HomePage extends React.Component {
         if (newOrder < 1) {
             newOrder = 1;
         }
-        const oldOrder = Number(e.target.dataset.index)+1;
+        const oldOrder = Number(e.target.dataset.index) + 1;
         const id = e.target.dataset.id;
         // console.log(newOrder);
         // console.log(oldOrder);
         // console.log(id);
-        if ( Number(newOrder) > Number(oldOrder) ) {
+        if (Number(newOrder) > Number(oldOrder)) {
             for (let i = 0; i < tell.length; i++) {
                 if (id !== tell[i].id) {
                     if (tell[i].order <= newOrder && tell[i].order > oldOrder) {
-                        tell[i].order = tell[i].order-1;
+                        tell[i].order = tell[i].order - 1;
                     }
                 }
             }
-        } else if ( Number(newOrder) < Number(oldOrder) ) {
+        } else if (Number(newOrder) < Number(oldOrder)) {
             for (let i = 0; i < tell.length; i++) {
-                
                 if (id !== tell[i].id) {
                     if (tell[i].order < oldOrder && tell[i].order >= newOrder) {
-                        tell[i].order = Number(tell[i].order)+1;
+                        tell[i].order = Number(tell[i].order) + 1;
                     }
                 }
             }
@@ -519,9 +500,9 @@ class HomePage extends React.Component {
         const fbTell = {};
         tell.map((tellItem, index) => {
             fbTell[tellItem.id] = tellItem;
-        })
+        });
         //fbTell[id] = null;
-        
+
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         homepage.tell = fbTell;
         //console.log(fbTell);
@@ -530,9 +511,9 @@ class HomePage extends React.Component {
             tell,
             homepage
         });
-    }
+    };
 
-    onTellOrderChange = (e) => {
+    onTellOrderChange = e => {
         const tell = this.state.tell;
         let newOrder = e.target.value;
         if (newOrder > tell.length) {
@@ -541,53 +522,56 @@ class HomePage extends React.Component {
         if (newOrder < 1) {
             newOrder = 1;
         }
-        const oldOrder = Number(e.target.dataset.index)+1;
+        const oldOrder = Number(e.target.dataset.index) + 1;
         tell[e.target.dataset.index].order = Number(newOrder);
         this.setState({
             tell
         });
-    }
+    };
 
-    onTellOrderKeyPress = (e) => {
-        if (e.key === 'Enter') {
+    onTellOrderKeyPress = e => {
+        if (e.key === "Enter") {
             this.onTellOrderBlur(e);
         }
-    }
+    };
 
     startEditTell = () => {
         this.setState({
             hideTellEditPanel: !this.state.hideTellEditPanel
         });
-    }
+    };
 
     showPage = () => {
         this.setState({
             pageHidden: false
         });
-    }
-
-                   
+    };
 
     render() {
-        if(this.state.windowWidth === undefined) { // if your component doesn't have to wait for an async action, remove this block 
+        if (this.state.windowWidth === undefined) {
+            // if your component doesn't have to wait for an async action, remove this block
             return null; // render null when app is not ready
         }
         return (
             <div className="container-fluid">
-                
                 <Prompt
-                    style={{background: "red"}}
-                    when={!isEqual(this.state.homepageOrigin, this.state.homepage)}
+                    style={{ background: "red" }}
+                    when={
+                        !isEqual(this.state.homepageOrigin, this.state.homepage)
+                    }
                     message="Changes you made may not be saved."
-                /> 
+                />
 
                 <Helmet>
                     <title>{this.state.seo.title}</title>
                 </Helmet>
 
-                
-
-                <Modal open={this.state.seoHomepageModalIsOpen} onClose={this.onToggleHomepageSeo} center dir="rtl">
+                <Modal
+                    open={this.state.seoHomepageModalIsOpen}
+                    onClose={this.onToggleHomepageSeo}
+                    center
+                    dir="rtl"
+                >
                     <div className="backoffice__seo__modal">
                         <h4 className="Heebo-Regular">seo</h4>
                         <div className="backoffice__seo__modal__left">
@@ -615,86 +599,101 @@ class HomePage extends React.Component {
                             <br />
                         </div>
                         <div className="backoffice__seo__modal__right">
-                            <input
-                                value="כותרת"
-                                readOnly
-                            />
+                            <input value="כותרת" readOnly />
                             <br />
-                            <textarea
-                                value="תאור"
-                                readOnly
-                            />
+                            <textarea value="תאור" readOnly />
                             <br />
-                            <textarea
-                                value="מילות מפתח"
-                                readOnly
-                            />
+                            <textarea value="מילות מפתח" readOnly />
                             <br />
                         </div>
                         <br />
-                        <Button bsStyle="success" onClick={this.updateHomepageSeo}>עדכון</Button>
+                        <Button
+                            bsStyle="success"
+                            onClick={this.updateHomepageSeo}
+                        >
+                            עדכון
+                        </Button>
                     </div>
                 </Modal>
 
-
-                <Navigation showPage={this.showPage} page='homepage' {...this.props} windowWidth={this.state.windowWidth} windowHeight={this.state.windowHeight} categories={this.props.eventsCategories}/>
+                <Navigation
+                    showPage={this.showPage}
+                    page="homepage"
+                    {...this.props}
+                    windowWidth={this.state.windowWidth}
+                    windowHeight={this.state.windowHeight}
+                    categories={this.props.eventsCategories}
+                />
 
                 <div hidden={this.state.pageHidden}>
                     <div className="homepage__structure">
                         <div className="homepage__left">
-
-                            { 
-                                this.props.isAuthenticated === true ? 
-                                    <div className="about__edit__panel__box">
-                                        <div className="about__edit__panel">
-                                            <button className="backoffice_button" onClick={this.onUpdateHomePage}>
-                                                <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
-                                            </button>
-                                            <button className="backoffice_button" onClick={this.props.startLogout}>
-                                                <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
-                                            </button>
-                                            <button className="backoffice_button" onClick={this.onToggleHomepageSeo}>
-                                                seo
-                                            </button>
-                                        </div>
+                            {this.props.isAuthenticated === true ? (
+                                <div className="about__edit__panel__box">
+                                    <div className="about__edit__panel">
+                                        <button
+                                            className="backoffice_button"
+                                            onClick={this.onUpdateHomePage}
+                                        >
+                                            <img
+                                                className="backoffice_icon"
+                                                src="/images/backoffice/save.svg"
+                                                alt="שמירה"
+                                            />
+                                        </button>
+                                        <button
+                                            className="backoffice_button"
+                                            onClick={this.props.startLogout}
+                                        >
+                                            <img
+                                                className="backoffice_icon"
+                                                src="/images/backoffice/exit.svg"
+                                                alt="יציאה"
+                                            />
+                                        </button>
+                                        <button
+                                            className="backoffice_button"
+                                            onClick={this.onToggleHomepageSeo}
+                                        >
+                                            seo
+                                        </button>
                                     </div>
-                                :
-                                    null
-                            }
+                                </div>
+                            ) : null}
 
                             <HomePagePleased
                                 {...this.props}
-                                field='pleasedText'
-                                action='setString'
+                                field="pleasedText"
+                                action="setString"
                                 homepage={this.state.homepage}
                                 homepageOrigin={this.state.homepageOrigin}
                                 onChange={this.setData}
                             />
                             <HomePagePleasedMobile
                                 {...this.props}
-                                field='pleasedText'
-                                action='setString'
+                                field="pleasedText"
+                                action="setString"
                                 homepage={this.state.homepage}
                                 homepageOrigin={this.state.homepageOrigin}
                                 onChange={this.setData}
                             />
-                            <HomePageEvents 
+                            <HomePageEvents
                                 {...this.props}
-                                action='setString'
-                                name='events'
+                                action="setString"
+                                name="events"
                                 homepage={this.state.homepage}
                                 homepageOrigin={this.state.homepageOrigin}
                                 onChange={this.setData}
                                 uploadWidget={this.uploadWidget}
                                 ratioGreenArrow={this.state.ratioGreenArrow}
                                 setIconRatioOn={this.setIconRatioOn}
-                                setIconRatioOut={this.setIconRatioOut} 
+                                setIconRatioOut={this.setIconRatioOut}
                             />
                             <HomePageIntouch />
-                            <HomePageTell 
+                            <HomePageTell
                                 {...this.props}
-                                action='setString'
-                                name='tell'
+                                action="setString"
+                                name="tell"
                                 homepage={this.state.homepage}
                                 homepageOrigin={this.state.homepageOrigin}
                                 tellIndex={this.state.tellIndex}
@@ -709,71 +708,93 @@ class HomePage extends React.Component {
                                 startEditTell={this.startEditTell}
                             />
 
+                            {this.props.isAuthenticated === true ? (
+                                <div
+                                    className="backoffice__edit__events__tabs__box"
+                                    hidden={this.state.hideTellEditPanel}
+                                >
+                                    {this.state.tell ? this.state.tell.length >
+                                    0 ? (
+                                        this.state.tell.map((tell, index) => {
+                                            return (
+                                                <div
+                                                    className="backoffice__edit__events__tabs__in__box"
+                                                    key={"in" + tell.id}
+                                                    dir="rtl"
+                                                >
+                                                    <Button
+                                                        id="btn-x"
+                                                        data-id={tell.id}
+                                                        data-order={tell.order}
+                                                        data-publicid={
+                                                            tell.publicId
+                                                        }
+                                                        data-index={tell.order}
+                                                        data-showstatus={false}
+                                                        className="backoffice__events__tabs__remove btn-danger"
+                                                        onClick={
+                                                            this.onDeleteTell
+                                                        }
+                                                    >
+                                                        X
+                                                    </Button>
 
-                            { 
-                                this.props.isAuthenticated === true ? 
-                                    <div className="backoffice__edit__events__tabs__box" hidden={this.state.hideTellEditPanel}>
-                                        {
-                                            this.state.tell ?
-                                            this.state.tell.length > 0 ?
-                                                
-                                                this.state.tell.map((tell, index) => {
-                                                    return  <div className="backoffice__edit__events__tabs__in__box" key={"in"+tell.id} dir="rtl">
-                                                                <Button
-                                                                    id="btn-x"
-                                                                    data-id={tell.id}
-                                                                    data-order={tell.order}
-                                                                    data-publicid={tell.publicId}
-                                                                    data-index={tell.order}
-                                                                    data-showstatus={false}
-                                                                    className="backoffice__events__tabs__remove btn-danger"
-                                                                    onClick={this.onDeleteTell}
-                                                                >
-                                                                    X
-                                                                </Button>
-                                                                
-                                                                <div className="backoffice__events__tabs__order__box">
-                                                                    <input
-                                                                        id="number"
-                                                                        data-id={tell.id}
-                                                                        type="number"
-                                                                        value={tell.order}
-                                                                        data-index={index}
-                                                                        onChange={this.onTellOrderChange}
-                                                                        onKeyPress={this.onTellOrderKeyPress}
-                                                                        onBlur={this.onTellOrderBlur}
-                                                                    />
-                                                                </div>
-                                                                <div>
-                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.name}, </p>
-                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.position} </p>
-                                                                    <p className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text" dir="rtl">{tell.company} | {tell.createdAt} </p>
-                                                                </div>
-                                                            </div>
-                                                })
-                                                
-                                            :
-                                                null
-                                            :
-                                                null
-                                        }
-                                        <div className="backoffice__events__tabs__update__box">
-                                            <Button className="backoffice__events__tabs__update btn-success" onClick={this.onUpdateHomePage}>עדכון</Button>
-                                        </div>
+                                                    <div className="backoffice__events__tabs__order__box">
+                                                        <input
+                                                            id="number"
+                                                            data-id={tell.id}
+                                                            type="number"
+                                                            value={tell.order}
+                                                            data-index={index}
+                                                            onChange={
+                                                                this
+                                                                    .onTellOrderChange
+                                                            }
+                                                            onKeyPress={
+                                                                this
+                                                                    .onTellOrderKeyPress
+                                                            }
+                                                            onBlur={
+                                                                this
+                                                                    .onTellOrderBlur
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text"
+                                                            dir="rtl"
+                                                        >
+                                                            {tell.name},{" "}
+                                                        </p>
+                                                        <p
+                                                            className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text"
+                                                            dir="rtl"
+                                                        >
+                                                            {tell.position}{" "}
+                                                        </p>
+                                                        <p
+                                                            className="homepage__tell__details homepage__tell__details__block homepage__tell__details__block__noedit Heebo-Medium backoffice__gray__text"
+                                                            dir="rtl"
+                                                        >
+                                                            {tell.company} |{" "}
+                                                            {tell.createdAt}{" "}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })
+                                    ) : null : null}
+                                    <div className="backoffice__events__tabs__update__box">
+                                        <Button
+                                            className="backoffice__events__tabs__update btn-success"
+                                            onClick={this.onUpdateHomePage}
+                                        >
+                                            עדכון
+                                        </Button>
                                     </div>
-                                :
-                                    null
-                            }
-
-
-
-
-
-
-
-
-
-
+                                </div>
+                            ) : null}
 
                             <HomePageEventsToolbar />
                         </div>
@@ -784,16 +805,22 @@ class HomePage extends React.Component {
                             ratioPhone={this.state.ratioPhone}
                             ratioWhatsapp={this.state.ratioWhatsapp}
                             setIconRatioOn={this.setIconRatioOn}
-                            setIconRatioOut={this.setIconRatioOut} 
+                            setIconRatioOut={this.setIconRatioOut}
                         />
-                        
                     </div>
-                    
-                    <div hidden={this.state.pageupImageClassName === 'pageup__image'} className="pageup__image__fake desktop"> </div>
+
+                    <div
+                        hidden={
+                            this.state.pageupImageClassName === "pageup__image"
+                        }
+                        className="pageup__image__fake desktop"
+                    >
+                        {" "}
+                    </div>
                     <PageUpStrip
                         pageupImageClassName={this.state.pageupImageClassName}
                     />
-                    <div id='fake_pageupstrip'> </div>
+                    <div id="fake_pageupstrip"> </div>
 
                     <ContactStrip location={this.state.currentLocation} />
                     <CustomersStrip />
@@ -802,27 +829,26 @@ class HomePage extends React.Component {
             </div>
         );
     }
-} 
+}
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     isAuthenticated: !!state.auth.uid,
     eventsCategories: state.eventspage,
     homepage: state.homepage,
     navigation: state.navigation
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     startLogout: () => dispatch(startLogout()),
-    startAddHomePageTell: (homepage, tellData) => dispatch(startAddHomePageTell(homepage, tellData)),
-    startSetHomePage: (done) => dispatch(startSetHomePage(done)),
-    startEditHomePage: (updates) => dispatch(startEditHomePage(updates)),
-    startEditHomePageSeo: (seo) => dispatch(startEditHomePageSeo(seo)),
-    startDeleteHomePageImage: ( homepage, publicid ) => dispatch(startDeleteHomePageImage( homepage, publicid ))
+    startAddHomePageTell: (homepage, tellData) =>
+        dispatch(startAddHomePageTell(homepage, tellData)),
+    startSetHomePage: done => dispatch(startSetHomePage(done)),
+    startEditHomePage: updates => dispatch(startEditHomePage(updates)),
+    startEditHomePageSeo: seo => dispatch(startEditHomePageSeo(seo)),
+    startDeleteHomePageImage: (homepage, publicid) =>
+        dispatch(startDeleteHomePageImage(homepage, publicid))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
-
-
 
 //{this.state.seo.title ? (window.prerenderReady = true) : null}

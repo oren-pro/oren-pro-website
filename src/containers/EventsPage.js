@@ -1578,7 +1578,6 @@ class EventsPage extends React.Component {
                     <title>{this.state.seo.title}</title>
                 </Helmet>
 
-
                 <Modal
                     open={this.state.newSubcategoryNameModalIsOpen}
                     onClose={this.onToggleNewSubcategoryName}
@@ -1622,7 +1621,6 @@ class EventsPage extends React.Component {
                         }
                     </div>
                 </Modal>
-
 
                 <Modal
                     open={this.state.newItemNameModalIsOpen}

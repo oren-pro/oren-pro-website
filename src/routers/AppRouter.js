@@ -72,7 +72,7 @@ class AppRouter extends React.Component {
                             
                             <Route path="/signin" component={SigninPage} exact={true} />
                             <PublicRoute path="/login" component={LoginPage} exact={true} />
-                            <Route path="/קצת_אחרת" component={DifferentPage} exact={true} />
+                            
                             <Route component={NotFoundPage} />
                         </Switch>
                         :
@@ -90,3 +90,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(AppRouter);
+
+// <Route path="/קצת_אחרת" component={DifferentPage} exact={true} />

@@ -370,19 +370,11 @@ class Navigation extends React.Component {
                                     צור קשר
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    to="/קצת_אחרת"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    קצת אחרת
-                                </NavLink>
-                            </NavItem>
+                            
                             {this.state.eventsCategoriesReverse !== [] ? (
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
-                                        if (category.navbar === true) {
+                                        if (category.navbar === true || category.navbartest === true) {
                                             return (
                                                 <NavItem key={category.id}>
                                                     <NavLink
@@ -552,15 +544,7 @@ class Navigation extends React.Component {
                                     צור קשר
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    to="/קצת_אחרת"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    קצת אחרת
-                                </NavLink>
-                            </NavItem>
+                            
                             {this.state.eventsCategoriesReverse !== [] ? (
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
@@ -626,3 +610,28 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+
+
+//  under צור קשר
+
+// <NavItem>
+//                                 <NavLink
+//                                     to="/קצת_אחרת"
+//                                     className="nav__link nav__link--padding-top"
+//                                     activeClassName="is-active nav__link--active"
+//                                 >
+//                                     קצת אחרת
+//                                 </NavLink>
+//                             </NavItem>
+
+
+
+// <NavItem>
+//                                 <NavLink
+//                                     to="/קצת_אחרת"
+//                                     className="nav__link nav__link--padding-top"
+//                                     activeClassName="is-active nav__link--active"
+//                                 >
+//                                     קצת אחרת
+//                                 </NavLink>
+//                             </NavItem>
