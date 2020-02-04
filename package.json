@@ -5,7 +5,7 @@
   "author": "mosh",
   "license": "MIT",
   "engines": {
-    "node": "12.8.0"
+    "node": "11.10.1"
   },
   "scripts": {
     "build:dev": "webpack",
@@ -49,7 +49,7 @@
     "lodash": "^4.17.14",
     "lodash.assign": "^4.2.0",
     "lodash.clonedeep": "^4.5.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.13.1",
     "nodemailer": "^4.6.7",
     "nodemailer-smtp-transport": "^2.7.4",
     "normalize.css": "^8.0.0",
