@@ -12,7 +12,13 @@ import { startSendMessage } from '../actions/messages';
 import ReactGA from 'react-ga';
 
 function initializeReactGA(url) {
-    ReactGA.initialize('UA-2975885-3');
+    //ReactGA.initialize('UA-2975885-3');
+    ReactGA.initialize([{
+        trackingId: 'UA-2975885-3'
+    }, 
+    {
+        trackingId: 'AW-806706295'
+    }]);
     ReactGA.pageview(url);
 }
 
