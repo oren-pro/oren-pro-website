@@ -31,7 +31,7 @@ import { iconRatioOut } from "../reusableFunctions/iconRatioOut";
 import { handlePageScroll } from "../reusableFunctions/handlePageScroll";
 import isEqual from "lodash/isEqual";
 import $ from "jquery";
-
+console.log('test');
 import ReactGA from "react-ga";
 
 function initializeReactGA(url) {
