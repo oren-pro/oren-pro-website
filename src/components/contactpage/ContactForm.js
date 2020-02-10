@@ -71,7 +71,7 @@ export class ContactForm extends React.Component {
         if (this.state.mailSentModalIsOpen) {
             initializeReactGA(this.props.location);
         } else {
-            initializeReactGA(`${this.props.location}-specific-contact-thank-you-page`);
+            //initializeReactGA(`${this.props.location}-specific-contact-thank-you-page`);;
             initializeReactGA(`contact-contact-thank-you-page`);
         }
 
