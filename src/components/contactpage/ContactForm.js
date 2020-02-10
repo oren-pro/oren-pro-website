@@ -68,11 +68,11 @@ export class ContactForm extends React.Component {
         }
     };
     onToggleMailSentModal = () => {
-        console.log(this.props.location);
         if (this.state.mailSentModalIsOpen) {
             initializeReactGA(this.props.location);
         } else {
-            initializeReactGA(`${this.props.location}-contact-thank-you-page`);
+            initializeReactGA(`${this.props.location}-specific-contact-thank-you-page`);
+            initializeReactGA(`contact-contact-thank-you-page`);
         }
 
         this.setState({
@@ -81,7 +81,6 @@ export class ContactForm extends React.Component {
     }
     onSendMail = (userMessage) => {
         this.props.startSendMessage(userMessage).then((res) => {
-            //console.log(res);
             this.onToggleMailSentModal();
         });
     };
