@@ -15,7 +15,21 @@ var admin = require("firebase-admin");
 
 const app = express();
 
+app.use(function forceHTTPS(req, res, next) {
+  var local = req.url;
+  var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+  var www = req.headers.host;
+  console.log(local);
+  console.log(schema);
+  console.log(www);
+ //  || www.indexOf('www') < 0
+  if (schema !== 'https') {
+    return res.redirect('https://www.oren-pro.com' + local);
+  }
 
+  return next();
+
+});
 
 
 
