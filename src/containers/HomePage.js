@@ -669,7 +669,7 @@ class HomePage extends React.Component {
 
                             <HomePagePleased
                                 {...this.props}
-                                field="pleasedText"
+                                field="pleasedTextHtml"
                                 action="setString"
                                 homepage={this.state.homepage}
                                 homepageOrigin={this.state.homepageOrigin}
