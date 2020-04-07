@@ -125,17 +125,22 @@ export default class AboutContentStrip extends React.Component {
             </div>
 
             { 
-                this.props.isAuthenticated === true ? 
-                    <input
-                        id="number"
-                        type="number"
-                        defaultValue={this.props.aboutpage[this.props.index].linesShow}
-                        data-field="linesShow"
-                        data-action='setNumber'
-                        data-name={`item${this.props.index}`}
-                        data-index={this.props.index}
-                        onChange={this.onHeightChange}
-                    />
+                this.props.isAuthenticated === true ?
+                    <div className="about__text__box__input__lable">
+                        <div className="backoffice__toolbar__label">
+                            שורות מוצגות 
+                        </div>
+                        <input
+                            id="number"
+                            type="number"
+                            defaultValue={this.props.aboutpage[this.props.index].linesShow}
+                            data-field="linesShow"
+                            data-action='setNumber'
+                            data-name={`item${this.props.index}`}
+                            data-index={this.props.index}
+                            onChange={this.onHeightChange}
+                        />
+                    </div>
                 :
                     null
             }

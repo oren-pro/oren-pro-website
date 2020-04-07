@@ -777,6 +777,9 @@ class AboutPage extends React.Component {
                             { 
                                 this.props.isAuthenticated === true ? 
                                     <div className="backoffice__events__events__buttons">
+                                        <div className="backoffice__toolbar__label">
+                                            ניהול תמונות
+                                        </div>
                                         <button className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
                                             <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תת קטגוריה" />
                                         </button>
@@ -812,8 +815,11 @@ class AboutPage extends React.Component {
                             { 
                                 this.props.isAuthenticated === true ? 
                                     <div className="backoffice__events__events__buttons">
+                                        <div className="backoffice__toolbar__label">
+                                            ניהול תמונות
+                                        </div>
                                         <button className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
-                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תת קטגוריה" />
+                                            <img className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                                         </button>
                                         <button className="backoffice__events__events__save__button" onClick={this.updateImages}>
                                             <img className="backoffice__events__events__save__icon" src="/images/backoffice/save.svg" alt="שמירה" />

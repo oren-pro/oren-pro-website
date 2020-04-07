@@ -78,11 +78,19 @@
     top: 2rem;
 }
 
+.about__gallery > .backoffice__events__events__buttons {
+    left: 0rem;
+}
+
 .backoffice__events__images__buttons {
     position: absolute;
     z-index: 717;
     left: -8rem;
     top: 3rem;
+}
+
+.rdw-link-modal-input {
+    min-width: 18rem;
 }
 
 .backoffice__events__events__save__button {

@@ -23,7 +23,12 @@
     top: 0;
 }
 
-
+.about__text__box__input__lable {
+    position: absolute;
+    z-index: 5;
+    left: 5rem;
+    top: 2rem;
+}
 
 .about__topstrip__bg {
     width: 58rem;
@@ -64,6 +69,7 @@
 }
 
 .about__content__box {
+    position: relative;
     width: 90rem;
     vertical-align: top;
     text-align: center;
@@ -202,11 +208,12 @@
 .about__content__box input {
     font-family: $fontRegular;
     font-weight: $fontSizeRegular;
-    width: 5rem;
+    width: 6rem;
     height: 2rem;
     position: absolute;
     z-index: 5;
     left: 18%;
+    top: 2.2rem;
 }
 
 
