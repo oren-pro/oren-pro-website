@@ -452,12 +452,12 @@ class EventsPage extends React.Component {
         const category = this.state.category;
         const subcategory = this.state.subcategory;
         if (this.state.subcategoryId === '') {
-            category.text = e.target.value;
+            category.textHtml = e.target.value;
             this.setState({
                 category
             });
         } else {
-            subcategory.text = e.target.value;
+            subcategory.textHtml = e.target.value;
             this.setState({
                 subcategory
             });
@@ -1597,7 +1597,7 @@ class EventsPage extends React.Component {
                     <h2 className="Heebo-Medium">הוספת תת-קטגוריה חדשה</h2>
                     <h4 className="Heebo-Regular">נא למלא שם לתת-הקטגוריה החדשה</h4>
                     <h4 className="Heebo-Regular">{this.state.newSubCategoryNameModalAlert}</h4>
-                    <div dir="rtl">
+                    <div dir="rtl" style={{marginTop: '2rem'}}>
                         <AutosizeInput
                             className="events__tabs__button"
                             type="text"
@@ -1606,7 +1606,8 @@ class EventsPage extends React.Component {
                             onChange={this.onNewSubcategoryNameChange}
                         />
                         <Button bsStyle="success" onClick={this.addNewSubcategory}>המשך</Button>
-                        <h2 className="Heebo-Medium margin-top">חיבור תת-קטגוריה קיימת</h2>
+                        <p className="Heebo-Medium margin-top" style={{marginTop: '2.5rem'}}>או -</p>
+                        <h2 className="Heebo-Medium margin-top" style={{marginTop: '0.5rem', paddingBottom: '0.5rem'}}>חיבור תת-קטגוריה קיימת</h2>
                         {
                             this.state.allSubCategories ?
                                 this.state.allSubCategories.map((subCategory, index) => {
@@ -1726,21 +1727,29 @@ class EventsPage extends React.Component {
                     </div>
                 </Modal>
 
-                <Navigation />
+                <Navigation 
+                    isAuthenticated={this.props.isAuthenticated}
+                    isEditable={true}
+                />
+                
                 <div className="homepage__structure">
                     <div className="events__left">
 
                         { 
                             this.props.isAuthenticated === true ? 
                                 <div className="about__edit__panel__box">
-                                    <div className="about__edit__panel">
-                                        <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.onToggleSeo}>
-                                            seo
-                                        </button>
+                                    <div className="backoffice__toolbar__label">
+                                        seo עריכת
                                     </div>
+                                    <button className="backoffice_button" onClick={this.onToggleSeo}>
+                                        seo
+                                    </button>
+                                    <div className="backoffice__toolbar__label" style={{marginTop: '1rem'}}>
+                                        יציאה
+                                    </div>
+                                    <button className="backoffice_button" onClick={this.props.startLogout}>
+                                        <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
+                                    </button>
                                 </div>
                             :
                                 null
@@ -1750,6 +1759,7 @@ class EventsPage extends React.Component {
                             categoryOrigin={this.state.categoryOrigin}
                             categoryName={this.state.category.name}
                             categoryId={this.state.category.id}
+                            subcategoryName={this.state.subcategoryName}
                             isAuthenticated={this.props.isAuthenticated}
                             onChange={this.onCategoryNameChange}
                             onUpdateCategory={this.onUpdateCategory}
@@ -1836,11 +1846,14 @@ class EventsPage extends React.Component {
                             :
                                 null
                         }
-                        <EventsText 
+                        <EventsText
+                            field="categoryTextHtml"
+                            action="setString"
                             subCategories={this.state.subCategories}
                             categoryTextOrigin={this.state.subcategoryId === '' ? this.state.categoryOrigin.text : this.state.subcategory.text}
                             showLinesOrigin={this.state.subcategoryId === '' ? this.state.categoryOrigin.showLines : this.state.subcategory.showLines}
                             categoryText={this.state.subcategoryId === '' ? this.state.category.text : this.state.subcategory.text}
+                            categoryTextHtml={this.state.subcategoryId === '' ? this.state.category.textHtml : this.state.subcategory.textHtml}
                             showLines={this.state.subcategoryId === '' ? this.state.category.showLines : this.state.subcategory.showLines}
                             categoryId={this.state.category.id}
                             isAuthenticated={this.props.isAuthenticated}

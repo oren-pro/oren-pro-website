@@ -8,13 +8,20 @@ import {
     Nav,
     NavItem
 } from "reactstrap";
+import Modal from 'react-responsive-modal';
 import HomePageCarousel from "../homepage/HomePageCarousel";
 import IconHoverChange from "./IconHoverChange";
 import { connect } from "react-redux";
 import { setHomePageCarouselDone } from "../../actions/navigation";
 import $ from "jquery";
-import IconHoverGrow from "./IconHoverGrow";
 import { stringReplace } from "../../reusableFunctions/stringReplace";
+import AutosizeInput from 'react-input-autosize';
+import Button from 'react-bootstrap/lib/Button';
+import {
+    startAddCategory,
+    startEditCategories,
+    startToggleShowCategory,
+} from '../../actions/eventspage';
 
 const pageToTopD = () => {
     if (typeof window !== "undefined") {
@@ -32,8 +39,12 @@ class Navigation extends React.Component {
             fixed: "none",
             isOpen: false,
             accessibilityIcon: "accessibility",
+            eventsCategories: this.props.eventsCategories,
             eventsCategoriesReverse: [],
-            windowWidth: undefined
+            windowWidth: undefined,
+            hideCategoriesEditPanel: true,
+            newCategoryNameModalIsOpen: false,
+            newCategoryName: ''
         };
     }
 
@@ -106,6 +117,7 @@ class Navigation extends React.Component {
     };
 
     componentDidMount = () => {
+        console.log('this.props.eventsCategories', this.props.eventsCategories);
         window.addEventListener("load", this.handleLoad);
 
         if (
@@ -145,6 +157,8 @@ class Navigation extends React.Component {
     };
 
     componentDidUpdate = prevProps => {
+        console.log(prevProps);
+        console.log('this.props.eventsCategories', this.props.eventsCategories);
         if (
             this.state.eventsCategoriesReverse.length === 0 &&
             this.props.eventsCategories.length > 0
@@ -168,6 +182,7 @@ class Navigation extends React.Component {
             return eventsCategoriesReverse.unshift(category);
         });
         this.setState({
+            eventsCategories: this.props.eventsCategories,
             eventsCategoriesReverse
         });
     };
@@ -284,10 +299,250 @@ class Navigation extends React.Component {
         });
         window.scrollTo(0, 0);
     };
+    
+    startEditCategory = () => {
+        this.setState({
+            hideCategoriesEditPanel: !this.state.hideCategoriesEditPanel
+        });
+    }
+    
+    toggleShowCategory = (e) => {
+        const categoryId = e.target.dataset.id;
+        let visible = null;
+        if (e.target.dataset.visible === "true") {
+            visible = false;
+        } else {
+            visible = true;
+        }
+        this.props.startToggleShowCategory(categoryId, visible).then((res) => {
+            this.setState({
+                eventsCategories: this.props.eventsCategories
+            });
+        });
+    }
+    
+    onCategoryOrderChange = (e) => {
+        const eventsCategories = this.state.eventsCategories;
+        const categoryId = e.target.dataset.id;
+        let categoryIndex = null;
+        eventsCategories.map((category, index) => {
+            if (category.id === categoryId) categoryIndex = index;
+        })
+        let newOrder = e.target.value;
+        if (newOrder > eventsCategories.length) newOrder = eventsCategories.length;
+        if (newOrder < 1) newOrder = 1;
+        eventsCategories[categoryIndex].order = Number(newOrder);
+        this.setState({
+            eventsCategories
+        });
+    }
+    
+    onCategoryOrderBlur = (e) => {
+        const eventsCategories = this.state.eventsCategories;
+        //const categoryId = e.target.dataset.id;
+        let newOrder = e.target.value;
+        if (newOrder > eventsCategories.length) {
+            newOrder = eventsCategories.length;
+        }
+        if (newOrder < 1) {
+            newOrder = 1;
+        }
+        const oldOrder = Number(e.target.dataset.index)+1;
+        const id = e.target.dataset.id;
+        if ( Number(newOrder) > Number(oldOrder) ) {
+            for (let i = 0; i < eventsCategories.length; i++) {
+                if (id !== eventsCategories[i].id) {
+                    if (eventsCategories[i].order <= newOrder && eventsCategories[i].order > oldOrder) {
+                        eventsCategories[i].order = eventsCategories[i].order-1;
+                    }
+                }
+            }
+        } else if ( Number(newOrder) < Number(oldOrder) ) {
+            for (let i = 0; i < eventsCategories.length; i++) {
+                
+                if (id !== eventsCategories[i].id) {
+                    if (eventsCategories[i].order < oldOrder && eventsCategories[i].order >= newOrder) {
+                        eventsCategories[i].order = Number(eventsCategories[i].order)+1;
+                    }
+                }
+            }
+        }
+        eventsCategories.sort((a, b) => {
+            return a.order > b.order ? 1 : -1;
+        });
+        this.setState({
+            eventsCategories
+        });
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
+    }
+    
+    onCategoryOrderKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.onCategoryOrderBlur(e);
+        }
+    }
+    
+    onCategoryNameChange = (e) => {
+        const index = e.target.dataset.index;
+        const categoryNewName = e.target.value;
+        const eventsCategories = this.state.eventsCategories;
+        eventsCategories[index].name = categoryNewName;
+        this.setState({
+            eventsCategories
+        });
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
+    }
+
+    onCategoryNameBlur = (e) => {
+        let nameFlag = false;
+        let oldName = '';
+        const eventsCategories = this.state.eventsCategories;
+        const categoryNewName = e.target.value;
+        const categoryId = e.target.dataset.id;
+        eventsCategories.map((category, index) => {
+            if (category.id === categoryId) {
+                oldName = category.name;
+            }
+        })
+        eventsCategories.map((category, index) => {
+            if (category.name === categoryNewName && category.id !== categoryId) {
+                nameFlag = true;
+            }
+        })
+        if (nameFlag === true) {
+            alert("שם קטגוריה קיים במערכת");
+            e.target.value = oldName;
+            eventsCategories.map((category, index) => {
+                if (category.id === categoryId) {
+                    eventsCategories[index].name = oldName;
+                    this.setState({
+                        eventsCategories
+                    });
+                }
+            })
+        }
+        // } else {
+        //     if (typeof(window) !== "undefined") {
+        //         if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.subCategoriesOrigin, subCategories) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+        //             window.removeEventListener("beforeunload", this.unloadFunc);
+        //         } else {
+        //             window.addEventListener("beforeunload", this.unloadFunc);
+        //         }
+        //     }
+        // }
+    }
+    
+    updateCategories = () => {
+        const categories = this.state.eventsCategories;
+        const fbCategories = {};
+        categories.map((category, index) => {
+            fbCategories[category.id] = category;
+        })
+        this.props.startEditCategories(fbCategories, categories);
+
+        this.setState({
+            eventsCategoriesOrigin: categories
+        });
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.categoryOrigin, this.state.category) && isEqual(this.state.itemsCurrentCheck, this.state.itemsCurrentOrigin)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
+    }
+    
+    addNewCategory = () => {
+        let nameFlag = false;
+        this.props.eventsCategories.map((category, index) => {
+            if(category.name === this.state.newCategoryName) {
+                nameFlag = true;
+            }
+        })
+
+        if(nameFlag === true) {
+            this.setState({
+                newCategoryNameModalAlert: 'שם קטגוריה קיים במערכת'
+            });
+        } else if (this.state.newCategoryName === '') {
+            this.setState({
+                newCategoryNameModalAlert: 'שם קטגוריה חייב לכלול אות אחת לפחות'
+            });
+        } else {
+            const name = this.state.newCategoryName;
+            const order = this.props.eventsCategories.length+1;
+            const category = {
+                name,
+                order,
+                isVisible: false,
+                type: 'category'
+            };
+            this.props.startAddCategory(category, order).then((categories)=> {
+                //this.getAllData(categoryId, categoryId);
+                console.log('categories', categories);
+                this.setState({
+                    newCategoryNameModalIsOpen: false,
+                    newCategoryName: ''
+                });
+            });
+        }
+        
+    }
+
+    onNewCategoryNameChange = (e) => {
+        const newCategoryName = e.target.value;
+        this.setState({
+            newCategoryName
+        });
+    }
+
+    onToggleNewCategoryName = () => {
+        this.setState({
+            newCategoryNameModalIsOpen: !this.state.newCategoryNameModalIsOpen
+        });
+    }
 
     render() {
         return (
             <div className="container-fluid">
+                
+                <Modal
+                    open={this.state.newCategoryNameModalIsOpen}
+                    onClose={this.onToggleNewCategoryName}
+                    center
+                    classNames={{
+                        overlay: 'custom-overlay',
+                        modal: 'custom-modal',
+                        closeButton: 'custom-close-button'                     
+                    }}
+                >
+                    <h2 className="Heebo-Medium">הוספת קטגוריה חדשה</h2>
+                    <h4 className="Heebo-Regular">נא למלא שם לקטגוריה החדשה</h4>
+                    <h4 className="Heebo-Regular">{this.state.newCategoryNameModalAlert}</h4>
+                    <div dir="rtl" style={{marginTop: '2rem', paddingBottom: '2rem'}}>
+                        <AutosizeInput
+                            className="events__tabs__button"
+                            type="text"
+                            placeholder="שם הקטגוריה"
+                            value={this.state.newCategoryName}
+                            onChange={this.onNewCategoryNameChange}
+                        />
+                        <Button bsStyle="success" onClick={this.addNewCategory}>המשך</Button>
+                    </div>
+                </Modal>
+                
                 <div className="collapse__bg__loader" />
 
                 {this.props.page === "homepage" ? this.props.windowWidth <
@@ -360,35 +615,49 @@ class Navigation extends React.Component {
                                     src="/images/navigation/nav_logo.svg"
                                     alt="אורן ורינת הפקות אירועים - לוגו"
                                 />
-                            </NavbarBrand>
-                            <NavItem>
-                                <NavLink
-                                    to="/contact"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    צור קשר
-                                </NavLink>
-                            </NavItem>
-                            
+                            </NavbarBrand>                            
                             {this.state.eventsCategoriesReverse !== [] ? (
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
-                                        if (category.navbar === true || category.navbartest === true) {
+                                        if (category.isVisible === true) {
                                             return (
-                                                <NavItem key={category.id}>
-                                                    <NavLink
-                                                        to={`/${stringReplace(
-                                                            category.name,
-                                                            " ",
-                                                            "_"
-                                                        )}`}
-                                                        className="nav__link nav__link--padding-top"
-                                                        activeClassName="is-active nav__link--active"
-                                                    >
-                                                        {category.name}
-                                                    </NavLink>
-                                                </NavItem>
+                                                category.type === 'category' ?
+                                                    <NavItem key={category.id}>
+                                                        <NavLink
+                                                            to={`/${stringReplace(
+                                                                category.name,
+                                                                " ",
+                                                                "_"
+                                                            )}`}
+                                                            className="nav__link nav__link--padding-top"
+                                                            activeClassName="is-active nav__link--active"
+                                                        >
+                                                            {category.name}
+                                                        </NavLink>
+                                                    </NavItem>
+                                                :
+                                                    category.urlTo === '/' ?
+                                                        <NavItem key={category.id}>
+                                                            <NavLink
+                                                                onClick={this.homepageClicked}
+                                                                exact
+                                                                to={category.urlTo}
+                                                                className="nav__link nav__link--padding-top"
+                                                                activeClassName="is-active nav__link--active"
+                                                            >
+                                                                {category.name}
+                                                            </NavLink>
+                                                        </NavItem>
+                                                    :
+                                                        <NavItem key={category.id}>
+                                                            <NavLink
+                                                                to={category.urlTo}
+                                                                className="nav__link nav__link--padding-top"
+                                                                activeClassName="is-active nav__link--active"
+                                                            >
+                                                                {category.name}
+                                                            </NavLink>
+                                                        </NavItem>
                                             );
                                         } else {
                                             return null;
@@ -396,26 +665,6 @@ class Navigation extends React.Component {
                                     }
                                 )
                             ) : null}
-                            <NavItem>
-                                <NavLink
-                                    to="/about"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    נעים להכיר
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    onClick={this.homepageClicked}
-                                    exact
-                                    to="/"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    דף הבית
-                                </NavLink>
-                            </NavItem>
                             <NavItem className="nav-item--accessibility">
                                 <div
                                     className="nav__link--accessibility"
@@ -535,34 +784,36 @@ class Navigation extends React.Component {
                                     alt="קו הפרדה"
                                 />
                             </div>
-                            <NavItem>
-                                <NavLink
-                                    to="/contact"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    צור קשר
-                                </NavLink>
-                            </NavItem>
                             
                             {this.state.eventsCategoriesReverse !== [] ? (
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
-                                        if (category.navbar === true) {
+                                        if (category.isVisible === true) {
                                             return (
-                                                <NavItem key={category.id}>
-                                                    <NavLink
-                                                        to={`/${stringReplace(
-                                                            category.name,
-                                                            " ",
-                                                            "_"
-                                                        )}`}
-                                                        className="nav__link nav__link--padding-top"
-                                                        activeClassName="is-active nav__link--active"
-                                                    >
-                                                        {category.name}
-                                                    </NavLink>
-                                                </NavItem>
+                                                category.type === 'category' ?
+                                                    <NavItem key={category.id}>
+                                                        <NavLink
+                                                            to={`/${stringReplace(
+                                                                category.name,
+                                                                " ",
+                                                                "_"
+                                                            )}`}
+                                                            className="nav__link nav__link--padding-top"
+                                                            activeClassName="is-active nav__link--active"
+                                                        >
+                                                            {category.name}
+                                                        </NavLink>
+                                                    </NavItem>
+                                                :
+                                                    <NavItem key={category.id}>
+                                                        <NavLink
+                                                            to={category.urlTo}
+                                                            className="nav__link nav__link--padding-top"
+                                                            activeClassName="is-active nav__link--active"
+                                                        >
+                                                            {category.name}
+                                                        </NavLink>
+                                                    </NavItem>
                                             );
                                         } else {
                                             return null;
@@ -570,29 +821,98 @@ class Navigation extends React.Component {
                                     }
                                 )
                             ) : null}
-                            <NavItem>
-                                <NavLink
-                                    to="/about"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    נעים להכיר
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    onClick={this.homepageClicked}
-                                    exact
-                                    to="/"
-                                    className="nav__link nav__link--padding-top"
-                                    activeClassName="is-active nav__link--active"
-                                >
-                                    דף הבית
-                                </NavLink>
-                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
+                {this.props.isAuthenticated &&
+                this.props.isEditable ? (
+                    <div className="backoffice__toolbar__buttons">
+                        <div className="backoffice__toolbar__label">
+                            Toolbar ניהול
+                        </div>
+                        <button
+                            className="backoffice__add__button"
+                            onClick={
+                                this.onToggleNewCategoryName
+                            }
+                        >
+                            <img
+                                className="backoffice__add__icon"
+                                src="/images/eventspage/add-eventSubcategory-icon.svg"
+                                alt="הוספת קטגוריה"
+                            />
+                        </button>
+                        <button
+                            className="backoffice__edit__button"
+                            onClick={
+                                this.startEditCategory
+                            }
+                        >
+                            <img
+                                className="backoffice__edit__icon"
+                                src="/images/backoffice/edit.svg"
+                                alt="עריכה"
+                            />
+                        </button>
+                    </div>
+                ) : null}
+                { 
+                    this.props.isAuthenticated === true ? 
+                        <div className="backoffice__edit__navigation__box" hidden={this.state.hideCategoriesEditPanel}>
+                            {
+                                this.state.eventsCategories.length > 0 ?
+                                    this.state.eventsCategories.map((category, index) => {
+                                        return  <div className="backoffice__edit__events__tabs__in__box" key={category.id} dir="rtl">
+                                                    <Button
+                                                        id="btn-show"
+                                                        data-id={category.id}
+                                                        data-visible={category.isVisible}
+                                                        className={`backoffice__events__tabs__remove${category.isVisible === true ? ' btn-success' : ' btn-danger'}`}
+                                                        onClick={this.toggleShowCategory}
+                                                    >
+                                                        <img
+                                                            data-id={category.id}
+                                                            data-visible={category.isVisible}
+                                                            className="backoffice__show__icon"
+                                                            src={`/images/backoffice/${category.isVisible === true ? 'show' : 'hide'}.svg`}
+                                                            alt={category.isVisible === true ? 'הצג' : 'הסתר'}
+                                                        />
+                                                    </Button>
+                                                    <div className="backoffice__events__tabs__order__box">
+                                                        <input
+                                                            id="number"
+                                                            data-id={category.id}
+                                                            type="number"
+                                                            value={category.order || 0}
+                                                            data-index={index}
+                                                            onChange={this.onCategoryOrderChange}
+                                                            onKeyPress={this.onCategoryOrderKeyPress}
+                                                            onBlur={this.onCategoryOrderBlur}
+                                                        />
+                                                    </div>
+                                                    <AutosizeInput
+                                                        data-id={category.id}
+                                                        data-index={index}
+                                                        className="events__tabs__button"
+                                                        type="text"
+                                                        placeholder="שם תת קטגוריה"
+                                                        value={category.name}
+                                                        onChange={this.onCategoryNameChange}
+                                                        onBlur={this.onCategoryNameBlur}
+                                                    />
+                                                </div>
+                                    })
+                                    
+                                :
+                                    null
+                            }
+                            <div className="backoffice__events__tabs__update__box">
+                                <Button className="backoffice__events__tabs__update btn-success" onClick={this.updateCategories}>עדכון</Button>
+                            </div>
+                        </div>
+                    :
+                        null
+                }
             </div>
         );
     }
@@ -605,33 +925,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setHomePageCarouselDone: homepageCarouselDone =>
-        dispatch(setHomePageCarouselDone(homepageCarouselDone))
+    setHomePageCarouselDone: homepageCarouselDone => dispatch(setHomePageCarouselDone(homepageCarouselDone)),
+    startToggleShowCategory: (categoryId, visible) => dispatch(startToggleShowCategory(categoryId, visible)),
+    startEditCategories: (fbCategories, categories) => dispatch(startEditCategories(fbCategories, categories)),
+    startAddCategory: (category) => dispatch(startAddCategory(category)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
-
-
-//  under צור קשר
-
-// <NavItem>
-//                                 <NavLink
-//                                     to="/קצת_אחרת"
-//                                     className="nav__link nav__link--padding-top"
-//                                     activeClassName="is-active nav__link--active"
-//                                 >
-//                                     קצת אחרת
-//                                 </NavLink>
-//                             </NavItem>
-
-
-
-// <NavItem>
-//                                 <NavLink
-//                                     to="/קצת_אחרת"
-//                                     className="nav__link nav__link--padding-top"
-//                                     activeClassName="is-active nav__link--active"
-//                                 >
-//                                     קצת אחרת
-//                                 </NavLink>
-//                             </NavItem>

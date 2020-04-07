@@ -86,6 +86,7 @@ class EventPage extends React.Component {
             eventLinkText: '',
             eventLinkLink: '',
             eventText: '',
+            eventTextHtml: '',
             eventShowLines: 1,
             eventVideoId: '',
             eventNameOrigin: '',
@@ -155,6 +156,7 @@ class EventPage extends React.Component {
     getEventId = (eventName, items) => {
         let eventId = '';
         let eventText = '';
+        let eventTextHtml = '';
         let eventLinkText = '';
         let eventLinkLink = '';
         let eventShowLines = 1;
@@ -165,6 +167,7 @@ class EventPage extends React.Component {
                 console.log("item: ", item);
                 eventId = item.id;
                 eventText = item.text;
+                eventTextHtml = item.textHtml;
                 eventLinkText = item.linkText;
                 eventLinkLink = item.linkLink;
                 eventShowLines = item.showLines;
@@ -259,6 +262,9 @@ class EventPage extends React.Component {
         if( eventText === undefined){
             eventText = "";
         }
+        if( eventTextHtml === undefined){
+            eventTextHtml = "";
+        }
         if( eventLinkText === undefined){
             eventLinkText = "";
         }
@@ -269,6 +275,7 @@ class EventPage extends React.Component {
         this.setState({
             eventId,
             eventText,
+            eventTextHtml,
             eventLinkText,
             eventLinkLink,
             eventTextOrigin: eventText,
@@ -732,12 +739,13 @@ class EventPage extends React.Component {
         } else {
             const eventName = JSON.parse(JSON.stringify(this.state.eventName));
             const eventText = JSON.parse(JSON.stringify(this.state.eventText));
+            const eventTextHtml = JSON.parse(JSON.stringify(this.state.eventTextHtml));
             const eventLinkText = JSON.parse(JSON.stringify(this.state.eventLinkText));
             const eventLinkLink = JSON.parse(JSON.stringify(this.state.eventLinkLink));
             const eventShowLines = JSON.parse(JSON.stringify(this.state.eventShowLines));
             const eventVideoId = JSON.parse(JSON.stringify(this.state.eventVideoId));
             const eventId = JSON.parse(JSON.stringify(this.state.eventId));
-            this.props.startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId).then(() => {
+            this.props.startEditEvent(eventName, eventText, eventTextHtml, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId).then(() => {
                 let gotoNewLocation = false;
                 if(eventName !== this.state.eventNameOrigin) {
                     gotoNewLocation = true;
@@ -745,6 +753,7 @@ class EventPage extends React.Component {
                 this.setState(() => ({
                     eventName,
                     eventText,
+                    eventTextHtml,
                     eventLinkText,
                     eventLinkLink,
                     eventShowLines,
@@ -814,17 +823,18 @@ class EventPage extends React.Component {
     }
 
     onEventTextChange = (e) => {
-        const eventText = e.target.value;
+        const eventTextHtml = e.target.value;
+        console.log('eventTextHtml', eventTextHtml);
         this.setState({
-            eventText
+            eventTextHtml
         });
-        if (typeof(window) !== "undefined") {
-            if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-                window.removeEventListener("beforeunload", this.unloadFunc);
-            } else {
-                window.addEventListener("beforeunload", this.unloadFunc);
-            }
-        }
+        // if (typeof(window) !== "undefined") {
+        //     if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
+        //         window.removeEventListener("beforeunload", this.unloadFunc);
+        //     } else {
+        //         window.addEventListener("beforeunload", this.unloadFunc);
+        //     }
+        // }
     }
 
     onVideoIdChange = (e) => {
@@ -1292,27 +1302,37 @@ class EventPage extends React.Component {
                 
 
                 
-                <Navigation />
+                <Navigation 
+                    isAuthenticated={this.props.isAuthenticated}
+                    isEditable={true}
+                />
                 <div className="homepage__structure">
                     <div className="events__left">
                         
                         { 
                             this.props.isAuthenticated === true ? 
-                                <div className="about__edit__panel__box">
-                                    <div className="about__edit__panel">
-                                        <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.onToggleEventSeo}>
-                                            seo
-                                        </button>
-                                    </div>
+                            <div className="about__edit__panel__box">
+                                <div className="backoffice__toolbar__label">
+                                    seo עריכת
                                 </div>
+                                <button className="backoffice_button" onClick={this.onToggleSeo}>
+                                    seo
+                                </button>
+                                <div className="backoffice__toolbar__label" style={{marginTop: '1rem'}}>
+                                    יציאה
+                                </div>
+                                <button className="backoffice_button" onClick={this.props.startLogout}>
+                                    <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
+                                </button>
+                            </div>
                             :
                                 null
                         }
 
-                        <EventsHeader categoryName={this.props.categoryName} />
+                        <EventsHeader
+                            categoryName={this.props.categoryName}
+                            subcategoryName={this.state.subcategoryName}
+                        />
 
                         <EventsTabs
                             categoryName={this.props.categoryName}
@@ -1336,7 +1356,9 @@ class EventPage extends React.Component {
                         <EventHeader
                             categoryName={this.props.categoryName}
                             eventName={this.state.eventName}
+                            eventId={this.state.eventId}
                             eventText={this.state.eventText}
+                            eventTextHtml={this.state.eventTextHtml}
                             eventLinkText={this.state.eventLinkText}
                             eventLinkLink={this.state.eventLinkLink}
                             showLines={this.state.eventShowLines}
@@ -1437,7 +1459,7 @@ const mapDispatchToProps = (dispatch) => ({
     startAddImage: (image, categoryId, order) => dispatch(startAddImage(image, categoryId, order)),
     startSetImages: (eventId, categoryId, itemLocation) => dispatch(startSetImages(eventId, categoryId, itemLocation)),
     setSubcategoryId: (id) => dispatch(setSubcategoryId(id)),
-    startEditEvent: (eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId) => dispatch(startEditEvent(eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId)),
+    startEditEvent: (eventName, eventText, eventTextHtml, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId) => dispatch(startEditEvent(eventName, eventText, eventTextHtml, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId)),
     startEditImages: (fbImages, images, eventId, categoryId) => dispatch(startEditImages(fbImages, images, eventId, categoryId)),
     startDeleteImage: (fbImages, images, eventId, categoryId, publicid) => dispatch(startDeleteImage(fbImages, images, eventId, categoryId, publicid)),
     startSetAllSubcategories: () => dispatch(startSetAllSubcategories()),

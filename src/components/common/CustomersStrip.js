@@ -217,6 +217,9 @@ class CustomersStrip extends React.Component {
         { 
             this.props.isAuthenticated === true ? 
                 <div className="backoffice__customers__strip__buttons">
+                    <div className="backoffice__toolbar__label">
+                        ניהול לקוחות
+                    </div>
                     <button data-id={this.props.eventId} className="backoffice__events__events__add__button" onClick={this.uploadWidget}>
                         <img data-id={this.props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                     </button>

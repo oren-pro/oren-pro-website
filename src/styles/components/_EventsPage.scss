@@ -104,6 +104,19 @@
     cursor: pointer;
 }
 
+.events__tabs__button input {
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
+    font-size: 1.5rem;
+    line-height: 0.5rem;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-top: -0.3rem;
+    width: 4rem;
+}
+
 .events__tabs__button--selected {
     background: $gray;
     color: $white;
@@ -123,15 +136,18 @@
     padding: 0;
 }
 
+.events__text__box__input__lable {
+    position: absolute;
+    z-index: 5;
+    left: -10rem;
+    top: 2rem;
+}
+
 .events__text__box input {
     font-family: $fontRegular;
     font-weight: $fontSizeRegular;
-    position: absolute;
     width: 5rem;
     height: 2rem;
-    z-index: 5;
-    left: -10%;
-    top: 4%;
 }
 
 .events__text__box textarea {
@@ -161,7 +177,7 @@
 
 .events__text {
     display: inline-block;
-    text-align: right;
+    text-align: center;
     color: $gray;
     font-size: 1.3rem;
     line-height: 1.5rem;
@@ -170,6 +186,10 @@
     padding: 0;
     border: none;
     background: none;
+}
+
+.events__text > p {
+    min-height: 10px;
 }
 
 .events__event__text {

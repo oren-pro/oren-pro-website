@@ -19,6 +19,9 @@ const EventsEvents = props => (
     >
         {props.isAuthenticated === true && props.oneLine !== true ? (
             <div className="backoffice__events__events__buttons">
+                <div className="backoffice__toolbar__label">
+                    ניהול אייטמים
+                </div>
                 {props.subcategoryId !== "" ? (
                     <button
                         className="backoffice__events__events__add__button"

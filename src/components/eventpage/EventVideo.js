@@ -90,8 +90,12 @@ class EventVideo extends React.Component {
             { 
                 this.props.isAuthenticated === true ?
                     
-                        <div className={`event__text__box__input`}>
+                        <div className="events__video__input__lable">
+                            <div className="backoffice__toolbar__label">
+                                Video ID 
+                            </div>
                             <input
+                                className={`event__video__input`}
                                 id="string"
                                 type="string"
                                 placeholder="video id"

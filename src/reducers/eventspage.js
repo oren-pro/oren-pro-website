@@ -76,6 +76,9 @@ const eventsReducerDefaultState = {};
             });
             events.categories[categoryIndex] = action.category;
             return events;
+        case 'EDIT_CATEGORIES':
+            events.categories = action.categories;
+            return events;
         case 'EDIT_SUBCATEGORIES':
             events[action.categoryId] = action.subcategories;
             return events;
@@ -105,6 +108,9 @@ const eventsReducerDefaultState = {};
             });
             events[action.categoryId][subcategoryIndex].visible = action.visible;
             return events;
+        case 'TOGGLE_SHOW_CATEGORY':
+            events[action.categoryId].isVisible = action.visible;
+            return events;
         case 'TOGGLE_ALL_SHOW_SUBCATEGORY':
             events.allSubCategories.map((subcategory, index) => {
                 if(subcategory.id === action.subcategoryId) {
@@ -112,6 +118,18 @@ const eventsReducerDefaultState = {};
                 }
             });
             events.allSubCategories[subcategoryIndex].visible = action.visible;
+            return events;
+        case 'TOGGLE_ALL_SHOW_CATEGORY':
+            events.categories.map((category, index) => {
+                if(category.id === action.categoryId) {
+                    console.log('here', category);
+                    categoryIndex = index;
+                }
+            });
+            console.log('categoryIndex', categoryIndex);
+            console.log('events', events);
+            console.log('action.visible', action.visible);
+            events.categories[categoryIndex].isVisible = action.visible;
             return events;
         case 'TOGGLE_SHOW_EVENT':
             events[action.categoryId+'items'].map((event, index) => {

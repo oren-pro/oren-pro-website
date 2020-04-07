@@ -184,9 +184,11 @@
     fill: #666665;
 }
 
-// .accessibility-color--light {
-//     background: #666665 !important;
-// }
+/*
+.accessibility-color--light {
+    background: #666665 !important;
+}
+*/
 
 .nav__link--padding-top {
     padding-top: 0rem;

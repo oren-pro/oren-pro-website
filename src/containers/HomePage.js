@@ -201,7 +201,7 @@ class HomePage extends React.Component {
 
     onUpdateHomePage = () => {
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        console.log(homepage);
+        console.log('homepage', homepage);
         this.props.startEditHomePage({
             homepage: homepage
         });
@@ -629,6 +629,8 @@ class HomePage extends React.Component {
                     windowWidth={this.state.windowWidth}
                     windowHeight={this.state.windowHeight}
                     categories={this.props.eventsCategories}
+                    isAuthenticated={this.props.isAuthenticated}
+                    isEditable={true}
                 />
 
                 <div hidden={this.state.pageHidden}>
@@ -636,32 +638,24 @@ class HomePage extends React.Component {
                         <div className="homepage__left">
                             {this.props.isAuthenticated === true ? (
                                 <div className="about__edit__panel__box">
-                                    <div className="about__edit__panel">
-                                        <button
-                                            className="backoffice_button"
-                                            onClick={this.onUpdateHomePage}
-                                        >
-                                            <img
-                                                className="backoffice_icon"
-                                                src="/images/backoffice/save.svg"
-                                                alt="שמירה"
-                                            />
+                                    <div className="about__edit__panel__box">
+                                        <div className="backoffice__toolbar__label">
+                                            שמירה
+                                        </div>
+                                        <button className="backoffice_button" onClick={this.onUpdateHomePage}>
+                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
                                         </button>
-                                        <button
-                                            className="backoffice_button"
-                                            onClick={this.props.startLogout}
-                                        >
-                                            <img
-                                                className="backoffice_icon"
-                                                src="/images/backoffice/exit.svg"
-                                                alt="יציאה"
-                                            />
-                                        </button>
-                                        <button
-                                            className="backoffice_button"
-                                            onClick={this.onToggleHomepageSeo}
-                                        >
+                                        <div className="backoffice__toolbar__label">
+                                            seo עריכת
+                                        </div>
+                                        <button className="backoffice_button" onClick={this.onToggleHomepageSeo}>
                                             seo
+                                        </button>
+                                        <div className="backoffice__toolbar__label" style={{marginTop: '1rem'}}>
+                                            יציאה
+                                        </div>
+                                        <button className="backoffice_button" onClick={this.props.startLogout}>
+                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
                                         </button>
                                     </div>
                                 </div>

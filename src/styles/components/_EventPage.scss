@@ -469,16 +469,51 @@ $eventsEventImageHeight: 14.2rem;
     height: 2rem;
     background: none;
     border: 1px solid $gray;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .event__text__box__input {
-    display: inline-block;
-    position: absolute;
+    display: block;
     width: 5rem;
     height: 2rem;
+}
+
+.events__video__input__lable {
+    position: absolute;
     z-index: 5;
-    left: -10%;
-    top: 4%;
+    left: -5.5rem;
+    top: 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.event__text__box__input__lable {
+    position: absolute;
+    z-index: 5;
+    left: -10rem;
+    top: 0rem;
+}
+
+.event__video__input {
+    display: block;
+    width: 14rem;
+    height: 2rem;
+}
+
+.events__video__input__lable input {
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
+    width: 14rem;
+    height: 2rem;
+    background: none;
+    border: 1px solid $gray;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .event__text__box textarea {
@@ -536,9 +571,13 @@ $eventsEventImageHeight: 14.2rem;
 
 
 
+.rah-static {
+    width: 100% !important;
+}
 
-
-
+.rah-animating {
+    width: 100% !important;
+}
 
 
 

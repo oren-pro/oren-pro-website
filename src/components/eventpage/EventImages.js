@@ -8,6 +8,9 @@ const EventImages = (props) => (
             { 
                 props.isAuthenticated === true ? 
                     <div className="backoffice__events__images__buttons">
+                        <div className="backoffice__toolbar__label">
+                            ניהול תמונות
+                        </div>
                         <button data-id={props.eventId} className="backoffice__events__events__add__button" onClick={props.uploadWidget}>
                             <img data-id={props.eventId} className="backoffice__events__events__add__icon" src="/images/eventspage/add-eventSubcategory-icon.svg" alt="הוספת תמונה" />
                         </button>

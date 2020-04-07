@@ -15,7 +15,7 @@ export const setCategories = (categories) => ({
 
 export const startSetCategories = () => {
     return (dispatch) => {
-        return firebase.database().ref('eventsCategories').once('value').then((snapshot) => {
+        return firebase.database().ref('eventsCategories').orderByChild(`order`).once('value').then((snapshot) => {
             const categories = [];
             snapshot.forEach((childSnapshot) => {
                 dispatch(startSetSubcategories(childSnapshot.key));
@@ -191,9 +191,12 @@ export const addCategory = (category) => ({
 export const startAddCategory = (categoryData = {}) => {
     return (dispatch) => {
         const {
-            name = ''
+            name = '',
+            order,
+            isVisible = false,
+            type = 'category'
         } = categoryData;
-        const category = {name};
+        const category = {name, order, isVisible, type};
         return firebase.database().ref('eventsCategories').push(category).then((ref) => {
             dispatch(addCategory({
                 id: ref.key,
@@ -486,6 +489,20 @@ export const startEditCategory = ( category ) => {
     };
 };
 
+// EDIT_CATEGORIES
+
+export const editCategories = ( categories ) => ({
+    type: 'EDIT_CATEGORIES',
+    categories
+});
+
+export const startEditCategories = ( fbCategories, categories ) => {
+    return (dispatch) => {
+        return firebase.database().ref().child(`eventsCategories`).update(fbCategories).then(() => {
+            dispatch(editCategories( categories ));
+        })
+    };
+};
 
 // EDIT_SUBCATEGORIES
 
@@ -512,10 +529,12 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
     category
 });
 
-export const startEditEvent = ( eventName, eventText, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId ) => {
+export const startEditEvent = ( eventName, eventText, eventTextHtml, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId ) => {
+    console.log('eventTextHtml', eventTextHtml);
     const event = {
         name: eventName,
         text: eventText,
+        textHtml: eventTextHtml,
         linkText: eventLinkText,
         linkLink: eventLinkLink,
         showLines: eventShowLines,
@@ -623,6 +642,31 @@ export const startToggleShowSubcategory = ( categoryId, subcategoryId, visible )
     };
 };
 
+export const toggleShowCategory = ( categoryId, visible ) => ({
+    type: 'TOGGLE_SHOW_CATEGORY',
+    categoryId,
+    visible
+});
+
+export const toggleAllShowCategory = ( categoryId, visible ) => ({
+    type: 'TOGGLE_ALL_SHOW_CATEGORY',
+    categoryId,
+    visible
+});
+
+export const startToggleShowCategory = ( categoryId, visible ) => {
+    const visibleObj = {
+        isVisible: visible
+    };
+    console.log('in actions', visibleObj);
+    return (dispatch) => {
+        return firebase.database().ref().child(`eventsCategories/${categoryId}`).update(visibleObj).then(() => {
+            dispatch(toggleShowCategory( categoryId, visible ));
+            dispatch(toggleAllShowCategory( categoryId, visible ));
+            return 'done';
+        })
+    };
+};
 
 
 

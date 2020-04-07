@@ -715,23 +715,33 @@ class AboutPage extends React.Component {
                     
                 </ModalRB>
                 
-                <Navigation />
+                <Navigation
+                    isAuthenticated={this.props.isAuthenticated}
+                    isEditable={true}
+                />
                 <div className="about__structure">
                     <div className="about__left">
                         { 
                             this.props.isAuthenticated === true ? 
                                 <div className="about__edit__panel__box">
-                                    <div className="about__edit__panel">
-                                        <button className="backoffice_button" onClick={this.onUpdateAboutPage}>
-                                            <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.props.startLogout}>
-                                            <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
-                                        </button>
-                                        <button className="backoffice_button" onClick={this.onToggleAboutpageSeo}>
-                                            seo
-                                        </button>
+                                    <div className="backoffice__toolbar__label">
+                                        שמירה
                                     </div>
+                                    <button className="backoffice_button" onClick={this.onUpdateAboutPage}>
+                                        <img className="backoffice_icon" src="/images/backoffice/save.svg" alt="שמירה" />
+                                    </button>
+                                    <div className="backoffice__toolbar__label">
+                                        seo עריכת
+                                    </div>
+                                    <button className="backoffice_button" onClick={this.onToggleAboutpageSeo}>
+                                        seo
+                                    </button>
+                                    <div className="backoffice__toolbar__label" style={{marginTop: '1rem'}}>
+                                        יציאה
+                                    </div>
+                                    <button className="backoffice_button" onClick={this.props.startLogout}>
+                                        <img className="backoffice_icon" src="/images/backoffice/exit.svg" alt="יציאה" />
+                                    </button>
                                 </div>
                             :
                                 null

@@ -2,10 +2,9 @@
 .about__edit__panel__box {
     position: fixed;
     z-index: 505;
-    left: 15%;
-    top: 11rem;
-    width: 20%;
-    text-align: center;
+    left: 2vw;
+    top: 10.4rem;
+    text-align: left;
 }
 
 
@@ -44,8 +43,8 @@
 
 .backoffice__events__header__buttons {
     position: absolute;
-    left: 0rem;
-    top: 2rem;
+    left: -3rem;
+    top: -0.5rem;
 }
 
 .backoffice__events__header__save__button {
@@ -53,16 +52,13 @@
     background: none;
     border: none;
     z-index: 718;
-    width: 2rem;
-    height: 2rem;
-    left: 3rem;
+    width: 3rem;
+    height: 3rem;
     cursor: pointer;
 }
 
 .backoffice__events__header__save__icon {
     width: 3rem;
-    margin-right: -1.3rem;
-    margin-top: -1.3rem;
     border: none;
     background: none;
 }
@@ -78,32 +74,31 @@
 .backoffice__events__events__buttons {
     position: absolute;
     z-index: 717;
-    left: -1rem;
+    left: -7rem;
     top: 2rem;
 }
 
 .backoffice__events__images__buttons {
     position: absolute;
     z-index: 717;
-    left: -2rem;
-    top: 2rem;
+    left: -8rem;
+    top: 3rem;
 }
 
 .backoffice__events__events__save__button {
-    position: absolute;
+    _position: absolute;
     background: none;
     border: none;
     z-index: 203;
-    width: 2rem;
-    height: 2rem;
-    left: 0rem;
+    width: 3rem;
+    height: 3rem;
+    _left: 0rem;
     cursor: pointer;
 }
 
 .backoffice__events__events__save__icon {
     width: 3rem;
-    margin-right: -1.3rem;
-    margin-top: -1.3rem;
+    border: 1px solid $white;
     border: none;
     background: none;
 }
@@ -118,13 +113,11 @@
 
 
 .backoffice__events__events__add__button {
-    position:absolute;
     background: none;
     border: none;
     z-index: 203;
-    width: 2rem;
-    height: 2rem;
-    left: -3rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .backoffice__events__events__save__icon:hover {
@@ -136,9 +129,8 @@
 }
 
 .backoffice__events__events__add__icon {
+    border: 1px solid $white;
     width: 3rem;
-    margin-right: -1.3rem;
-    margin-top: -1.3rem;
 }
 
 .backoffice__events__events__add__icon:hover {
@@ -149,12 +141,55 @@
     background: green;
 }
 
-
-
 .backoffice__events__tabs__buttons {
     position: absolute;
-    left: -6rem;
-    top: -0.5rem;
+    left: -10rem;
+    top: -2rem;
+}
+
+.backoffice__toolbar__buttons {
+    position: fixed;
+    left: 2vw;
+    top: 4vh;
+    z-index: 15001;
+}
+
+.backoffice__toolbar__label {
+    display: block;
+    font-size: 12px;
+    height: 18px;
+    width: 80px;
+    text-align: center;
+    color: $white;
+    background: $gray;
+}
+
+.backoffice__edit__navigation__box {
+    position: fixed;
+    top: 8rem;
+    left: 15vw;
+    width: 70vw;
+    padding-top: 4rem;
+    padding-right: 3rem;
+    padding-bottom: 4rem;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+    background: $white;
+    z-index: 11001
+}
+
+.backoffice__edit__navigation__box input {
+    font-family: $fontRegular;
+    font-weight: $fontSizeRegular;
+    font-size: 1.5rem;
+    line-height: 0.5rem;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-top: -0.3rem;
+    width: 4rem;
 }
 
 .backoffice__edit__events__tabs__box {
@@ -226,20 +261,16 @@
 }
 
 .backoffice__add__button {
-    position:absolute;
     background: none;
     border: none;
     z-index: 203;
-    width: 2rem;
-    height: 2rem;
-    left: 0rem;
+    width: 3rem;
+    height: 3rem;
     cursor: pointer;
 }
 
 .backoffice__add__icon {
     width: 3rem;
-    margin-right: -1.3rem;
-    margin-top: -1.3rem;
     background: none;
     border: none;
 }
@@ -253,31 +284,25 @@
 }
 
 .backoffice__edit__button {
-    position:absolute;
     background: none;
     border: none;
     z-index: 203;
     width: 2rem;
     height: 2rem;
-    left: 3rem;
     cursor: pointer;
 }
 
 .backoffice__customers__strip__edit__button {
-    position:absolute;
     background: none;
     border: none;
     z-index: 203;
-    width: 2rem;
-    height: 2rem;
-    left: 0.5rem;
+    width: 3rem;
+    height: 3rem;
     cursor: pointer;
 }
 
 .backoffice__edit__icon {
     width: 3rem;
-    margin-right: -1.3rem;
-    margin-top: -1.3rem;
 }
 
 .backoffice__edit__icon:hover {
@@ -484,6 +509,7 @@
 .backoffice_button {
     border: none;
     background: $white;
+    border: 1px solid $white;
     width: 4rem;
     cursor: pointer;
 }
@@ -577,6 +603,27 @@
     height: 2rem;
 }
 
+.backoffice__events__tabs__buttons>.backoffice__add__button {
+    position:absolute;
+    background: none;
+    border: none;
+    z-index: 203;
+    width: 4rem;
+    height: 3rem;
+    left: 0rem;
+    cursor: pointer;
+}
+
+.backoffice__events__tabs__buttons>.backoffice__edit__button {
+    position:absolute;
+    background: none;
+    border: none;
+    z-index: 203;
+    width: 4rem;
+    height: 3rem;
+    left: 3rem;
+    cursor: pointer;
+}
 
 
 

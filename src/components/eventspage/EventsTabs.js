@@ -107,6 +107,9 @@ class EventsTabs extends React.Component {
                             {this.props.isAuthenticated &&
                             this.props.isEditable ? (
                                 <div className="backoffice__events__tabs__buttons">
+                                    <div className="backoffice__toolbar__label">
+                                        ניהול קטגוריה 
+                                    </div>
                                     <button
                                         className="backoffice__add__button"
                                         onClick={
