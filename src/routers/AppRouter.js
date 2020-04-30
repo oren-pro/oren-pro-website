@@ -1,8 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+//import createHistory from 'history/createBrowserHistory';
 import { createMemoryHistory } from 'history';
 import ReactLoading from "react-loading";
+
+const createHistory = require("history").createBrowserHistory;
 
 let loadImage = "";
 if (typeof(window) !== "undefined") {

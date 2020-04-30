@@ -44,7 +44,8 @@ class Navigation extends React.Component {
             windowWidth: undefined,
             hideCategoriesEditPanel: true,
             newCategoryNameModalIsOpen: false,
-            newCategoryName: ''
+            newCategoryName: '',
+            location: null
         };
     }
 
@@ -154,6 +155,14 @@ class Navigation extends React.Component {
                 window.addEventListener("scroll", this.handleScroll);
             }
         }
+        let location = "/";
+        if (typeof window !== "undefined") {
+            location = decodeURIComponent((window.location.href).replace(/\+/g,  " "));
+        }
+        
+        this.setState({
+            location
+        })
     };
 
     componentDidUpdate = prevProps => {
@@ -190,7 +199,7 @@ class Navigation extends React.Component {
     componentWillUnmount = () => {
         let location = "/";
         if (typeof window !== "undefined") {
-            const location = window.location.href;
+            location = window.location.href;
         }
         const page = location.substring(
             location.lastIndexOf("/"),
@@ -515,6 +524,8 @@ class Navigation extends React.Component {
     }
 
     render() {
+        
+        
         return (
             <div className="container-fluid">
                 
@@ -620,6 +631,17 @@ class Navigation extends React.Component {
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
                                         if (category.isVisible === true) {
+                                            console.log('this.state.location',this.state.location);
+                                            console.log('includes',this.state.location && this.state.location.includes(stringReplace(
+                                                category.name,
+                                                " ",
+                                                "_"
+                                            )));
+                                            console.log('string',stringReplace(
+                                                category.name,
+                                                " ",
+                                                "_"
+                                            ));
                                             return (
                                                 category.type === 'category' ?
                                                     <NavItem key={category.id}>
@@ -629,7 +651,11 @@ class Navigation extends React.Component {
                                                                 " ",
                                                                 "_"
                                                             )}`}
-                                                            className="nav__link nav__link--padding-top"
+                                                            className={`nav__link nav__link--padding-top${this.state.location && this.state.location.includes(stringReplace(
+                                                                category.name,
+                                                                " ",
+                                                                "_"
+                                                            )) ? ' is-active nav__link--active' : ''}`}
                                                             activeClassName="is-active nav__link--active"
                                                         >
                                                             {category.name}
@@ -652,6 +678,7 @@ class Navigation extends React.Component {
                                                         <NavItem key={category.id}>
                                                             <NavLink
                                                                 to={category.urlTo}
+                                                                exact
                                                                 className="nav__link nav__link--padding-top"
                                                                 activeClassName="is-active nav__link--active"
                                                             >
@@ -681,7 +708,7 @@ class Navigation extends React.Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
-
+                
                 <Navbar
                     id="navbarM"
                     light
@@ -928,7 +955,7 @@ const mapDispatchToProps = dispatch => ({
     setHomePageCarouselDone: homepageCarouselDone => dispatch(setHomePageCarouselDone(homepageCarouselDone)),
     startToggleShowCategory: (categoryId, visible) => dispatch(startToggleShowCategory(categoryId, visible)),
     startEditCategories: (fbCategories, categories) => dispatch(startEditCategories(fbCategories, categories)),
-    startAddCategory: (category) => dispatch(startAddCategory(category)),
+    startAddCategory: (category) => dispatch(startAddCategory(category))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

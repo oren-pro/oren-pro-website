@@ -1332,6 +1332,7 @@ class EventPage extends React.Component {
                         <EventsHeader
                             categoryName={this.props.categoryName}
                             subcategoryName={this.state.subcategoryName}
+                            eventName={this.state.eventName}
                         />
 
                         <EventsTabs

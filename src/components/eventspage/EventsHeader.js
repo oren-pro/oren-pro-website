@@ -32,9 +32,9 @@ class EventsHeader extends React.Component {
                 }
                 {
                     this.props.isAuthenticated === true ?
-                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.subcategoryName ? this.props.subcategoryName : this.props.categoryName}</h1>
+                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.eventName ? this.props.eventName : this.props.subcategoryName ? this.props.subcategoryName : this.props.categoryName}</h1>
                     :
-                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.subcategoryName ? this.props.subcategoryName : this.props.categoryName}</h1>
+                        <h1 className="events__header Heebo-Medium" dir="rtl">{this.props.eventName ? this.props.eventName : this.props.subcategoryName ? this.props.subcategoryName : this.props.categoryName}</h1>
                 }
                 {
                     this.props.categoryName !== "מאמרים" || (this.props.categoryName === "מאמרים" && this.props.isAuthenticated === true) ?
