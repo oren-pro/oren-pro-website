@@ -1315,7 +1315,7 @@ class EventPage extends React.Component {
                                 <div className="backoffice__toolbar__label">
                                     seo עריכת
                                 </div>
-                                <button className="backoffice_button" onClick={this.onToggleSeo}>
+                                <button className="backoffice_button" onClick={this.onToggleEventSeo}>
                                     seo
                                 </button>
                                 <div className="backoffice__toolbar__label" style={{marginTop: '1rem'}}>
