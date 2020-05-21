@@ -120,9 +120,6 @@ export class ContactForm extends React.Component {
                 {this.state.error && <p className={`contact__error--${this.props.style} Heebo-Regular`}>{this.state.error}</p>}
                 <form className={`contact__form--${this.props.style}`} onSubmit={this.onSubmit} dir="rtl">
                     <div>
-                        <ContactFollow
-                            style='strip'
-                        />
                         <input
                             type="text"
                             placeholder="*שם:"
