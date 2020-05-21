@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import { startSendMessage } from '../../actions/messages';
-
+import ContactFollow from './ContactFollow';
 
 import ReactGA from 'react-ga';
 
@@ -120,6 +120,9 @@ export class ContactForm extends React.Component {
                 {this.state.error && <p className={`contact__error--${this.props.style} Heebo-Regular`}>{this.state.error}</p>}
                 <form className={`contact__form--${this.props.style}`} onSubmit={this.onSubmit} dir="rtl">
                     <div>
+                        <ContactFollow
+                            style='strip'
+                        />
                         <input
                             type="text"
                             placeholder="*שם:"
