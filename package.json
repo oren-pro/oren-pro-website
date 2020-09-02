@@ -42,7 +42,7 @@
     "firebase": "^5.0.4",
     "firebase-admin": "^6.0.0",
     "fontfaceobserver": "^2.0.13",
-    "googleapis": "^33.0.0",
+    "googleapis": "^39.1.0",
     "gsap": "^2.0.1",
     "history": "^4.7.2",
     "hoist-non-react-statics": "^2.5.5",
