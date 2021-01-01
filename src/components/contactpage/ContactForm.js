@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import { startSendMessage } from '../../actions/messages';
-import ContactFollow from './ContactFollow';
 
 import ReactGA from 'react-ga';
 
