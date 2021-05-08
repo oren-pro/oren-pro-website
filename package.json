@@ -49,7 +49,7 @@
     "html-minifier": "^3.5.20",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.3.1",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "lodash.assign": "^4.2.0",
     "lodash.clonedeep": "^4.5.0",
     "node-sass": "^4.13.1",
