@@ -578,9 +578,10 @@ $slideCrouselControlsTransitionStyle: ease-out;
     }
 
     .events__tabs__button {
-        height: 3.8rem;
+        min-height: 3.8rem;
+        height: auto;
         font-size: 2.7rem;
-        line-height: 0.5rem;
+        line-height: 2.7rem;
         padding-left: 0.6rem;
         padding-right: 0.6rem;
         padding-top: 0.3rem;

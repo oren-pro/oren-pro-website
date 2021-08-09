@@ -1,7 +1,6 @@
 import React from "react";
 import { Prompt } from "react-router-dom";
 import { Helmet } from "react-helmet";
-//import { Button } from "react-bootstrap";
 import Button from "react-bootstrap/lib/Button";
 import Modal from "react-responsive-modal";
 import ContactStrip from "../components/contactpage/ContactStrip";
@@ -31,7 +30,6 @@ import { iconRatioOut } from "../reusableFunctions/iconRatioOut";
 import { handlePageScroll } from "../reusableFunctions/handlePageScroll";
 import isEqual from "lodash/isEqual";
 import $ from "jquery";
-console.log('test');
 import ReactGA from "react-ga";
 
 function initializeReactGA(url) {
