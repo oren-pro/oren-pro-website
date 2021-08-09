@@ -23,9 +23,9 @@ app.use(function forceHTTPS(req, res, next) {
   console.log(schema);
   console.log(www);
  //  || www.indexOf('www') < 0
-  if (schema !== 'https') {
-    return res.redirect('https://www.oren-pro.com' + local);
-  }
+  // if (schema !== 'https') {
+  //   return res.redirect('https://www.oren-pro.com' + local);
+  // }
 
   return next();
 
@@ -662,7 +662,7 @@ admin.initializeApp({
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
   }),
-  databaseURL: process.env.FIREBASE_DATABASE_URL
+  databaseURL: 'https://oren-pro.firebaseio.com',
 });
 
 
