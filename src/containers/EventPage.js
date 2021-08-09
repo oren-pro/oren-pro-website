@@ -164,7 +164,6 @@ class EventPage extends React.Component {
         let seo = {};
         items.map((item) => {
             if (eventName === item.name) {
-                console.log("item: ", item);
                 eventId = item.id;
                 eventText = item.text;
                 eventTextHtml = item.textHtml;

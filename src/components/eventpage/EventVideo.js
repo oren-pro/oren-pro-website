@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import YouTube from 'react-youtube';
+// import YouTube from 'react-youtube';
+// import ReactPlayer from 'react-player/lazy'
+import VideoContentYT from 'react-video-content-youtube';
 import $ from 'jquery';
 
 
@@ -23,6 +25,7 @@ class EventVideo extends React.Component {
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (this.props.videoId !== prevProps.videoId) {
             console.log(this.props.videoId);
+            console.log('this.state.videoId', this.state.videoId);
             this.setState({
                 videoId: this.props.videoId
             });
@@ -43,6 +46,7 @@ class EventVideo extends React.Component {
     }
 
     render() {
+        console.log('this.state.videoId', this.state.videoId);
         let windowWidth = $( window ).width();
         let windowHeight = $( window ).height();
         console.log();
@@ -71,15 +75,18 @@ class EventVideo extends React.Component {
         if( this.state.media === 'mobile') {
             currentItems = this.state.mobileImages;
         }
+        console.log('this.state.videoId', this.state.videoId);
         return (
           <div style={{position: 'relative', minHeight: '40px', marginTop: '0.5rem'}}>
-            { this.props.videoId != "" ?
+            { this.state.videoId != "" ?
             
-                    <YouTube
-                        videoId={this.props.videoId}
-                        opts={opts}
-                        onReady={this._onReady}
-                    />
+                    // <YouTube
+                    //     videoId={this.state.videoId}
+                    //     opts={opts}
+                    //     onReady={this._onReady}
+                    // />
+                    // <ReactPlayer url={`https://www.youtube.com/watch?v=${this.state.videoId}`}/>
+                    <VideoContentYT src={this.state.videoId} params={{autoPlay: true}}/>
 
                 :
 
