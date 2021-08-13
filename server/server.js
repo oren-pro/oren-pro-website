@@ -16,9 +16,9 @@ app.use(function forceHTTPS(req, res, next) {
   var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
   var www = req.headers.host;
   //  || www.indexOf('www') < 0
-  if (schema !== 'https') {
-    return res.redirect('https://oren-pro.com' + local);
-  }
+  // if (schema !== 'https') {
+  //   return res.redirect('https://oren-pro.com' + local);
+  // }
 
   return next();
 
