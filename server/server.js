@@ -7,10 +7,6 @@ var cors = require('cors');
 var cloudinary = require('cloudinary');
 const fs = require('fs');
 
-
-
-
-
 var admin = require("firebase-admin");
 
 const app = express();
@@ -19,19 +15,13 @@ app.use(function forceHTTPS(req, res, next) {
   var local = req.url;
   var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
   var www = req.headers.host;
-  console.log(local);
-  console.log(schema);
-  console.log(www);
- //  || www.indexOf('www') < 0
-  // if (schema !== 'https') {
-  //   return res.redirect('https://www.oren-pro.com' + local);
-  // }
+  if (schema !== 'https') {
+    return res.redirect('https://www.oren-pro.com' + local);
+  }
 
   return next();
 
 });
-
-
 
 app.use(function forceLiveDomain(req, res, next) {
 
@@ -103,9 +93,6 @@ app.use(function forceLiveDomain(req, res, next) {
     return res.redirect(301, '/פסטיבלים_ואירועי_חוצות');
   }
   
-
-
-
   //http://www.oren-pro.com/1310/1306/פורים-קרנבל-ברזילאי
   if (String(req.originalUrl) === '/1310/1306/%D7%A4%D7%95%D7%A8%D7%99%D7%9D-%D7%A7%D7%A8%D7%A0%D7%91%D7%9C-%D7%91%D7%A8%D7%96%D7%99%D7%9C%D7%90%D7%99') {
     return res.redirect(301, '/אירועי_קונספט/אירועי_חברה');
@@ -126,7 +113,6 @@ app.use(function forceLiveDomain(req, res, next) {
     return res.redirect(301, '/פורים_משפחות/אירוע_משפחות/אירועי_חברה');
   }
 
-
   //http://www.oren-pro.com/1347/1306/הפנינג-משפחות-פורים-בסגנון-הוואי
   if (String(req.originalUrl) === '/1347/1306/%D7%94%D7%A4%D7%A0%D7%99%D7%A0%D7%92-%D7%9E%D7%A9%D7%A4%D7%97%D7%95%D7%AA-%D7%A4%D7%95%D7%A8%D7%99%D7%9D-%D7%91%D7%A1%D7%92%D7%A0%D7%95%D7%9F-%D7%94%D7%95%D7%95%D7%90%D7%99') {
     return res.redirect(301, '/אירוע_משפחות/אירועי_חברה');
@@ -142,8 +128,6 @@ app.use(function forceLiveDomain(req, res, next) {
   if (String(req.originalUrl) === '/1078/1069/%D7%99%D7%95%D7%9D-%D7%9B%D7%99%D7%A3-%D7%98%D7%99%D7%95%D7%9C-%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D') {
     return res.redirect(301, '/יום_כיף_בירושלים/ימי_גיבוש_וכיף/אירועי_חברה');
   }
-
-
 
   //http://www.oren-pro.com/1213/993/סיור-חנוכיות-בצפת
   if (String(req.originalUrl) === '/1213/993/%D7%A1%D7%99%D7%95%D7%A8-%D7%97%D7%A0%D7%95%D7%9B%D7%99%D7%95%D7%AA-%D7%91%D7%A6%D7%A4%D7%AA') {
@@ -403,10 +387,6 @@ app.use(function forceLiveDomain(req, res, next) {
   if (String(req.originalUrl) === '/event/211/131/%D7%97%D7%AA%D7%95%D7%A0%D7%94') {
     return res.redirect(301, '/קצת_אחרת');
   }
-
-
-
-
 
 
   //http://www.oren-pro.com/1047/1021/שבועות-בקניון-חוצות-אלונים-
