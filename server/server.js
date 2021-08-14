@@ -652,18 +652,11 @@ app.get('/robots.txt', function (req, res) {
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    type: 'service_account',
     projectId: process.env.FIREBASE_PROJECT_ID,
-    private_key_id: '0fab5408c84d97f6a91d17596b0c3b83b870be1e',
-    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    client_id: '113982232227854221037',
-    auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-    token_uri: 'https://oauth2.googleapis.com/token',
-    auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-    client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-x5kto%40oren-pro.iam.gserviceaccount.com'
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
   }),
-  databaseURL: process.env.FIREBASE_DATABASE_URL
+  databaseURL: 'https://oren-pro.firebaseio.com'
 });
 
 
