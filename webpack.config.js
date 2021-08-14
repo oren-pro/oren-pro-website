@@ -14,6 +14,15 @@ if (process.env.NODE_ENV === 'test') {
     require('dotenv').config({ path: '.env.development' });
 }
 
+// console.log(process.env.FIREBASE_API_KEY);
+// console.log(process.env.FIREBASE_AUTH_DOMAIN);
+// console.log(process.env.FIREBASE_CLIENT_EMAIL);
+// console.log(process.env.FIREBASE_DATABASE_URL);
+// console.log(process.env.FIREBASE_MESSAGING_SENDER_ID);
+// console.log(process.env.FIREBASE_PRIVATE_KEY);
+// console.log(process.env.FIREBASE_PROJECT_ID);
+// console.log(process.env.FIREBASE_STORAGE_BUCKET);
+
 module.exports = (env) => {
     const isProduction = env === "production";
     const CSSExtract = new ExtractTextPlugin('styles.css');
