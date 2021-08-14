@@ -652,7 +652,13 @@ app.get('/robots.txt', function (req, res) {
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
+    apiKey: "AIzaSyBVeoi651Fe05MYHeFMwqnvkGhHL97yRoo",
+    authDomain: "oren-pro.firebaseapp.com",
+    databaseURL: "https://oren-pro.firebaseio.com",
+    projectId: "oren-pro",
+    storageBucket: "oren-pro.appspot.com",
+    messagingSenderId: "275556401980",
+    appId: "1:275556401980:web:2519b35fe6d68af03ad439",
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
   }),
