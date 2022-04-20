@@ -66,7 +66,6 @@ class TileGallery extends React.Component {
         <div ref={c => (this._gallery = c)}>
           {thumbs.map((photo, index) => {
             const { src, width, height } = photo;
-            //console.log(photo);
             const imgStyle = {  width: '100%', height: '100%' };
             const buttonStyle = { width: width, height: height }
             const divStyle = { position: 'relative', display: 'block', float: 'right', width: width, height: height, margin: margin };

@@ -44,10 +44,8 @@ export const setDesktopGallery = (desktopImages) => ({
 export const startSetDesktopGallery = () => {
     return (dispatch) => {
         return firebase.database().ref(`website/desktopGallery/`).once('value').then((snapshot) => {
-            //console.log('in set desktopGallery ============');
             const desktopImages = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
                 desktopImages.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -56,10 +54,8 @@ export const startSetDesktopGallery = () => {
             desktopImages.sort((a, b) => {
                 return a.order > b.order ? 1 : -1;
             });
-            //console.log(desktopImages);
             dispatch(setDesktopGallery(desktopImages));
             return (desktopImages);
-            //dispatch(check());
         });
     };
 };
@@ -71,7 +67,6 @@ export const startSetDesktopGallery = () => {
 export const startDeleteDesktopGallery = ( fbDesktopImages, desktopImages, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/deleteImage';
         var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
@@ -81,7 +76,6 @@ export const startDeleteDesktopGallery = ( fbDesktopImages, desktopImages, publi
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            //console.log(data);
         });
         return firebase.database().ref('website/desktopGallery').update(fbDesktopImages).then(() => {
             dispatch(setDesktopGallery(desktopImages));

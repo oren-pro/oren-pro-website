@@ -47,10 +47,8 @@ export const setCostumers = (costumers) => ({
 export const startSetCostumers = () => {
     return (dispatch) => {
         return firebase.database().ref(`website/costumers/`).once('value').then((snapshot) => {
-            //console.log('in set homepage ============');
             const costumers = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
                 costumers.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -60,7 +58,6 @@ export const startSetCostumers = () => {
                 return a.order > b.order ? 1 : -1;
             });
             dispatch(setCostumers(costumers));
-            //dispatch(check());
         });
     };
 };
@@ -71,7 +68,6 @@ export const startSetCostumers = () => {
 export const startDeleteCostumer = ( fbCostumers, costumers, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/deleteImage';
         var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
@@ -81,7 +77,6 @@ export const startDeleteCostumer = ( fbCostumers, costumers, publicid ) => {
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
         });
         return firebase.database().ref('website/costumers').update(fbCostumers).then(() => {
             //dispatch(editCostumers( costumers ));

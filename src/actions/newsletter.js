@@ -18,11 +18,9 @@ export const subscribeToNewsletter = (newsletterData = {}) => {
         })
         .then(function (response) {
             console.log("response");
-            console.log(response);
         })
         .catch(function (error) {
             console.log('error');
-            console.log(error);
         });
 
         return firebase.database().ref(`newsletter`).push(subscriber);

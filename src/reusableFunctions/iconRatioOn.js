@@ -33,7 +33,6 @@ export const iconRatioOn = (e) => {
                 ratioWhatsapp: 1
             };
         case 'whatsapp':
-        console.log('whatsapp');
             return {
                 ratioFacebook: 1,
                 ratioInstagram: 1,

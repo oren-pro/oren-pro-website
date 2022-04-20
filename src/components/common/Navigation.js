@@ -496,8 +496,6 @@ class Navigation extends React.Component {
                 type: 'category'
             };
             this.props.startAddCategory(category, order).then((categories)=> {
-                //this.getAllData(categoryId, categoryId);
-                console.log('categories', categories);
                 this.setState({
                     newCategoryNameModalIsOpen: false,
                     newCategoryName: ''

@@ -46,10 +46,8 @@ export const setMobileGallery = (mobileImages) => ({
 export const startSetMobileGallery = () => {
     return (dispatch) => {
         return firebase.database().ref(`website/mobileGallery/`).once('value').then((snapshot) => {
-            //console.log('in set mobileGallery ============');
             const mobileImages = [];
             snapshot.forEach((childSnapshot) => {
-                //console.log(childSnapshot.val());
                 mobileImages.push({
                     id: childSnapshot.key,
                     ...childSnapshot.val()
@@ -58,10 +56,8 @@ export const startSetMobileGallery = () => {
             mobileImages.sort((a, b) => {
                 return a.order > b.order ? 1 : -1;
             });
-            //console.log(mobileImages);
             dispatch(setMobileGallery(mobileImages));
             return (mobileImages);
-            //dispatch(check());
         });
     };
 };
@@ -73,7 +69,6 @@ export const startSetMobileGallery = () => {
 export const startDeleteMobileGallery = ( fbMobileImages, mobileImages, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/deleteImage';
         var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
@@ -83,7 +78,6 @@ export const startDeleteMobileGallery = ( fbMobileImages, mobileImages, publicid
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
         });
         return firebase.database().ref('website/mobileGallery').update(fbMobileImages).then(() => {
             dispatch(setMobileGallery(mobileImages));

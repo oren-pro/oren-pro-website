@@ -37,22 +37,17 @@ class UncontrolledCarousel extends Component {
   }
 
   onNext() {
-    //console.log('next: '+this.state.activeIndex);
     if (this.animating) return;
     const nextIndex = this.state.activeIndex === this.props.items.length - 1 ? 0 : this.state.activeIndex + 1;
-    //this.props.onCurrentImageChange(nextIndex);
-    //this.setState({ activeIndex: nextIndex });
     if (this.props.onCurrentImageChange) {
     this.props.onCurrentImageChange(nextIndex);
     }
   }
 
   previous() {
-    //console.log('previous: '+this.state.activeIndex);
     if (this.animating) return;
     const nextIndex = this.state.activeIndex === 0 ? this.props.items.length - 1 : this.state.activeIndex - 1;
     this.props.onCurrentImageChange(nextIndex);
-    //this.setState({ activeIndex: nextIndex });
   }
 
   goToIndex(newIndex) {
@@ -61,9 +56,6 @@ class UncontrolledCarousel extends Component {
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    //console.log('nextProps, nextState');
-    //console.log(nextProps.activeIndex);
-    //console.log(this.props.activeIndex);
     if(this.props !== nextProps) {
       this.setState({ activeIndex: nextProps.activeIndex });
       return true;
@@ -76,8 +68,6 @@ class UncontrolledCarousel extends Component {
 
   getDerivedStateFromProps = (props, state) => {
     //console.log('getDerivedStateFromProps');
-    //console.log(props);
-    //console.log(state);
   }
 
 

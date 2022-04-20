@@ -109,10 +109,8 @@ class HomePage extends React.Component {
         this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
         if (typeof window !== "undefined") {
             if (isEqual(this.state.homepageOrigin, homepage)) {
-                //console.log("remove listener");
                 window.removeEventListener("beforeunload", this.unloadFunc);
             } else {
-                //console.log("add listener");
                 window.addEventListener("beforeunload", this.unloadFunc);
             }
         }
@@ -125,11 +123,8 @@ class HomePage extends React.Component {
     };
 
     uploadWidget = e => {
-        //console.log('myUploadWidget called');
         const { dataset } = e.target;
         const { name, index, field, action, publicid } = dataset;
-        // console.log(field);
-        // console.log(publicid);
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         var myUploadWidget = cloudinary.openUploadWidget(
             {
@@ -183,10 +178,8 @@ class HomePage extends React.Component {
                         homepage
                     });
                     this.setLocalTell(JSON.parse(JSON.stringify(homepage)));
-                    //console.log(publicid);
                     this.props.startDeleteHomePageImage(homepage, publicid);
                     //Step 2.4:  Call the .close() method in order to close the widget
-                    //console.log('myUploadWidget.close()');
                     myUploadWidget.close();
 
                     this.onUpdateHomePage();
@@ -199,7 +192,6 @@ class HomePage extends React.Component {
 
     onUpdateHomePage = () => {
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
-        console.log('homepage', homepage);
         this.props.startEditHomePage({
             homepage: homepage
         });
@@ -212,7 +204,6 @@ class HomePage extends React.Component {
     };
 
     handleScroll = () => {
-        //console.log('in handle scroll');
         this.setState(
             handlePageScroll(
                 this.state.pageupImageClassName,
@@ -241,7 +232,6 @@ class HomePage extends React.Component {
         }
 
         if (this.props.navigation.homepageCarouselDone === true) {
-            //console.log('setting');
             this.setState({
                 pageupImageClassName: "pageup__image__absolute",
                 navigation: this.props.navigation,
@@ -257,7 +247,6 @@ class HomePage extends React.Component {
             if (err) {
                 throw err;
             }
-            //console.log(startSetHomePageResponse);
             const homepage = JSON.parse(
                 JSON.stringify(startSetHomePageResponse)
             );
@@ -319,10 +308,8 @@ class HomePage extends React.Component {
     };
 
     addNewTell = () => {
-        //const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         const homepage = this.state.homepage;
         const order = Number(this.state.tell.length) + 1;
-        //console.log(order);
         const tellData = {
             name: "",
             position: "",
@@ -333,8 +320,6 @@ class HomePage extends React.Component {
             visible: false
         };
         this.props.startAddHomePageTell(homepage, tellData).then(res => {
-            //console.log(res);
-
             const tempTell = res.tell;
             const tell = [];
             Object.keys(tempTell).forEach(function eachKey(key) {
@@ -477,9 +462,6 @@ class HomePage extends React.Component {
         }
         const oldOrder = Number(e.target.dataset.index) + 1;
         const id = e.target.dataset.id;
-        // console.log(newOrder);
-        // console.log(oldOrder);
-        // console.log(id);
         if (Number(newOrder) > Number(oldOrder)) {
             for (let i = 0; i < tell.length; i++) {
                 if (id !== tell[i].id) {
@@ -505,11 +487,9 @@ class HomePage extends React.Component {
         tell.map((tellItem, index) => {
             fbTell[tellItem.id] = tellItem;
         });
-        //fbTell[id] = null;
 
         const homepage = JSON.parse(JSON.stringify(this.state.homepage));
         homepage.tell = fbTell;
-        //console.log(fbTell);
 
         this.setState({
             tell,

@@ -12,7 +12,6 @@ class TextEditorWysiwyg extends React.Component {
   
     componentDidUpdate = (prevProps) => {
         if (this.props.textHtml !== prevProps.textHtml || this.props.text !== prevProps.text) {
-            console.log('here');
             const html = this.props.textHtml || this.props.text || '';
             const contentBlock = htmlToDraft(html);
             if (contentBlock) {
@@ -24,8 +23,6 @@ class TextEditorWysiwyg extends React.Component {
     }
     
     onEditorStateChange = (editorState) => {
-        console.log('editorState', editorState);
-        console.log('editorState', draftToHtml(convertToRaw(editorState.getCurrentContent())));
         let currentValue = draftToHtml(convertToRaw(editorState.getCurrentContent()));
         this.setState({
             editorState,

@@ -25,7 +25,6 @@ export const startSendMessage = (messageData = {}) => {
 export const sendMessage = ({ name, email, phone, message }) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/sendEmail';
         var action = '/sendEmail';
         var xhr = new XMLHttpRequest();
         var data = '';
@@ -38,8 +37,6 @@ export const sendMessage = ({ name, email, phone, message }) => {
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log('in send mail');
-            console.log(data);
         });
         return ("done");
     };

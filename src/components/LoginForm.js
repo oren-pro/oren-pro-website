@@ -31,13 +31,11 @@ export default class LoginForm extends React.Component {
                 error: '',
                 connecting: true
             }));
-            //console.log('submitted');
             this.props.onSubmit({
                 userEmail: this.state.userEmail,
                 password: this.state.password
             }).then((res) => {
                 if (res === false) {
-                    console.log('connecting false');
                     this.setState(() => ({
                         error: 'Please provide valid user name and password',
                         connecting: false

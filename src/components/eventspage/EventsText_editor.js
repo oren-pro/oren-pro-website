@@ -59,7 +59,6 @@ export default class EventsText extends React.Component {
 
     render() {
         const { height } = this.state;
-        //console.log(this.props.showLines);
         return (
             <div className="events__text__box">
                 <div className="common__intouch__seperator__box__desktop desktop">

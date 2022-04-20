@@ -106,18 +106,15 @@ export const startAddHomePageTell = (homepage, tellData) => {
 export const startDeleteHomePageImage = ( homepage, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/deleteImage';
         var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
-        console.log(publicid);
         data += 'publicid=' + publicid;
         xhr.open(method, action);
         xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
         });
         return firebase.database().ref(`website/`).update(homepage).then(() => {
             dispatch(editHomePage( homepage ));

@@ -2,10 +2,8 @@ import React from 'react';
 import AnimateHeight from 'react-animate-height';
 import Textarea from 'react-expanding-textarea';
 import $ from 'jquery';
-import {getMobileRatio, getDesktopRatio} from '../../reusableFunctions/getRatio';
 
 const shouldHighLight = (org, update) => {
-    //console.log('in highlight')
     if ( org === update ) {
         return 'about__content__text Heebo-Regular edit__bg';
     } else {

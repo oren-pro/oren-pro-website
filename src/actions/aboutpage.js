@@ -44,10 +44,8 @@ export const setAboutPage = (aboutpage) => ({
 export const startSetAboutPage = () => {
     return (dispatch) => {
         return database.ref(`website/aboutpage/`).once('value').then((snapshot) => {
-            //console.log('in set homepage ============');
             const aboutpage = snapshot.val();
             dispatch(setAboutPage(aboutpage));
-            //dispatch(check());
         });
     };
 };
@@ -90,22 +88,17 @@ export const startAddAboutImage = (imageData = {}, order) => {
 
             let aboutImages = getState().aboutpage.aboutimages;
 
-            console.log(aboutImages);
             if (!aboutImages) {
                 aboutImages = {};
             }
 
             aboutImages[ref.key] = localImage;
 
-            console.log(aboutImages);
-
             const images = [];
             Object.keys(aboutImages).map((key) => {
                 const keyedImg = {id: String(key), ...aboutImages[key]};
                 images.push(keyedImg);
             });
-
-            console.log(images);
 
              dispatch(addAboutImage(images));
              return images;
@@ -124,7 +117,6 @@ export const deleteAboutImage = ( images ) => ({
 export const startDeleteAboutImage = ( fbImages, images, publicid ) => {
     return (dispatch) => {
         var method = 'POST';
-        //var action = 'http://localhost:3000/deleteImage';
         var action = '/deleteImage';
         var xhr = new XMLHttpRequest();
         var data = '';
@@ -134,7 +126,6 @@ export const startDeleteAboutImage = ( fbImages, images, publicid ) => {
         xhr.send(data);
         xhr.addEventListener('load', function (e) {
             var data = e.target.responseText;
-            console.log(data);
         });
         return database.ref().child(`website/aboutpage/aboutimages`).update(fbImages).then(() => {
             //dispatch(editImages( images, eventId, categoryId ));

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
-//import createHistory from 'history/createBrowserHistory';
 import { createMemoryHistory } from 'history';
 import ReactLoading from "react-loading";
 
@@ -9,7 +8,6 @@ const createHistory = require("history").createBrowserHistory;
 let loadImage = "";
 if (typeof(window) !== "undefined") {
     if (navigator.userAgent.toLowerCase().indexOf('msie') > -1 || navigator.userAgent.toLowerCase().indexOf('trident') > -1 || navigator.userAgent.toLowerCase().indexOf('edge') > -1 ){
-        //console.log("found");
         loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><img src="/images/ie-preloader.gif" alt="אורן ורינת הפקות אירועים" /></div>;
     } else {
         loadImage = <div style={{width:'100vw', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><ReactLoading type="spinningBubbles" color="#666665" /></div>;

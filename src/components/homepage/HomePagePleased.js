@@ -17,7 +17,6 @@ export class HomePagePleased extends React.Component {
     
     componentDidUpdate = (prevProps) => {
         if (this.props.homepage.pleasedText !== prevProps.homepage.pleasedText) {
-            //const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
             const html = this.props.homepage.pleasedTextHtml || '';
             const contentBlock = htmlToDraft(html);
             if (contentBlock) {
@@ -29,8 +28,6 @@ export class HomePagePleased extends React.Component {
     }
 
     onEditorStateChange = (editorState) => {
-        console.log('editorState', editorState);
-        console.log('editorState', draftToHtml(convertToRaw(editorState.getCurrentContent())));
         let currentValue = draftToHtml(convertToRaw(editorState.getCurrentContent()));
         this.setState({
             editorState,

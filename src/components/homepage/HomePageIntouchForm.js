@@ -57,7 +57,6 @@ export default class HomePageIntouchForm extends React.Component {
         } else {
             //cleare error message
             this.setState(() => ({ error: '' }));
-            //console.log('submitted');
             this.props.onSubmit({
                 name: this.state.name,
                 email: this.state.email

@@ -66,7 +66,6 @@ class IconHoverGrow extends React.Component {
           measure = 'em';
       }
     }
-    //console.log(this.props.icon);
     const width = (icons[this.props.icon].width * this.props.ratio * ratioFixer) + measure;
     const height = (icons[this.props.icon].height * this.props.ratio * ratioFixer) + measure;
     const vbwidth = icons[this.props.icon].vbwidth;

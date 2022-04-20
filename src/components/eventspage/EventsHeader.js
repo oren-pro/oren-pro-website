@@ -2,7 +2,6 @@ import React from 'react';
 import AutosizeInput from 'react-input-autosize';
 
 const shouldHighLight = (org, update) => {
-    //console.log('in highlight')
     if ( org === update ) {
         return 'events__header__input Heebo-Medium edit__bg';
     } else {

@@ -76,28 +76,21 @@ class AboutPage extends React.Component {
 
         switch (action) {
 			case "setString":
-                //console.log(value);
                 aboutpage[index][field] = value;
-                //console.log(homepage);
                 break;
             case "setNumber":
-                //console.log(value);
                 aboutpage[index][field] = value;
-                //console.log(homepage);
                 break;
 			default:
 				break;
         };
-        //console.log(aboutpage);
         this.setState({
             aboutpage: aboutpage
         });
         if (typeof(window) !== "undefined") {
-            if(isEqual(this.state.aboutpageOrigin, aboutpage)){ 
-                //console.log("remove listener");
+            if(isEqual(this.state.aboutpageOrigin, aboutpage)){
                 window.removeEventListener("beforeunload", this.unloadFunc);
             } else {
-                //console.log("add listener");
                 window.addEventListener("beforeunload", this.unloadFunc);
             }
         }
