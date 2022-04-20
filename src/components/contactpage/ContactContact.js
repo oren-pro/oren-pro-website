@@ -39,9 +39,6 @@ const ContactContact = (props) => (
             </p>
         </div>
         {
-            console.log('in render - contact contact')
-        }
-        {
             props.style === 'page' ?
                 <img className={`contact__seperator--${props.style}`}  src="/images/contact/contact-seperator.svg" alt="קו הפרדה" />
             :

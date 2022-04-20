@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import YouTube from 'react-youtube';
-// import ReactPlayer from 'react-player/lazy'
 import VideoContentYT from 'react-video-content-youtube';
 import $ from 'jquery';
 
@@ -16,7 +14,6 @@ class EventVideo extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props.videoId);
         this.setState({
             videoId: this.props.videoId
         });
@@ -24,32 +21,18 @@ class EventVideo extends React.Component {
 
     componentDidUpdate = (prevProps, prevState, snapshot) => {
         if (this.props.videoId !== prevProps.videoId) {
-            console.log(this.props.videoId);
-            console.log('this.state.videoId', this.state.videoId);
             this.setState({
                 videoId: this.props.videoId
             });
         }
     }
 
-    // componentDidUpdate = () => {
-    //     console.log(this.props.videoId);
-    //     this.setState({
-    //         videoId: this.props.videoId
-    //     });
-    // }
-
     onVideoIdChange = (e) => {
-        console.log('invideidchange');
-        console.log(e.target.value);
         this.props.onVideoIdChange(e);
     }
 
     render() {
-        console.log('this.state.videoId', this.state.videoId);
         let windowWidth = $( window ).width();
-        let windowHeight = $( window ).height();
-        console.log();
         let videoWidth, videoHeight;
         if(windowWidth < 768) {
             videoWidth = windowWidth * 0.98;
@@ -61,9 +44,7 @@ class EventVideo extends React.Component {
         const opts = {
             height: videoHeight,
             width: videoWidth,
-            //height: '410',
-            //width: '730',
-            playerVars: { // https://developers.google.com/youtube/player_parameters
+            playerVars: {
                 autoplay: 0,
                 rel: 0,
                 list: 'playlist',
@@ -75,23 +56,12 @@ class EventVideo extends React.Component {
         if( this.state.media === 'mobile') {
             currentItems = this.state.mobileImages;
         }
-        console.log('this.state.videoId', this.state.videoId);
         return (
           <div style={{position: 'relative', minHeight: '40px', marginTop: '0.5rem'}}>
             { this.state.videoId != "" ?
-            
-                    // <YouTube
-                    //     videoId={this.state.videoId}
-                    //     opts={opts}
-                    //     onReady={this._onReady}
-                    // />
-                    // <ReactPlayer url={`https://www.youtube.com/watch?v=${this.state.videoId}`}/>
                     <VideoContentYT src={this.state.videoId} params={{autoPlay: true}}/>
-
                 :
-
                     null
-    
             }
             
             { 
@@ -122,7 +92,6 @@ class EventVideo extends React.Component {
     }
 
     _onReady(event) {
-        // access to player in all event handlers via event.target
         event.target.pauseVideo();
     }
 }

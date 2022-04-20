@@ -794,17 +794,9 @@ class EventPage extends React.Component {
 
     onEventLinkTextChange = (e) => {
         const eventLinkText = e.target.value;
-        console.log("in link text");
         this.setState({
             eventLinkText
         });
-        // if (typeof(window) !== "undefined") {
-        //     if(isEqual(this.state.eventLinkTextOrigin, eventLinkText) && isEqual(this.state.eventLinkTextOrigin, this.state.eventLinkText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-        //         window.removeEventListener("beforeunload", this.unloadFunc);
-        //     } else {
-        //         window.addEventListener("beforeunload", this.unloadFunc);
-        //     }
-        // }
     }
 
     onEventLinkLinkChange = (e) => {
@@ -823,22 +815,12 @@ class EventPage extends React.Component {
 
     onEventTextChange = (e) => {
         const eventTextHtml = e.target.value;
-        console.log('eventTextHtml', eventTextHtml);
         this.setState({
             eventTextHtml
         });
-        // if (typeof(window) !== "undefined") {
-        //     if(isEqual(this.state.eventNameOrigin, this.state.eventName) && isEqual(this.state.eventTextOrigin, eventText) && isEqual(this.state.eventShowLinesOrigin, this.state.eventShowLines)){ 
-        //         window.removeEventListener("beforeunload", this.unloadFunc);
-        //     } else {
-        //         window.addEventListener("beforeunload", this.unloadFunc);
-        //     }
-        // }
     }
 
     onVideoIdChange = (e) => {
-        console.log('in eventpage onVideoIdChange');
-        console.log(e.target.value);
         const eventVideoId = e.target.value;
         this.setState({
             eventVideoId

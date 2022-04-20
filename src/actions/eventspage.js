@@ -413,8 +413,6 @@ export const editSeo = ( seo, categoryId ) => ({
 
 export const startEditSeo = ( seo, categoryId, link ) => {
     return (dispatch) => {
-        console.log('in seo update');
-        console.log(link);
         return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
             return firebase.database().ref(`eventsCategories/${categoryId}/seo`).update(seo).then(() => {
                 dispatch(editSeo( seo, categoryId ));
@@ -434,8 +432,6 @@ export const editSubSeo = ( seo, categoryId, subcategoryId ) => ({
 
 export const startEditSubSeo = ( seo, categoryId, subcategoryId, link ) => {
     return (dispatch, getState) => {
-        console.log('in sub seo update');
-        console.log(link);
         return firebase.database().ref(`serverSeo/${link}/seo`).update(seo).then(() => {
             return firebase.database().ref(`eventsSubcategories/${subcategoryId}/seo`).update(seo).then(() => {
                 const eventspage = getState().eventspage;
@@ -530,7 +526,6 @@ export const editEvent = ( eventName, eventText, eventShowLines, eventId ) => ({
 });
 
 export const startEditEvent = ( eventName, eventText, eventTextHtml, eventLinkText, eventLinkLink, eventShowLines, eventVideoId, eventId ) => {
-    console.log('eventTextHtml', eventTextHtml);
     const event = {
         name: eventName,
         text: eventText,
@@ -658,7 +653,6 @@ export const startToggleShowCategory = ( categoryId, visible ) => {
     const visibleObj = {
         isVisible: visible
     };
-    console.log('in actions', visibleObj);
     return (dispatch) => {
         return firebase.database().ref().child(`eventsCategories/${categoryId}`).update(visibleObj).then(() => {
             dispatch(toggleShowCategory( categoryId, visible ));

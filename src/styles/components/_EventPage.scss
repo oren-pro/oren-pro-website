@@ -499,6 +499,7 @@ $eventsEventImageHeight: 14.2rem;
 }
 
 .event__video__input {
+    background: white;
     display: block;
     width: 14rem;
     height: 2rem;
@@ -509,7 +510,7 @@ $eventsEventImageHeight: 14.2rem;
     font-weight: $fontSizeRegular;
     width: 14rem;
     height: 2rem;
-    background: none;
+    background: white;
     border: 1px solid $gray;
     margin-top: 6px;
     margin-left: auto;

@@ -118,7 +118,6 @@ class Navigation extends React.Component {
     };
 
     componentDidMount = () => {
-        console.log('this.props.eventsCategories', this.props.eventsCategories);
         window.addEventListener("load", this.handleLoad);
 
         if (
@@ -166,8 +165,6 @@ class Navigation extends React.Component {
     };
 
     componentDidUpdate = prevProps => {
-        console.log(prevProps);
-        console.log('this.props.eventsCategories', this.props.eventsCategories);
         if (
             this.state.eventsCategoriesReverse.length === 0 &&
             this.props.eventsCategories.length > 0
@@ -631,17 +628,6 @@ class Navigation extends React.Component {
                                 this.state.eventsCategoriesReverse.map(
                                     category => {
                                         if (category.isVisible === true) {
-                                            console.log('this.state.location',this.state.location);
-                                            console.log('includes',this.state.location && this.state.location.includes(stringReplace(
-                                                category.name,
-                                                " ",
-                                                "_"
-                                            )));
-                                            console.log('string',stringReplace(
-                                                category.name,
-                                                " ",
-                                                "_"
-                                            ));
                                             return (
                                                 category.type === 'category' ?
                                                     <NavItem key={category.id}>

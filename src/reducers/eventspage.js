@@ -122,13 +122,9 @@ const eventsReducerDefaultState = {};
         case 'TOGGLE_ALL_SHOW_CATEGORY':
             events.categories.map((category, index) => {
                 if(category.id === action.categoryId) {
-                    console.log('here', category);
                     categoryIndex = index;
                 }
             });
-            console.log('categoryIndex', categoryIndex);
-            console.log('events', events);
-            console.log('action.visible', action.visible);
             events.categories[categoryIndex].isVisible = action.visible;
             return events;
         case 'TOGGLE_SHOW_EVENT':

@@ -70,7 +70,6 @@ const EventsEvents = props => (
                 </h3>
             </div>
         ) : null}
-        {console.log('props.itemsCurrent', props.itemsCurrent)}
         {props.itemsCurrent.map((item, index) => {
             return (
                 <EventsEvent
