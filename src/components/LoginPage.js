@@ -6,7 +6,7 @@ import { startLogin } from '../actions/auth';
 export class LoginPage extends React.Component {
     onSubmit = (user) => {
         return this.props.startLogin(user.userEmail, user.password).then((res) => {
-            console.log('login page res = '+{...res});
+            console.log({ res });
             if (res) {
                 return true;
             } else {
