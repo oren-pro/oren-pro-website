@@ -660,7 +660,7 @@ admin.initializeApp({
     messagingSenderId: "275556401980",
     appId: "1:275556401980:web:2519b35fe6d68af03ad439",
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: '-----BEGIN PRIVATE KEY-----' + process.env.FIREBASE_PRIVATE_KEY.replace(/\@/g, '\n').replace(/\\n/g, '\n') + '-----END PRIVATE KEY-----\n'
+    privateKey: `-----BEGIN PRIVATE KEY-----${process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')}-----END PRIVATE KEY-----\n`
   }),
   databaseURL: 'https://oren-pro.firebaseio.com'
 });
