@@ -908,20 +908,20 @@ app.get('/:category?/:subCategory?/:event?/:toomuch?', function(request, respons
 
 
 app.get('*.js', function (request, response, next) {
-  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-  }
+  // if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+  //   request.url = request.url + '.gz';
+  //   response.set('Content-Encoding', 'gzip');
+  // }
     next();
 });
 
 
 app.get('*.css', function (request, response, next) {
-  if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
-    request.url = request.url + '.gz';
-    response.set('Content-Encoding', 'gzip');
-    response.set('Content-Type', 'text/css');
-  }
+  // if(request.headers['user-agent'].toLowerCase().indexOf('firefox') === -1) {
+  //   request.url = request.url + '.gz';
+  //   response.set('Content-Encoding', 'gzip');
+  //   response.set('Content-Type', 'text/css');
+  // }
     next();
 });
 
